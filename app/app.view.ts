@@ -1,6 +1,6 @@
 namespace $.$$ {
 
-	type Kind = 'movie' | 'series' | 'book' | 'game' | 'anime'
+	type Kind = 'movie' | 'series' | 'book' | 'anime'
 	type Status = 'want_to' | 'doing' | 'done' | 'dropped'
 
 	type Entry = {
@@ -17,7 +17,6 @@ namespace $.$$ {
 		movie: 'фильм',
 		series: 'сериал',
 		book: 'книга',
-		game: 'игра',
 		anime: 'аниме',
 	}
 
@@ -25,39 +24,34 @@ namespace $.$$ {
 		movie: '#6f8ed4',
 		series: '#57b0a6',
 		book: '#cba65f',
-		game: '#74b277',
 		anime: '#c189bd',
 	}
 
 	const STATUS_VERB: Record<Status, (k: Kind) => string> = {
 		want_to: () => 'хочу',
-		doing: k => k === 'book' ? 'читаю' : k === 'game' ? 'играю' : 'смотрю',
-		done: k => k === 'book' ? 'прочитал' : k === 'game' ? 'пройдено' : 'готово',
+		doing: k => k === 'book' ? 'читаю' : 'смотрю',
+		done: k => k === 'book' ? 'прочитал' : 'готово',
 		dropped: () => 'бросил',
 	}
 
 	const FIXTURE: Entry[] = [
 		{ id: '1', title: 'Frieren', year: '2023', kind: 'anime', status: 'doing', rating: null, favorite: true },
 		{ id: '2', title: 'Dune: Part Two', year: '2024', kind: 'movie', status: 'done', rating: 9, favorite: true },
-		{ id: '3', title: 'Disco Elysium', year: '2019', kind: 'game', status: 'doing', rating: 10, favorite: true },
 		{ id: '4', title: 'Дюна', year: '1965', kind: 'book', status: 'doing', rating: 8, favorite: false },
 		{ id: '5', title: 'Severance', year: '2022', kind: 'series', status: 'done', rating: 9, favorite: false },
 		{ id: '6', title: 'Цветы для Элджернона', year: '1966', kind: 'book', status: 'want_to', rating: null, favorite: false },
 		{ id: '7', title: 'Blue Eye Samurai', year: '2023', kind: 'anime', status: 'done', rating: 8, favorite: false },
-		{ id: '8', title: 'Hollow Knight', year: '2017', kind: 'game', status: 'want_to', rating: null, favorite: false },
 		{ id: '9', title: 'Andor', year: '2022', kind: 'series', status: 'doing', rating: 9, favorite: true },
 		{ id: '10', title: 'Оппенгеймер', year: '2023', kind: 'movie', status: 'done', rating: 8, favorite: false },
 		{ id: '11', title: 'Vinland Saga', year: '2019', kind: 'anime', status: 'dropped', rating: 6, favorite: false },
 		{ id: '12', title: 'Атака титанов', year: '2013', kind: 'anime', status: 'done', rating: 9, favorite: true },
 		{ id: '13', title: '1984', year: '1949', kind: 'book', status: 'done', rating: 9, favorite: false },
-		{ id: '14', title: "Baldur's Gate 3", year: '2023', kind: 'game', status: 'doing', rating: 10, favorite: true },
 		{ id: '15', title: 'The Bear', year: '2022', kind: 'series', status: 'want_to', rating: null, favorite: false },
 		{ id: '16', title: 'Поднятие уровня в одиночку', year: '2024', kind: 'anime', status: 'doing', rating: 7, favorite: false },
 		{ id: '17', title: 'Достучаться до небес', year: '1997', kind: 'movie', status: 'want_to', rating: null, favorite: false },
-		{ id: '18', title: 'Outer Wilds', year: '2019', kind: 'game', status: 'done', rating: 10, favorite: true },
 	]
 
-	const KIND_ORDER: ( Kind | 'all' )[] = [ 'all', 'movie', 'series', 'book', 'game', 'anime' ]
+	const KIND_ORDER: ( Kind | 'all' )[] = [ 'all', 'movie', 'series', 'book', 'anime' ]
 
 	function initials_of( title: string ) {
 		return title.replace( /[«»"']/g, '' )
