@@ -5,8 +5,8 @@ namespace $ {
 		flex: { direction: 'column' },
 		minHeight: '100%',
 		background: { color: '#050505' },
-		color: $bog_builderui_tokens.text,
-		font: { family: $bog_builderui_tokens.font_body },
+		color: '#f5f5f5',
+		font: { family: 'Inter, Arial, sans-serif' },
 
 		Top: {
 			flex: { direction: 'row', wrap: 'wrap', shrink: 0 },
@@ -14,7 +14,7 @@ namespace $ {
 			align: { items: 'center' },
 			padding: { top: '18px', right: '32px', bottom: '18px', left: '32px' },
 			border: { bottom: { width: '1px', style: 'solid', color: '#ffffff14' } },
-			background: { image: 'linear-gradient(180deg, #050505f5 0%, #050505d9 72%, #05050500 100%)' },
+			background: { color: '#050505f5' },
 			position: 'sticky',
 			top: 0,
 			zIndex: 10,
@@ -25,7 +25,7 @@ namespace $ {
 			align: { items: 'center' },
 			gap: $mol_gap.text,
 			font: {
-				family: $bog_builderui_tokens.font_head,
+				family: 'Inter, Arial, sans-serif',
 				weight: 800,
 				size: '24px',
 			},
@@ -67,6 +67,11 @@ namespace $ {
 			gap: $mol_gap.block,
 		},
 
+		Status_chips: {
+			flex: { direction: 'row', wrap: 'wrap' },
+			gap: $mol_gap.text,
+		},
+
 		Count: {
 			marginLeft: 'auto',
 			color: '#ffffff99',
@@ -76,10 +81,21 @@ namespace $ {
 		Banner: {
 			margin: { top: '18px', right: '32px', left: '32px' },
 			flex: { shrink: 0 },
-			background: { image: 'linear-gradient(120deg, #180203 0%, #5c050a 42%, #050505 100%)' },
+			gap: '4px',
+			padding: { top: '14px', right: '18px', bottom: '14px', left: '18px' },
+			background: { color: '#180203' },
 			border: { width: '1px', style: 'solid', color: '#ffffff12' },
 			borderRadius: '8px',
 			boxShadow: '0 18px 50px #0000008c',
+		},
+
+		Banner_title: {
+			font: { weight: 800, size: '15px' },
+			color: '#ffffff',
+		},
+
+		Banner_text: {
+			color: '#ffffffa6',
 		},
 
 		Library: {

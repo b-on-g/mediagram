@@ -59,6 +59,7 @@ namespace $.$$ {
 	]
 
 	const KIND_ORDER: ( Kind | 'all' )[] = [ 'all', 'movie', 'series', 'book', 'game', 'anime' ]
+	const STATUS_ORDER: ( Status | 'all' )[] = [ 'all', 'want_to', 'doing', 'done', 'dropped' ]
 
 	function initials_of( title: string ) {
 		return title.replace( /[«»"']/g, '' )
@@ -94,13 +95,6 @@ namespace $.$$ {
 				done: 'готово',
 				dropped: 'бросил',
 			}
-		}
-
-		lights() {
-			const mode = this.Theme().mode()
-			if( mode === 'light' ) return 'light'
-			if( mode === 'dark' ) return 'dark'
-			return this.$.$mol_lights() ? 'light' : 'dark'
 		}
 
 		@ $mol_mem
@@ -148,9 +142,24 @@ namespace $.$$ {
 			} )
 		}
 
+		status_chips() {
+			return STATUS_ORDER.map( s => {
+				const chip = this.Chip( `status-${ s }` )
+				chip.kind = () => String( s )
+				chip.label = () => this.status_options()[ s ]
+				chip.active = () => this.status() === s ? 'on' : 'off'
+				chip.click = ( e?: Event ) => {
+					if( e ) e.preventDefault()
+					this.status( s )
+					return null
+				}
+				return chip
+			} )
+		}
+
 		@ $mol_mem_key
 		Chip( id: string ) {
-			return new this.$.$bog_mediagram_app_chip()
+			return new $bog_mediagram_app_chip()
 		}
 
 		entries() {
@@ -159,7 +168,7 @@ namespace $.$$ {
 
 		@ $mol_mem_key
 		Card( id: string ) {
-			const card = new this.$.$bog_mediagram_app_card()
+			const card = new $bog_mediagram_app_card()
 			card.title = () => this.entry( id ).title
 			card.year = () => this.entry( id ).year
 			card.kind = () => this.entry( id ).kind
