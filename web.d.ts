@@ -1966,7 +1966,7 @@ declare namespace $ {
 		ReturnType< $mol_string['value'] >
 	>
 	type $mol_button__click_bog_mediagram_app_5 = $mol_type_enforce<
-		ReturnType< $bog_mediagram_app['add_click'] >
+		ReturnType< $bog_mediagram_app['theme_toggle'] >
 		,
 		ReturnType< $mol_button['click'] >
 	>
@@ -1975,28 +1975,28 @@ declare namespace $ {
 		,
 		ReturnType< $mol_button['sub'] >
 	>
-	type $mol_view__sub_bog_mediagram_app_7 = $mol_type_enforce<
+	type $mol_button__click_bog_mediagram_app_7 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app['add_click'] >
+		,
+		ReturnType< $mol_button['click'] >
+	>
+	type $mol_button__sub_bog_mediagram_app_8 = $mol_type_enforce<
 		readonly(any)[]
 		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_view__sub_bog_mediagram_app_8 = $mol_type_enforce<
-		ReturnType< $bog_mediagram_app['type_chips'] >
-		,
-		ReturnType< $mol_view['sub'] >
+		ReturnType< $mol_button['sub'] >
 	>
 	type $mol_view__sub_bog_mediagram_app_9 = $mol_type_enforce<
-		ReturnType< $bog_mediagram_app['status_chips'] >
+		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
 	type $mol_view__sub_bog_mediagram_app_10 = $mol_type_enforce<
-		readonly(any)[]
+		ReturnType< $bog_mediagram_app['type_chips'] >
 		,
 		ReturnType< $mol_view['sub'] >
 	>
 	type $mol_view__sub_bog_mediagram_app_11 = $mol_type_enforce<
-		readonly(any)[]
+		ReturnType< $bog_mediagram_app['status_chips'] >
 		,
 		ReturnType< $mol_view['sub'] >
 	>
@@ -2021,21 +2021,35 @@ declare namespace $ {
 		ReturnType< $mol_view['sub'] >
 	>
 	type $mol_view__sub_bog_mediagram_app_16 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_bog_mediagram_app_17 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_bog_mediagram_app_18 = $mol_type_enforce<
 		ReturnType< $bog_mediagram_app['entries'] >
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_scroll__sub_bog_mediagram_app_17 = $mol_type_enforce<
+	type $mol_scroll__sub_bog_mediagram_app_19 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_scroll['sub'] >
 	>
 	export class $bog_mediagram_app extends $mol_view {
+		theme( ): string
 		Brand_mark( ): $mol_view
 		Brand_name( ): $mol_view
 		Brand( ): $mol_view
 		query( next?: string ): string
 		Search( ): $mol_string
+		theme_toggle( next?: any ): any
+		theme_label( ): string
+		Theme_btn( ): $mol_button
 		add_click( next?: any ): any
 		Add_btn( ): $mol_button
 		Top( ): $mol_view
@@ -2055,6 +2069,9 @@ declare namespace $ {
 		entries( ): readonly(any)[]
 		Grid( ): $mol_view
 		Library( ): $mol_scroll
+		attr( ): ({ 
+			'bog_mediagram_theme': ReturnType< $bog_mediagram_app['theme'] >,
+		})  & ReturnType< $mol_view['attr'] >
 		sub( ): readonly(any)[]
 	}
 	
@@ -2069,10 +2086,12 @@ declare namespace $ {
 		kind( ): string
 		label( ): string
 		active( ): string
+		theme( ): string
 		click( next?: any ): any
 		attr( ): ({ 
 			'bog_mediagram_chip_kind': ReturnType< $bog_mediagram_app_chip['kind'] >,
 			'bog_mediagram_chip_active': ReturnType< $bog_mediagram_app_chip['active'] >,
+			'bog_mediagram_theme': ReturnType< $bog_mediagram_app_chip['theme'] >,
 		})  & ReturnType< $mol_button['attr'] >
 		sub( ): readonly(any)[]
 	}
@@ -2146,9 +2165,11 @@ declare namespace $ {
 		initials( ): string
 		color( ): string
 		poster_bg( ): string
+		theme( ): string
 		attr( ): ({ 
 			'bog_mediagram_status': ReturnType< $bog_mediagram_app_card['status_class'] >,
 			'bog_mediagram_kind': ReturnType< $bog_mediagram_app_card['kind'] >,
+			'bog_mediagram_theme': ReturnType< $bog_mediagram_app_card['theme'] >,
 		})  & ReturnType< $mol_view['attr'] >
 		sub( ): readonly(any)[]
 	}
@@ -2173,6 +2194,9 @@ declare namespace $.$$ {
         query(next?: string): string;
         status(next?: string): string;
         kind_filter(next?: string): string;
+        theme(next?: string): string;
+        theme_label(): "тёмная" | "светлая";
+        theme_toggle(e?: Event): null;
         status_options(): {
             all: string;
             want_to: string;

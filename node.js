@@ -5011,6 +5011,9 @@ var $;
 
 ;
 	($.$bog_mediagram_app) = class $bog_mediagram_app extends ($.$mol_view) {
+		theme(){
+			return "dark";
+		}
 		Brand_mark(){
 			const obj = new this.$.$mol_view();
 			return obj;
@@ -5035,6 +5038,19 @@ var $;
 			(obj.value) = (next) => ((this.query(next)));
 			return obj;
 		}
+		theme_toggle(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		theme_label(){
+			return "";
+		}
+		Theme_btn(){
+			const obj = new this.$.$mol_button();
+			(obj.click) = (next) => ((this.theme_toggle(next)));
+			(obj.sub) = () => ([(this.theme_label())]);
+			return obj;
+		}
 		add_click(next){
 			if(next !== undefined) return next;
 			return null;
@@ -5050,6 +5066,7 @@ var $;
 			(obj.sub) = () => ([
 				(this.Brand()), 
 				(this.Search()), 
+				(this.Theme_btn()), 
 				(this.Add_btn())
 			]);
 			return obj;
@@ -5122,6 +5139,9 @@ var $;
 			(obj.sub) = () => ([(this.Grid())]);
 			return obj;
 		}
+		attr(){
+			return {...(super.attr()), "bog_mediagram_theme": (this.theme())};
+		}
 		sub(){
 			return [
 				(this.Top()), 
@@ -5136,6 +5156,8 @@ var $;
 	($mol_mem(($.$bog_mediagram_app.prototype), "Brand"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "query"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Search"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "theme_toggle"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Theme_btn"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "add_click"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Add_btn"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Top"));
@@ -5168,6 +5190,9 @@ var $;
 		active(){
 			return "off";
 		}
+		theme(){
+			return "dark";
+		}
 		click(next){
 			if(next !== undefined) return next;
 			return null;
@@ -5176,7 +5201,8 @@ var $;
 			return {
 				...(super.attr()), 
 				"bog_mediagram_chip_kind": (this.kind()), 
-				"bog_mediagram_chip_active": (this.active())
+				"bog_mediagram_chip_active": (this.active()), 
+				"bog_mediagram_theme": (this.theme())
 			};
 		}
 		sub(){
@@ -5272,11 +5298,15 @@ var $;
 		poster_bg(){
 			return "";
 		}
+		theme(){
+			return "dark";
+		}
 		attr(){
 			return {
 				...(super.attr()), 
 				"bog_mediagram_status": (this.status_class()), 
-				"bog_mediagram_kind": (this.kind())
+				"bog_mediagram_kind": (this.kind()), 
+				"bog_mediagram_theme": (this.theme())
 			};
 		}
 		sub(){
@@ -5482,6 +5512,18 @@ var $;
             kind_filter(next) {
                 return $mol_state_arg.value('kind', next) ?? 'all';
             }
+            theme(next) {
+                return $mol_state_arg.value('theme', next) ?? 'dark';
+            }
+            theme_label() {
+                return this.theme() === 'light' ? 'тёмная' : 'светлая';
+            }
+            theme_toggle(e) {
+                if (e)
+                    e.preventDefault();
+                this.theme(this.theme() === 'light' ? 'dark' : 'light');
+                return null;
+            }
             status_options() {
                 return {
                     all: 'всё',
@@ -5523,6 +5565,7 @@ var $;
                     chip.kind = () => k;
                     chip.label = () => k === 'all' ? 'всё' : KIND_LABEL[k];
                     chip.active = () => this.kind_filter() === k ? 'on' : 'off';
+                    chip.theme = () => this.theme();
                     chip.click = (e) => {
                         if (e)
                             e.preventDefault();
@@ -5538,6 +5581,7 @@ var $;
                     chip.kind = () => String(s);
                     chip.label = () => this.status_options()[s];
                     chip.active = () => this.status() === s ? 'on' : 'off';
+                    chip.theme = () => this.theme();
                     chip.click = (e) => {
                         if (e)
                             e.preventDefault();
@@ -5567,6 +5611,7 @@ var $;
                 card.rate_text = () => this.entry(id).rating !== null ? String(this.entry(id).rating) : '';
                 card.initials = () => initials_of(this.entry(id).title);
                 card.color = () => KIND_COLOR[this.entry(id).kind];
+                card.theme = () => this.theme();
                 card.poster_bg = () => {
                     const c = KIND_COLOR[this.entry(id).kind];
                     return `linear-gradient(180deg, #05050500 42%, #050505d9 100%), linear-gradient(150deg, color-mix(in srgb, ${c} 52%, #111), #090909), url("${this.entry(id).cover}")`;
@@ -5594,6 +5639,12 @@ var $;
         __decorate([
             $mol_mem
         ], $bog_mediagram_app.prototype, "kind_filter", null);
+        __decorate([
+            $mol_mem
+        ], $bog_mediagram_app.prototype, "theme", null);
+        __decorate([
+            $mol_action
+        ], $bog_mediagram_app.prototype, "theme_toggle", null);
         __decorate([
             $mol_mem
         ], $bog_mediagram_app.prototype, "entries_all", null);
@@ -5662,6 +5713,22 @@ var $;
             minWidth: '160px',
             maxWidth: '420px',
         },
+        Theme_btn: {
+            flex: { shrink: 0 },
+            background: { color: '#ffffff' },
+            color: '#050505',
+            border: { width: '1px', style: 'solid', color: '#ffffff' },
+            borderRadius: '6px',
+            font: { weight: 700 },
+        },
+        Add_btn: {
+            flex: { shrink: 0 },
+            background: { color: '#e50914' },
+            color: '#ffffff',
+            border: { width: '1px', style: 'solid', color: '#e50914' },
+            borderRadius: '6px',
+            font: { weight: 700 },
+        },
         Filters: {
             flex: { direction: 'column', shrink: 0 },
             gap: $mol_gap.block,
@@ -5713,12 +5780,44 @@ var $;
             gap: '22px',
             gridTemplateColumns: 'repeat(auto-fill, minmax(170px, 1fr))',
         },
+        '@': {
+            bog_mediagram_theme: {
+                light: {
+                    background: { color: '#ffffff' },
+                    color: '#050505',
+                    Top: {
+                        background: { color: '#fffffffa' },
+                        border: { bottom: { width: '1px', style: 'solid', color: '#0505051f' } },
+                    },
+                    Filters: {
+                        background: { color: '#ffffff' },
+                        border: { bottom: { width: '1px', style: 'solid', color: '#05050517' } },
+                    },
+                    Theme_btn: {
+                        background: { color: '#050505' },
+                        color: '#ffffff',
+                        border: { width: '1px', style: 'solid', color: '#050505' },
+                    },
+                    Banner: {
+                        background: { color: '#050505' },
+                        border: { width: '1px', style: 'solid', color: '#050505' },
+                    },
+                    Count: {
+                        color: '#05050599',
+                    },
+                },
+            },
+        },
     });
     $mol_style_define($bog_mediagram_app_chip, {
         flex: { direction: 'row', shrink: 0 },
         align: { items: 'center' },
         gap: $mol_gap.text,
         cursor: 'pointer',
+        background: { color: '#050505' },
+        color: '#ffffff',
+        border: { width: '1px', style: 'solid', color: '#ffffff26' },
+        borderRadius: '6px',
         Swatch: {
             width: '8px',
             height: '8px',
@@ -5726,10 +5825,18 @@ var $;
             background: { color: 'currentcolor' },
         },
         '@': {
+            bog_mediagram_theme: {
+                light: {
+                    background: { color: '#ffffff' },
+                    color: '#050505',
+                    border: { width: '1px', style: 'solid', color: '#05050526' },
+                },
+            },
             bog_mediagram_chip_active: {
                 on: {
                     background: { color: '#e50914' },
                     color: '#ffffff',
+                    border: { width: '1px', style: 'solid', color: '#e50914' },
                 },
             },
         },
@@ -5818,6 +5925,18 @@ var $;
                 size: '11px',
             },
             color: '#ffffff8f',
+        },
+        '@': {
+            bog_mediagram_theme: {
+                light: {
+                    Title_view: {
+                        color: '#050505',
+                    },
+                    Sub: {
+                        color: '#05050599',
+                    },
+                },
+            },
         },
     });
 })($ || ($ = {}));
