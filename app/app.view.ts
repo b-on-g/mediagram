@@ -1,6 +1,6 @@
 namespace $.$$ {
 
-	type Kind = 'movie' | 'series' | 'book' | 'game' | 'anime'
+	type Kind = 'movie' | 'series' | 'book' | 'anime' | 'youtube'
 	type Status = 'want_to' | 'doing' | 'done' | 'dropped'
 
 	type Entry = {
@@ -18,47 +18,47 @@ namespace $.$$ {
 		movie: 'фильм',
 		series: 'сериал',
 		book: 'книга',
-		game: 'игра',
 		anime: 'аниме',
+		youtube: 'YouTube',
 	}
 
 	const KIND_COLOR: Record<Kind, string> = {
-		movie: '#6f8ed4',
-		series: '#57b0a6',
-		book: '#cba65f',
-		game: '#74b277',
-		anime: '#c189bd',
+		movie: '#e50914',
+		series: '#ffffff',
+		book: '#111111',
+		anime: '#e50914',
+		youtube: '#ff0000',
 	}
 
 	const STATUS_VERB: Record<Status, (k: Kind) => string> = {
 		want_to: () => 'хочу',
-		doing: k => k === 'book' ? 'читаю' : k === 'game' ? 'играю' : 'смотрю',
-		done: k => k === 'book' ? 'прочитал' : k === 'game' ? 'пройдено' : 'готово',
+		doing: k => k === 'book' ? 'читаю' : 'смотрю',
+		done: k => k === 'book' ? 'прочитал' : 'готово',
 		dropped: () => 'бросил',
 	}
 
 	const FIXTURE: Entry[] = [
 		{ id: '1', title: 'Frieren', year: '2023', kind: 'anime', status: 'doing', rating: null, favorite: true, cover: 'https://image.tmdb.org/t/p/w500/dqZENchTd7lp5zht7BdlqM7RBhD.jpg' },
 		{ id: '2', title: 'Dune: Part Two', year: '2024', kind: 'movie', status: 'done', rating: 9, favorite: true, cover: 'https://image.tmdb.org/t/p/w500/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg' },
-		{ id: '3', title: 'Disco Elysium', year: '2019', kind: 'game', status: 'doing', rating: 10, favorite: true, cover: 'https://cdn.akamai.steamstatic.com/steam/apps/632470/library_600x900.jpg' },
+		{ id: '3', title: 'Kurzgesagt: Black Holes', year: '2024', kind: 'youtube', status: 'doing', rating: 10, favorite: true, cover: 'https://i.ytimg.com/vi/QqsLTNkzvaY/hq720.jpg' },
 		{ id: '4', title: 'Дюна', year: '1965', kind: 'book', status: 'doing', rating: 8, favorite: false, cover: 'https://covers.openlibrary.org/b/isbn/9780441172719-L.jpg' },
 		{ id: '5', title: 'Severance', year: '2022', kind: 'series', status: 'done', rating: 9, favorite: false, cover: 'https://image.tmdb.org/t/p/w500/pPHpeI2X1qEd1CS1SeyrdhZ4qnT.jpg' },
 		{ id: '6', title: 'Цветы для Элджернона', year: '1966', kind: 'book', status: 'want_to', rating: null, favorite: false, cover: 'https://covers.openlibrary.org/b/isbn/9780156030083-L.jpg' },
 		{ id: '7', title: 'Blue Eye Samurai', year: '2023', kind: 'anime', status: 'done', rating: 8, favorite: false, cover: 'https://image.tmdb.org/t/p/w500/fXm3JT4WLQVnwukdvghtAblc1wc.jpg' },
-		{ id: '8', title: 'Hollow Knight', year: '2017', kind: 'game', status: 'want_to', rating: null, favorite: false, cover: 'https://cdn.akamai.steamstatic.com/steam/apps/367520/library_600x900.jpg' },
+		{ id: '8', title: 'Veritasium: The Most Misunderstood Concept', year: '2021', kind: 'youtube', status: 'want_to', rating: null, favorite: false, cover: 'https://i.ytimg.com/vi/pTn6Ewhb27k/hq720.jpg' },
 		{ id: '9', title: 'Andor', year: '2022', kind: 'series', status: 'doing', rating: 9, favorite: true, cover: 'https://image.tmdb.org/t/p/w500/khZqmwHQicTYoS7Flreb9EddFZC.jpg' },
 		{ id: '10', title: 'Оппенгеймер', year: '2023', kind: 'movie', status: 'done', rating: 8, favorite: false, cover: 'https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg' },
 		{ id: '11', title: 'Vinland Saga', year: '2019', kind: 'anime', status: 'dropped', rating: 6, favorite: false, cover: 'https://image.tmdb.org/t/p/w500/rK3FOkHBFQXqxEgTYZ9NqXSthYP.jpg' },
 		{ id: '12', title: 'Атака титанов', year: '2013', kind: 'anime', status: 'done', rating: 9, favorite: true, cover: 'https://image.tmdb.org/t/p/w500/hTP1DtLGFamjfu8WqjnuQdP1n4i.jpg' },
 		{ id: '13', title: '1984', year: '1949', kind: 'book', status: 'done', rating: 9, favorite: false, cover: 'https://covers.openlibrary.org/b/isbn/9780451524935-L.jpg' },
-		{ id: '14', title: "Baldur's Gate 3", year: '2023', kind: 'game', status: 'doing', rating: 10, favorite: true, cover: 'https://cdn.akamai.steamstatic.com/steam/apps/1086940/library_600x900.jpg' },
+		{ id: '14', title: 'Marques Brownlee: AI Hardware', year: '2024', kind: 'youtube', status: 'doing', rating: 10, favorite: true, cover: 'https://i.ytimg.com/vi/ddTV12hErTc/hq720.jpg' },
 		{ id: '15', title: 'The Bear', year: '2022', kind: 'series', status: 'want_to', rating: null, favorite: false, cover: 'https://image.tmdb.org/t/p/w500/sHFlbKS3WLqMnp9t2ghADIJFnuQ.jpg' },
 		{ id: '16', title: 'Поднятие уровня в одиночку', year: '2024', kind: 'anime', status: 'doing', rating: 7, favorite: false, cover: 'https://image.tmdb.org/t/p/w500/geCRueV3ElhRTr0xtJuEWJt6dJ1.jpg' },
 		{ id: '17', title: 'Достучаться до небес', year: '1997', kind: 'movie', status: 'want_to', rating: null, favorite: false, cover: 'https://image.tmdb.org/t/p/w500/oY6E8n9s56pmY3z0NwJtYDR2h5b.jpg' },
-		{ id: '18', title: 'Outer Wilds', year: '2019', kind: 'game', status: 'done', rating: 10, favorite: true, cover: 'https://cdn.akamai.steamstatic.com/steam/apps/753640/library_600x900.jpg' },
+		{ id: '18', title: 'TED-Ed: Time Travel', year: '2022', kind: 'youtube', status: 'done', rating: 10, favorite: true, cover: 'https://i.ytimg.com/vi/d3zTfXvYZ9s/hq720.jpg' },
 	]
 
-	const KIND_ORDER: ( Kind | 'all' )[] = [ 'all', 'movie', 'series', 'book', 'game', 'anime' ]
+	const KIND_ORDER: ( Kind | 'all' )[] = [ 'all', 'movie', 'series', 'book', 'anime', 'youtube' ]
 	const STATUS_ORDER: ( Status | 'all' )[] = [ 'all', 'want_to', 'doing', 'done', 'dropped' ]
 
 	function initials_of( title: string ) {

@@ -181,7 +181,7 @@ namespace $ {
 			top: '8px',
 			right: '8px',
 			font: { size: '13px' },
-			color: '#ef5b6b',
+			color: '#e50914',
 		},
 
 		Pill: {
