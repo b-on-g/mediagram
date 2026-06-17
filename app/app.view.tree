@@ -1,0 +1,97 @@
+- mediagram — webapp + Chrome side panel
+- Одна сборка $mol-аппа адаптируется по ширине через container queries
+- Пресет builderui: zinc / sky / yellow / eb-garamond / large
+- Тема светает/тёмная переключается через $bog_theme_toggle
+
+$bog_mediagram_app $bog_builderui_div
+	plugins /
+		<= Theme $bog_theme_auto
+	attr *
+		^
+		bog_builderui_lights <= lights \dark
+		bog_builderui_base \zinc
+		bog_builderui_theme \sky
+		bog_builderui_chart \yellow
+		bog_builderui_radius \large
+		bog_builderui_font_body \eb-garamond
+		bog_builderui_font_head \eb-garamond
+	sub /
+		<= Top $mol_view
+			sub /
+				<= Brand $mol_view
+					sub /
+						<= Brand_mark $mol_view
+						<= Brand_name $mol_view sub / \mediagram
+				<= Search $bog_builderui_field
+					hint \поиск по библиотеке
+					value? <=> query? \
+				<= Theme_toggle $bog_theme_toggle
+					theme_auto <= Theme
+				<= Add_btn $bog_builderui_button
+					title \добавить
+					click? <=> add_click? null
+		<= Filters $mol_view
+			sub /
+				<= Types $mol_view
+					sub <= type_chips /
+				<= Status_row $mol_view
+					sub /
+						<= Status_tabs $bog_builderui_tabs
+							value? <=> status? \all
+							options <= status_options *
+						<= Count $mol_view sub / <= count_label \
+		<= Banner $bog_builderui_alert
+			title <= banner_title \
+			text <= banner_text \
+		<= Library $mol_scroll
+			sub /
+				<= Grid $mol_view
+					sub <= entries /
+
+$bog_mediagram_app_chip $bog_builderui_button
+	kind \
+	label \
+	active \off
+	variant \ghost
+	attr *
+		^
+		bog_mediagram_chip_kind <= kind
+		bog_mediagram_chip_active <= active
+	sub /
+		<= Swatch $mol_view
+		<= Label $mol_view sub / <= label
+
+$bog_mediagram_app_card $bog_builderui_card
+	title \
+	year \
+	kind \
+	kind_label \
+	status_label \
+	status_class \
+	favorite false
+	fav_label \
+	rating null
+	rate_text \
+	initials \
+	color \
+	poster_bg \
+	attr *
+		^
+		bog_mediagram_status <= status_class
+		bog_mediagram_kind <= kind
+	sub /
+		<= Poster $mol_view
+			style *
+				background <= poster_bg
+			sub /
+				<= Kind_flag $mol_view sub / <= kind_label
+				<= Fav_view $mol_view sub / <= fav_label
+				<= Init $mol_view sub / <= initials
+				<= Pill $bog_builderui_badge
+					title <= status_label
+					variant \secondary
+				<= Rate_view $mol_view sub / <= rate_text
+		<= Meta $mol_view
+			sub /
+				<= Title_view $mol_view sub / <= title
+				<= Sub $mol_view sub / <= year
