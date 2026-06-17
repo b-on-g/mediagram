@@ -4792,40 +4792,40 @@ declare namespace $ {
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_scroll__sub_bog_mediagram_app_20 = $mol_type_enforce<
+	type $mol_view__sub_bog_mediagram_app_20 = $mol_type_enforce<
 		ReturnType< $bog_mediagram_app['body_content'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_scroll__sub_bog_mediagram_app_21 = $mol_type_enforce<
+		readonly(any)[]
 		,
 		ReturnType< $mol_scroll['sub'] >
 	>
-	type $bog_mediagram_app_nav__tab_bog_mediagram_app_21 = $mol_type_enforce<
+	type $bog_mediagram_app_nav__tab_bog_mediagram_app_22 = $mol_type_enforce<
 		ReturnType< $bog_mediagram_app['tab'] >
 		,
 		ReturnType< $bog_mediagram_app_nav['tab'] >
 	>
-	type $mol_view__sub_bog_mediagram_app_22 = $mol_type_enforce<
+	type $mol_view__sub_bog_mediagram_app_23 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $bog_builderui_alert__title_bog_mediagram_app_23 = $mol_type_enforce<
+	type $bog_builderui_alert__title_bog_mediagram_app_24 = $mol_type_enforce<
 		ReturnType< $bog_mediagram_app['banner_title'] >
 		,
 		ReturnType< $bog_builderui_alert['title'] >
 	>
-	type $bog_builderui_alert__text_bog_mediagram_app_24 = $mol_type_enforce<
+	type $bog_builderui_alert__text_bog_mediagram_app_25 = $mol_type_enforce<
 		ReturnType< $bog_mediagram_app['banner_text'] >
 		,
 		ReturnType< $bog_builderui_alert['text'] >
 	>
-	type $mol_view__sub_bog_mediagram_app_25 = $mol_type_enforce<
+	type $mol_view__sub_bog_mediagram_app_26 = $mol_type_enforce<
 		ReturnType< $bog_mediagram_app['entries'] >
 		,
 		ReturnType< $mol_view['sub'] >
-	>
-	type $bog_builderui_card__sub_bog_mediagram_app_26 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $bog_builderui_card['sub'] >
 	>
 	type $bog_builderui_card__sub_bog_mediagram_app_27 = $mol_type_enforce<
 		readonly(any)[]
@@ -4833,6 +4833,11 @@ declare namespace $ {
 		ReturnType< $bog_builderui_card['sub'] >
 	>
 	type $bog_builderui_card__sub_bog_mediagram_app_28 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $bog_builderui_card['sub'] >
+	>
+	type $bog_builderui_card__sub_bog_mediagram_app_29 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $bog_builderui_card['sub'] >
@@ -4868,6 +4873,7 @@ declare namespace $ {
 		Add_btn( ): $bog_builderui_button
 		Top( ): $mol_view
 		body_content( ): readonly(any)[]
+		Page( ): $mol_view
 		Body( ): $mol_scroll
 		Nav( ): $bog_mediagram_app_nav
 		plugins( ): readonly(any)[]

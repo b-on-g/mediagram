@@ -800,7 +800,9 @@ $bog_mediagram_app $bog_builderui_div
 				<= Add_btn $bog_builderui_button
 					title \добавить
 					click? <=> add_click? null
-		<= Body $mol_scroll sub <= body_content /
+		<= Body $mol_scroll
+			sub /
+				<= Page $mol_view sub <= body_content /
 		<= Nav $bog_mediagram_app_nav
 			tab? <=> tab? \library
 

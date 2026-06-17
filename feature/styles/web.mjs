@@ -11280,9 +11280,14 @@ var $;
 		body_content(){
 			return [];
 		}
+		Page(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.body_content()));
+			return obj;
+		}
 		Body(){
 			const obj = new this.$.$mol_scroll();
-			(obj.sub) = () => ((this.body_content()));
+			(obj.sub) = () => ([(this.Page())]);
 			return obj;
 		}
 		Nav(){
@@ -11367,6 +11372,7 @@ var $;
 	($mol_mem(($.$bog_mediagram_app.prototype), "add_click"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Add_btn"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Top"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Page"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Body"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Nav"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Library_filters"));
@@ -12084,7 +12090,11 @@ var $;
         },
         Body: {
             flex: { grow: 1 },
+        },
+        Page: {
+            flex: { direction: 'column', grow: 1 },
             padding: { bottom: '72px' },
+            width: '100%',
         },
         Library_filters: {
             flex: { direction: 'column', shrink: 0 },
