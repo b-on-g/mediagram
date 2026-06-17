@@ -11,6 +11,7 @@ namespace $.$$ {
 		status: Status
 		rating: number | null
 		favorite: boolean
+		cover: string
 	}
 
 	const KIND_LABEL: Record<Kind, string> = {
@@ -37,24 +38,24 @@ namespace $.$$ {
 	}
 
 	const FIXTURE: Entry[] = [
-		{ id: '1', title: 'Frieren', year: '2023', kind: 'anime', status: 'doing', rating: null, favorite: true },
-		{ id: '2', title: 'Dune: Part Two', year: '2024', kind: 'movie', status: 'done', rating: 9, favorite: true },
-		{ id: '3', title: 'Disco Elysium', year: '2019', kind: 'game', status: 'doing', rating: 10, favorite: true },
-		{ id: '4', title: 'Дюна', year: '1965', kind: 'book', status: 'doing', rating: 8, favorite: false },
-		{ id: '5', title: 'Severance', year: '2022', kind: 'series', status: 'done', rating: 9, favorite: false },
-		{ id: '6', title: 'Цветы для Элджернона', year: '1966', kind: 'book', status: 'want_to', rating: null, favorite: false },
-		{ id: '7', title: 'Blue Eye Samurai', year: '2023', kind: 'anime', status: 'done', rating: 8, favorite: false },
-		{ id: '8', title: 'Hollow Knight', year: '2017', kind: 'game', status: 'want_to', rating: null, favorite: false },
-		{ id: '9', title: 'Andor', year: '2022', kind: 'series', status: 'doing', rating: 9, favorite: true },
-		{ id: '10', title: 'Оппенгеймер', year: '2023', kind: 'movie', status: 'done', rating: 8, favorite: false },
-		{ id: '11', title: 'Vinland Saga', year: '2019', kind: 'anime', status: 'dropped', rating: 6, favorite: false },
-		{ id: '12', title: 'Атака титанов', year: '2013', kind: 'anime', status: 'done', rating: 9, favorite: true },
-		{ id: '13', title: '1984', year: '1949', kind: 'book', status: 'done', rating: 9, favorite: false },
-		{ id: '14', title: "Baldur's Gate 3", year: '2023', kind: 'game', status: 'doing', rating: 10, favorite: true },
-		{ id: '15', title: 'The Bear', year: '2022', kind: 'series', status: 'want_to', rating: null, favorite: false },
-		{ id: '16', title: 'Поднятие уровня в одиночку', year: '2024', kind: 'anime', status: 'doing', rating: 7, favorite: false },
-		{ id: '17', title: 'Достучаться до небес', year: '1997', kind: 'movie', status: 'want_to', rating: null, favorite: false },
-		{ id: '18', title: 'Outer Wilds', year: '2019', kind: 'game', status: 'done', rating: 10, favorite: true },
+		{ id: '1', title: 'Frieren', year: '2023', kind: 'anime', status: 'doing', rating: null, favorite: true, cover: 'https://image.tmdb.org/t/p/w500/dqZENchTd7lp5zht7BdlqM7RBhD.jpg' },
+		{ id: '2', title: 'Dune: Part Two', year: '2024', kind: 'movie', status: 'done', rating: 9, favorite: true, cover: 'https://image.tmdb.org/t/p/w500/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg' },
+		{ id: '3', title: 'Disco Elysium', year: '2019', kind: 'game', status: 'doing', rating: 10, favorite: true, cover: 'https://cdn.akamai.steamstatic.com/steam/apps/632470/library_600x900.jpg' },
+		{ id: '4', title: 'Дюна', year: '1965', kind: 'book', status: 'doing', rating: 8, favorite: false, cover: 'https://covers.openlibrary.org/b/isbn/9780441172719-L.jpg' },
+		{ id: '5', title: 'Severance', year: '2022', kind: 'series', status: 'done', rating: 9, favorite: false, cover: 'https://image.tmdb.org/t/p/w500/pPHpeI2X1qEd1CS1SeyrdhZ4qnT.jpg' },
+		{ id: '6', title: 'Цветы для Элджернона', year: '1966', kind: 'book', status: 'want_to', rating: null, favorite: false, cover: 'https://covers.openlibrary.org/b/isbn/9780156030083-L.jpg' },
+		{ id: '7', title: 'Blue Eye Samurai', year: '2023', kind: 'anime', status: 'done', rating: 8, favorite: false, cover: 'https://image.tmdb.org/t/p/w500/fXm3JT4WLQVnwukdvghtAblc1wc.jpg' },
+		{ id: '8', title: 'Hollow Knight', year: '2017', kind: 'game', status: 'want_to', rating: null, favorite: false, cover: 'https://cdn.akamai.steamstatic.com/steam/apps/367520/library_600x900.jpg' },
+		{ id: '9', title: 'Andor', year: '2022', kind: 'series', status: 'doing', rating: 9, favorite: true, cover: 'https://image.tmdb.org/t/p/w500/khZqmwHQicTYoS7Flreb9EddFZC.jpg' },
+		{ id: '10', title: 'Оппенгеймер', year: '2023', kind: 'movie', status: 'done', rating: 8, favorite: false, cover: 'https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg' },
+		{ id: '11', title: 'Vinland Saga', year: '2019', kind: 'anime', status: 'dropped', rating: 6, favorite: false, cover: 'https://image.tmdb.org/t/p/w500/rK3FOkHBFQXqxEgTYZ9NqXSthYP.jpg' },
+		{ id: '12', title: 'Атака титанов', year: '2013', kind: 'anime', status: 'done', rating: 9, favorite: true, cover: 'https://image.tmdb.org/t/p/w500/hTP1DtLGFamjfu8WqjnuQdP1n4i.jpg' },
+		{ id: '13', title: '1984', year: '1949', kind: 'book', status: 'done', rating: 9, favorite: false, cover: 'https://covers.openlibrary.org/b/isbn/9780451524935-L.jpg' },
+		{ id: '14', title: "Baldur's Gate 3", year: '2023', kind: 'game', status: 'doing', rating: 10, favorite: true, cover: 'https://cdn.akamai.steamstatic.com/steam/apps/1086940/library_600x900.jpg' },
+		{ id: '15', title: 'The Bear', year: '2022', kind: 'series', status: 'want_to', rating: null, favorite: false, cover: 'https://image.tmdb.org/t/p/w500/sHFlbKS3WLqMnp9t2ghADIJFnuQ.jpg' },
+		{ id: '16', title: 'Поднятие уровня в одиночку', year: '2024', kind: 'anime', status: 'doing', rating: 7, favorite: false, cover: 'https://image.tmdb.org/t/p/w500/geCRueV3ElhRTr0xtJuEWJt6dJ1.jpg' },
+		{ id: '17', title: 'Достучаться до небес', year: '1997', kind: 'movie', status: 'want_to', rating: null, favorite: false, cover: 'https://image.tmdb.org/t/p/w500/oY6E8n9s56pmY3z0NwJtYDR2h5b.jpg' },
+		{ id: '18', title: 'Outer Wilds', year: '2019', kind: 'game', status: 'done', rating: 10, favorite: true, cover: 'https://cdn.akamai.steamstatic.com/steam/apps/753640/library_600x900.jpg' },
 	]
 
 	const KIND_ORDER: ( Kind | 'all' )[] = [ 'all', 'movie', 'series', 'book', 'game', 'anime' ]
@@ -173,7 +174,7 @@ namespace $.$$ {
 			card.color = () => KIND_COLOR[ this.entry( id ).kind ]
 			card.poster_bg = () => {
 				const c = KIND_COLOR[ this.entry( id ).kind ]
-				return `linear-gradient(150deg, color-mix(in srgb, ${ c } 78%, #0a0b0e), color-mix(in srgb, ${ c } 34%, #0a0b0e))`
+				return `linear-gradient(180deg, #05050500 42%, #050505d9 100%), linear-gradient(150deg, color-mix(in srgb, ${ c } 52%, #111), #090909), url("${ this.entry( id ).cover }")`
 			}
 			return card
 		}
