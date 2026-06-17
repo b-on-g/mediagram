@@ -2157,7 +2157,7 @@ declare namespace $ {
 
 //# sourceMappingURL=app.view.tree.d.ts.map
 declare namespace $.$$ {
-    type Kind = 'movie' | 'series' | 'book' | 'game' | 'anime';
+    type Kind = 'movie' | 'series' | 'book' | 'anime' | 'youtube';
     type Status = 'want_to' | 'doing' | 'done' | 'dropped';
     type Entry = {
         id: string;
