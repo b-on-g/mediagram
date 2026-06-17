@@ -10,11 +10,11 @@ $bog_mediagram_app $bog_builderui_div
 		^
 		bog_builderui_lights <= lights \dark
 		bog_builderui_base \zinc
-		bog_builderui_theme \sky
+		bog_builderui_theme \red
 		bog_builderui_chart \yellow
-		bog_builderui_radius \large
-		bog_builderui_font_body \eb-garamond
-		bog_builderui_font_head \eb-garamond
+		bog_builderui_radius \medium
+		bog_builderui_font_body \inter
+		bog_builderui_font_head \inter
 	sub /
 		<= Top $mol_view
 			sub /
@@ -86,7 +86,6 @@ $bog_mediagram_app_card $bog_builderui_card
 			sub /
 				<= Kind_flag $mol_view sub / <= kind_label
 				<= Fav_view $mol_view sub / <= fav_label
-				<= Init $mol_view sub / <= initials
 				<= Pill $bog_builderui_badge
 					title <= status_label
 					variant \secondary
