@@ -41,6 +41,25 @@ $bog_mediagram_app $bog_builderui_div
 		sub /
 			<= Me_title $mol_view sub / \Я
 			<= Me_text $mol_view sub / \профиль, перенос аккаунта, share-правила
+	Recognized $bog_builderui_card
+		attr *
+			^
+			bog_mediagram_page_kind <= recognized_page_kind \info
+		sub /
+			<= Recognized_head $mol_view
+				sub /
+					<= Recognized_badge $mol_view sub / \распознано на странице
+					<= Recognized_host $mol_view sub / <= recognized_host \
+			<= Recognized_title $mol_view sub / <= recognized_title \
+			<= Recognized_meta $mol_view sub / <= recognized_meta \
+			<= Recognized_actions $mol_view
+				sub /
+					<= Recognized_status $bog_builderui_select
+						value? <=> recognized_status? \want_to
+						dictionary <= recognized_status_options *
+					<= Recognized_add $bog_builderui_button
+						title \добавить
+						click?event <=> recognized_add?event null
 	sub /
 		<= Top $mol_view
 			sub /

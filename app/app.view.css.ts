@@ -129,6 +129,52 @@ namespace $ {
 			flex: { shrink: 0 },
 		},
 
+		Recognized: {
+			margin: { top: $mol_gap.block, right: $mol_gap.block, left: $mol_gap.block },
+			flex: { direction: 'column', shrink: 0 },
+			gap: $mol_gap.text,
+		},
+
+		Recognized_head: {
+			flex: { direction: 'row', wrap: 'wrap' },
+			align: { items: 'center' },
+			gap: $mol_gap.text,
+		},
+
+		Recognized_badge: {
+			font: { size: '11px', weight: 600 },
+			textTransform: 'uppercase',
+			letterSpacing: '0.4px',
+			color: $bog_builderui_tokens.control,
+		},
+
+		Recognized_host: {
+			font: {
+				family: 'ui-monospace, "SF Mono", Menlo, monospace',
+				size: '11px',
+			},
+			color: $bog_builderui_tokens.shade,
+		},
+
+		Recognized_title: {
+			font: {
+				family: $bog_builderui_tokens.font_head,
+				size: '18px',
+				weight: 700,
+			},
+		},
+
+		Recognized_meta: {
+			font: { size: '13px' },
+			color: $bog_builderui_tokens.shade,
+		},
+
+		Recognized_actions: {
+			flex: { direction: 'row', wrap: 'wrap' },
+			gap: $mol_gap.text,
+			align: { items: 'center' },
+		},
+
 	} )
 
 	$mol_style_define( $bog_mediagram_app_chip, {

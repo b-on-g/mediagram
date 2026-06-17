@@ -64,6 +64,21 @@ namespace $.$$ {
 
 	export class $bog_mediagram_app extends $.$bog_mediagram_app {
 
+		static {
+			const c = ( globalThis as any ).chrome
+			if( c?.runtime?.onMessage ) {
+				c.runtime.onMessage.addListener( ( msg: any ) => {
+					if( msg?.type === 'mediagram_snapshot_changed' ) {
+						try {
+							const root = $bog_mediagram_app.Root( 0 )
+							root.snapshot_tick( root.snapshot_tick() + 1 )
+						} catch( e ) { /* root not mounted yet */ }
+					}
+					return false
+				} )
+			}
+		}
+
 		@ $mol_mem
 		query( next?: string ) {
 			return $mol_state_arg.value( 'q', next ) ?? ''
@@ -193,12 +208,72 @@ namespace $.$$ {
 				case 'feed': return [ this.Feed_pane() ]
 				case 'circles': return [ this.Circles_pane() ]
 				case 'me': return [ this.Me_pane() ]
-				default: return [
-					this.Library_filters(),
-					this.Library_banner(),
-					this.Library_grid(),
-				]
+				default: {
+					const items: any[] = []
+					if( this.snapshot() ) items.push( this.Recognized() )
+					items.push( this.Library_filters(), this.Library_banner(), this.Library_grid() )
+					return items
+				}
 			}
+		}
+
+		in_extension() {
+			return Boolean( ( globalThis as any ).chrome?.runtime?.id )
+		}
+
+		@ $mol_mem
+		snapshot_tick( next?: number ) {
+			return next ?? 0
+		}
+
+		@ $mol_mem
+		snapshot(): any {
+			this.snapshot_tick()
+			if( !this.in_extension() ) return null
+			const c = ( globalThis as any ).chrome
+			if( !c?.runtime?.sendMessage ) return null
+			const reply = $mol_wire_sync( c.runtime ).sendMessage({ type: 'mediagram_whoami' })
+			return reply?.payload ?? null
+		}
+
+		recognized_host() {
+			return this.snapshot()?.host ?? ''
+		}
+
+		recognized_title() {
+			return this.snapshot()?.entity?.title ?? ''
+		}
+
+		recognized_meta() {
+			const snap = this.snapshot()
+			if( !snap ) return ''
+			const e = snap.entity
+			const kind = e?.kind ? ( KIND_LABEL[ e.kind as Kind ] ?? e.kind ) : '—'
+			const year = e?.year ? ` · ${ e.year }` : ''
+			const pk = snap.page_kind === 'player' ? ' · идёт воспроизведение' : ''
+			return `${ kind }${ year }${ pk }`
+		}
+
+		recognized_page_kind() {
+			return this.snapshot()?.page_kind ?? 'info'
+		}
+
+		recognized_status_options() {
+			return { want_to: 'хочу', doing: 'смотрю' }
+		}
+
+		@ $mol_mem
+		recognized_status( next?: string ): string {
+			if( next !== undefined ) return next
+			return this.snapshot()?.page_kind === 'player' ? 'doing' : 'want_to'
+		}
+
+		recognized_add( e?: Event ) {
+			if( e ) e.preventDefault()
+			const snap = this.snapshot()
+			if( !snap ) return null
+			console.log( '[mediagram] add', this.recognized_status(), snap )
+			return null
 		}
 
 	}
