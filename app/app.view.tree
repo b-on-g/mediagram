@@ -10,11 +10,11 @@ $bog_mediagram_app $bog_builderui_div
 		^
 		bog_builderui_lights <= lights \dark
 		bog_builderui_base \zinc
-		bog_builderui_theme \red
+		bog_builderui_theme \sky
 		bog_builderui_chart \yellow
-		bog_builderui_radius \medium
-		bog_builderui_font_body \inter
-		bog_builderui_font_head \inter
+		bog_builderui_radius \large
+		bog_builderui_font_body \eb-garamond
+		bog_builderui_font_head \eb-garamond
 	sub /
 		<= Top $mol_view
 			sub /
