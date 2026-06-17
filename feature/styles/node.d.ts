@@ -2095,6 +2095,18 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
+
+	export class $bog_builderui_card extends $bog_builderui_div {
+	}
+	
+}
+
+//# sourceMappingURL=card.view.tree.d.ts.map
+/** @see $bog_builderui_tokens */
+declare namespace $ {
+}
+
+declare namespace $ {
     /**
     * Key names code for hotkey
     * @see [mol_hotkey](../../hotkey/hotkey.view.ts)
@@ -2362,60 +2374,6 @@ declare namespace $ {
 }
 
 declare namespace $ {
-
-	export class $mol_ghost extends $mol_view {
-		Sub( ): $mol_view
-	}
-	
-}
-
-//# sourceMappingURL=ghost.view.tree.d.ts.map
-declare namespace $.$$ {
-    /**
-     * Mixin view logic to DOM node of another component.
-     */
-    class $mol_ghost extends $.$mol_ghost {
-        dom_node_external(next?: Element): Element;
-        dom_node_actual(): Element;
-        dom_tree(): Element;
-        title(): string;
-        minimal_width(): number;
-        minimal_height(): number;
-    }
-}
-
-declare namespace $ {
-
-	export class $mol_follower extends $mol_ghost {
-		transform( ): string
-		Anchor( ): $mol_view
-		align( ): readonly(number)[]
-		offset( ): readonly(number)[]
-		style( ): ({ 
-			'transform': ReturnType< $mol_follower['transform'] >,
-		})  & ReturnType< $mol_ghost['style'] >
-	}
-	
-}
-
-//# sourceMappingURL=follower.view.tree.d.ts.map
-declare namespace $.$$ {
-    /**
-     * Marker on top of another component with tracking of its position.
-     */
-    class $mol_follower extends $.$mol_follower {
-        pos(): {
-            left: number;
-            top: number;
-        } | null;
-        transform(): string;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
     class $mol_print extends $mol_object {
         static before(): $mol_dom_listener;
         static after(): $mol_dom_listener;
@@ -2460,605 +2418,6 @@ declare namespace $.$$ {
 
 declare namespace $ {
 
-	type $mol_pop_bubble__content_mol_pop_1 = $mol_type_enforce<
-		ReturnType< $mol_pop['bubble_content'] >
-		,
-		ReturnType< $mol_pop_bubble['content'] >
-	>
-	type $mol_pop_bubble__height_max_mol_pop_2 = $mol_type_enforce<
-		ReturnType< $mol_pop['height_max'] >
-		,
-		ReturnType< $mol_pop_bubble['height_max'] >
-	>
-	type $mol_follower__offset_mol_pop_3 = $mol_type_enforce<
-		ReturnType< $mol_pop['bubble_offset'] >
-		,
-		ReturnType< $mol_follower['offset'] >
-	>
-	type $mol_follower__align_mol_pop_4 = $mol_type_enforce<
-		ReturnType< $mol_pop['bubble_align'] >
-		,
-		ReturnType< $mol_follower['align'] >
-	>
-	type $mol_follower__Anchor_mol_pop_5 = $mol_type_enforce<
-		ReturnType< $mol_pop['Anchor'] >
-		,
-		ReturnType< $mol_follower['Anchor'] >
-	>
-	type $mol_follower__Sub_mol_pop_6 = $mol_type_enforce<
-		ReturnType< $mol_pop['Bubble'] >
-		,
-		ReturnType< $mol_follower['Sub'] >
-	>
-	export class $mol_pop extends $mol_view {
-		bubble( ): any
-		Anchor( ): any
-		bubble_offset( ): readonly(number)[]
-		bubble_align( ): readonly(number)[]
-		bubble_content( ): readonly($mol_view_content)[]
-		height_max( ): number
-		Bubble( ): $mol_pop_bubble
-		Follower( ): $mol_follower
-		showed( next?: boolean ): boolean
-		align_vert( ): string
-		align_hor( ): string
-		align( ): string
-		prefer( ): string
-		auto( ): readonly(any)[]
-		sub( ): readonly(any)[]
-		sub_visible( ): readonly(any)[]
-	}
-	
-	export class $mol_pop_bubble extends $mol_view {
-		content( ): readonly($mol_view_content)[]
-		height_max( ): number
-		sub( ): ReturnType< $mol_pop_bubble['content'] >
-		style( ): ({ 
-			'maxHeight': ReturnType< $mol_pop_bubble['height_max'] >,
-		})  & ReturnType< $mol_view['style'] >
-		attr( ): ({ 
-			'tabindex': number,
-			'popover': string,
-		})  & ReturnType< $mol_view['attr'] >
-	}
-	
-}
-
-//# sourceMappingURL=pop.view.tree.d.ts.map
-declare namespace $.$$ {
-    /**
-     * `Bubble` that can be shown anchored to `Anchor` element.
-     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_pop_demo
-     */
-    class $mol_pop extends $.$mol_pop {
-        showed(next?: boolean): boolean;
-        sub_visible(): any[];
-        height_max(): number;
-        align(): string;
-        align_vert(): "suspense" | "top" | "bottom";
-        align_hor(): "suspense" | "left" | "right";
-        bubble_offset(): number[];
-        bubble_align(): number[];
-        bubble(): void;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-    interface $mol_locale_dict {
-        [key: string]: string;
-    }
-    /**
-     * Localisation in $mol framework
-     * @see https://mol.hyoo.ru/#!section=docs/=s5aqnb_odub8l
-     */
-    class $mol_locale extends $mol_object {
-        static lang_default(): string;
-        static lang(next?: string): string;
-        static source(lang: string): any;
-        static texts(lang: string, next?: $mol_locale_dict): $mol_locale_dict;
-        static text(key: string): string;
-        static warn(key: string): null;
-    }
-}
-
-declare namespace $ {
-    function $mol_support_css_overflow_anchor(this: $): boolean;
-}
-
-declare namespace $ {
-
-	type $mol_view__style_mol_list_1 = $mol_type_enforce<
-		({ 
-			'paddingTop': ReturnType< $mol_list['gap_before'] >,
-		}) 
-		,
-		ReturnType< $mol_view['style'] >
-	>
-	type $mol_view__style_mol_list_2 = $mol_type_enforce<
-		({ 
-			'paddingTop': ReturnType< $mol_list['gap_after'] >,
-		}) 
-		,
-		ReturnType< $mol_view['style'] >
-	>
-	export class $mol_list extends $mol_view {
-		gap_before( ): number
-		Gap_before( ): $mol_view
-		Empty( ): $mol_view
-		gap_after( ): number
-		Gap_after( ): $mol_view
-		rows( ): readonly($mol_view)[]
-		render_visible_only( ): boolean
-		render_over( ): number
-		sub( ): ReturnType< $mol_list['rows'] >
-		item_height_min( id: any): number
-		item_width_min( id: any): number
-		view_window_shift( next?: number ): number
-		view_window( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=list.view.tree.d.ts.map
-declare namespace $.$$ {
-    /**
-     * The list of rows with lazy/virtual rendering support based on `minimal_height` of rows.
-     * `mol_list` should contain only components that inherits `mol_view`. You should not place raw strings or numbers in list.
-     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_list_demo
-     */
-    class $mol_list extends $.$mol_list {
-        sub(): readonly $mol_view[];
-        render_visible_only(): boolean;
-        _view_window_last: number[];
-        view_window(next?: [number, number]): [number, number];
-        item_height_min(index: number): number;
-        row_width_min(index: number): number;
-        gap_before(): number;
-        gap_after(): number;
-        sub_visible(): $mol_view[];
-        minimal_height(): number;
-        minimal_width(): number;
-        force_render(path: Set<$mol_view>): void;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_speck extends $mol_view {
-		value( ): any
-		theme( ): string
-		sub( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=speck.view.tree.d.ts.map
-declare namespace $ {
-
-	type $mol_speck__value_mol_button_1 = $mol_type_enforce<
-		ReturnType< $mol_button['error'] >
-		,
-		ReturnType< $mol_speck['value'] >
-	>
-	export class $mol_button extends $mol_view {
-		event_activate( next?: any ): any
-		activate( next?: ReturnType< $mol_button['event_activate'] > ): ReturnType< $mol_button['event_activate'] >
-		clicks( next?: any ): any
-		event_key_press( next?: any ): any
-		key_press( next?: ReturnType< $mol_button['event_key_press'] > ): ReturnType< $mol_button['event_key_press'] >
-		disabled( ): boolean
-		tab_index( ): number
-		hint( ): string
-		hint_safe( ): ReturnType< $mol_button['hint'] >
-		error( ): string
-		enabled( ): boolean
-		click( next?: any ): any
-		event_click( next?: any ): any
-		status( next?: readonly(any)[] ): readonly(any)[]
-		event( ): ({ 
-			click( next?: ReturnType< $mol_button['activate'] > ): ReturnType< $mol_button['activate'] >,
-			dblclick( next?: ReturnType< $mol_button['clicks'] > ): ReturnType< $mol_button['clicks'] >,
-			keydown( next?: ReturnType< $mol_button['key_press'] > ): ReturnType< $mol_button['key_press'] >,
-		})  & ReturnType< $mol_view['event'] >
-		attr( ): ({ 
-			'disabled': ReturnType< $mol_button['disabled'] >,
-			'role': string,
-			'tabindex': ReturnType< $mol_button['tab_index'] >,
-			'title': ReturnType< $mol_button['hint_safe'] >,
-		})  & ReturnType< $mol_view['attr'] >
-		sub( ): readonly($mol_view_content)[]
-		Speck( ): $mol_speck
-	}
-	
-}
-
-//# sourceMappingURL=button.view.tree.d.ts.map
-declare namespace $.$$ {
-    /**
-     * Simple button.
-     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_button_demo
-     */
-    class $mol_button extends $.$mol_button {
-        disabled(): boolean;
-        event_activate(next: Event): void;
-        event_key_press(event: KeyboardEvent): any;
-        tab_index(): number;
-        error(): string;
-        hint_safe(): string;
-        sub_visible(): ($mol_view_content | $mol_speck)[];
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_button_typed extends $mol_button {
-		minimal_height( ): number
-		minimal_width( ): number
-	}
-	
-}
-
-//# sourceMappingURL=typed.view.tree.d.ts.map
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_button_minor extends $mol_button_typed {
-	}
-	
-}
-
-//# sourceMappingURL=minor.view.tree.d.ts.map
-declare namespace $ {
-
-	export class $bog_theme_picker_row extends $mol_button_minor {
-		focused_str( ): string
-		hover( next?: any ): any
-		theme_name( ): string
-		title( ): ReturnType< $bog_theme_picker_row['theme_name'] >
-		attr( ): ({ 
-			'bog_theme_picker_row_focused': ReturnType< $bog_theme_picker_row['focused_str'] >,
-		})  & ReturnType< $mol_button_minor['attr'] >
-		event( ): ({ 
-			pointerenter( next?: ReturnType< $bog_theme_picker_row['hover'] > ): ReturnType< $bog_theme_picker_row['hover'] >,
-		})  & ReturnType< $mol_button_minor['event'] >
-	}
-	
-}
-
-//# sourceMappingURL=row.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $bog_theme_picker_row extends $.$bog_theme_picker_row {
-        focused_str(): "" | "true";
-    }
-}
-
-declare namespace $.$$ {
-}
-
-declare namespace $ {
-
-	type $mol_string__value_bog_theme_picker_1 = $mol_type_enforce<
-		ReturnType< $bog_theme_picker['query'] >
-		,
-		ReturnType< $mol_string['value'] >
-	>
-	type $mol_string__hint_bog_theme_picker_2 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_string['hint'] >
-	>
-	type $mol_list__rows_bog_theme_picker_3 = $mol_type_enforce<
-		ReturnType< $bog_theme_picker['theme_rows'] >
-		,
-		ReturnType< $mol_list['rows'] >
-	>
-	type $mol_list__rows_bog_theme_picker_4 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_list['rows'] >
-	>
-	type $bog_theme_picker_row__theme_name_bog_theme_picker_5 = $mol_type_enforce<
-		ReturnType< $bog_theme_picker['theme_name'] >
-		,
-		ReturnType< $bog_theme_picker_row['theme_name'] >
-	>
-	type $bog_theme_picker_row__focused_bog_theme_picker_6 = $mol_type_enforce<
-		ReturnType< $bog_theme_picker['theme_focused'] >
-		,
-		ReturnType< $bog_theme_picker_row['focused'] >
-	>
-	type $bog_theme_picker_row__click_bog_theme_picker_7 = $mol_type_enforce<
-		ReturnType< $bog_theme_picker['theme_select'] >
-		,
-		ReturnType< $bog_theme_picker_row['click'] >
-	>
-	type $bog_theme_picker_row__hover_bog_theme_picker_8 = $mol_type_enforce<
-		ReturnType< $bog_theme_picker['theme_hover'] >
-		,
-		ReturnType< $bog_theme_picker_row['hover'] >
-	>
-	export class $bog_theme_picker extends $mol_scroll {
-		theme_name( id: any): string
-		theme_focused( id: any): boolean
-		theme_select( id: any, next?: any ): any
-		theme_hover( id: any, next?: any ): any
-		Search( ): $mol_string
-		theme_rows( ): readonly(any)[]
-		Theme_list( ): $mol_list
-		Content( ): $mol_list
-		key_down( next?: any ): any
-		theme_auto( ): $bog_theme_auto
-		close( next?: any ): any
-		query( next?: string ): string
-		focused_index( next?: number ): number
-		Theme_row( id: any): $bog_theme_picker_row
-		sub( ): readonly(any)[]
-		event( ): ({ 
-			keydown( next?: ReturnType< $bog_theme_picker['key_down'] > ): ReturnType< $bog_theme_picker['key_down'] >,
-		})  & ReturnType< $mol_scroll['event'] >
-	}
-	
-}
-
-//# sourceMappingURL=picker.view.tree.d.ts.map
-declare namespace $.$$ {
-    /**
-     * Theme picker popup with search and list
-     */
-    class $bog_theme_picker extends $.$bog_theme_picker {
-        theme_rows(): $.$bog_theme_picker_row[];
-        filtered_themes(): ("$mol_theme_giper_smash_dark" | "$mol_theme_giper_smash_light" | "$mol_theme_light" | "$mol_theme_dark" | "$mol_theme_monefro_light" | "$mol_theme_monefro_dark" | "$mol_theme_homerent_light" | "$mol_theme_homerent_dark" | "$mol_theme_upwork" | "$mol_theme_ainews_light" | "$mol_theme_ainews_dark" | "$mol_theme_calm_dark" | "$mol_theme_calm_light")[];
-        theme_name(index: number): "$mol_theme_giper_smash_dark" | "$mol_theme_giper_smash_light" | "$mol_theme_light" | "$mol_theme_dark" | "$mol_theme_monefro_light" | "$mol_theme_monefro_dark" | "$mol_theme_homerent_light" | "$mol_theme_homerent_dark" | "$mol_theme_upwork" | "$mol_theme_ainews_light" | "$mol_theme_ainews_dark" | "$mol_theme_calm_dark" | "$mol_theme_calm_light";
-        theme_focused(index: number): boolean;
-        theme_select(index: number, event?: MouseEvent): null;
-        theme_hover(index: number, event?: PointerEvent): null;
-        key_down(event?: KeyboardEvent): null;
-        private select_theme;
-        private preview_theme;
-    }
-}
-
-declare namespace $.$$ {
-}
-
-declare namespace $ {
-    /** State of time moment */
-    class $mol_state_time extends $mol_object {
-        static task(precision: number, reset?: null): $mol_after_timeout | $mol_after_frame;
-        static now(precision: number): number;
-    }
-}
-
-declare namespace $ {
-
-	export class $mol_svg extends $mol_view {
-		dom_name( ): string
-		dom_name_space( ): string
-		font_size( ): number
-		font_family( ): string
-		style_size( ): Record<string, any>
-	}
-	
-}
-
-//# sourceMappingURL=svg.view.tree.d.ts.map
-declare namespace $.$$ {
-    /** Base SVG component to display SVG images or icons. */
-    class $mol_svg extends $.$mol_svg {
-        computed_style(): Record<string, any>;
-        font_size(): number;
-        font_family(): any;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_svg_root extends $mol_svg {
-		view_box( ): string
-		aspect( ): string
-		dom_name( ): string
-		attr( ): ({ 
-			'viewBox': ReturnType< $mol_svg_root['view_box'] >,
-			'preserveAspectRatio': ReturnType< $mol_svg_root['aspect'] >,
-		})  & ReturnType< $mol_svg['attr'] >
-	}
-	
-}
-
-//# sourceMappingURL=root.view.tree.d.ts.map
-declare namespace $ {
-
-	export class $mol_svg_path extends $mol_svg {
-		geometry( ): string
-		dom_name( ): string
-		attr( ): ({ 
-			'd': ReturnType< $mol_svg_path['geometry'] >,
-		})  & ReturnType< $mol_svg['attr'] >
-	}
-	
-}
-
-//# sourceMappingURL=path.view.tree.d.ts.map
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	type $mol_svg_path__geometry_mol_icon_1 = $mol_type_enforce<
-		ReturnType< $mol_icon['path'] >
-		,
-		ReturnType< $mol_svg_path['geometry'] >
-	>
-	export class $mol_icon extends $mol_svg_root {
-		path( ): string
-		Path( ): $mol_svg_path
-		view_box( ): string
-		minimal_width( ): number
-		minimal_height( ): number
-		sub( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=icon.view.tree.d.ts.map
-declare namespace $ {
-
-	export class $mol_icon_white_balance_sunny extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=sunny.view.tree.d.ts.map
-declare namespace $ {
-
-	export class $mol_icon_weather_night extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=night.view.tree.d.ts.map
-declare namespace $ {
-
-	export class $mol_icon_monitor extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=monitor.view.tree.d.ts.map
-declare namespace $ {
-
-	type $mol_view__event_bog_theme_toggle_1 = $mol_type_enforce<
-		({ 
-			click( next?: ReturnType< $bog_theme_toggle['backdrop_click'] > ): ReturnType< $bog_theme_toggle['backdrop_click'] >,
-		}) 
-		,
-		ReturnType< $mol_view['event'] >
-	>
-	type $bog_theme_picker__theme_auto_bog_theme_toggle_2 = $mol_type_enforce<
-		ReturnType< $bog_theme_toggle['theme_auto'] >
-		,
-		ReturnType< $bog_theme_picker['theme_auto'] >
-	>
-	type $bog_theme_picker__close_bog_theme_toggle_3 = $mol_type_enforce<
-		ReturnType< $bog_theme_toggle['picker_close'] >
-		,
-		ReturnType< $bog_theme_picker['close'] >
-	>
-	type $mol_button_minor__sub_bog_theme_toggle_4 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_button_minor['sub'] >
-	>
-	type $mol_button_minor__hint_bog_theme_toggle_5 = $mol_type_enforce<
-		ReturnType< $bog_theme_toggle['anchor_hint'] >
-		,
-		ReturnType< $mol_button_minor['hint'] >
-	>
-	type $mol_button_minor__click_bog_theme_toggle_6 = $mol_type_enforce<
-		ReturnType< $bog_theme_toggle['clicked'] >
-		,
-		ReturnType< $mol_button_minor['click'] >
-	>
-	type $mol_button_minor__event_bog_theme_toggle_7 = $mol_type_enforce<
-		({ 
-			pointerdown( next?: ReturnType< $bog_theme_toggle['press_start'] > ): ReturnType< $bog_theme_toggle['press_start'] >,
-			pointermove( next?: ReturnType< $bog_theme_toggle['press_move'] > ): ReturnType< $bog_theme_toggle['press_move'] >,
-			pointerup( next?: ReturnType< $bog_theme_toggle['press_end'] > ): ReturnType< $bog_theme_toggle['press_end'] >,
-			pointercancel( next?: ReturnType< $bog_theme_toggle['press_cancel'] > ): ReturnType< $bog_theme_toggle['press_cancel'] >,
-			lostpointercapture( next?: ReturnType< $bog_theme_toggle['press_lost'] > ): ReturnType< $bog_theme_toggle['press_lost'] >,
-		})  & ReturnType< $mol_button_minor['event'] >
-		,
-		ReturnType< $mol_button_minor['event'] >
-	>
-	export class $bog_theme_toggle extends $mol_pop {
-		Icon( ): $mol_view
-		anchor_hint( ): string
-		clicked( next?: any ): any
-		press_start( next?: any ): any
-		press_move( next?: any ): any
-		press_end( next?: any ): any
-		press_cancel( next?: any ): any
-		press_lost( next?: any ): any
-		backdrop_click( next?: any ): any
-		Backdrop( ): $mol_view
-		picker_close( next?: any ): any
-		Picker( ): $bog_theme_picker
-		theme_auto( ): $bog_theme_auto
-		showed( next?: boolean ): boolean
-		align( ): string
-		Anchor( ): $mol_button_minor
-		Icon_light( ): $mol_icon_white_balance_sunny
-		Icon_dark( ): $mol_icon_weather_night
-		Icon_system( ): $mol_icon_monitor
-		bubble_content( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=toggle.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $bog_theme_toggle extends $.$bog_theme_toggle {
-        long_press_delay: number;
-        move_threshold: number;
-        private press_timer;
-        private press_start_x;
-        private press_start_y;
-        private is_long_press;
-        Icon(): $mol_icon_white_balance_sunny | $mol_icon_weather_night | $mol_icon_monitor;
-        anchor_hint(): "Светлая тема" | "Тёмная тема" | "Пользовательская тема" | "Как в системе";
-        clicked(event?: MouseEvent): null;
-        press_start(event?: PointerEvent): null;
-        press_move(event?: PointerEvent): null;
-        press_end(event?: PointerEvent): null;
-        press_cancel(event?: PointerEvent): null;
-        press_lost(event?: Event): null;
-        private clear_press_timer;
-        private on_long_press;
-        picker_close(): void;
-        backdrop_click(event?: MouseEvent): null;
-    }
-}
-
-declare namespace $.$$ {
-}
-
-declare namespace $ {
-
-	export class $bog_builderui_card extends $bog_builderui_div {
-	}
-	
-}
-
-//# sourceMappingURL=card.view.tree.d.ts.map
-/** @see $bog_builderui_tokens */
-declare namespace $ {
-}
-
-declare namespace $ {
-
 	type $mol_gallery__style_mol_gallery_1 = $mol_type_enforce<
 		({ 
 			'flexGrow': ReturnType< $mol_gallery['side_size'] >,
@@ -3094,6 +2453,36 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
+}
+
+declare namespace $ {
+    /** State of time moment */
+    class $mol_state_time extends $mol_object {
+        static task(precision: number, reset?: null): $mol_after_timeout | $mol_after_frame;
+        static now(precision: number): number;
+    }
+}
+
+declare namespace $ {
+
+	export class $mol_svg extends $mol_view {
+		dom_name( ): string
+		dom_name_space( ): string
+		font_size( ): number
+		font_family( ): string
+		style_size( ): Record<string, any>
+	}
+	
+}
+
+//# sourceMappingURL=svg.view.tree.d.ts.map
+declare namespace $.$$ {
+    /** Base SVG component to display SVG images or icons. */
+    class $mol_svg extends $.$mol_svg {
+        computed_style(): Record<string, any>;
+        font_size(): number;
+        font_family(): any;
+    }
 }
 
 declare namespace $ {
@@ -3391,6 +2780,24 @@ declare namespace $.$$ {
 declare namespace $ {
 }
 
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_svg_root extends $mol_svg {
+		view_box( ): string
+		aspect( ): string
+		dom_name( ): string
+		attr( ): ({ 
+			'viewBox': ReturnType< $mol_svg_root['view_box'] >,
+			'preserveAspectRatio': ReturnType< $mol_svg_root['aspect'] >,
+		})  & ReturnType< $mol_svg['attr'] >
+	}
+	
+}
+
+//# sourceMappingURL=root.view.tree.d.ts.map
 declare namespace $ {
 
 	type $mol_vector_2d__mol_touch_1 = $mol_type_enforce<
@@ -3807,6 +3214,245 @@ declare namespace $ {
 }
 
 declare namespace $ {
+
+	export class $mol_ghost extends $mol_view {
+		Sub( ): $mol_view
+	}
+	
+}
+
+//# sourceMappingURL=ghost.view.tree.d.ts.map
+declare namespace $.$$ {
+    /**
+     * Mixin view logic to DOM node of another component.
+     */
+    class $mol_ghost extends $.$mol_ghost {
+        dom_node_external(next?: Element): Element;
+        dom_node_actual(): Element;
+        dom_tree(): Element;
+        title(): string;
+        minimal_width(): number;
+        minimal_height(): number;
+    }
+}
+
+declare namespace $ {
+
+	export class $mol_follower extends $mol_ghost {
+		transform( ): string
+		Anchor( ): $mol_view
+		align( ): readonly(number)[]
+		offset( ): readonly(number)[]
+		style( ): ({ 
+			'transform': ReturnType< $mol_follower['transform'] >,
+		})  & ReturnType< $mol_ghost['style'] >
+	}
+	
+}
+
+//# sourceMappingURL=follower.view.tree.d.ts.map
+declare namespace $.$$ {
+    /**
+     * Marker on top of another component with tracking of its position.
+     */
+    class $mol_follower extends $.$mol_follower {
+        pos(): {
+            left: number;
+            top: number;
+        } | null;
+        transform(): string;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	type $mol_pop_bubble__content_mol_pop_1 = $mol_type_enforce<
+		ReturnType< $mol_pop['bubble_content'] >
+		,
+		ReturnType< $mol_pop_bubble['content'] >
+	>
+	type $mol_pop_bubble__height_max_mol_pop_2 = $mol_type_enforce<
+		ReturnType< $mol_pop['height_max'] >
+		,
+		ReturnType< $mol_pop_bubble['height_max'] >
+	>
+	type $mol_follower__offset_mol_pop_3 = $mol_type_enforce<
+		ReturnType< $mol_pop['bubble_offset'] >
+		,
+		ReturnType< $mol_follower['offset'] >
+	>
+	type $mol_follower__align_mol_pop_4 = $mol_type_enforce<
+		ReturnType< $mol_pop['bubble_align'] >
+		,
+		ReturnType< $mol_follower['align'] >
+	>
+	type $mol_follower__Anchor_mol_pop_5 = $mol_type_enforce<
+		ReturnType< $mol_pop['Anchor'] >
+		,
+		ReturnType< $mol_follower['Anchor'] >
+	>
+	type $mol_follower__Sub_mol_pop_6 = $mol_type_enforce<
+		ReturnType< $mol_pop['Bubble'] >
+		,
+		ReturnType< $mol_follower['Sub'] >
+	>
+	export class $mol_pop extends $mol_view {
+		bubble( ): any
+		Anchor( ): any
+		bubble_offset( ): readonly(number)[]
+		bubble_align( ): readonly(number)[]
+		bubble_content( ): readonly($mol_view_content)[]
+		height_max( ): number
+		Bubble( ): $mol_pop_bubble
+		Follower( ): $mol_follower
+		showed( next?: boolean ): boolean
+		align_vert( ): string
+		align_hor( ): string
+		align( ): string
+		prefer( ): string
+		auto( ): readonly(any)[]
+		sub( ): readonly(any)[]
+		sub_visible( ): readonly(any)[]
+	}
+	
+	export class $mol_pop_bubble extends $mol_view {
+		content( ): readonly($mol_view_content)[]
+		height_max( ): number
+		sub( ): ReturnType< $mol_pop_bubble['content'] >
+		style( ): ({ 
+			'maxHeight': ReturnType< $mol_pop_bubble['height_max'] >,
+		})  & ReturnType< $mol_view['style'] >
+		attr( ): ({ 
+			'tabindex': number,
+			'popover': string,
+		})  & ReturnType< $mol_view['attr'] >
+	}
+	
+}
+
+//# sourceMappingURL=pop.view.tree.d.ts.map
+declare namespace $.$$ {
+    /**
+     * `Bubble` that can be shown anchored to `Anchor` element.
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_pop_demo
+     */
+    class $mol_pop extends $.$mol_pop {
+        showed(next?: boolean): boolean;
+        sub_visible(): any[];
+        height_max(): number;
+        align(): string;
+        align_vert(): "suspense" | "top" | "bottom";
+        align_hor(): "suspense" | "left" | "right";
+        bubble_offset(): number[];
+        bubble_align(): number[];
+        bubble(): void;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_speck extends $mol_view {
+		value( ): any
+		theme( ): string
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=speck.view.tree.d.ts.map
+declare namespace $ {
+
+	type $mol_speck__value_mol_button_1 = $mol_type_enforce<
+		ReturnType< $mol_button['error'] >
+		,
+		ReturnType< $mol_speck['value'] >
+	>
+	export class $mol_button extends $mol_view {
+		event_activate( next?: any ): any
+		activate( next?: ReturnType< $mol_button['event_activate'] > ): ReturnType< $mol_button['event_activate'] >
+		clicks( next?: any ): any
+		event_key_press( next?: any ): any
+		key_press( next?: ReturnType< $mol_button['event_key_press'] > ): ReturnType< $mol_button['event_key_press'] >
+		disabled( ): boolean
+		tab_index( ): number
+		hint( ): string
+		hint_safe( ): ReturnType< $mol_button['hint'] >
+		error( ): string
+		enabled( ): boolean
+		click( next?: any ): any
+		event_click( next?: any ): any
+		status( next?: readonly(any)[] ): readonly(any)[]
+		event( ): ({ 
+			click( next?: ReturnType< $mol_button['activate'] > ): ReturnType< $mol_button['activate'] >,
+			dblclick( next?: ReturnType< $mol_button['clicks'] > ): ReturnType< $mol_button['clicks'] >,
+			keydown( next?: ReturnType< $mol_button['key_press'] > ): ReturnType< $mol_button['key_press'] >,
+		})  & ReturnType< $mol_view['event'] >
+		attr( ): ({ 
+			'disabled': ReturnType< $mol_button['disabled'] >,
+			'role': string,
+			'tabindex': ReturnType< $mol_button['tab_index'] >,
+			'title': ReturnType< $mol_button['hint_safe'] >,
+		})  & ReturnType< $mol_view['attr'] >
+		sub( ): readonly($mol_view_content)[]
+		Speck( ): $mol_speck
+	}
+	
+}
+
+//# sourceMappingURL=button.view.tree.d.ts.map
+declare namespace $.$$ {
+    /**
+     * Simple button.
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_button_demo
+     */
+    class $mol_button extends $.$mol_button {
+        disabled(): boolean;
+        event_activate(next: Event): void;
+        event_key_press(event: KeyboardEvent): any;
+        tab_index(): number;
+        error(): string;
+        hint_safe(): string;
+        sub_visible(): ($mol_view_content | $mol_speck)[];
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_button_typed extends $mol_button {
+		minimal_height( ): number
+		minimal_width( ): number
+	}
+	
+}
+
+//# sourceMappingURL=typed.view.tree.d.ts.map
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_button_minor extends $mol_button_typed {
+	}
+	
+}
+
+//# sourceMappingURL=minor.view.tree.d.ts.map
+declare namespace $ {
     class $mol_dom_event<EventType extends Event> extends $mol_object {
         readonly native: EventType;
         constructor(native: EventType);
@@ -4137,6 +3783,24 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    interface $mol_locale_dict {
+        [key: string]: string;
+    }
+    /**
+     * Localisation in $mol framework
+     * @see https://mol.hyoo.ru/#!section=docs/=s5aqnb_odub8l
+     */
+    class $mol_locale extends $mol_object {
+        static lang_default(): string;
+        static lang(next?: string): string;
+        static source(lang: string): any;
+        static texts(lang: string, next?: $mol_locale_dict): $mol_locale_dict;
+        static text(key: string): string;
+        static warn(key: string): null;
+    }
+}
+
+declare namespace $ {
 
 	export class $mol_nav extends $mol_plugin {
 		event_key( next?: any ): any
@@ -4176,6 +3840,105 @@ declare namespace $.$$ {
     }
 }
 
+declare namespace $ {
+    function $mol_support_css_overflow_anchor(this: $): boolean;
+}
+
+declare namespace $ {
+
+	type $mol_view__style_mol_list_1 = $mol_type_enforce<
+		({ 
+			'paddingTop': ReturnType< $mol_list['gap_before'] >,
+		}) 
+		,
+		ReturnType< $mol_view['style'] >
+	>
+	type $mol_view__style_mol_list_2 = $mol_type_enforce<
+		({ 
+			'paddingTop': ReturnType< $mol_list['gap_after'] >,
+		}) 
+		,
+		ReturnType< $mol_view['style'] >
+	>
+	export class $mol_list extends $mol_view {
+		gap_before( ): number
+		Gap_before( ): $mol_view
+		Empty( ): $mol_view
+		gap_after( ): number
+		Gap_after( ): $mol_view
+		rows( ): readonly($mol_view)[]
+		render_visible_only( ): boolean
+		render_over( ): number
+		sub( ): ReturnType< $mol_list['rows'] >
+		item_height_min( id: any): number
+		item_width_min( id: any): number
+		view_window_shift( next?: number ): number
+		view_window( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=list.view.tree.d.ts.map
+declare namespace $.$$ {
+    /**
+     * The list of rows with lazy/virtual rendering support based on `minimal_height` of rows.
+     * `mol_list` should contain only components that inherits `mol_view`. You should not place raw strings or numbers in list.
+     * @see https://mol.hyoo.ru/#!section=demos/demo=mol_list_demo
+     */
+    class $mol_list extends $.$mol_list {
+        sub(): readonly $mol_view[];
+        render_visible_only(): boolean;
+        _view_window_last: number[];
+        view_window(next?: [number, number]): [number, number];
+        item_height_min(index: number): number;
+        row_width_min(index: number): number;
+        gap_before(): number;
+        gap_after(): number;
+        sub_visible(): $mol_view[];
+        minimal_height(): number;
+        minimal_width(): number;
+        force_render(path: Set<$mol_view>): void;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_svg_path extends $mol_svg {
+		geometry( ): string
+		dom_name( ): string
+		attr( ): ({ 
+			'd': ReturnType< $mol_svg_path['geometry'] >,
+		})  & ReturnType< $mol_svg['attr'] >
+	}
+	
+}
+
+//# sourceMappingURL=path.view.tree.d.ts.map
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	type $mol_svg_path__geometry_mol_icon_1 = $mol_type_enforce<
+		ReturnType< $mol_icon['path'] >
+		,
+		ReturnType< $mol_svg_path['geometry'] >
+	>
+	export class $mol_icon extends $mol_svg_root {
+		path( ): string
+		Path( ): $mol_svg_path
+		view_box( ): string
+		minimal_width( ): number
+		minimal_height( ): number
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=icon.view.tree.d.ts.map
 declare namespace $ {
 
 	export class $mol_icon_close extends $mol_icon {
@@ -4560,27 +4323,6 @@ declare namespace $ {
 }
 
 declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $bog_builderui_button extends $mol_button_minor {
-		minimal_height( ): number
-		minimal_width( ): number
-		variant( ): string
-		attr( ): ({ 
-			'bog_builderui_button_variant': ReturnType< $bog_builderui_button['variant'] >,
-		})  & ReturnType< $mol_button_minor['attr'] >
-	}
-	
-}
-
-//# sourceMappingURL=button.view.tree.d.ts.map
-/** @see $bog_builderui_tokens */
-declare namespace $ {
-}
-
-declare namespace $ {
 
 	type $mol_check__checked_mol_check_list_1 = $mol_type_enforce<
 		ReturnType< $mol_check_list['option_checked'] >
@@ -4696,6 +4438,264 @@ declare namespace $ {
 
 declare namespace $ {
 
+	export class $bog_theme_picker_row extends $mol_button_minor {
+		focused_str( ): string
+		hover( next?: any ): any
+		theme_name( ): string
+		title( ): ReturnType< $bog_theme_picker_row['theme_name'] >
+		attr( ): ({ 
+			'bog_theme_picker_row_focused': ReturnType< $bog_theme_picker_row['focused_str'] >,
+		})  & ReturnType< $mol_button_minor['attr'] >
+		event( ): ({ 
+			pointerenter( next?: ReturnType< $bog_theme_picker_row['hover'] > ): ReturnType< $bog_theme_picker_row['hover'] >,
+		})  & ReturnType< $mol_button_minor['event'] >
+	}
+	
+}
+
+//# sourceMappingURL=row.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $bog_theme_picker_row extends $.$bog_theme_picker_row {
+        focused_str(): "" | "true";
+    }
+}
+
+declare namespace $.$$ {
+}
+
+declare namespace $ {
+
+	type $mol_string__value_bog_theme_picker_1 = $mol_type_enforce<
+		ReturnType< $bog_theme_picker['query'] >
+		,
+		ReturnType< $mol_string['value'] >
+	>
+	type $mol_string__hint_bog_theme_picker_2 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_string['hint'] >
+	>
+	type $mol_list__rows_bog_theme_picker_3 = $mol_type_enforce<
+		ReturnType< $bog_theme_picker['theme_rows'] >
+		,
+		ReturnType< $mol_list['rows'] >
+	>
+	type $mol_list__rows_bog_theme_picker_4 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_list['rows'] >
+	>
+	type $bog_theme_picker_row__theme_name_bog_theme_picker_5 = $mol_type_enforce<
+		ReturnType< $bog_theme_picker['theme_name'] >
+		,
+		ReturnType< $bog_theme_picker_row['theme_name'] >
+	>
+	type $bog_theme_picker_row__focused_bog_theme_picker_6 = $mol_type_enforce<
+		ReturnType< $bog_theme_picker['theme_focused'] >
+		,
+		ReturnType< $bog_theme_picker_row['focused'] >
+	>
+	type $bog_theme_picker_row__click_bog_theme_picker_7 = $mol_type_enforce<
+		ReturnType< $bog_theme_picker['theme_select'] >
+		,
+		ReturnType< $bog_theme_picker_row['click'] >
+	>
+	type $bog_theme_picker_row__hover_bog_theme_picker_8 = $mol_type_enforce<
+		ReturnType< $bog_theme_picker['theme_hover'] >
+		,
+		ReturnType< $bog_theme_picker_row['hover'] >
+	>
+	export class $bog_theme_picker extends $mol_scroll {
+		theme_name( id: any): string
+		theme_focused( id: any): boolean
+		theme_select( id: any, next?: any ): any
+		theme_hover( id: any, next?: any ): any
+		Search( ): $mol_string
+		theme_rows( ): readonly(any)[]
+		Theme_list( ): $mol_list
+		Content( ): $mol_list
+		key_down( next?: any ): any
+		theme_auto( ): $bog_theme_auto
+		close( next?: any ): any
+		query( next?: string ): string
+		focused_index( next?: number ): number
+		Theme_row( id: any): $bog_theme_picker_row
+		sub( ): readonly(any)[]
+		event( ): ({ 
+			keydown( next?: ReturnType< $bog_theme_picker['key_down'] > ): ReturnType< $bog_theme_picker['key_down'] >,
+		})  & ReturnType< $mol_scroll['event'] >
+	}
+	
+}
+
+//# sourceMappingURL=picker.view.tree.d.ts.map
+declare namespace $.$$ {
+    /**
+     * Theme picker popup with search and list
+     */
+    class $bog_theme_picker extends $.$bog_theme_picker {
+        theme_rows(): $.$bog_theme_picker_row[];
+        filtered_themes(): ("$mol_theme_giper_smash_dark" | "$mol_theme_giper_smash_light" | "$mol_theme_light" | "$mol_theme_dark" | "$mol_theme_monefro_light" | "$mol_theme_monefro_dark" | "$mol_theme_homerent_light" | "$mol_theme_homerent_dark" | "$mol_theme_upwork" | "$mol_theme_ainews_light" | "$mol_theme_ainews_dark" | "$mol_theme_calm_dark" | "$mol_theme_calm_light")[];
+        theme_name(index: number): "$mol_theme_giper_smash_dark" | "$mol_theme_giper_smash_light" | "$mol_theme_light" | "$mol_theme_dark" | "$mol_theme_monefro_light" | "$mol_theme_monefro_dark" | "$mol_theme_homerent_light" | "$mol_theme_homerent_dark" | "$mol_theme_upwork" | "$mol_theme_ainews_light" | "$mol_theme_ainews_dark" | "$mol_theme_calm_dark" | "$mol_theme_calm_light";
+        theme_focused(index: number): boolean;
+        theme_select(index: number, event?: MouseEvent): null;
+        theme_hover(index: number, event?: PointerEvent): null;
+        key_down(event?: KeyboardEvent): null;
+        private select_theme;
+        private preview_theme;
+    }
+}
+
+declare namespace $.$$ {
+}
+
+declare namespace $ {
+
+	export class $mol_icon_white_balance_sunny extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=sunny.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_weather_night extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=night.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_monitor extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=monitor.view.tree.d.ts.map
+declare namespace $ {
+
+	type $mol_view__event_bog_theme_toggle_1 = $mol_type_enforce<
+		({ 
+			click( next?: ReturnType< $bog_theme_toggle['backdrop_click'] > ): ReturnType< $bog_theme_toggle['backdrop_click'] >,
+		}) 
+		,
+		ReturnType< $mol_view['event'] >
+	>
+	type $bog_theme_picker__theme_auto_bog_theme_toggle_2 = $mol_type_enforce<
+		ReturnType< $bog_theme_toggle['theme_auto'] >
+		,
+		ReturnType< $bog_theme_picker['theme_auto'] >
+	>
+	type $bog_theme_picker__close_bog_theme_toggle_3 = $mol_type_enforce<
+		ReturnType< $bog_theme_toggle['picker_close'] >
+		,
+		ReturnType< $bog_theme_picker['close'] >
+	>
+	type $mol_button_minor__sub_bog_theme_toggle_4 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_button_minor['sub'] >
+	>
+	type $mol_button_minor__hint_bog_theme_toggle_5 = $mol_type_enforce<
+		ReturnType< $bog_theme_toggle['anchor_hint'] >
+		,
+		ReturnType< $mol_button_minor['hint'] >
+	>
+	type $mol_button_minor__click_bog_theme_toggle_6 = $mol_type_enforce<
+		ReturnType< $bog_theme_toggle['clicked'] >
+		,
+		ReturnType< $mol_button_minor['click'] >
+	>
+	type $mol_button_minor__event_bog_theme_toggle_7 = $mol_type_enforce<
+		({ 
+			pointerdown( next?: ReturnType< $bog_theme_toggle['press_start'] > ): ReturnType< $bog_theme_toggle['press_start'] >,
+			pointermove( next?: ReturnType< $bog_theme_toggle['press_move'] > ): ReturnType< $bog_theme_toggle['press_move'] >,
+			pointerup( next?: ReturnType< $bog_theme_toggle['press_end'] > ): ReturnType< $bog_theme_toggle['press_end'] >,
+			pointercancel( next?: ReturnType< $bog_theme_toggle['press_cancel'] > ): ReturnType< $bog_theme_toggle['press_cancel'] >,
+			lostpointercapture( next?: ReturnType< $bog_theme_toggle['press_lost'] > ): ReturnType< $bog_theme_toggle['press_lost'] >,
+		})  & ReturnType< $mol_button_minor['event'] >
+		,
+		ReturnType< $mol_button_minor['event'] >
+	>
+	export class $bog_theme_toggle extends $mol_pop {
+		Icon( ): $mol_view
+		anchor_hint( ): string
+		clicked( next?: any ): any
+		press_start( next?: any ): any
+		press_move( next?: any ): any
+		press_end( next?: any ): any
+		press_cancel( next?: any ): any
+		press_lost( next?: any ): any
+		backdrop_click( next?: any ): any
+		Backdrop( ): $mol_view
+		picker_close( next?: any ): any
+		Picker( ): $bog_theme_picker
+		theme_auto( ): $bog_theme_auto
+		showed( next?: boolean ): boolean
+		align( ): string
+		Anchor( ): $mol_button_minor
+		Icon_light( ): $mol_icon_white_balance_sunny
+		Icon_dark( ): $mol_icon_weather_night
+		Icon_system( ): $mol_icon_monitor
+		bubble_content( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=toggle.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $bog_theme_toggle extends $.$bog_theme_toggle {
+        long_press_delay: number;
+        move_threshold: number;
+        private press_timer;
+        private press_start_x;
+        private press_start_y;
+        private is_long_press;
+        Icon(): $mol_icon_white_balance_sunny | $mol_icon_weather_night | $mol_icon_monitor;
+        anchor_hint(): "Светлая тема" | "Тёмная тема" | "Пользовательская тема" | "Как в системе";
+        clicked(event?: MouseEvent): null;
+        press_start(event?: PointerEvent): null;
+        press_move(event?: PointerEvent): null;
+        press_end(event?: PointerEvent): null;
+        press_cancel(event?: PointerEvent): null;
+        press_lost(event?: Event): null;
+        private clear_press_timer;
+        private on_long_press;
+        picker_close(): void;
+        backdrop_click(event?: MouseEvent): null;
+    }
+}
+
+declare namespace $.$$ {
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $bog_builderui_button extends $mol_button_minor {
+		minimal_height( ): number
+		minimal_width( ): number
+		variant( ): string
+		attr( ): ({ 
+			'bog_builderui_button_variant': ReturnType< $bog_builderui_button['variant'] >,
+		})  & ReturnType< $mol_button_minor['attr'] >
+	}
+	
+}
+
+//# sourceMappingURL=button.view.tree.d.ts.map
+/** @see $bog_builderui_tokens */
+declare namespace $ {
+}
+
+declare namespace $ {
+
 	type $mol_view__sub_bog_builderui_alert_1 = $mol_type_enforce<
 		readonly(any)[]
 		,
@@ -4743,6 +4743,42 @@ declare namespace $ {
 }
 
 declare namespace $ {
+
+	export class $mol_icon_library extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=library.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_history extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=history.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_group extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=group.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_account extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=account.view.tree.d.ts.map
+declare namespace $ {
     function $mol_offline(): void;
 }
 
@@ -4752,39 +4788,39 @@ declare namespace $ {
 declare namespace $ {
 
 	type $mol_view__sub_bog_mediagram_app_1 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app['type_chips'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $bog_builderui_tabs__value_bog_mediagram_app_2 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app['status'] >
+		,
+		ReturnType< $bog_builderui_tabs['value'] >
+	>
+	type $bog_builderui_tabs__options_bog_mediagram_app_3 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app['status_options'] >
+		,
+		ReturnType< $bog_builderui_tabs['options'] >
+	>
+	type $mol_view__sub_bog_mediagram_app_4 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_view__sub_bog_mediagram_app_2 = $mol_type_enforce<
+	type $mol_view__sub_bog_mediagram_app_5 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $bog_builderui_field__hint_bog_mediagram_app_3 = $mol_type_enforce<
-		string
+	type $mol_view__sub_bog_mediagram_app_6 = $mol_type_enforce<
+		readonly(any)[]
 		,
-		ReturnType< $bog_builderui_field['hint'] >
+		ReturnType< $mol_view['sub'] >
 	>
-	type $bog_builderui_field__value_bog_mediagram_app_4 = $mol_type_enforce<
-		ReturnType< $bog_mediagram_app['query'] >
+	type $mol_view__sub_bog_mediagram_app_7 = $mol_type_enforce<
+		readonly(any)[]
 		,
-		ReturnType< $bog_builderui_field['value'] >
-	>
-	type $bog_theme_toggle__theme_auto_bog_mediagram_app_5 = $mol_type_enforce<
-		ReturnType< $bog_mediagram_app['Theme'] >
-		,
-		ReturnType< $bog_theme_toggle['theme_auto'] >
-	>
-	type $bog_builderui_button__title_bog_mediagram_app_6 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $bog_builderui_button['title'] >
-	>
-	type $bog_builderui_button__click_bog_mediagram_app_7 = $mol_type_enforce<
-		ReturnType< $bog_mediagram_app['add_click'] >
-		,
-		ReturnType< $bog_builderui_button['click'] >
+		ReturnType< $mol_view['sub'] >
 	>
 	type $mol_view__sub_bog_mediagram_app_8 = $mol_type_enforce<
 		readonly(any)[]
@@ -4792,19 +4828,19 @@ declare namespace $ {
 		ReturnType< $mol_view['sub'] >
 	>
 	type $mol_view__sub_bog_mediagram_app_9 = $mol_type_enforce<
-		ReturnType< $bog_mediagram_app['type_chips'] >
+		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $bog_builderui_tabs__value_bog_mediagram_app_10 = $mol_type_enforce<
-		ReturnType< $bog_mediagram_app['status'] >
+	type $mol_view__sub_bog_mediagram_app_10 = $mol_type_enforce<
+		readonly(any)[]
 		,
-		ReturnType< $bog_builderui_tabs['value'] >
+		ReturnType< $mol_view['sub'] >
 	>
-	type $bog_builderui_tabs__options_bog_mediagram_app_11 = $mol_type_enforce<
-		ReturnType< $bog_mediagram_app['status_options'] >
+	type $mol_view__sub_bog_mediagram_app_11 = $mol_type_enforce<
+		readonly(any)[]
 		,
-		ReturnType< $bog_builderui_tabs['options'] >
+		ReturnType< $mol_view['sub'] >
 	>
 	type $mol_view__sub_bog_mediagram_app_12 = $mol_type_enforce<
 		readonly(any)[]
@@ -4816,34 +4852,102 @@ declare namespace $ {
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_view__sub_bog_mediagram_app_14 = $mol_type_enforce<
+	type $bog_builderui_field__hint_bog_mediagram_app_14 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $bog_builderui_field['hint'] >
+	>
+	type $bog_builderui_field__value_bog_mediagram_app_15 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app['query'] >
+		,
+		ReturnType< $bog_builderui_field['value'] >
+	>
+	type $bog_theme_toggle__theme_auto_bog_mediagram_app_16 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app['Theme'] >
+		,
+		ReturnType< $bog_theme_toggle['theme_auto'] >
+	>
+	type $bog_builderui_button__title_bog_mediagram_app_17 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $bog_builderui_button['title'] >
+	>
+	type $bog_builderui_button__click_bog_mediagram_app_18 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app['add_click'] >
+		,
+		ReturnType< $bog_builderui_button['click'] >
+	>
+	type $mol_view__sub_bog_mediagram_app_19 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $bog_builderui_alert__title_bog_mediagram_app_15 = $mol_type_enforce<
+	type $mol_scroll__sub_bog_mediagram_app_20 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app['body_content'] >
+		,
+		ReturnType< $mol_scroll['sub'] >
+	>
+	type $bog_mediagram_app_nav__tab_bog_mediagram_app_21 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app['tab'] >
+		,
+		ReturnType< $bog_mediagram_app_nav['tab'] >
+	>
+	type $mol_view__sub_bog_mediagram_app_22 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $bog_builderui_alert__title_bog_mediagram_app_23 = $mol_type_enforce<
 		ReturnType< $bog_mediagram_app['banner_title'] >
 		,
 		ReturnType< $bog_builderui_alert['title'] >
 	>
-	type $bog_builderui_alert__text_bog_mediagram_app_16 = $mol_type_enforce<
+	type $bog_builderui_alert__text_bog_mediagram_app_24 = $mol_type_enforce<
 		ReturnType< $bog_mediagram_app['banner_text'] >
 		,
 		ReturnType< $bog_builderui_alert['text'] >
 	>
-	type $mol_view__sub_bog_mediagram_app_17 = $mol_type_enforce<
+	type $mol_view__sub_bog_mediagram_app_25 = $mol_type_enforce<
 		ReturnType< $bog_mediagram_app['entries'] >
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_scroll__sub_bog_mediagram_app_18 = $mol_type_enforce<
+	type $bog_builderui_card__sub_bog_mediagram_app_26 = $mol_type_enforce<
 		readonly(any)[]
 		,
-		ReturnType< $mol_scroll['sub'] >
+		ReturnType< $bog_builderui_card['sub'] >
+	>
+	type $bog_builderui_card__sub_bog_mediagram_app_27 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $bog_builderui_card['sub'] >
+	>
+	type $bog_builderui_card__sub_bog_mediagram_app_28 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $bog_builderui_card['sub'] >
 	>
 	export class $bog_mediagram_app extends $bog_builderui_div {
 		Theme( ): $bog_theme_auto
 		lights( ): string
+		tab( next?: string ): string
+		type_chips( ): readonly(any)[]
+		Types( ): $mol_view
+		status( next?: string ): string
+		status_options( ): Record<string, any>
+		Status_tabs( ): $bog_builderui_tabs
+		count_label( ): string
+		Count( ): $mol_view
+		Status_row( ): $mol_view
+		banner_title( ): string
+		banner_text( ): string
+		entries( ): readonly(any)[]
+		Feed_title( ): $mol_view
+		Feed_text( ): $mol_view
+		Circles_title( ): $mol_view
+		Circles_text( ): $mol_view
+		Me_title( ): $mol_view
+		Me_text( ): $mol_view
 		Brand_mark( ): $mol_view
 		Brand_name( ): $mol_view
 		Brand( ): $mol_view
@@ -4853,21 +4957,9 @@ declare namespace $ {
 		add_click( next?: any ): any
 		Add_btn( ): $bog_builderui_button
 		Top( ): $mol_view
-		type_chips( ): readonly(any)[]
-		Types( ): $mol_view
-		status( next?: string ): string
-		status_options( ): Record<string, any>
-		Status_tabs( ): $bog_builderui_tabs
-		count_label( ): string
-		Count( ): $mol_view
-		Status_row( ): $mol_view
-		Filters( ): $mol_view
-		banner_title( ): string
-		banner_text( ): string
-		Banner( ): $bog_builderui_alert
-		entries( ): readonly(any)[]
-		Grid( ): $mol_view
-		Library( ): $mol_scroll
+		body_content( ): readonly(any)[]
+		Body( ): $mol_scroll
+		Nav( ): $bog_mediagram_app_nav
 		plugins( ): readonly(any)[]
 		attr( ): ({ 
 			'bog_builderui_lights': ReturnType< $bog_mediagram_app['lights'] >,
@@ -4877,7 +4969,14 @@ declare namespace $ {
 			'bog_builderui_radius': string,
 			'bog_builderui_font_body': string,
 			'bog_builderui_font_head': string,
+			'bog_mediagram_tab': ReturnType< $bog_mediagram_app['tab'] >,
 		})  & ReturnType< $bog_builderui_div['attr'] >
+		Library_filters( ): $mol_view
+		Library_banner( ): $bog_builderui_alert
+		Library_grid( ): $mol_view
+		Feed_pane( ): $bog_builderui_card
+		Circles_pane( ): $bog_builderui_card
+		Me_pane( ): $bog_builderui_card
 		sub( ): readonly(any)[]
 	}
 	
@@ -4987,6 +5086,127 @@ declare namespace $ {
 		sub( ): readonly(any)[]
 	}
 	
+	type $bog_mediagram_app_nav_item__label_bog_mediagram_app_nav_1 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $bog_mediagram_app_nav_item['label'] >
+	>
+	type $bog_mediagram_app_nav_item__active_bog_mediagram_app_nav_2 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app_nav['library_active'] >
+		,
+		ReturnType< $bog_mediagram_app_nav_item['active'] >
+	>
+	type $bog_mediagram_app_nav_item__Icon_bog_mediagram_app_nav_3 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app_nav['Icon_library'] >
+		,
+		ReturnType< $bog_mediagram_app_nav_item['Icon'] >
+	>
+	type $bog_mediagram_app_nav_item__click_bog_mediagram_app_nav_4 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app_nav['library_click'] >
+		,
+		ReturnType< $bog_mediagram_app_nav_item['click'] >
+	>
+	type $bog_mediagram_app_nav_item__label_bog_mediagram_app_nav_5 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $bog_mediagram_app_nav_item['label'] >
+	>
+	type $bog_mediagram_app_nav_item__active_bog_mediagram_app_nav_6 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app_nav['feed_active'] >
+		,
+		ReturnType< $bog_mediagram_app_nav_item['active'] >
+	>
+	type $bog_mediagram_app_nav_item__Icon_bog_mediagram_app_nav_7 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app_nav['Icon_feed'] >
+		,
+		ReturnType< $bog_mediagram_app_nav_item['Icon'] >
+	>
+	type $bog_mediagram_app_nav_item__click_bog_mediagram_app_nav_8 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app_nav['feed_click'] >
+		,
+		ReturnType< $bog_mediagram_app_nav_item['click'] >
+	>
+	type $bog_mediagram_app_nav_item__label_bog_mediagram_app_nav_9 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $bog_mediagram_app_nav_item['label'] >
+	>
+	type $bog_mediagram_app_nav_item__active_bog_mediagram_app_nav_10 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app_nav['circles_active'] >
+		,
+		ReturnType< $bog_mediagram_app_nav_item['active'] >
+	>
+	type $bog_mediagram_app_nav_item__Icon_bog_mediagram_app_nav_11 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app_nav['Icon_circles'] >
+		,
+		ReturnType< $bog_mediagram_app_nav_item['Icon'] >
+	>
+	type $bog_mediagram_app_nav_item__click_bog_mediagram_app_nav_12 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app_nav['circles_click'] >
+		,
+		ReturnType< $bog_mediagram_app_nav_item['click'] >
+	>
+	type $bog_mediagram_app_nav_item__label_bog_mediagram_app_nav_13 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $bog_mediagram_app_nav_item['label'] >
+	>
+	type $bog_mediagram_app_nav_item__active_bog_mediagram_app_nav_14 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app_nav['me_active'] >
+		,
+		ReturnType< $bog_mediagram_app_nav_item['active'] >
+	>
+	type $bog_mediagram_app_nav_item__Icon_bog_mediagram_app_nav_15 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app_nav['Icon_me'] >
+		,
+		ReturnType< $bog_mediagram_app_nav_item['Icon'] >
+	>
+	type $bog_mediagram_app_nav_item__click_bog_mediagram_app_nav_16 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app_nav['me_click'] >
+		,
+		ReturnType< $bog_mediagram_app_nav_item['click'] >
+	>
+	export class $bog_mediagram_app_nav extends $mol_view {
+		library_active( ): string
+		Icon_library( ): $mol_icon_library
+		library_click( next?: any ): any
+		Tab_library( ): $bog_mediagram_app_nav_item
+		feed_active( ): string
+		Icon_feed( ): $mol_icon_history
+		feed_click( next?: any ): any
+		Tab_feed( ): $bog_mediagram_app_nav_item
+		circles_active( ): string
+		Icon_circles( ): $mol_icon_group
+		circles_click( next?: any ): any
+		Tab_circles( ): $bog_mediagram_app_nav_item
+		me_active( ): string
+		Icon_me( ): $mol_icon_account
+		me_click( next?: any ): any
+		Tab_me( ): $bog_mediagram_app_nav_item
+		tab( next?: string ): string
+		sub( ): readonly(any)[]
+	}
+	
+	type $mol_view__sub_bog_mediagram_app_nav_item_1 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	export class $bog_mediagram_app_nav_item extends $mol_view {
+		click( next?: any ): any
+		Label( ): $mol_view
+		label( ): string
+		active( ): string
+		Icon( ): $mol_view
+		attr( ): ({ 
+			'bog_mediagram_nav_active': ReturnType< $bog_mediagram_app_nav_item['active'] >,
+		})  & ReturnType< $mol_view['attr'] >
+		event( ): ({ 
+			click( next?: ReturnType< $bog_mediagram_app_nav_item['click'] > ): ReturnType< $bog_mediagram_app_nav_item['click'] >,
+		})  & ReturnType< $mol_view['event'] >
+		sub( ): readonly(any)[]
+	}
+	
 }
 
 //# sourceMappingURL=app.view.tree.d.ts.map
@@ -5025,10 +5245,24 @@ declare namespace $.$$ {
         Card(id: string): $bog_mediagram_app_card;
         entry(id: string): Entry;
         add_click(e?: Event): null;
+        tab(next?: string): string;
+        body_content(): ($mol_view | $bog_builderui_alert)[];
     }
     export class $bog_mediagram_app_chip extends $.$bog_mediagram_app_chip {
     }
     export class $bog_mediagram_app_card extends $.$bog_mediagram_app_card {
+    }
+    export class $bog_mediagram_app_nav extends $.$bog_mediagram_app_nav {
+        library_active(): "on" | "off";
+        feed_active(): "on" | "off";
+        circles_active(): "on" | "off";
+        me_active(): "on" | "off";
+        library_click(e?: Event): null;
+        feed_click(e?: Event): null;
+        circles_click(e?: Event): null;
+        me_click(e?: Event): null;
+    }
+    export class $bog_mediagram_app_nav_item extends $.$bog_mediagram_app_nav_item {
     }
     export {};
 }
