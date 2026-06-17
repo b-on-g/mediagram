@@ -50,7 +50,12 @@ namespace $ {
 
 		Body: {
 			flex: { grow: 1 },
+		},
+
+		Page: {
+			flex: { direction: 'column', grow: 1 },
 			padding: { bottom: '72px' },
+			width: '100%',
 		},
 
 		Library_filters: {
