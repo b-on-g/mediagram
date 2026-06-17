@@ -4437,6 +4437,27 @@ declare namespace $ {
 }
 
 declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $bog_builderui_button extends $mol_button_minor {
+		minimal_height( ): number
+		minimal_width( ): number
+		variant( ): string
+		attr( ): ({ 
+			'bog_builderui_button_variant': ReturnType< $bog_builderui_button['variant'] >,
+		})  & ReturnType< $mol_button_minor['attr'] >
+	}
+	
+}
+
+//# sourceMappingURL=button.view.tree.d.ts.map
+/** @see $bog_builderui_tokens */
+declare namespace $ {
+}
+
+declare namespace $ {
 
 	export class $bog_theme_picker_row extends $mol_button_minor {
 		focused_str( ): string
@@ -4674,27 +4695,6 @@ declare namespace $.$$ {
 }
 
 declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $bog_builderui_button extends $mol_button_minor {
-		minimal_height( ): number
-		minimal_width( ): number
-		variant( ): string
-		attr( ): ({ 
-			'bog_builderui_button_variant': ReturnType< $bog_builderui_button['variant'] >,
-		})  & ReturnType< $mol_button_minor['attr'] >
-	}
-	
-}
-
-//# sourceMappingURL=button.view.tree.d.ts.map
-/** @see $bog_builderui_tokens */
-declare namespace $ {
-}
-
-declare namespace $ {
 
 	type $mol_view__sub_bog_builderui_alert_1 = $mol_type_enforce<
 		readonly(any)[]
@@ -4852,82 +4852,144 @@ declare namespace $ {
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $bog_builderui_field__hint_bog_mediagram_app_14 = $mol_type_enforce<
-		string
+	type $mol_view__sub_bog_mediagram_app_14 = $mol_type_enforce<
+		readonly(any)[]
 		,
-		ReturnType< $bog_builderui_field['hint'] >
+		ReturnType< $mol_view['sub'] >
 	>
-	type $bog_builderui_field__value_bog_mediagram_app_15 = $mol_type_enforce<
-		ReturnType< $bog_mediagram_app['query'] >
+	type $mol_view__sub_bog_mediagram_app_15 = $mol_type_enforce<
+		readonly(any)[]
 		,
-		ReturnType< $bog_builderui_field['value'] >
+		ReturnType< $mol_view['sub'] >
 	>
-	type $bog_theme_toggle__theme_auto_bog_mediagram_app_16 = $mol_type_enforce<
-		ReturnType< $bog_mediagram_app['Theme'] >
+	type $mol_view__sub_bog_mediagram_app_16 = $mol_type_enforce<
+		readonly(any)[]
 		,
-		ReturnType< $bog_theme_toggle['theme_auto'] >
+		ReturnType< $mol_view['sub'] >
 	>
-	type $bog_builderui_button__title_bog_mediagram_app_17 = $mol_type_enforce<
+	type $bog_builderui_select__value_bog_mediagram_app_17 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app['recognized_status'] >
+		,
+		ReturnType< $bog_builderui_select['value'] >
+	>
+	type $bog_builderui_select__dictionary_bog_mediagram_app_18 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app['recognized_status_options'] >
+		,
+		ReturnType< $bog_builderui_select['dictionary'] >
+	>
+	type $bog_builderui_button__title_bog_mediagram_app_19 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $bog_builderui_button['title'] >
 	>
-	type $bog_builderui_button__click_bog_mediagram_app_18 = $mol_type_enforce<
-		ReturnType< $bog_mediagram_app['add_click'] >
+	type $bog_builderui_button__click_bog_mediagram_app_20 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app['recognized_add'] >
 		,
 		ReturnType< $bog_builderui_button['click'] >
 	>
-	type $mol_view__sub_bog_mediagram_app_19 = $mol_type_enforce<
+	type $mol_view__sub_bog_mediagram_app_21 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_view__sub_bog_mediagram_app_20 = $mol_type_enforce<
-		ReturnType< $bog_mediagram_app['body_content'] >
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_scroll__sub_bog_mediagram_app_21 = $mol_type_enforce<
+	type $mol_view__sub_bog_mediagram_app_22 = $mol_type_enforce<
 		readonly(any)[]
 		,
-		ReturnType< $mol_scroll['sub'] >
-	>
-	type $bog_mediagram_app_nav__tab_bog_mediagram_app_22 = $mol_type_enforce<
-		ReturnType< $bog_mediagram_app['tab'] >
-		,
-		ReturnType< $bog_mediagram_app_nav['tab'] >
+		ReturnType< $mol_view['sub'] >
 	>
 	type $mol_view__sub_bog_mediagram_app_23 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $bog_builderui_alert__title_bog_mediagram_app_24 = $mol_type_enforce<
+	type $bog_builderui_field__hint_bog_mediagram_app_24 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $bog_builderui_field['hint'] >
+	>
+	type $bog_builderui_field__value_bog_mediagram_app_25 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app['query'] >
+		,
+		ReturnType< $bog_builderui_field['value'] >
+	>
+	type $bog_theme_toggle__theme_auto_bog_mediagram_app_26 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app['Theme'] >
+		,
+		ReturnType< $bog_theme_toggle['theme_auto'] >
+	>
+	type $bog_builderui_button__title_bog_mediagram_app_27 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $bog_builderui_button['title'] >
+	>
+	type $bog_builderui_button__click_bog_mediagram_app_28 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app['add_click'] >
+		,
+		ReturnType< $bog_builderui_button['click'] >
+	>
+	type $mol_view__sub_bog_mediagram_app_29 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_bog_mediagram_app_30 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app['body_content'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_scroll__sub_bog_mediagram_app_31 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_scroll['sub'] >
+	>
+	type $bog_mediagram_app_nav__tab_bog_mediagram_app_32 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app['tab'] >
+		,
+		ReturnType< $bog_mediagram_app_nav['tab'] >
+	>
+	type $mol_view__sub_bog_mediagram_app_33 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $bog_builderui_alert__title_bog_mediagram_app_34 = $mol_type_enforce<
 		ReturnType< $bog_mediagram_app['banner_title'] >
 		,
 		ReturnType< $bog_builderui_alert['title'] >
 	>
-	type $bog_builderui_alert__text_bog_mediagram_app_25 = $mol_type_enforce<
+	type $bog_builderui_alert__text_bog_mediagram_app_35 = $mol_type_enforce<
 		ReturnType< $bog_mediagram_app['banner_text'] >
 		,
 		ReturnType< $bog_builderui_alert['text'] >
 	>
-	type $mol_view__sub_bog_mediagram_app_26 = $mol_type_enforce<
+	type $mol_view__sub_bog_mediagram_app_36 = $mol_type_enforce<
 		ReturnType< $bog_mediagram_app['entries'] >
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $bog_builderui_card__sub_bog_mediagram_app_27 = $mol_type_enforce<
+	type $bog_builderui_card__sub_bog_mediagram_app_37 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $bog_builderui_card['sub'] >
 	>
-	type $bog_builderui_card__sub_bog_mediagram_app_28 = $mol_type_enforce<
+	type $bog_builderui_card__sub_bog_mediagram_app_38 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $bog_builderui_card['sub'] >
 	>
-	type $bog_builderui_card__sub_bog_mediagram_app_29 = $mol_type_enforce<
+	type $bog_builderui_card__sub_bog_mediagram_app_39 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $bog_builderui_card['sub'] >
+	>
+	type $bog_builderui_card__attr_bog_mediagram_app_40 = $mol_type_enforce<
+		({ 
+			'bog_mediagram_page_kind': ReturnType< $bog_mediagram_app['recognized_page_kind'] >,
+		})  & ReturnType< $bog_builderui_card['attr'] >
+		,
+		ReturnType< $bog_builderui_card['attr'] >
+	>
+	type $bog_builderui_card__sub_bog_mediagram_app_41 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $bog_builderui_card['sub'] >
@@ -4953,6 +5015,21 @@ declare namespace $ {
 		Circles_text( ): $mol_view
 		Me_title( ): $mol_view
 		Me_text( ): $mol_view
+		recognized_page_kind( ): string
+		Recognized_badge( ): $mol_view
+		recognized_host( ): string
+		Recognized_host( ): $mol_view
+		Recognized_head( ): $mol_view
+		recognized_title( ): string
+		Recognized_title( ): $mol_view
+		recognized_meta( ): string
+		Recognized_meta( ): $mol_view
+		recognized_status( next?: string ): string
+		recognized_status_options( ): Record<string, any>
+		Recognized_status( ): $bog_builderui_select
+		recognized_add( next?: any ): any
+		Recognized_add( ): $bog_builderui_button
+		Recognized_actions( ): $mol_view
 		Brand_mark( ): $mol_view
 		Brand_name( ): $mol_view
 		Brand( ): $mol_view
@@ -4983,6 +5060,7 @@ declare namespace $ {
 		Feed_pane( ): $bog_builderui_card
 		Circles_pane( ): $bog_builderui_card
 		Me_pane( ): $bog_builderui_card
+		Recognized( ): $bog_builderui_card
 		sub( ): readonly(any)[]
 	}
 	
@@ -5252,7 +5330,20 @@ declare namespace $.$$ {
         entry(id: string): Entry;
         add_click(e?: Event): null;
         tab(next?: string): string;
-        body_content(): ($mol_view | $bog_builderui_alert)[];
+        body_content(): any[];
+        in_extension(): boolean;
+        snapshot_tick(next?: number): number;
+        snapshot(): any;
+        recognized_host(): any;
+        recognized_title(): any;
+        recognized_meta(): string;
+        recognized_page_kind(): any;
+        recognized_status_options(): {
+            want_to: string;
+            doing: string;
+        };
+        recognized_status(next?: string): string;
+        recognized_add(e?: Event): null;
     }
     export class $bog_mediagram_app_chip extends $.$bog_mediagram_app_chip {
     }

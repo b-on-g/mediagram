@@ -644,6 +644,14 @@ $mol_switch $mol_check_list
 
 $bog_builderui_tabs $mol_switch
 
+$bog_builderui_button $mol_button_minor
+	minimal_height 32
+	minimal_width 0
+	variant \default
+	attr *
+		^
+		bog_builderui_button_variant <= variant
+
 $bog_theme_picker_row $mol_button_minor
 	theme_name \
 	title <= theme_name
@@ -707,14 +715,6 @@ $bog_theme_toggle $mol_pop
 		<= Picker $bog_theme_picker
 			theme_auto <= theme_auto
 			close? <=> picker_close? null
-
-$bog_builderui_button $mol_button_minor
-	minimal_height 32
-	minimal_width 0
-	variant \default
-	attr *
-		^
-		bog_builderui_button_variant <= variant
 
 $bog_builderui_alert $bog_builderui_card
 	title \
@@ -785,6 +785,25 @@ $bog_mediagram_app $bog_builderui_div
 		sub /
 			<= Me_title $mol_view sub / \Я
 			<= Me_text $mol_view sub / \профиль, перенос аккаунта, share-правила
+	Recognized $bog_builderui_card
+		attr *
+			^
+			bog_mediagram_page_kind <= recognized_page_kind \info
+		sub /
+			<= Recognized_head $mol_view
+				sub /
+					<= Recognized_badge $mol_view sub / \распознано на странице
+					<= Recognized_host $mol_view sub / <= recognized_host \
+			<= Recognized_title $mol_view sub / <= recognized_title \
+			<= Recognized_meta $mol_view sub / <= recognized_meta \
+			<= Recognized_actions $mol_view
+				sub /
+					<= Recognized_status $bog_builderui_select
+						value? <=> recognized_status? \want_to
+						dictionary <= recognized_status_options *
+					<= Recognized_add $bog_builderui_button
+						title \добавить
+						click?event <=> recognized_add?event null
 	sub /
 		<= Top $mol_view
 			sub /

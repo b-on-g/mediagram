@@ -10698,6 +10698,61 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$bog_builderui_button) = class $bog_builderui_button extends ($.$mol_button_minor) {
+		minimal_height(){
+			return 32;
+		}
+		minimal_width(){
+			return 0;
+		}
+		variant(){
+			return "default";
+		}
+		attr(){
+			return {...(super.attr()), "bog_builderui_button_variant": (this.variant())};
+		}
+	};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("bog/builderui/button/button.view.css", "[bog_builderui_button][bog_builderui_button_variant=\"secondary\"] {\n\tbackground-color: var(--bog_builderui_field);\n\tcolor: var(--bog_builderui_text);\n\tborder: 1px solid var(--bog_builderui_line);\n}\n\n[bog_builderui_button][bog_builderui_button_variant=\"outline\"] {\n\tbackground-color: transparent;\n\tcolor: var(--bog_builderui_text);\n\tborder: 1px solid var(--bog_builderui_line);\n}\n\n[bog_builderui_button][bog_builderui_button_variant=\"ghost\"] {\n\tbackground-color: transparent;\n\tcolor: var(--bog_builderui_text);\n\tborder: 0;\n}\n\n[bog_builderui_button][bog_builderui_button_variant=\"destructive\"] {\n\tbackground-color: var(--bog_builderui_special);\n\tcolor: var(--bog_builderui_back);\n\tborder: 0;\n}\n\n[bog_builderui_button][bog_builderui_button_variant=\"secondary\"]:hover,\n[bog_builderui_button][bog_builderui_button_variant=\"outline\"]:hover,\n[bog_builderui_button][bog_builderui_button_variant=\"ghost\"]:hover {\n\tbackground-color: var(--bog_builderui_hover);\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+"use strict";
+/** @see $bog_builderui_tokens */
+var $;
+(function ($) {
+    $mol_style_define($bog_builderui_button, {
+        font: {
+            family: $bog_builderui_tokens.font_body,
+            weight: 500,
+        },
+        color: $bog_builderui_tokens.back,
+        background: {
+            color: $bog_builderui_tokens.control,
+        },
+        border: {
+            radius: $bog_builderui_tokens.radius,
+            width: 0,
+        },
+        padding: {
+            top: '0.5rem',
+            bottom: '0.5rem',
+            left: '1rem',
+            right: '1rem',
+        },
+    });
+})($ || ($ = {}));
+
+;
 	($.$bog_theme_picker_row) = class $bog_theme_picker_row extends ($.$mol_button_minor) {
 		focused_str(){
 			return "";
@@ -11321,61 +11376,6 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$bog_builderui_button) = class $bog_builderui_button extends ($.$mol_button_minor) {
-		minimal_height(){
-			return 32;
-		}
-		minimal_width(){
-			return 0;
-		}
-		variant(){
-			return "default";
-		}
-		attr(){
-			return {...(super.attr()), "bog_builderui_button_variant": (this.variant())};
-		}
-	};
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("bog/builderui/button/button.view.css", "[bog_builderui_button][bog_builderui_button_variant=\"secondary\"] {\n\tbackground-color: var(--bog_builderui_field);\n\tcolor: var(--bog_builderui_text);\n\tborder: 1px solid var(--bog_builderui_line);\n}\n\n[bog_builderui_button][bog_builderui_button_variant=\"outline\"] {\n\tbackground-color: transparent;\n\tcolor: var(--bog_builderui_text);\n\tborder: 1px solid var(--bog_builderui_line);\n}\n\n[bog_builderui_button][bog_builderui_button_variant=\"ghost\"] {\n\tbackground-color: transparent;\n\tcolor: var(--bog_builderui_text);\n\tborder: 0;\n}\n\n[bog_builderui_button][bog_builderui_button_variant=\"destructive\"] {\n\tbackground-color: var(--bog_builderui_special);\n\tcolor: var(--bog_builderui_back);\n\tborder: 0;\n}\n\n[bog_builderui_button][bog_builderui_button_variant=\"secondary\"]:hover,\n[bog_builderui_button][bog_builderui_button_variant=\"outline\"]:hover,\n[bog_builderui_button][bog_builderui_button_variant=\"ghost\"]:hover {\n\tbackground-color: var(--bog_builderui_hover);\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
-"use strict";
-/** @see $bog_builderui_tokens */
-var $;
-(function ($) {
-    $mol_style_define($bog_builderui_button, {
-        font: {
-            family: $bog_builderui_tokens.font_body,
-            weight: 500,
-        },
-        color: $bog_builderui_tokens.back,
-        background: {
-            color: $bog_builderui_tokens.control,
-        },
-        border: {
-            radius: $bog_builderui_tokens.radius,
-            width: 0,
-        },
-        padding: {
-            top: '0.5rem',
-            bottom: '0.5rem',
-            left: '1rem',
-            right: '1rem',
-        },
-    });
-})($ || ($ = {}));
-
-;
 	($.$bog_builderui_alert) = class $bog_builderui_alert extends ($.$bog_builderui_card) {
 		Alert_title(){
 			const obj = new this.$.$mol_view();
@@ -11640,6 +11640,71 @@ var $;
 			(obj.sub) = () => (["профиль, перенос аккаунта, share-правила"]);
 			return obj;
 		}
+		recognized_page_kind(){
+			return "info";
+		}
+		Recognized_badge(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => (["распознано на странице"]);
+			return obj;
+		}
+		recognized_host(){
+			return "";
+		}
+		Recognized_host(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.recognized_host())]);
+			return obj;
+		}
+		Recognized_head(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Recognized_badge()), (this.Recognized_host())]);
+			return obj;
+		}
+		recognized_title(){
+			return "";
+		}
+		Recognized_title(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.recognized_title())]);
+			return obj;
+		}
+		recognized_meta(){
+			return "";
+		}
+		Recognized_meta(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.recognized_meta())]);
+			return obj;
+		}
+		recognized_status(next){
+			if(next !== undefined) return next;
+			return "want_to";
+		}
+		recognized_status_options(){
+			return {};
+		}
+		Recognized_status(){
+			const obj = new this.$.$bog_builderui_select();
+			(obj.value) = (next) => ((this.recognized_status(next)));
+			(obj.dictionary) = () => ((this.recognized_status_options()));
+			return obj;
+		}
+		recognized_add(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Recognized_add(){
+			const obj = new this.$.$bog_builderui_button();
+			(obj.title) = () => ("добавить");
+			(obj.click) = (next) => ((this.recognized_add(next)));
+			return obj;
+		}
+		Recognized_actions(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Recognized_status()), (this.Recognized_add())]);
+			return obj;
+		}
 		Brand_mark(){
 			const obj = new this.$.$mol_view();
 			return obj;
@@ -11754,6 +11819,17 @@ var $;
 			(obj.sub) = () => ([(this.Me_title()), (this.Me_text())]);
 			return obj;
 		}
+		Recognized(){
+			const obj = new this.$.$bog_builderui_card();
+			(obj.attr) = () => ({...(this.$.$bog_builderui_card.prototype.attr.call(obj)), "bog_mediagram_page_kind": (this.recognized_page_kind())});
+			(obj.sub) = () => ([
+				(this.Recognized_head()), 
+				(this.Recognized_title()), 
+				(this.Recognized_meta()), 
+				(this.Recognized_actions())
+			]);
+			return obj;
+		}
 		sub(){
 			return [
 				(this.Top()), 
@@ -11775,6 +11851,16 @@ var $;
 	($mol_mem(($.$bog_mediagram_app.prototype), "Circles_text"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Me_title"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Me_text"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Recognized_badge"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Recognized_host"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Recognized_head"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Recognized_title"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Recognized_meta"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "recognized_status"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Recognized_status"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "recognized_add"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Recognized_add"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Recognized_actions"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Brand_mark"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Brand_name"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Brand"));
@@ -11793,6 +11879,7 @@ var $;
 	($mol_mem(($.$bog_mediagram_app.prototype), "Feed_pane"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Circles_pane"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Me_pane"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Recognized"));
 	($.$bog_mediagram_app_chip) = class $bog_mediagram_app_chip extends ($.$bog_builderui_button) {
 		Swatch(){
 			const obj = new this.$.$mol_view();
@@ -12153,6 +12240,21 @@ var $;
                 .toUpperCase();
         }
         class $bog_mediagram_app extends $.$bog_mediagram_app {
+            static {
+                const c = globalThis.chrome;
+                if (c?.runtime?.onMessage) {
+                    c.runtime.onMessage.addListener((msg) => {
+                        if (msg?.type === 'mediagram_snapshot_changed') {
+                            try {
+                                const root = $bog_mediagram_app.Root(0);
+                                root.snapshot_tick(root.snapshot_tick() + 1);
+                            }
+                            catch (e) { /* root not mounted yet */ }
+                        }
+                        return false;
+                    });
+                }
+            }
             query(next) {
                 return $mol_state_arg.value('q', next) ?? '';
             }
@@ -12265,12 +12367,66 @@ var $;
                     case 'feed': return [this.Feed_pane()];
                     case 'circles': return [this.Circles_pane()];
                     case 'me': return [this.Me_pane()];
-                    default: return [
-                        this.Library_filters(),
-                        this.Library_banner(),
-                        this.Library_grid(),
-                    ];
+                    default: {
+                        const items = [];
+                        if (this.snapshot())
+                            items.push(this.Recognized());
+                        items.push(this.Library_filters(), this.Library_banner(), this.Library_grid());
+                        return items;
+                    }
                 }
+            }
+            in_extension() {
+                return Boolean(globalThis.chrome?.runtime?.id);
+            }
+            snapshot_tick(next) {
+                return next ?? 0;
+            }
+            snapshot() {
+                this.snapshot_tick();
+                if (!this.in_extension())
+                    return null;
+                const c = globalThis.chrome;
+                if (!c?.runtime?.sendMessage)
+                    return null;
+                const reply = $mol_wire_sync(c.runtime).sendMessage({ type: 'mediagram_whoami' });
+                return reply?.payload ?? null;
+            }
+            recognized_host() {
+                return this.snapshot()?.host ?? '';
+            }
+            recognized_title() {
+                return this.snapshot()?.entity?.title ?? '';
+            }
+            recognized_meta() {
+                const snap = this.snapshot();
+                if (!snap)
+                    return '';
+                const e = snap.entity;
+                const kind = e?.kind ? (KIND_LABEL[e.kind] ?? e.kind) : '—';
+                const year = e?.year ? ` · ${e.year}` : '';
+                const pk = snap.page_kind === 'player' ? ' · идёт воспроизведение' : '';
+                return `${kind}${year}${pk}`;
+            }
+            recognized_page_kind() {
+                return this.snapshot()?.page_kind ?? 'info';
+            }
+            recognized_status_options() {
+                return { want_to: 'хочу', doing: 'смотрю' };
+            }
+            recognized_status(next) {
+                if (next !== undefined)
+                    return next;
+                return this.snapshot()?.page_kind === 'player' ? 'doing' : 'want_to';
+            }
+            recognized_add(e) {
+                if (e)
+                    e.preventDefault();
+                const snap = this.snapshot();
+                if (!snap)
+                    return null;
+                console.log('[mediagram] add', this.recognized_status(), snap);
+                return null;
             }
         }
         __decorate([
@@ -12297,6 +12453,15 @@ var $;
         __decorate([
             $mol_mem
         ], $bog_mediagram_app.prototype, "tab", null);
+        __decorate([
+            $mol_mem
+        ], $bog_mediagram_app.prototype, "snapshot_tick", null);
+        __decorate([
+            $mol_mem
+        ], $bog_mediagram_app.prototype, "snapshot", null);
+        __decorate([
+            $mol_mem
+        ], $bog_mediagram_app.prototype, "recognized_status", null);
         $$.$bog_mediagram_app = $bog_mediagram_app;
         class $bog_mediagram_app_chip extends $.$bog_mediagram_app_chip {
         }
@@ -12455,6 +12620,45 @@ var $;
             bottom: 0,
             zIndex: 6,
             flex: { shrink: 0 },
+        },
+        Recognized: {
+            margin: { top: $mol_gap.block, right: $mol_gap.block, left: $mol_gap.block },
+            flex: { direction: 'column', shrink: 0 },
+            gap: $mol_gap.text,
+        },
+        Recognized_head: {
+            flex: { direction: 'row', wrap: 'wrap' },
+            align: { items: 'center' },
+            gap: $mol_gap.text,
+        },
+        Recognized_badge: {
+            font: { size: '11px', weight: 600 },
+            textTransform: 'uppercase',
+            letterSpacing: '0.4px',
+            color: $bog_builderui_tokens.control,
+        },
+        Recognized_host: {
+            font: {
+                family: 'ui-monospace, "SF Mono", Menlo, monospace',
+                size: '11px',
+            },
+            color: $bog_builderui_tokens.shade,
+        },
+        Recognized_title: {
+            font: {
+                family: $bog_builderui_tokens.font_head,
+                size: '18px',
+                weight: 700,
+            },
+        },
+        Recognized_meta: {
+            font: { size: '13px' },
+            color: $bog_builderui_tokens.shade,
+        },
+        Recognized_actions: {
+            flex: { direction: 'row', wrap: 'wrap' },
+            gap: $mol_gap.text,
+            align: { items: 'center' },
         },
     });
     $mol_style_define($bog_mediagram_app_chip, {
