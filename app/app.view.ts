@@ -183,9 +183,59 @@ namespace $.$$ {
 			return null
 		}
 
+		@ $mol_mem
+		tab( next?: string ) {
+			return $mol_state_arg.value( 'tab', next ) ?? 'library'
+		}
+
+		body_content() {
+			switch( this.tab() ) {
+				case 'feed': return [ this.Feed_pane() ]
+				case 'circles': return [ this.Circles_pane() ]
+				case 'me': return [ this.Me_pane() ]
+				default: return [
+					this.Library_filters(),
+					this.Library_banner(),
+					this.Library_grid(),
+				]
+			}
+		}
+
 	}
 
 	export class $bog_mediagram_app_chip extends $.$bog_mediagram_app_chip {}
 	export class $bog_mediagram_app_card extends $.$bog_mediagram_app_card {}
+
+	export class $bog_mediagram_app_nav extends $.$bog_mediagram_app_nav {
+
+		library_active() { return this.tab() === 'library' ? 'on' : 'off' }
+		feed_active()    { return this.tab() === 'feed'    ? 'on' : 'off' }
+		circles_active() { return this.tab() === 'circles' ? 'on' : 'off' }
+		me_active()      { return this.tab() === 'me'      ? 'on' : 'off' }
+
+		library_click( e?: Event ) {
+			if( e ) e.preventDefault()
+			this.tab( 'library' )
+			return null
+		}
+		feed_click( e?: Event ) {
+			if( e ) e.preventDefault()
+			this.tab( 'feed' )
+			return null
+		}
+		circles_click( e?: Event ) {
+			if( e ) e.preventDefault()
+			this.tab( 'circles' )
+			return null
+		}
+		me_click( e?: Event ) {
+			if( e ) e.preventDefault()
+			this.tab( 'me' )
+			return null
+		}
+
+	}
+
+	export class $bog_mediagram_app_nav_item extends $.$bog_mediagram_app_nav_item {}
 
 }

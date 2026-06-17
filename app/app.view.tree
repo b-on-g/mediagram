@@ -15,6 +15,32 @@ $bog_mediagram_app $bog_builderui_div
 		bog_builderui_radius \large
 		bog_builderui_font_body \eb-garamond
 		bog_builderui_font_head \eb-garamond
+		bog_mediagram_tab <= tab \library
+	Library_filters $mol_view
+		sub /
+			<= Types $mol_view sub <= type_chips /
+			<= Status_row $mol_view
+				sub /
+					<= Status_tabs $bog_builderui_tabs
+						value? <=> status? \all
+						options <= status_options *
+					<= Count $mol_view sub / <= count_label \
+	Library_banner $bog_builderui_alert
+		title <= banner_title \
+		text <= banner_text \
+	Library_grid $mol_view sub <= entries /
+	Feed_pane $bog_builderui_card
+		sub /
+			<= Feed_title $mol_view sub / \Лента активности
+			<= Feed_text $mol_view sub / \тут появятся события из ваших кругов
+	Circles_pane $bog_builderui_card
+		sub /
+			<= Circles_title $mol_view sub / \Круги
+			<= Circles_text $mol_view sub / \приватные группы — семья и друзья
+	Me_pane $bog_builderui_card
+		sub /
+			<= Me_title $mol_view sub / \Я
+			<= Me_text $mol_view sub / \профиль, перенос аккаунта, share-правила
 	sub /
 		<= Top $mol_view
 			sub /
@@ -23,30 +49,16 @@ $bog_mediagram_app $bog_builderui_div
 						<= Brand_mark $mol_view
 						<= Brand_name $mol_view sub / \mediagram
 				<= Search $bog_builderui_field
-					hint \поиск по библиотеке
+					hint \поиск
 					value? <=> query? \
 				<= Theme_toggle $bog_theme_toggle
 					theme_auto <= Theme
 				<= Add_btn $bog_builderui_button
 					title \добавить
 					click? <=> add_click? null
-		<= Filters $mol_view
-			sub /
-				<= Types $mol_view
-					sub <= type_chips /
-				<= Status_row $mol_view
-					sub /
-						<= Status_tabs $bog_builderui_tabs
-							value? <=> status? \all
-							options <= status_options *
-						<= Count $mol_view sub / <= count_label \
-		<= Banner $bog_builderui_alert
-			title <= banner_title \
-			text <= banner_text \
-		<= Library $mol_scroll
-			sub /
-				<= Grid $mol_view
-					sub <= entries /
+		<= Body $mol_scroll sub <= body_content /
+		<= Nav $bog_mediagram_app_nav
+			tab? <=> tab? \library
 
 $bog_mediagram_app_chip $bog_builderui_button
 	kind \
@@ -95,3 +107,42 @@ $bog_mediagram_app_card $bog_builderui_card
 			sub /
 				<= Title_view $mol_view sub / <= title
 				<= Sub $mol_view sub / <= year
+
+$bog_mediagram_app_nav $mol_view
+	tab?val \library
+	sub /
+		<= Tab_library $bog_mediagram_app_nav_item
+			label \Библиотека
+			active <= library_active \off
+			Icon <= Icon_library $mol_icon_library
+			click?event <=> library_click?event null
+		<= Tab_feed $bog_mediagram_app_nav_item
+			label \Лента
+			active <= feed_active \off
+			Icon <= Icon_feed $mol_icon_history
+			click?event <=> feed_click?event null
+		<= Tab_circles $bog_mediagram_app_nav_item
+			label \Круги
+			active <= circles_active \off
+			Icon <= Icon_circles $mol_icon_group
+			click?event <=> circles_click?event null
+		<= Tab_me $bog_mediagram_app_nav_item
+			label \Я
+			active <= me_active \off
+			Icon <= Icon_me $mol_icon_account
+			click?event <=> me_click?event null
+
+$bog_mediagram_app_nav_item $mol_view
+	label \
+	active \off
+	Icon $mol_view
+	click?event null
+	attr *
+		^
+		bog_mediagram_nav_active <= active
+	event *
+		^
+		click?event <=> click?event null
+	sub /
+		<= Icon
+		<= Label $mol_view sub / <= label

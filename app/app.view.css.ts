@@ -12,7 +12,12 @@ namespace $ {
 			flex: { direction: 'row', wrap: 'wrap', shrink: 0 },
 			gap: $mol_gap.text,
 			align: { items: 'center' },
-			padding: { top: $mol_gap.block, right: $mol_gap.block, bottom: $mol_gap.block, left: $mol_gap.block },
+			padding: {
+				top: $mol_gap.block,
+				right: $mol_gap.block,
+				bottom: $mol_gap.block,
+				left: $mol_gap.block,
+			},
 			border: { bottom: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line } },
 			background: { color: $bog_builderui_tokens.card },
 			position: 'sticky',
@@ -43,10 +48,20 @@ namespace $ {
 			minWidth: '160px',
 		},
 
-		Filters: {
+		Body: {
+			flex: { grow: 1 },
+			padding: { bottom: '72px' },
+		},
+
+		Library_filters: {
 			flex: { direction: 'column', shrink: 0 },
 			gap: $mol_gap.text,
-			padding: { top: $mol_gap.text, right: $mol_gap.block, bottom: $mol_gap.text, left: $mol_gap.block },
+			padding: {
+				top: $mol_gap.text,
+				right: $mol_gap.block,
+				bottom: $mol_gap.text,
+				left: $mol_gap.block,
+			},
 			border: { bottom: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line } },
 		},
 
@@ -67,20 +82,46 @@ namespace $ {
 			font: { size: '12px' },
 		},
 
-		Banner: {
+		Library_banner: {
 			margin: { top: $mol_gap.text, right: $mol_gap.block, left: $mol_gap.block },
 			flex: { shrink: 0 },
 		},
 
-		Library: {
-			flex: { grow: 1 },
-		},
-
-		Grid: {
+		Library_grid: {
 			display: 'grid',
-			padding: { top: $mol_gap.block, right: $mol_gap.block, bottom: $mol_gap.block, left: $mol_gap.block },
+			padding: {
+				top: $mol_gap.block,
+				right: $mol_gap.block,
+				bottom: $mol_gap.block,
+				left: $mol_gap.block,
+			},
 			gap: $mol_gap.block,
 			gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))',
+		},
+
+		Feed_pane: {
+			margin: { top: $mol_gap.block, right: $mol_gap.block, left: $mol_gap.block },
+			flex: { direction: 'column' },
+			gap: $mol_gap.text,
+		},
+
+		Circles_pane: {
+			margin: { top: $mol_gap.block, right: $mol_gap.block, left: $mol_gap.block },
+			flex: { direction: 'column' },
+			gap: $mol_gap.text,
+		},
+
+		Me_pane: {
+			margin: { top: $mol_gap.block, right: $mol_gap.block, left: $mol_gap.block },
+			flex: { direction: 'column' },
+			gap: $mol_gap.text,
+		},
+
+		Nav: {
+			position: 'sticky',
+			bottom: 0,
+			zIndex: 6,
+			flex: { shrink: 0 },
 		},
 
 	} )
@@ -203,6 +244,60 @@ namespace $ {
 				size: '11px',
 			},
 			color: $bog_builderui_tokens.shade,
+		},
+	} )
+
+	$mol_style_define( $bog_mediagram_app_nav, {
+		flex: { direction: 'row' },
+		padding: {
+			top: '6px',
+			right: $mol_gap.text,
+			bottom: '6px',
+			left: $mol_gap.text,
+		},
+		gap: '4px',
+		background: { color: $bog_builderui_tokens.card },
+		border: { top: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line } },
+	} )
+
+	$mol_style_define( $bog_mediagram_app_nav_item, {
+		flex: { direction: 'column', grow: 1, basis: '0%' },
+		align: { items: 'center' },
+		justify: { content: 'center' },
+		gap: '2px',
+		padding: { top: '8px', right: $mol_gap.text, bottom: '8px', left: $mol_gap.text },
+		minWidth: 0,
+		minHeight: '56px',
+		cursor: 'pointer',
+		userSelect: 'none',
+		border: { radius: $bog_builderui_tokens.radius },
+		color: $bog_builderui_tokens.shade,
+		background: { color: 'transparent' },
+		transition: 'color 120ms ease, background-color 120ms ease',
+
+		Icon: {
+			width: '24px',
+			height: '24px',
+			color: 'inherit',
+		},
+
+		Label: {
+			font: { size: '11px', weight: 500 },
+			color: 'inherit',
+			whiteSpace: 'nowrap',
+		},
+
+		':hover': {
+			background: { color: $bog_builderui_tokens.hover },
+			color: $bog_builderui_tokens.text,
+		},
+
+		'@': {
+			bog_mediagram_nav_active: {
+				on: {
+					color: $bog_builderui_tokens.control,
+				},
+			},
 		},
 	} )
 
