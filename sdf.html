@@ -1,0 +1,408 @@
+<!doctype html>
+<html lang="ru" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>mediagram — библиотека</title>
+<style>
+  :root{
+    --bg:#0e0f13; --panel:#15171c; --elev:#1b1e25; --elev-2:#21242c;
+    --line:#262a31; --line-soft:#1e2129;
+    --t1:#ececf0; --t2:#9b9ea8; --t3:#6a6d77;
+    --accent:#e58a6f; --accent-2:#ef9a82; --accent-soft:rgba(229,138,111,.14);
+    /* типы медиа — приглушённые, читаемые на тёмном */
+    --movie:#6f8ed4; --series:#57b0a6; --book:#cba65f; --game:#74b277; --anime:#c189bd;
+    --radius:14px; --radius-sm:10px;
+    --shadow:0 1px 0 rgba(255,255,255,.02) inset, 0 8px 24px -12px rgba(0,0,0,.6);
+    --mono:ui-monospace,"SF Mono",Menlo,monospace;
+    --ui:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,system-ui,sans-serif;
+  }
+  [data-theme="light"]{
+    --bg:#f4f5f7; --panel:#ffffff; --elev:#ffffff; --elev-2:#f6f7f9;
+    --line:#e4e6ea; --line-soft:#eceef1;
+    --t1:#1a1c20; --t2:#5b5f68; --t3:#8d919b;
+    --accent:#d9714f; --accent-2:#c5613f; --accent-soft:rgba(217,113,79,.12);
+    --movie:#3f63b0; --series:#1f897e; --book:#a87c2e; --game:#3f8e54; --anime:#9a4f93;
+    --shadow:0 1px 2px rgba(20,22,28,.04), 0 10px 28px -16px rgba(20,22,28,.18);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{
+    background:var(--bg); color:var(--t1); font-family:var(--ui);
+    -webkit-font-smoothing:antialiased; font-size:14px; line-height:1.45;
+  }
+
+  /* ---------- превью-обёртка (не часть продукта) ---------- */
+  .preview{max-width:1240px;margin:0 auto;padding:18px}
+  .preview__bar{
+    display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+    margin-bottom:16px;color:var(--t2);font-size:12.5px;
+  }
+  .preview__bar b{color:var(--t1);font-weight:600;letter-spacing:.2px}
+  .seg{display:inline-flex;background:var(--elev);border:1px solid var(--line);
+    border-radius:999px;padding:3px}
+  .seg button{
+    appearance:none;border:0;background:none;color:var(--t2);
+    font:inherit;font-size:12.5px;padding:5px 12px;border-radius:999px;cursor:pointer;
+  }
+  .seg button[aria-pressed="true"]{background:var(--accent);color:#fff}
+  [data-theme="light"] .seg button[aria-pressed="true"]{color:#fff}
+  .preview__spacer{flex:1}
+
+  /* стейдж переключает «сайт» / «сайдбар» */
+  .stage{transition:max-width .35s ease}
+  .stage--site{max-width:100%}
+  .stage--side{max-width:none}
+
+  /* в режиме сайдбара рисуем фейковый хост браузера */
+  .host{display:none}
+  .stage--side .host{
+    display:grid;grid-template-columns:1fr 380px;gap:0;
+    border:1px solid var(--line);border-radius:18px;overflow:hidden;
+    background:var(--panel);box-shadow:var(--shadow);min-height:720px;
+  }
+  .stage--side .app{height:720px;overflow:auto;border-left:1px solid var(--line)}
+  .stage--site .host{display:none}
+  .stage--site .app{display:block}
+
+  /* фейковая страница-плеер слева */
+  .hostpage{position:relative;background:
+    radial-gradient(120% 80% at 30% 0%,#181b22,transparent 60%),var(--bg);
+    padding:0;overflow:hidden}
+  .hostpage__top{display:flex;align-items:center;gap:8px;padding:12px 16px;
+    border-bottom:1px solid var(--line-soft);color:var(--t3);font-size:12px}
+  .dot{width:10px;height:10px;border-radius:50%;background:var(--line)}
+  .urlbar{flex:1;background:var(--elev);border:1px solid var(--line);
+    border-radius:8px;padding:6px 10px;color:var(--t2);font-size:11.5px;font-family:var(--mono)}
+  .player{margin:22px;aspect-ratio:16/9;border-radius:12px;border:1px solid var(--line);
+    background:linear-gradient(135deg,#202531,#15181f);display:grid;place-items:center;
+    color:var(--t3)}
+  .player__play{width:54px;height:54px;border-radius:50%;border:1px solid var(--line);
+    background:var(--elev);display:grid;place-items:center}
+  .player__play::after{content:"";border-left:14px solid var(--t2);
+    border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:4px}
+  .hostmeta{margin:0 22px 22px;color:var(--t2);font-size:12.5px}
+  .hostmeta h3{margin:0 0 4px;color:var(--t1);font-size:15px}
+
+  /* тост авто-фиксации */
+  .toast{position:absolute;left:22px;bottom:22px;display:flex;align-items:center;gap:10px;
+    background:var(--elev-2);border:1px solid var(--line);border-radius:12px;
+    padding:10px 12px;box-shadow:var(--shadow);max-width:330px}
+  .toast__ic{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;
+    background:var(--accent-soft);color:var(--accent);font-size:15px}
+  .toast b{color:var(--t1)} .toast small{color:var(--t3)}
+
+  /* ---------- приложение ---------- */
+  .app{container-type:inline-size;background:var(--panel)}
+  .stage--site .app{border:1px solid var(--line);border-radius:18px;overflow:hidden;
+    box-shadow:var(--shadow)}
+
+  /* шапка */
+  .top{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:12px;
+    padding:14px 18px;background:color-mix(in srgb,var(--panel) 88%,transparent);
+    backdrop-filter:saturate(1.2) blur(10px);border-bottom:1px solid var(--line-soft)}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:650;letter-spacing:-.2px;
+    font-size:15.5px}
+  .brand .mark{width:24px;height:24px;border-radius:7px;
+    background:linear-gradient(140deg,var(--accent),var(--anime));
+    box-shadow:0 0 0 1px rgba(255,255,255,.06) inset}
+  .search{flex:1;min-width:0;display:flex;align-items:center;gap:8px;
+    background:var(--elev);border:1px solid var(--line);border-radius:10px;
+    padding:8px 11px;color:var(--t3)}
+  .search input{flex:1;min-width:0;background:none;border:0;outline:none;color:var(--t1);
+    font:inherit;font-size:13.5px}
+  .iconbtn{width:34px;height:34px;flex:0 0 auto;border:1px solid var(--line);
+    background:var(--elev);border-radius:10px;color:var(--t2);cursor:pointer;
+    display:grid;place-items:center;font-size:15px}
+  .iconbtn:hover{color:var(--t1);border-color:var(--accent)}
+  .addbtn{display:inline-flex;align-items:center;gap:7px;border:0;cursor:pointer;
+    background:var(--accent);color:#fff;font:inherit;font-weight:600;font-size:13px;
+    padding:9px 14px;border-radius:10px}
+  .addbtn:hover{background:var(--accent-2)}
+
+  /* панель фильтров */
+  .filters{padding:12px 18px;border-bottom:1px solid var(--line-soft);
+    display:flex;flex-direction:column;gap:10px}
+  .types{display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;padding-bottom:1px}
+  .types::-webkit-scrollbar{display:none}
+  .chip{flex:0 0 auto;display:inline-flex;align-items:center;gap:7px;cursor:pointer;
+    border:1px solid var(--line);background:var(--elev);color:var(--t2);
+    border-radius:999px;padding:6px 12px;font-size:12.5px;white-space:nowrap}
+  .chip .swatch{width:8px;height:8px;border-radius:50%}
+  .chip[aria-pressed="true"]{color:var(--t1);border-color:transparent;
+    background:var(--elev-2);box-shadow:0 0 0 1px var(--line) inset}
+  .chip[aria-pressed="true"].all{background:var(--accent-soft);
+    box-shadow:0 0 0 1px var(--accent) inset;color:var(--accent)}
+  .row2{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .status{display:inline-flex;background:var(--elev);border:1px solid var(--line);
+    border-radius:9px;padding:3px;gap:2px}
+  .status button{border:0;background:none;color:var(--t2);font:inherit;font-size:12.5px;
+    padding:5px 11px;border-radius:7px;cursor:pointer}
+  .status button[aria-pressed="true"]{background:var(--elev-2);color:var(--t1);
+    box-shadow:0 0 0 1px var(--line) inset}
+  .count{margin-left:auto;color:var(--t3);font-size:12px;font-family:var(--mono)}
+
+  /* контент: сетка постеров (широкий режим) */
+  .grid{padding:18px;display:grid;gap:16px;
+    grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+  .card{cursor:pointer}
+  .poster{position:relative;aspect-ratio:2/3;border-radius:12px;overflow:hidden;
+    border:1px solid var(--line);display:grid;place-items:center;
+    box-shadow:var(--shadow)}
+  .poster .init{font-family:var(--mono);font-size:30px;font-weight:600;
+    color:rgba(255,255,255,.82);letter-spacing:.5px;text-shadow:0 1px 8px rgba(0,0,0,.35)}
+  .poster .fav{position:absolute;top:8px;right:8px;font-size:13px;
+    filter:drop-shadow(0 1px 2px rgba(0,0,0,.5))}
+  .poster .typeflag{position:absolute;top:8px;left:8px;font-size:10px;font-weight:600;
+    letter-spacing:.3px;text-transform:uppercase;padding:3px 7px;border-radius:6px;
+    background:rgba(8,9,12,.55);backdrop-filter:blur(3px);color:#fff}
+  .poster .pill{position:absolute;left:8px;bottom:8px}
+  .rate{position:absolute;right:8px;bottom:8px;font-family:var(--mono);font-size:12px;
+    font-weight:600;color:#fff;background:rgba(8,9,12,.6);backdrop-filter:blur(3px);
+    padding:2px 7px;border-radius:7px}
+  .meta{margin-top:9px}
+  .meta .title{font-size:13.5px;font-weight:600;color:var(--t1);
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .meta .sub{font-size:11.5px;color:var(--t3);font-family:var(--mono);margin-top:2px}
+
+  /* статус-пилл */
+  .pill{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:600;
+    padding:3px 8px;border-radius:7px;letter-spacing:.2px}
+  .pill::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+  .pill.doing{color:var(--accent);background:var(--accent-soft)}
+  .pill.done{color:var(--game);background:color-mix(in srgb,var(--game) 16%,transparent)}
+  .pill.want{color:var(--t2);background:var(--elev-2)}
+  .pill.dropped{color:var(--t3);background:var(--elev-2)}
+  .pill.dropped::before{background:var(--t3)}
+
+  /* строки-список (узкий режим) — по умолчанию скрыты */
+  .list{display:none;padding:8px 10px}
+  .item{display:flex;gap:12px;align-items:center;padding:9px 10px;border-radius:12px;
+    cursor:pointer}
+  .item:hover{background:var(--elev)}
+  .item .th{flex:0 0 auto;width:46px;height:66px;border-radius:8px;overflow:hidden;
+    display:grid;place-items:center;border:1px solid var(--line)}
+  .item .th .init{font-family:var(--mono);font-weight:600;color:#fff;font-size:16px}
+  .item .body{flex:1;min-width:0}
+  .item .title{font-size:13.5px;font-weight:600;color:var(--t1);
+    overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .item .sub{display:flex;align-items:center;gap:8px;margin-top:4px;
+    color:var(--t3);font-size:11.5px;font-family:var(--mono)}
+  .item .typeline{display:inline-flex;align-items:center;gap:5px}
+  .item .typeline .swatch{width:7px;height:7px;border-radius:50%}
+  .item .right{flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+  .item .r{font-family:var(--mono);font-size:12.5px;font-weight:600;color:var(--t1)}
+  .item .r.empty{color:var(--t3)}
+
+  /* секция-заголовок «сегодня зафиксировано» */
+  .banner{margin:14px 18px 0;display:flex;align-items:center;gap:10px;
+    background:var(--accent-soft);border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);
+    border-radius:12px;padding:10px 13px;font-size:12.5px;color:var(--t1)}
+  .banner b{color:var(--accent)}
+  .banner a{margin-left:auto;color:var(--accent);text-decoration:none;font-weight:600;font-size:12px}
+
+  /* ---------- РЕФЛОУ ПО ШИРИНЕ КОНТЕЙНЕРА ---------- */
+  @container (max-width: 540px){
+    .grid{display:none}
+    .list{display:block}
+    .search{order:3;flex-basis:100%}
+    .top{flex-wrap:wrap;gap:10px}
+    .addbtn span{display:none}
+    .addbtn{padding:9px 11px}
+    .count{display:none}
+    .banner{margin:12px 12px 0}
+  }
+  @container (max-width: 380px){
+    .filters{padding:10px 12px}
+    .top{padding:12px 12px}
+  }
+
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:8px}
+</style>
+</head>
+<body>
+<div class="preview">
+  <div class="preview__bar">
+    <b>mediagram</b><span>— превью библиотеки</span>
+    <div class="preview__spacer"></div>
+    <div class="seg" role="group" aria-label="режим просмотра">
+      <button id="m-site" aria-pressed="true" onclick="setMode('site')">сайт</button>
+      <button id="m-side" aria-pressed="false" onclick="setMode('side')">боковая панель</button>
+    </div>
+    <div class="seg" role="group" aria-label="тема">
+      <button id="t-dark" aria-pressed="true" onclick="setTheme('dark')">тёмная</button>
+      <button id="t-light" aria-pressed="false" onclick="setTheme('light')">светлая</button>
+    </div>
+  </div>
+
+  <div id="stage" class="stage stage--site">
+    <div class="host">
+      <!-- фейковая страница-плеер для демонстрации боковой панели -->
+      <div class="hostpage">
+        <div class="hostpage__top">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+          <div class="urlbar">animego.org/anime/frieren/episode-12</div>
+        </div>
+        <div class="player"><div class="player__play"></div></div>
+        <div class="hostmeta">
+          <h3>Frieren · серия 12</h3>
+          <div>идёт воспроизведение — панель справа фиксирует просмотр сама</div>
+        </div>
+        <div class="toast">
+          <div class="toast__ic">⏱</div>
+          <div><b>15 мин — отметил «смотрю»</b><br><small>Frieren · авто · отменить</small></div>
+        </div>
+      </div>
+      <!-- сюда же монтируется приложение (см. JS) в режиме боковой панели -->
+    </div>
+
+    <!-- ПРИЛОЖЕНИЕ -->
+    <div class="app" id="app">
+      <header class="top">
+        <div class="brand"><span class="mark"></span>mediagram</div>
+        <label class="search">
+          <span>⌕</span>
+          <input placeholder="поиск по библиотеке" aria-label="поиск по библиотеке">
+        </label>
+        <button class="iconbtn" title="фильтры">⥢</button>
+        <button class="addbtn">＋<span>добавить</span></button>
+      </header>
+
+      <div class="filters">
+        <div class="types" role="group" aria-label="тип медиа">
+          <button class="chip all" aria-pressed="true">всё</button>
+          <button class="chip" aria-pressed="false"><span class="swatch" style="background:var(--movie)"></span>фильмы</button>
+          <button class="chip" aria-pressed="false"><span class="swatch" style="background:var(--series)"></span>сериалы</button>
+          <button class="chip" aria-pressed="false"><span class="swatch" style="background:var(--book)"></span>книги</button>
+          <button class="chip" aria-pressed="false"><span class="swatch" style="background:var(--game)"></span>игры</button>
+          <button class="chip" aria-pressed="false"><span class="swatch" style="background:var(--anime)"></span>аниме</button>
+        </div>
+        <div class="row2">
+          <div class="status" role="group" aria-label="статус">
+            <button aria-pressed="true">всё</button>
+            <button aria-pressed="false">хочу</button>
+            <button aria-pressed="false">смотрю</button>
+            <button aria-pressed="false">готово</button>
+            <button aria-pressed="false">бросил</button>
+          </div>
+          <span class="count" id="count">— записей</span>
+        </div>
+      </div>
+
+      <div class="banner">
+        <span>⏱</span><span><b>сегодня зафиксировано: 2</b> — авто из плеера</span>
+        <a href="#">история · отмена</a>
+      </div>
+
+      <div class="grid" id="grid"></div>
+      <div class="list" id="list"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const TYPES = {
+  movie:{label:'фильм', c:'var(--movie)'},
+  series:{label:'сериал', c:'var(--series)'},
+  book:{label:'книга', c:'var(--book)'},
+  game:{label:'игра', c:'var(--game)'},
+  anime:{label:'аниме', c:'var(--anime)'},
+};
+const ST = {
+  doing:{cls:'doing', label:'смотрю'},
+  done:{cls:'done', label:'готово'},
+  want:{cls:'want', label:'хочу'},
+  dropped:{cls:'dropped', label:'бросил'},
+};
+// смотрю→читаю→играю по типу — мелочь, но честно
+function statusLabel(s, type){
+  if(s==='doing') return type==='book'?'читаю':type==='game'?'играю':'смотрю';
+  if(s==='done')  return type==='book'?'прочитал':type==='game'?'пройдено':'готово';
+  return ST[s].label;
+}
+const DATA = [
+  ['Frieren','2023','anime','doing',null,true],
+  ['Dune: Part Two','2024','movie','done',9,true],
+  ['Disco Elysium','2019','game','doing',10,true],
+  ['Дюна','1965','book','doing',8,false],
+  ['Severance','2022','series','done',9,false],
+  ['Цветы для Элджернона','1966','book','want',null,false],
+  ['Blue Eye Samurai','2023','anime','done',8,false],
+  ['Hollow Knight','2017','game','want',null,false],
+  ['Andor','2022','series','doing',9,true],
+  ['Оппенгеймер','2023','movie','done',8,false],
+  ['Vinland Saga','2019','anime','dropped',6,false],
+  ['Атака титанов','2013','anime','done',9,true],
+  ['1984','1949','book','done',9,false],
+  ["Baldur's Gate 3",'2023','game','doing',10,true],
+  ['The Bear','2022','series','want',null,false],
+  ['Поднятие уровня в одиночку','2024','anime','doing',7,false],
+  ['Достучаться до небес','1997','movie','want',null,false],
+  ['Outer Wilds','2019','game','done',10,true],
+];
+const initials = t => t.replace(/[«»"']/g,'').split(/\s+/).slice(0,2).map(w=>w[0]).join('').toUpperCase();
+const posterBg = c => `linear-gradient(150deg, color-mix(in srgb, ${c} 78%, #0a0b0e), color-mix(in srgb, ${c} 34%, #0a0b0e))`;
+
+function card([title,year,type,status,rate,fav]){
+  const t = TYPES[type];
+  return `<div class="card" tabindex="0">
+    <div class="poster" style="background:${posterBg(t.c)}">
+      <span class="typeflag">${t.label}</span>
+      ${fav?'<span class="fav">❤️</span>':''}
+      <span class="init">${initials(title)}</span>
+      <span class="pill ${ST[status].cls}">${statusLabel(status,type)}</span>
+      ${rate?`<span class="rate">${rate}</span>`:''}
+    </div>
+    <div class="meta">
+      <div class="title">${title}</div>
+      <div class="sub">${year}</div>
+    </div>
+  </div>`;
+}
+function row([title,year,type,status,rate,fav]){
+  const t = TYPES[type];
+  return `<div class="item" tabindex="0">
+    <div class="th" style="background:${posterBg(t.c)}"><span class="init">${initials(title)}</span></div>
+    <div class="body">
+      <div class="title">${fav?'❤ ':''}${title}</div>
+      <div class="sub">
+        <span class="typeline"><span class="swatch" style="background:${t.c}"></span>${t.label}</span>
+        <span>·</span><span>${year}</span>
+        <span class="pill ${ST[status].cls}" style="font-size:10px;padding:2px 7px">${statusLabel(status,type)}</span>
+      </div>
+    </div>
+    <div class="right"><div class="r ${rate?'':'empty'}">${rate?'★ '+rate:'—'}</div></div>
+  </div>`;
+}
+document.getElementById('grid').innerHTML = DATA.map(card).join('');
+document.getElementById('list').innerHTML = DATA.map(row).join('');
+document.getElementById('count').textContent = DATA.length + ' записей';
+
+// переключатели превью
+function setMode(m){
+  const s=document.getElementById('stage');
+  s.className='stage stage--'+(m==='side'?'side':'site');
+  document.getElementById('m-site').setAttribute('aria-pressed', m==='site');
+  document.getElementById('m-side').setAttribute('aria-pressed', m==='side');
+  const host=document.querySelector('.host'), app=document.getElementById('app');
+  if(m==='side'){ host.appendChild(app); } else { s.appendChild(app); }
+}
+function setTheme(t){
+  document.documentElement.dataset.theme=t;
+  document.getElementById('t-dark').setAttribute('aria-pressed', t==='dark');
+  document.getElementById('t-light').setAttribute('aria-pressed', t==='light');
+}
+// простые тогглы фильтров (визуал)
+document.querySelectorAll('.types .chip').forEach(c=>c.onclick=()=>{
+  document.querySelectorAll('.types .chip').forEach(x=>x.setAttribute('aria-pressed',false));
+  c.setAttribute('aria-pressed',true);
+});
+document.querySelectorAll('.status button').forEach(b=>b.onclick=()=>{
+  b.parentNode.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',false));
+  b.setAttribute('aria-pressed',true);
+});
+window.setMode = setMode; window.setTheme = setTheme;
+</script>
+</body>
+</html>
