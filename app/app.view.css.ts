@@ -48,6 +48,24 @@ namespace $ {
 			maxWidth: '420px',
 		},
 
+		Theme_btn: {
+			flex: { shrink: 0 },
+			background: { color: '#ffffff' },
+			color: '#050505',
+			border: { width: '1px', style: 'solid', color: '#ffffff' },
+			borderRadius: '6px',
+			font: { weight: 700 },
+		},
+
+		Add_btn: {
+			flex: { shrink: 0 },
+			background: { color: '#e50914' },
+			color: '#ffffff',
+			border: { width: '1px', style: 'solid', color: '#e50914' },
+			borderRadius: '6px',
+			font: { weight: 700 },
+		},
+
 		Filters: {
 			flex: { direction: 'column', shrink: 0 },
 			gap: $mol_gap.block,
@@ -109,6 +127,40 @@ namespace $ {
 			gridTemplateColumns: 'repeat(auto-fill, minmax(170px, 1fr))',
 		},
 
+		'@': {
+			bog_mediagram_theme: {
+				light: {
+					background: { color: '#ffffff' },
+					color: '#050505',
+
+					Top: {
+						background: { color: '#fffffffa' },
+						border: { bottom: { width: '1px', style: 'solid', color: '#0505051f' } },
+					},
+
+					Filters: {
+						background: { color: '#ffffff' },
+						border: { bottom: { width: '1px', style: 'solid', color: '#05050517' } },
+					},
+
+					Theme_btn: {
+						background: { color: '#050505' },
+						color: '#ffffff',
+						border: { width: '1px', style: 'solid', color: '#050505' },
+					},
+
+					Banner: {
+						background: { color: '#050505' },
+						border: { width: '1px', style: 'solid', color: '#050505' },
+					},
+
+					Count: {
+						color: '#05050599',
+					},
+				},
+			},
+		},
+
 	} )
 
 	$mol_style_define( $bog_mediagram_app_chip, {
@@ -116,6 +168,10 @@ namespace $ {
 		align: { items: 'center' },
 		gap: $mol_gap.text,
 		cursor: 'pointer',
+		background: { color: '#050505' },
+		color: '#ffffff',
+		border: { width: '1px', style: 'solid', color: '#ffffff26' },
+		borderRadius: '6px',
 
 		Swatch: {
 			width: '8px',
@@ -125,10 +181,18 @@ namespace $ {
 		},
 
 		'@': {
+			bog_mediagram_theme: {
+				light: {
+					background: { color: '#ffffff' },
+					color: '#050505',
+					border: { width: '1px', style: 'solid', color: '#05050526' },
+				},
+			},
 			bog_mediagram_chip_active: {
 				on: {
 					background: { color: '#e50914' },
 					color: '#ffffff',
+					border: { width: '1px', style: 'solid', color: '#e50914' },
 				},
 			},
 		},
@@ -226,6 +290,20 @@ namespace $ {
 				size: '11px',
 			},
 			color: '#ffffff8f',
+		},
+
+		'@': {
+			bog_mediagram_theme: {
+				light: {
+					Title_view: {
+						color: '#050505',
+					},
+
+					Sub: {
+						color: '#05050599',
+					},
+				},
+			},
 		},
 	} )
 

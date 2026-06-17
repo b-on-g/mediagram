@@ -87,6 +87,22 @@ namespace $.$$ {
 			return $mol_state_arg.value( 'kind', next ) ?? 'all'
 		}
 
+		@ $mol_mem
+		theme( next?: string ) {
+			return $mol_state_arg.value( 'theme', next ) ?? 'dark'
+		}
+
+		theme_label() {
+			return this.theme() === 'light' ? 'тёмная' : 'светлая'
+		}
+
+		@ $mol_action
+		theme_toggle( e?: Event ) {
+			if( e ) e.preventDefault()
+			this.theme( this.theme() === 'light' ? 'dark' : 'light' )
+			return null
+		}
+
 		status_options() {
 			return {
 				all: 'всё',
@@ -133,6 +149,7 @@ namespace $.$$ {
 				chip.kind = () => k
 				chip.label = () => k === 'all' ? 'всё' : KIND_LABEL[ k as Kind ]
 				chip.active = () => this.kind_filter() === k ? 'on' : 'off'
+				chip.theme = () => this.theme()
 				chip.click = ( e?: Event ) => {
 					if( e ) e.preventDefault()
 					this.kind_filter( k )
@@ -148,6 +165,7 @@ namespace $.$$ {
 				chip.kind = () => String( s )
 				chip.label = () => this.status_options()[ s ]
 				chip.active = () => this.status() === s ? 'on' : 'off'
+				chip.theme = () => this.theme()
 				chip.click = ( e?: Event ) => {
 					if( e ) e.preventDefault()
 					this.status( s )
@@ -181,6 +199,7 @@ namespace $.$$ {
 			card.rate_text = () => this.entry( id ).rating !== null ? String( this.entry( id ).rating ) : ''
 			card.initials = () => initials_of( this.entry( id ).title )
 			card.color = () => KIND_COLOR[ this.entry( id ).kind ]
+			card.theme = () => this.theme()
 			card.poster_bg = () => {
 				const c = KIND_COLOR[ this.entry( id ).kind ]
 				return `linear-gradient(180deg, #05050500 42%, #050505d9 100%), linear-gradient(150deg, color-mix(in srgb, ${ c } 52%, #111), #090909), url("${ this.entry( id ).cover }")`

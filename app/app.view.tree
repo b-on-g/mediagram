@@ -1,4 +1,7 @@
 $bog_mediagram_app $mol_view
+	attr *
+		^
+		bog_mediagram_theme <= theme \dark
 	sub /
 		<= Top $mol_view
 			sub /
@@ -9,6 +12,9 @@ $bog_mediagram_app $mol_view
 				<= Search $mol_string
 					hint \поиск по библиотеке
 					value? <=> query? \
+				<= Theme_btn $mol_button
+					click? <=> theme_toggle? null
+					sub / <= theme_label \
 				<= Add_btn $mol_button
 					click? <=> add_click? null
 					sub / \добавить
@@ -34,11 +40,13 @@ $bog_mediagram_app_chip $mol_button
 	kind \
 	label \
 	active \off
+	theme \dark
 	click? null
 	attr *
 		^
 		bog_mediagram_chip_kind <= kind
 		bog_mediagram_chip_active <= active
+		bog_mediagram_theme <= theme
 	sub /
 		<= Swatch $mol_view
 		<= Label $mol_view sub / <= label
@@ -57,10 +65,12 @@ $bog_mediagram_app_card $mol_view
 	initials \
 	color \
 	poster_bg \
+	theme \dark
 	attr *
 		^
 		bog_mediagram_status <= status_class
 		bog_mediagram_kind <= kind
+		bog_mediagram_theme <= theme
 	sub /
 		<= Poster $mol_view
 			style *
