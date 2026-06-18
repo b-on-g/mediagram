@@ -114,6 +114,24 @@ $bog_mediagram_app $mol_view
 			sub /
 				<= Banner_title $mol_view sub / <= banner_title \
 				<= Banner_text $mol_view sub / <= banner_text \
+		<= Groups $mol_view
+			sub /
+				<= Groups_head $mol_view
+					sub /
+						<= Groups_title $mol_view sub / \Группы
+						<= Groups_count $mol_view sub / <= groups_count_label \
+				<= Groups_form $mol_view
+					sub /
+						<= Group_name $mol_string
+							hint \название группы
+							value? <=> group_name? \
+						<= Group_types $mol_view
+							sub <= group_type_chips /
+						<= Group_create $mol_button
+							click? <=> group_create? null
+							sub / \создать
+				<= Groups_list $mol_view
+					sub <= group_rows /
 		<= Library $mol_scroll
 			sub /
 				<= Grid $mol_view
@@ -170,3 +188,19 @@ $bog_mediagram_app_card $mol_view
 			sub /
 				<= Title_view $mol_view sub / <= title
 				<= Sub $mol_view sub / <= year
+
+$bog_mediagram_app_group $mol_view
+	title \
+	type_label \
+	type_class \
+	theme \dark
+	attr *
+		^
+		bog_mediagram_group_type <= type_class
+		bog_mediagram_theme <= theme
+	sub /
+		<= Group_icon $mol_view sub / <= type_label
+		<= Group_meta $mol_view
+			sub /
+				<= Group_title $mol_view sub / <= title
+				<= Group_sub $mol_view sub / <= type_label

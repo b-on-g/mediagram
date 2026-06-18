@@ -2481,11 +2481,66 @@ declare namespace $ {
 		ReturnType< $mol_view['sub'] >
 	>
 	type $mol_view__sub_bog_mediagram_app_21 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_bog_mediagram_app_22 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_bog_mediagram_app_23 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_string__hint_bog_mediagram_app_24 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $mol_string['hint'] >
+	>
+	type $mol_string__value_bog_mediagram_app_25 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app['group_name'] >
+		,
+		ReturnType< $mol_string['value'] >
+	>
+	type $mol_view__sub_bog_mediagram_app_26 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app['group_type_chips'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_button__click_bog_mediagram_app_27 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app['group_create'] >
+		,
+		ReturnType< $mol_button['click'] >
+	>
+	type $mol_button__sub_bog_mediagram_app_28 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_button['sub'] >
+	>
+	type $mol_view__sub_bog_mediagram_app_29 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_bog_mediagram_app_30 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app['group_rows'] >
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_bog_mediagram_app_31 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_bog_mediagram_app_32 = $mol_type_enforce<
 		ReturnType< $bog_mediagram_app['entries'] >
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_scroll__sub_bog_mediagram_app_22 = $mol_type_enforce<
+	type $mol_scroll__sub_bog_mediagram_app_33 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_scroll['sub'] >
@@ -2519,6 +2574,20 @@ declare namespace $ {
 		banner_text( ): string
 		Banner_text( ): $mol_view
 		Banner( ): $mol_view
+		Groups_title( ): $mol_view
+		groups_count_label( ): string
+		Groups_count( ): $mol_view
+		Groups_head( ): $mol_view
+		group_name( next?: string ): string
+		Group_name( ): $mol_string
+		group_type_chips( ): readonly(any)[]
+		Group_types( ): $mol_view
+		group_create( next?: any ): any
+		Group_create( ): $mol_button
+		Groups_form( ): $mol_view
+		group_rows( ): readonly(any)[]
+		Groups_list( ): $mol_view
+		Groups( ): $mol_view
 		entries( ): readonly(any)[]
 		Grid( ): $mol_view
 		Library( ): $mol_scroll
@@ -2633,12 +2702,49 @@ declare namespace $ {
 		sub( ): readonly(any)[]
 	}
 	
+	type $mol_view__sub_bog_mediagram_app_group_1 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_bog_mediagram_app_group_2 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_bog_mediagram_app_group_3 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_bog_mediagram_app_group_4 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	export class $bog_mediagram_app_group extends $mol_view {
+		Group_icon( ): $mol_view
+		Group_title( ): $mol_view
+		Group_sub( ): $mol_view
+		Group_meta( ): $mol_view
+		title( ): string
+		type_label( ): string
+		type_class( ): string
+		theme( ): string
+		attr( ): ({ 
+			'bog_mediagram_group_type': ReturnType< $bog_mediagram_app_group['type_class'] >,
+			'bog_mediagram_theme': ReturnType< $bog_mediagram_app_group['theme'] >,
+		})  & ReturnType< $mol_view['attr'] >
+		sub( ): readonly(any)[]
+	}
+	
 }
 
 //# sourceMappingURL=app.view.tree.d.ts.map
 declare namespace $.$$ {
     type Kind = 'movie' | 'series' | 'book' | 'anime' | 'youtube';
     type Status = 'want_to' | 'doing' | 'done' | 'dropped';
+    type Group_type = 'family' | 'friends' | 'couple';
     type Entry = {
         id: string;
         title: string;
@@ -2648,6 +2754,11 @@ declare namespace $.$$ {
         rating: number | null;
         favorite: boolean;
         cover: string;
+    };
+    type Group = {
+        id: string;
+        title: string;
+        type: Group_type;
     };
     export class $bog_mediagram_app extends $.$bog_mediagram_app {
         query(next?: string): string;
@@ -2663,6 +2774,13 @@ declare namespace $.$$ {
             done: string;
             dropped: string;
         };
+        group_name(next?: string): string;
+        group_type(next?: Group_type): Group_type;
+        groups(next?: Group[]): Group[];
+        groups_count_label(): string;
+        group_type_chips(): $bog_mediagram_app_chip[];
+        group_create(e?: Event): null;
+        group_rows(): $bog_mediagram_app_group[];
         entries_all(): Entry[];
         entries_filtered(): Entry[];
         count_label(): string;
@@ -2671,6 +2789,8 @@ declare namespace $.$$ {
         type_chips(): $bog_mediagram_app_chip[];
         status_chips(): $bog_mediagram_app_chip[];
         Chip(id: string): $bog_mediagram_app_chip;
+        Group(id: string): $bog_mediagram_app_group;
+        group(id: string): Group;
         entries(): $bog_mediagram_app_card[];
         Card(id: string): $bog_mediagram_app_card;
         entry_status(id: string, next?: Status): Status;
@@ -2681,6 +2801,8 @@ declare namespace $.$$ {
     export class $bog_mediagram_app_chip extends $.$bog_mediagram_app_chip {
     }
     export class $bog_mediagram_app_card extends $.$bog_mediagram_app_card {
+    }
+    export class $bog_mediagram_app_group extends $.$bog_mediagram_app_group {
     }
     export {};
 }

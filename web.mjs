@@ -4420,6 +4420,78 @@ var $;
 			(obj.sub) = () => ([(this.Banner_title()), (this.Banner_text())]);
 			return obj;
 		}
+		Groups_title(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => (["Группы"]);
+			return obj;
+		}
+		groups_count_label(){
+			return "";
+		}
+		Groups_count(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.groups_count_label())]);
+			return obj;
+		}
+		Groups_head(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Groups_title()), (this.Groups_count())]);
+			return obj;
+		}
+		group_name(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		Group_name(){
+			const obj = new this.$.$mol_string();
+			(obj.hint) = () => ("название группы");
+			(obj.value) = (next) => ((this.group_name(next)));
+			return obj;
+		}
+		group_type_chips(){
+			return [];
+		}
+		Group_types(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.group_type_chips()));
+			return obj;
+		}
+		group_create(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Group_create(){
+			const obj = new this.$.$mol_button();
+			(obj.click) = (next) => ((this.group_create(next)));
+			(obj.sub) = () => (["создать"]);
+			return obj;
+		}
+		Groups_form(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([
+				(this.Group_name()), 
+				(this.Group_types()), 
+				(this.Group_create())
+			]);
+			return obj;
+		}
+		group_rows(){
+			return [];
+		}
+		Groups_list(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.group_rows()));
+			return obj;
+		}
+		Groups(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([
+				(this.Groups_head()), 
+				(this.Groups_form()), 
+				(this.Groups_list())
+			]);
+			return obj;
+		}
 		entries(){
 			return [];
 		}
@@ -4441,6 +4513,7 @@ var $;
 				(this.Top()), 
 				(this.Filters()), 
 				(this.Banner()), 
+				(this.Groups()), 
 				(this.Library())
 			];
 		}
@@ -4466,6 +4539,17 @@ var $;
 	($mol_mem(($.$bog_mediagram_app.prototype), "Banner_title"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Banner_text"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Banner"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Groups_title"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Groups_count"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Groups_head"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "group_name"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Group_name"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Group_types"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "group_create"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Group_create"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Groups_form"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Groups_list"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Groups"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Grid"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Library"));
 	($.$bog_mediagram_app_chip) = class $bog_mediagram_app_chip extends ($.$mol_button) {
@@ -4624,6 +4708,54 @@ var $;
 	($mol_mem(($.$bog_mediagram_app_card.prototype), "Title_view"));
 	($mol_mem(($.$bog_mediagram_app_card.prototype), "Sub"));
 	($mol_mem(($.$bog_mediagram_app_card.prototype), "Meta"));
+	($.$bog_mediagram_app_group) = class $bog_mediagram_app_group extends ($.$mol_view) {
+		Group_icon(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.type_label())]);
+			return obj;
+		}
+		Group_title(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.title())]);
+			return obj;
+		}
+		Group_sub(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.type_label())]);
+			return obj;
+		}
+		Group_meta(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Group_title()), (this.Group_sub())]);
+			return obj;
+		}
+		title(){
+			return "";
+		}
+		type_label(){
+			return "";
+		}
+		type_class(){
+			return "";
+		}
+		theme(){
+			return "dark";
+		}
+		attr(){
+			return {
+				...(super.attr()), 
+				"bog_mediagram_group_type": (this.type_class()), 
+				"bog_mediagram_theme": (this.theme())
+			};
+		}
+		sub(){
+			return [(this.Group_icon()), (this.Group_meta())];
+		}
+	};
+	($mol_mem(($.$bog_mediagram_app_group.prototype), "Group_icon"));
+	($mol_mem(($.$bog_mediagram_app_group.prototype), "Group_title"));
+	($mol_mem(($.$bog_mediagram_app_group.prototype), "Group_sub"));
+	($mol_mem(($.$bog_mediagram_app_group.prototype), "Group_meta"));
 
 
 ;
@@ -5142,6 +5274,11 @@ var $;
             done: k => k === 'book' ? 'прочитал' : 'готово',
             dropped: () => 'бросил',
         };
+        const GROUP_LABEL = {
+            family: 'семья',
+            friends: 'друзья',
+            couple: 'пара',
+        };
         const FIXTURE = [
             { id: '1', title: 'Frieren', year: '2023', kind: 'anime', status: 'doing', rating: null, favorite: true, cover: 'https://image.tmdb.org/t/p/w500/dqZENchTd7lp5zht7BdlqM7RBhD.jpg' },
             { id: '2', title: 'Dune: Part Two', year: '2024', kind: 'movie', status: 'done', rating: 9, favorite: true, cover: 'https://image.tmdb.org/t/p/w500/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg' },
@@ -5165,6 +5302,7 @@ var $;
         const KIND_ORDER = ['all', 'movie', 'series', 'book', 'anime', 'youtube'];
         const STATUS_ORDER = ['all', 'want_to', 'doing', 'done', 'dropped'];
         const STATUS_FLOW = ['want_to', 'doing', 'done', 'dropped'];
+        const GROUP_ORDER = ['family', 'friends', 'couple'];
         function initials_of(title) {
             return title.replace(/[«»"']/g, '')
                 .split(/\s+/)
@@ -5203,6 +5341,49 @@ var $;
                     done: 'готово',
                     dropped: 'бросил',
                 };
+            }
+            group_name(next) {
+                return $mol_state_local.value('mediagram_group_name', next) ?? '';
+            }
+            group_type(next) {
+                return $mol_state_local.value('mediagram_group_type', next) ?? 'family';
+            }
+            groups(next) {
+                return $mol_state_local.value('mediagram_groups', next) ?? [];
+            }
+            groups_count_label() {
+                return `${this.groups().length} групп`;
+            }
+            group_type_chips() {
+                return GROUP_ORDER.map(type => {
+                    const chip = this.Chip(`group-${type}`);
+                    chip.kind = () => type;
+                    chip.label = () => GROUP_LABEL[type];
+                    chip.active = () => this.group_type() === type ? 'on' : 'off';
+                    chip.theme = () => this.theme();
+                    chip.click = (e) => {
+                        if (e)
+                            e.preventDefault();
+                        this.group_type(type);
+                        return null;
+                    };
+                    return chip;
+                });
+            }
+            group_create(e) {
+                if (e)
+                    e.preventDefault();
+                const type = this.group_type();
+                const title = this.group_name().trim() || GROUP_LABEL[type];
+                this.groups([
+                    ...this.groups(),
+                    { id: `${Date.now()}`, title, type },
+                ]);
+                this.group_name('');
+                return null;
+            }
+            group_rows() {
+                return this.groups().map(group => this.Group(group.id));
             }
             entries_all() {
                 return FIXTURE;
@@ -5264,6 +5445,20 @@ var $;
             }
             Chip(id) {
                 return new $bog_mediagram_app_chip();
+            }
+            Group(id) {
+                const row = new $bog_mediagram_app_group();
+                row.title = () => this.group(id).title;
+                row.type_label = () => GROUP_LABEL[this.group(id).type];
+                row.type_class = () => this.group(id).type;
+                row.theme = () => this.theme();
+                return row;
+            }
+            group(id) {
+                const found = this.groups().find(group => group.id === id);
+                if (!found)
+                    throw new Error(`group ${id} not found`);
+                return found;
             }
             entries() {
                 return this.entries_filtered().map(e => this.Card(e.id));
@@ -5332,6 +5527,18 @@ var $;
         ], $bog_mediagram_app.prototype, "theme_toggle", null);
         __decorate([
             $mol_mem
+        ], $bog_mediagram_app.prototype, "group_name", null);
+        __decorate([
+            $mol_mem
+        ], $bog_mediagram_app.prototype, "group_type", null);
+        __decorate([
+            $mol_mem
+        ], $bog_mediagram_app.prototype, "groups", null);
+        __decorate([
+            $mol_action
+        ], $bog_mediagram_app.prototype, "group_create", null);
+        __decorate([
+            $mol_mem
         ], $bog_mediagram_app.prototype, "entries_all", null);
         __decorate([
             $mol_mem
@@ -5339,6 +5546,9 @@ var $;
         __decorate([
             $mol_mem_key
         ], $bog_mediagram_app.prototype, "Chip", null);
+        __decorate([
+            $mol_mem_key
+        ], $bog_mediagram_app.prototype, "Group", null);
         __decorate([
             $mol_mem_key
         ], $bog_mediagram_app.prototype, "Card", null);
@@ -5352,6 +5562,9 @@ var $;
         class $bog_mediagram_app_card extends $.$bog_mediagram_app_card {
         }
         $$.$bog_mediagram_app_card = $bog_mediagram_app_card;
+        class $bog_mediagram_app_group extends $.$bog_mediagram_app_group {
+        }
+        $$.$bog_mediagram_app_group = $bog_mediagram_app_group;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -5477,6 +5690,55 @@ var $;
         Banner_text: {
             color: '#ffffffa6',
         },
+        Groups: {
+            margin: { top: '18px', right: '32px', left: '32px' },
+            flex: { shrink: 0 },
+            gap: $mol_gap.block,
+            padding: { top: '16px', right: '18px', bottom: '18px', left: '18px' },
+            background: { color: '#0d0d0d' },
+            border: { width: '1px', style: 'solid', color: '#ffffff12' },
+            borderRadius: '8px',
+        },
+        Groups_head: {
+            flex: { direction: 'row', wrap: 'wrap' },
+            align: { items: 'center' },
+            gap: $mol_gap.text,
+        },
+        Groups_title: {
+            font: { weight: 800, size: '18px' },
+            color: '#ffffff',
+        },
+        Groups_count: {
+            marginLeft: 'auto',
+            color: '#ffffff99',
+            font: { size: '12px' },
+        },
+        Groups_form: {
+            flex: { direction: 'row', wrap: 'wrap' },
+            align: { items: 'center' },
+            gap: $mol_gap.text,
+        },
+        Group_name: {
+            flex: { grow: 1, basis: '180px' },
+            minWidth: '150px',
+        },
+        Group_types: {
+            flex: { direction: 'row', wrap: 'wrap', shrink: 0 },
+            gap: $mol_gap.text,
+        },
+        Group_create: {
+            flex: { shrink: 0 },
+            background: { color: '#e50914' },
+            color: '#ffffff',
+            border: { width: '1px', style: 'solid', color: '#e50914' },
+            borderRadius: '6px',
+            font: { weight: 700 },
+        },
+        Groups_list: {
+            display: 'grid',
+            gap: $mol_gap.text,
+            gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
+        },
         Library: {
             flex: { grow: 1 },
         },
@@ -5507,6 +5769,16 @@ var $;
                     Banner: {
                         background: { color: '#050505' },
                         border: { width: '1px', style: 'solid', color: '#050505' },
+                    },
+                    Groups: {
+                        background: { color: '#ffffff' },
+                        border: { width: '1px', style: 'solid', color: '#0505051f' },
+                    },
+                    Groups_title: {
+                        color: '#050505',
+                    },
+                    Groups_count: {
+                        color: '#05050599',
                     },
                     Count: {
                         color: '#05050599',
@@ -5551,6 +5823,55 @@ var $;
                     background: { color: '#e50914' },
                     color: '#ffffff',
                     border: { width: '1px', style: 'solid', color: '#e50914' },
+                },
+            },
+        },
+    });
+    $mol_style_define($bog_mediagram_app_group, {
+        flex: { direction: 'row' },
+        align: { items: 'center' },
+        gap: $mol_gap.text,
+        padding: { top: '10px', right: '12px', bottom: '10px', left: '12px' },
+        background: { color: '#050505' },
+        border: { width: '1px', style: 'solid', color: '#ffffff18' },
+        borderRadius: '6px',
+        Group_icon: {
+            flex: { shrink: 0 },
+            minWidth: '58px',
+            padding: { top: '4px', right: '7px', bottom: '4px', left: '7px' },
+            background: { color: '#e50914' },
+            color: '#ffffff',
+            borderRadius: '4px',
+            textTransform: 'uppercase',
+            textAlign: 'center',
+            font: { size: '10px', weight: 800 },
+        },
+        Group_meta: {
+            flex: { direction: 'column' },
+            overflow: { x: 'hidden' },
+        },
+        Group_title: {
+            color: '#ffffff',
+            font: { size: '14px', weight: 800 },
+            overflow: { x: 'hidden' },
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+        },
+        Group_sub: {
+            color: '#ffffff91',
+            font: { size: '11px' },
+        },
+        '@': {
+            bog_mediagram_theme: {
+                light: {
+                    background: { color: '#ffffff' },
+                    border: { width: '1px', style: 'solid', color: '#0505051f' },
+                    Group_title: {
+                        color: '#050505',
+                    },
+                    Group_sub: {
+                        color: '#05050599',
+                    },
                 },
             },
         },
