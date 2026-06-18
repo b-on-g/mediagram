@@ -137,6 +137,64 @@ namespace $ {
 			color: '#ffffffa6',
 		},
 
+		Groups: {
+			margin: { top: '18px', right: '32px', left: '32px' },
+			flex: { shrink: 0 },
+			gap: $mol_gap.block,
+			padding: { top: '16px', right: '18px', bottom: '18px', left: '18px' },
+			background: { color: '#0d0d0d' },
+			border: { width: '1px', style: 'solid', color: '#ffffff12' },
+			borderRadius: '8px',
+		},
+
+		Groups_head: {
+			flex: { direction: 'row', wrap: 'wrap' },
+			align: { items: 'center' },
+			gap: $mol_gap.text,
+		},
+
+		Groups_title: {
+			font: { weight: 800, size: '18px' },
+			color: '#ffffff',
+		},
+
+		Groups_count: {
+			marginLeft: 'auto',
+			color: '#ffffff99',
+			font: { size: '12px' },
+		},
+
+		Groups_form: {
+			flex: { direction: 'row', wrap: 'wrap' },
+			align: { items: 'center' },
+			gap: $mol_gap.text,
+		},
+
+		Group_name: {
+			flex: { grow: 1, basis: '180px' },
+			minWidth: '150px',
+		},
+
+		Group_types: {
+			flex: { direction: 'row', wrap: 'wrap', shrink: 0 },
+			gap: $mol_gap.text,
+		},
+
+		Group_create: {
+			flex: { shrink: 0 },
+			background: { color: '#e50914' },
+			color: '#ffffff',
+			border: { width: '1px', style: 'solid', color: '#e50914' },
+			borderRadius: '6px',
+			font: { weight: 700 },
+		},
+
+		Groups_list: {
+			display: 'grid',
+			gap: $mol_gap.text,
+			gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
+		},
+
 		Library: {
 			flex: { grow: 1 },
 		},
@@ -173,6 +231,19 @@ namespace $ {
 					Banner: {
 						background: { color: '#050505' },
 						border: { width: '1px', style: 'solid', color: '#050505' },
+					},
+
+					Groups: {
+						background: { color: '#ffffff' },
+						border: { width: '1px', style: 'solid', color: '#0505051f' },
+					},
+
+					Groups_title: {
+						color: '#050505',
+					},
+
+					Groups_count: {
+						color: '#05050599',
 					},
 
 					Count: {
@@ -224,6 +295,63 @@ namespace $ {
 					background: { color: '#e50914' },
 					color: '#ffffff',
 					border: { width: '1px', style: 'solid', color: '#e50914' },
+				},
+			},
+		},
+	} )
+
+	$mol_style_define( $bog_mediagram_app_group, {
+		flex: { direction: 'row' },
+		align: { items: 'center' },
+		gap: $mol_gap.text,
+		padding: { top: '10px', right: '12px', bottom: '10px', left: '12px' },
+		background: { color: '#050505' },
+		border: { width: '1px', style: 'solid', color: '#ffffff18' },
+		borderRadius: '6px',
+
+		Group_icon: {
+			flex: { shrink: 0 },
+			minWidth: '58px',
+			padding: { top: '4px', right: '7px', bottom: '4px', left: '7px' },
+			background: { color: '#e50914' },
+			color: '#ffffff',
+			borderRadius: '4px',
+			textTransform: 'uppercase',
+			textAlign: 'center',
+			font: { size: '10px', weight: 800 },
+		},
+
+		Group_meta: {
+			flex: { direction: 'column' },
+			overflow: { x: 'hidden' },
+		},
+
+		Group_title: {
+			color: '#ffffff',
+			font: { size: '14px', weight: 800 },
+			overflow: { x: 'hidden' },
+			textOverflow: 'ellipsis',
+			whiteSpace: 'nowrap',
+		},
+
+		Group_sub: {
+			color: '#ffffff91',
+			font: { size: '11px' },
+		},
+
+		'@': {
+			bog_mediagram_theme: {
+				light: {
+					background: { color: '#ffffff' },
+					border: { width: '1px', style: 'solid', color: '#0505051f' },
+
+					Group_title: {
+						color: '#050505',
+					},
+
+					Group_sub: {
+						color: '#05050599',
+					},
 				},
 			},
 		},

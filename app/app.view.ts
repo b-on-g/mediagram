@@ -2,6 +2,7 @@ namespace $.$$ {
 
 	type Kind = 'movie' | 'series' | 'book' | 'anime' | 'youtube'
 	type Status = 'want_to' | 'doing' | 'done' | 'dropped'
+	type Group_type = 'family' | 'friends' | 'couple'
 
 	type Entry = {
 		id: string
@@ -12,6 +13,12 @@ namespace $.$$ {
 		rating: number | null
 		favorite: boolean
 		cover: string
+	}
+
+	type Group = {
+		id: string
+		title: string
+		type: Group_type
 	}
 
 	const KIND_LABEL: Record<Kind, string> = {
@@ -35,6 +42,12 @@ namespace $.$$ {
 		doing: k => k === 'book' ? 'читаю' : 'смотрю',
 		done: k => k === 'book' ? 'прочитал' : 'готово',
 		dropped: () => 'бросил',
+	}
+
+	const GROUP_LABEL: Record<Group_type, string> = {
+		family: 'семья',
+		friends: 'друзья',
+		couple: 'пара',
 	}
 
 	const FIXTURE: Entry[] = [
@@ -61,6 +74,7 @@ namespace $.$$ {
 	const KIND_ORDER: ( Kind | 'all' )[] = [ 'all', 'movie', 'series', 'book', 'anime', 'youtube' ]
 	const STATUS_ORDER: ( Status | 'all' )[] = [ 'all', 'want_to', 'doing', 'done', 'dropped' ]
 	const STATUS_FLOW: Status[] = [ 'want_to', 'doing', 'done', 'dropped' ]
+	const GROUP_ORDER: Group_type[] = [ 'family', 'friends', 'couple' ]
 
 	function initials_of( title: string ) {
 		return title.replace( /[«»"']/g, '' )
@@ -112,6 +126,58 @@ namespace $.$$ {
 				done: 'готово',
 				dropped: 'бросил',
 			}
+		}
+
+		@ $mol_mem
+		group_name( next?: string ) {
+			return $mol_state_local.value( 'mediagram_group_name', next ) as string ?? ''
+		}
+
+		@ $mol_mem
+		group_type( next?: Group_type ) {
+			return $mol_state_local.value( 'mediagram_group_type', next ) as Group_type ?? 'family'
+		}
+
+		@ $mol_mem
+		groups( next?: Group[] ) {
+			return $mol_state_local.value( 'mediagram_groups', next ) as Group[] ?? []
+		}
+
+		groups_count_label() {
+			return `${ this.groups().length } групп`
+		}
+
+		group_type_chips() {
+			return GROUP_ORDER.map( type => {
+				const chip = this.Chip( `group-${ type }` )
+				chip.kind = () => type
+				chip.label = () => GROUP_LABEL[ type ]
+				chip.active = () => this.group_type() === type ? 'on' : 'off'
+				chip.theme = () => this.theme()
+				chip.click = ( e?: Event ) => {
+					if( e ) e.preventDefault()
+					this.group_type( type )
+					return null
+				}
+				return chip
+			} )
+		}
+
+		@ $mol_action
+		group_create( e?: Event ) {
+			if( e ) e.preventDefault()
+			const type = this.group_type()
+			const title = this.group_name().trim() || GROUP_LABEL[ type ]
+			this.groups( [
+				... this.groups(),
+				{ id: `${ Date.now() }`, title, type },
+			] )
+			this.group_name( '' )
+			return null
+		}
+
+		group_rows() {
+			return this.groups().map( group => this.Group( group.id ) )
 		}
 
 		@ $mol_mem
@@ -181,6 +247,22 @@ namespace $.$$ {
 			return new $bog_mediagram_app_chip()
 		}
 
+		@ $mol_mem_key
+		Group( id: string ) {
+			const row = new $bog_mediagram_app_group()
+			row.title = () => this.group( id ).title
+			row.type_label = () => GROUP_LABEL[ this.group( id ).type ]
+			row.type_class = () => this.group( id ).type
+			row.theme = () => this.theme()
+			return row
+		}
+
+		group( id: string ) {
+			const found = this.groups().find( group => group.id === id )
+			if( !found ) throw new Error( `group ${ id } not found` )
+			return found
+		}
+
 		entries() {
 			return this.entries_filtered().map( e => this.Card( e.id ) )
 		}
@@ -239,5 +321,6 @@ namespace $.$$ {
 
 	export class $bog_mediagram_app_chip extends $.$bog_mediagram_app_chip {}
 	export class $bog_mediagram_app_card extends $.$bog_mediagram_app_card {}
+	export class $bog_mediagram_app_group extends $.$bog_mediagram_app_group {}
 
 }
