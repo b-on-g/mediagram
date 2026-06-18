@@ -67,11 +67,25 @@ namespace $ {
 		},
 
 		Filters: {
-			flex: { direction: 'column', shrink: 0 },
-			gap: $mol_gap.block,
-			padding: { top: '12px', right: '32px', bottom: '12px', left: '32px' },
+			flex: { direction: 'row', wrap: 'wrap', shrink: 0 },
+			align: { items: 'center' },
+			gap: '14px',
+			padding: { top: '14px', right: '32px', bottom: '14px', left: '32px' },
 			border: { bottom: { width: '1px', style: 'solid', color: '#ffffff10' } },
 			background: { color: '#050505' },
+		},
+
+		Types_group: {
+			flex: { direction: 'row', wrap: 'wrap', shrink: 0 },
+			align: { items: 'center' },
+			gap: $mol_gap.text,
+		},
+
+		Type_filter_label: {
+			flex: { shrink: 0 },
+			color: '#ffffff99',
+			font: { size: '11px', weight: 800 },
+			textTransform: 'uppercase',
 		},
 
 		Types: {
@@ -82,7 +96,14 @@ namespace $ {
 		Status_row: {
 			flex: { direction: 'row', wrap: 'wrap' },
 			align: { items: 'center' },
-			gap: $mol_gap.block,
+			gap: $mol_gap.text,
+		},
+
+		Status_filter_label: {
+			flex: { shrink: 0 },
+			color: '#ffffff99',
+			font: { size: '11px', weight: 800 },
+			textTransform: 'uppercase',
 		},
 
 		Status_chips: {
@@ -157,6 +178,14 @@ namespace $ {
 					Count: {
 						color: '#05050599',
 					},
+
+					Type_filter_label: {
+						color: '#05050599',
+					},
+
+					Status_filter_label: {
+						color: '#05050599',
+					},
 				},
 			},
 		},
@@ -172,6 +201,8 @@ namespace $ {
 		color: '#ffffff',
 		border: { width: '1px', style: 'solid', color: '#ffffff26' },
 		borderRadius: '6px',
+		padding: { top: '7px', right: '10px', bottom: '7px', left: '10px' },
+		minHeight: '34px',
 
 		Swatch: {
 			width: '8px',
@@ -254,6 +285,16 @@ namespace $ {
 			bottom: '8px',
 			background: { color: '#e50914' },
 			color: '#ffffff',
+			border: { width: '1px', style: 'solid', color: '#ffffff5c' },
+			borderRadius: '4px',
+			padding: { top: '3px', right: '8px', bottom: '3px', left: '8px' },
+			font: { size: '11px', weight: 800 },
+			cursor: 'pointer',
+			textTransform: 'uppercase',
+			':hover': {
+				background: { color: '#ffffff' },
+				color: '#050505',
+			},
 		},
 
 		Rate_view: {

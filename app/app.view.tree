@@ -20,10 +20,14 @@ $bog_mediagram_app $mol_view
 					sub / \добавить
 		<= Filters $mol_view
 			sub /
-				<= Types $mol_view
-					sub <= type_chips /
+				<= Types_group $mol_view
+					sub /
+						<= Type_filter_label $mol_view sub / \Тип
+						<= Types $mol_view
+							sub <= type_chips /
 				<= Status_row $mol_view
 					sub /
+						<= Status_filter_label $mol_view sub / \Статус
 						<= Status_chips $mol_view
 							sub <= status_chips /
 						<= Count $mol_view sub / <= count_label \
@@ -58,6 +62,7 @@ $bog_mediagram_app_card $mol_view
 	kind_label \
 	status_label \
 	status_class \
+	status_change? null
 	favorite false
 	fav_label \
 	rating null
@@ -78,7 +83,8 @@ $bog_mediagram_app_card $mol_view
 			sub /
 				<= Kind_flag $mol_view sub / <= kind_label
 				<= Fav_view $mol_view sub / <= fav_label
-				<= Pill $mol_view
+				<= Pill $mol_button
+					click? <=> status_change? null
 					sub / <= status_label
 				<= Rate_view $mol_view sub / <= rate_text
 		<= Meta $mol_view

@@ -60,6 +60,7 @@ namespace $.$$ {
 
 	const KIND_ORDER: ( Kind | 'all' )[] = [ 'all', 'movie', 'series', 'book', 'anime', 'youtube' ]
 	const STATUS_ORDER: ( Status | 'all' )[] = [ 'all', 'want_to', 'doing', 'done', 'dropped' ]
+	const STATUS_FLOW: Status[] = [ 'want_to', 'doing', 'done', 'dropped' ]
 
 	function initials_of( title: string ) {
 		return title.replace( /[«»"']/g, '' )
@@ -125,7 +126,7 @@ namespace $.$$ {
 			const k = this.kind_filter()
 			return this.entries_all().filter( e => {
 				if( q && !e.title.toLowerCase().includes( q ) ) return false
-				if( s !== 'all' && e.status !== s ) return false
+				if( s !== 'all' && this.entry_status( e.id ) !== s ) return false
 				if( k !== 'all' && e.kind !== k ) return false
 				return true
 			} )
@@ -188,11 +189,16 @@ namespace $.$$ {
 		Card( id: string ) {
 			const card = new $bog_mediagram_app_card()
 			card.title = () => this.entry( id ).title
-			card.year = () => this.entry( id ).year
+			card.year = () => `год создания: ${ this.entry( id ).year }`
 			card.kind = () => this.entry( id ).kind
 			card.kind_label = () => KIND_LABEL[ this.entry( id ).kind ]
-			card.status_class = () => this.entry( id ).status
-			card.status_label = () => STATUS_VERB[ this.entry( id ).status ]( this.entry( id ).kind )
+			card.status_class = () => this.entry_status( id )
+			card.status_label = () => STATUS_VERB[ this.entry_status( id ) ]( this.entry( id ).kind )
+			card.status_change = ( e?: Event ) => {
+				if( e ) e.preventDefault()
+				this.entry_status( id, this.status_next( this.entry_status( id ) ) )
+				return null
+			}
 			card.favorite = () => this.entry( id ).favorite
 			card.fav_label = () => this.entry( id ).favorite ? '❤' : ''
 			card.rating = () => this.entry( id ).rating
@@ -205,6 +211,18 @@ namespace $.$$ {
 				return `linear-gradient(180deg, #05050500 42%, #050505d9 100%), linear-gradient(150deg, color-mix(in srgb, ${ c } 52%, #111), #090909), url("${ this.entry( id ).cover }")`
 			}
 			return card
+		}
+
+		@ $mol_mem_key
+		entry_status( id: string, next?: Status ) {
+			const key = `mediagram_status_${ id }`
+			const value = $mol_state_local.value( key, next ) as Status | null
+			return value ?? this.entry( id ).status
+		}
+
+		status_next( status: Status ) {
+			const index = STATUS_FLOW.indexOf( status )
+			return STATUS_FLOW[ ( index + 1 ) % STATUS_FLOW.length ]
 		}
 
 		entry( id: string ) {
