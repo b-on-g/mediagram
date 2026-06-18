@@ -39,8 +39,7 @@ namespace $ {
 		Brand_mark: {
 			width: '24px',
 			height: '24px',
-			borderRadius: '7px',
-			background: { color: $bog_builderui_tokens.control },
+			color: $bog_builderui_tokens.control,
 		},
 
 		Search: {

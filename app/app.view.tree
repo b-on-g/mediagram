@@ -62,18 +62,21 @@ $bog_mediagram_app $bog_builderui_div
 					<= Recognized_add $bog_builderui_button
 						title \добавить
 						click?event <=> recognized_add?event null
+	Brand $mol_view
+		sub /
+			<= Brand_mark $mol_icon_library
+			<= Brand_name $mol_view sub / \mediagram
+	Search $bog_builderui_field
+		hint \поиск в библиотеке
+		value? <=> query? \
+	Theme_toggle $bog_theme_toggle
+		theme_auto <= Theme
+	Add_btn $bog_builderui_button
+		title \+
+		hint \добавить вручную
+		click? <=> add_click? null
 	sub /
-		<= Top $mol_view
-			sub /
-				<= Brand $mol_view
-					sub /
-						<= Brand_mark $mol_view
-						<= Brand_name $mol_view sub / \mediagram
-				<= Search $bog_builderui_field
-					hint \поиск в библиотеке
-					value? <=> query? \
-				<= Theme_toggle $bog_theme_toggle
-					theme_auto <= Theme
+		<= Top $mol_view sub <= top_content /
 		<= Body $mol_scroll
 			sub /
 				<= Page $mol_view sub <= body_content /

@@ -34,22 +34,7 @@ namespace $.$$ {
 		dropped: () => 'бросил',
 	}
 
-	const FIXTURE: Entry[] = [
-		{ id: '1', title: 'Frieren', year: '2023', kind: 'anime', status: 'doing', rating: null, favorite: true },
-		{ id: '2', title: 'Dune: Part Two', year: '2024', kind: 'movie', status: 'done', rating: 9, favorite: true },
-		{ id: '4', title: 'Дюна', year: '1965', kind: 'book', status: 'doing', rating: 8, favorite: false },
-		{ id: '5', title: 'Severance', year: '2022', kind: 'series', status: 'done', rating: 9, favorite: false },
-		{ id: '6', title: 'Цветы для Элджернона', year: '1966', kind: 'book', status: 'want_to', rating: null, favorite: false },
-		{ id: '7', title: 'Blue Eye Samurai', year: '2023', kind: 'anime', status: 'done', rating: 8, favorite: false },
-		{ id: '9', title: 'Andor', year: '2022', kind: 'series', status: 'doing', rating: 9, favorite: true },
-		{ id: '10', title: 'Оппенгеймер', year: '2023', kind: 'movie', status: 'done', rating: 8, favorite: false },
-		{ id: '11', title: 'Vinland Saga', year: '2019', kind: 'anime', status: 'dropped', rating: 6, favorite: false },
-		{ id: '12', title: 'Атака титанов', year: '2013', kind: 'anime', status: 'done', rating: 9, favorite: true },
-		{ id: '13', title: '1984', year: '1949', kind: 'book', status: 'done', rating: 9, favorite: false },
-		{ id: '15', title: 'The Bear', year: '2022', kind: 'series', status: 'want_to', rating: null, favorite: false },
-		{ id: '16', title: 'Поднятие уровня в одиночку', year: '2024', kind: 'anime', status: 'doing', rating: 7, favorite: false },
-		{ id: '17', title: 'Достучаться до небес', year: '1997', kind: 'movie', status: 'want_to', rating: null, favorite: false },
-	]
+	const FIXTURE: Entry[] = []
 
 	const KIND_ORDER: ( Kind | 'all' )[] = [ 'all', 'movie', 'series', 'book', 'anime' ]
 
@@ -210,6 +195,18 @@ namespace $.$$ {
 					return items
 				}
 			}
+		}
+
+		top_content() {
+			const items: any[] = [ this.Brand(), this.Search(), this.Theme_toggle() ]
+			if( this.in_extension() ) items.push( this.Add_btn() )
+			return items
+		}
+
+		add_click( e?: Event ) {
+			if( e ) e.preventDefault()
+			console.log( '[mediagram] manual add (TODO: open form)' )
+			return null
 		}
 
 		in_extension() {
