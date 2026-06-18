@@ -5600,6 +5600,266 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$mol_svg) = class $mol_svg extends ($.$mol_view) {
+		dom_name(){
+			return "svg";
+		}
+		dom_name_space(){
+			return "http://www.w3.org/2000/svg";
+		}
+		font_size(){
+			return 16;
+		}
+		font_family(){
+			return "";
+		}
+		style_size(){
+			return {};
+		}
+	};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    /** State of time moment */
+    class $mol_state_time extends $mol_object {
+        static task(precision, reset) {
+            if (precision) {
+                return new $mol_after_timeout(precision, () => this.task(precision, null));
+            }
+            else {
+                return new $mol_after_frame(() => this.task(precision, null));
+            }
+        }
+        static now(precision) {
+            this.task(precision);
+            return Date.now();
+        }
+    }
+    __decorate([
+        $mol_mem_key
+    ], $mol_state_time, "task", null);
+    __decorate([
+        $mol_mem_key
+    ], $mol_state_time, "now", null);
+    $.$mol_state_time = $mol_state_time;
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /** Base SVG component to display SVG images or icons. */
+        class $mol_svg extends $.$mol_svg {
+            computed_style() {
+                const win = this.$.$mol_dom_context;
+                const style = win.getComputedStyle(this.dom_node());
+                if (!style['font-size'])
+                    $mol_state_time.now(0);
+                return style;
+            }
+            font_size() {
+                return parseInt(this.computed_style()['font-size']) || 16;
+            }
+            font_family() {
+                return this.computed_style()['font-family'];
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $mol_svg.prototype, "computed_style", null);
+        __decorate([
+            $mol_mem
+        ], $mol_svg.prototype, "font_size", null);
+        __decorate([
+            $mol_mem
+        ], $mol_svg.prototype, "font_family", null);
+        $$.$mol_svg = $mol_svg;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+	($.$mol_svg_root) = class $mol_svg_root extends ($.$mol_svg) {
+		view_box(){
+			return "0 0 100 100";
+		}
+		aspect(){
+			return "xMidYMid";
+		}
+		dom_name(){
+			return "svg";
+		}
+		attr(){
+			return {
+				...(super.attr()), 
+				"viewBox": (this.view_box()), 
+				"preserveAspectRatio": (this.aspect())
+			};
+		}
+	};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/svg/root/root.view.css", "[mol_svg_root] {\n\toverflow: hidden;\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+	($.$mol_svg_path) = class $mol_svg_path extends ($.$mol_svg) {
+		geometry(){
+			return "";
+		}
+		dom_name(){
+			return "path";
+		}
+		attr(){
+			return {...(super.attr()), "d": (this.geometry())};
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_icon) = class $mol_icon extends ($.$mol_svg_root) {
+		path(){
+			return "";
+		}
+		Path(){
+			const obj = new this.$.$mol_svg_path();
+			(obj.geometry) = () => ((this.path()));
+			return obj;
+		}
+		view_box(){
+			return "0 0 24 24";
+		}
+		minimal_width(){
+			return 16;
+		}
+		minimal_height(){
+			return 16;
+		}
+		sub(){
+			return [(this.Path())];
+		}
+	};
+	($mol_mem(($.$mol_icon.prototype), "Path"));
+
+
+;
+"use strict";
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("mol/icon/icon.view.css", "[mol_icon] {\n\tfill: currentColor;\n\tstroke: none;\n\twidth: 1em;\n\theight: 1.5em;\n\tflex: 0 0 auto;\n\tvertical-align: top;\n\tdisplay: inline-block;\n\tfilter: drop-shadow(0px 1px 1px var(--mol_theme_back));\n\ttransform-origin: center;\n}\n\n[mol_icon_path] {\n\ttransform-origin: center;\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+	($.$mol_icon_library) = class $mol_icon_library extends ($.$mol_icon) {
+		path(){
+			return "M12,8A3,3 0 0,0 15,5A3,3 0 0,0 12,2A3,3 0 0,0 9,5A3,3 0 0,0 12,8M12,11.54C9.64,9.35 6.5,8 3,8V19C6.5,19 9.64,20.35 12,22.54C14.36,20.35 17.5,19 21,19V8C17.5,8 14.36,9.35 12,11.54Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$bog_favicon) = class $bog_favicon extends ($.$mol_plugin) {
+		Icon(){
+			const obj = new this.$.$mol_view();
+			return obj;
+		}
+	};
+	($mol_mem(($.$bog_favicon.prototype), "Icon"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /** Плагин, который ставит favicon из переданного $mol_icon_* и подобных */
+        class $bog_favicon extends $.$bog_favicon {
+            // сюда передаем Icon <= icon $mol_icon_waze
+            Icon(next) {
+                if (next !== undefined)
+                    return next;
+                throw new Error('[bog_favicon] Icon is required: use `Icon <= icon $mol_icon_*` in view.tree');
+            }
+            favicon_data() {
+                const icon = this.Icon();
+                const node = icon.dom_tree();
+                if (!node.getAttribute('xmlns')) {
+                    node.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+                }
+                const svg = node.outerHTML;
+                return 'data:image/svg+xml,' + encodeURIComponent(svg);
+            }
+            apply_favicon() {
+                const doc = $mol_dom_context.document;
+                if (!doc)
+                    return;
+                const href = this.favicon_data();
+                let link = doc.querySelector('link[rel="icon"]');
+                if (!link) {
+                    link = doc.createElement('link');
+                    link.rel = 'icon';
+                    doc.head.appendChild(link);
+                }
+                link.type = 'image/svg+xml';
+                if (link.href !== href)
+                    link.href = href;
+            }
+            auto() {
+                this.favicon_data();
+                this.apply_favicon();
+                return null;
+            }
+            sub() {
+                return [];
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $bog_favicon.prototype, "Icon", null);
+        __decorate([
+            $mol_mem
+        ], $bog_favicon.prototype, "favicon_data", null);
+        $$.$bog_favicon = $bog_favicon;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
 	($.$bog_builderui_card) = class $bog_builderui_card extends ($.$bog_builderui_div) {};
 
 
@@ -5995,9 +6255,6 @@ var $;
 (function ($) {
     $mol_style_attach("mol/layer/layer.css", ":root {\n\t--mol_layer_hover: 1;\n\t--mol_layer_focus: 2;\n\t--mol_layer_speck: 3;\n\t--mol_layer_float: 4;\n\t--mol_layer_popup: 5;\n}\n");
 })($ || ($ = {}));
-
-;
-"use strict";
 
 ;
 "use strict";
@@ -6456,93 +6713,6 @@ var $;
 
 
 ;
-	($.$mol_svg) = class $mol_svg extends ($.$mol_view) {
-		dom_name(){
-			return "svg";
-		}
-		dom_name_space(){
-			return "http://www.w3.org/2000/svg";
-		}
-		font_size(){
-			return 16;
-		}
-		font_family(){
-			return "";
-		}
-		style_size(){
-			return {};
-		}
-	};
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    /** State of time moment */
-    class $mol_state_time extends $mol_object {
-        static task(precision, reset) {
-            if (precision) {
-                return new $mol_after_timeout(precision, () => this.task(precision, null));
-            }
-            else {
-                return new $mol_after_frame(() => this.task(precision, null));
-            }
-        }
-        static now(precision) {
-            this.task(precision);
-            return Date.now();
-        }
-    }
-    __decorate([
-        $mol_mem_key
-    ], $mol_state_time, "task", null);
-    __decorate([
-        $mol_mem_key
-    ], $mol_state_time, "now", null);
-    $.$mol_state_time = $mol_state_time;
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        /** Base SVG component to display SVG images or icons. */
-        class $mol_svg extends $.$mol_svg {
-            computed_style() {
-                const win = this.$.$mol_dom_context;
-                const style = win.getComputedStyle(this.dom_node());
-                if (!style['font-size'])
-                    $mol_state_time.now(0);
-                return style;
-            }
-            font_size() {
-                return parseInt(this.computed_style()['font-size']) || 16;
-            }
-            font_family() {
-                return this.computed_style()['font-family'];
-            }
-        }
-        __decorate([
-            $mol_mem
-        ], $mol_svg.prototype, "computed_style", null);
-        __decorate([
-            $mol_mem
-        ], $mol_svg.prototype, "font_size", null);
-        __decorate([
-            $mol_mem
-        ], $mol_svg.prototype, "font_family", null);
-        $$.$mol_svg = $mol_svg;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
 	($.$mol_svg_group) = class $mol_svg_group extends ($.$mol_svg) {
 		dom_name(){
 			return "g";
@@ -6963,38 +7133,6 @@ var $;
 (function ($) {
     $mol_style_attach("mol/chart/legend/legend.view.css", "[mol_chart_legend] {\n\tdisplay: flex;\n\tflex-wrap: wrap;\n\tflex-direction: row;\n\tflex: 0 1 auto;\n}\n\n[mol_chart_legend_graph_legend] {\n\tdisplay: flex;\n\tjustify-content: flex-start;\n\tflex: 1 1 8rem;\n\tpadding: .5rem;\n}\n\n[mol_chart_legend_graph_title] {\n\tmargin: 0 .25rem;\n\tflex: 1 1 auto;\n}\n\n[mol_chart_legend_graph_sample_box] {\n\tposition: relative;\n\twidth: 1.5rem;\n\tflex: none;\n}\n");
 })($ || ($ = {}));
-
-;
-	($.$mol_svg_root) = class $mol_svg_root extends ($.$mol_svg) {
-		view_box(){
-			return "0 0 100 100";
-		}
-		aspect(){
-			return "xMidYMid";
-		}
-		dom_name(){
-			return "svg";
-		}
-		attr(){
-			return {
-				...(super.attr()), 
-				"viewBox": (this.view_box()), 
-				"preserveAspectRatio": (this.aspect())
-			};
-		}
-	};
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/svg/root/root.view.css", "[mol_svg_root] {\n\toverflow: hidden;\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
-
 
 ;
 	($.$mol_touch) = class $mol_touch extends ($.$mol_plugin) {
@@ -9743,61 +9881,6 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$mol_svg_path) = class $mol_svg_path extends ($.$mol_svg) {
-		geometry(){
-			return "";
-		}
-		dom_name(){
-			return "path";
-		}
-		attr(){
-			return {...(super.attr()), "d": (this.geometry())};
-		}
-	};
-
-
-;
-"use strict";
-
-
-;
-	($.$mol_icon) = class $mol_icon extends ($.$mol_svg_root) {
-		path(){
-			return "";
-		}
-		Path(){
-			const obj = new this.$.$mol_svg_path();
-			(obj.geometry) = () => ((this.path()));
-			return obj;
-		}
-		view_box(){
-			return "0 0 24 24";
-		}
-		minimal_width(){
-			return 16;
-		}
-		minimal_height(){
-			return 16;
-		}
-		sub(){
-			return [(this.Path())];
-		}
-	};
-	($mol_mem(($.$mol_icon.prototype), "Path"));
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("mol/icon/icon.view.css", "[mol_icon] {\n\tfill: currentColor;\n\tstroke: none;\n\twidth: 1em;\n\theight: 1.5em;\n\tflex: 0 0 auto;\n\tvertical-align: top;\n\tdisplay: inline-block;\n\tfilter: drop-shadow(0px 1px 1px var(--mol_theme_back));\n\ttransform-origin: center;\n}\n\n[mol_icon_path] {\n\ttransform-origin: center;\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
 	($.$mol_icon_close) = class $mol_icon_close extends ($.$mol_icon) {
 		path(){
 			return "M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z";
@@ -11376,18 +11459,6 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$mol_icon_library) = class $mol_icon_library extends ($.$mol_icon) {
-		path(){
-			return "M12,8A3,3 0 0,0 15,5A3,3 0 0,0 12,2A3,3 0 0,0 9,5A3,3 0 0,0 12,8M12,11.54C9.64,9.35 6.5,8 3,8V19C6.5,19 9.64,20.35 12,22.54C14.36,20.35 17.5,19 21,19V8C17.5,8 14.36,9.35 12,11.54Z";
-		}
-	};
-
-
-;
-"use strict";
-
-
-;
 	($.$bog_mediagram_app_nav_item) = class $bog_mediagram_app_nav_item extends ($.$mol_view) {
 		click(next){
 			if(next !== undefined) return next;
@@ -11745,6 +11816,15 @@ var $;
 			const obj = new this.$.$bog_theme_auto();
 			return obj;
 		}
+		favicon_icon(){
+			const obj = new this.$.$mol_icon_library();
+			return obj;
+		}
+		Favicon(){
+			const obj = new this.$.$bog_favicon();
+			(obj.Icon) = () => ((this.favicon_icon()));
+			return obj;
+		}
 		lights(){
 			return "dark";
 		}
@@ -11910,7 +11990,7 @@ var $;
 		}
 		Search(){
 			const obj = new this.$.$bog_builderui_field();
-			(obj.hint) = () => ("поиск");
+			(obj.hint) = () => ("поиск в библиотеке");
 			(obj.value) = (next) => ((this.query(next)));
 			return obj;
 		}
@@ -11919,23 +11999,12 @@ var $;
 			(obj.theme_auto) = () => ((this.Theme()));
 			return obj;
 		}
-		add_click(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Add_btn(){
-			const obj = new this.$.$bog_builderui_button();
-			(obj.title) = () => ("добавить");
-			(obj.click) = (next) => ((this.add_click(next)));
-			return obj;
-		}
 		Top(){
 			const obj = new this.$.$mol_view();
 			(obj.sub) = () => ([
 				(this.Brand()), 
 				(this.Search()), 
-				(this.Theme_toggle()), 
-				(this.Add_btn())
+				(this.Theme_toggle())
 			]);
 			return obj;
 		}
@@ -11958,7 +12027,7 @@ var $;
 			return obj;
 		}
 		plugins(){
-			return [(this.Theme())];
+			return [(this.Theme()), (this.Favicon())];
 		}
 		attr(){
 			return {
@@ -12024,6 +12093,8 @@ var $;
 		}
 	};
 	($mol_mem(($.$bog_mediagram_app.prototype), "Theme"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "favicon_icon"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Favicon"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "tab"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Types"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "status"));
@@ -12052,8 +12123,6 @@ var $;
 	($mol_mem(($.$bog_mediagram_app.prototype), "query"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Search"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Theme_toggle"));
-	($mol_mem(($.$bog_mediagram_app.prototype), "add_click"));
-	($mol_mem(($.$bog_mediagram_app.prototype), "Add_btn"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Top"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Page"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Body"));
@@ -12601,11 +12670,6 @@ var $;
                 if (!found)
                     throw new Error(`entry ${id} not found`);
                 return found;
-            }
-            add_click(e) {
-                if (e)
-                    e.preventDefault();
-                return null;
             }
             tab(next) {
                 return $mol_state_arg.value('tab', next) ?? 'library';

@@ -11,6 +11,40 @@ $bog_theme_auto $mol_plugin
 	theme_set? null
 	attr * mol_theme <= theme \
 
+$mol_svg $mol_view
+	dom_name \svg
+	dom_name_space \http://www.w3.org/2000/svg
+	font_size 16
+	font_family \
+	style_size *
+
+$mol_svg_root $mol_svg
+	dom_name \svg
+	attr *
+		^
+		viewBox <= view_box \0 0 100 100
+		preserveAspectRatio <= aspect \xMidYMid
+
+$mol_svg_path $mol_svg
+	dom_name \path
+	attr *
+		^
+		d <= geometry \
+
+
+$mol_icon $mol_svg_root
+	view_box \0 0 24 24
+	minimal_width 16
+	minimal_height 16
+	sub /
+		<= Path $mol_svg_path
+			geometry <= path \
+
+$mol_icon_library $mol_icon path \M12,8A3,3 0 0,0 15,5A3,3 0 0,0 12,2A3,3 0 0,0 9,5A3,3 0 0,0 12,8M12,11.54C9.64,9.35 6.5,8 3,8V19C6.5,19 9.64,20.35 12,22.54C14.36,20.35 17.5,19 21,19V8C17.5,8 14.36,9.35 12,11.54Z
+
+$bog_favicon $mol_plugin
+	Icon $mol_view
+
 $bog_builderui_card $bog_builderui_div
 
 $mol_hotkey $mol_plugin
@@ -91,13 +125,6 @@ $mol_chart_legend $mol_scroll
 				sub /
 					<= graph_title* \
 
-$mol_svg $mol_view
-	dom_name \svg
-	dom_name_space \http://www.w3.org/2000/svg
-	font_size 16
-	font_family \
-	style_size *
-
 $mol_svg_group $mol_svg
 	dom_name \g
 
@@ -176,13 +203,6 @@ $mol_plot_graph_sample $mol_view
 	style *
 		^
 		color <= color \black
-
-$mol_svg_root $mol_svg
-	dom_name \svg
-	attr *
-		^
-		viewBox <= view_box \0 0 100 100
-		preserveAspectRatio <= aspect \xMidYMid
 
 $mol_touch $mol_plugin
 	start_zoom? 0
@@ -517,21 +537,6 @@ $mol_list $mol_view
 		0
 		0
 
-$mol_svg_path $mol_svg
-	dom_name \path
-	attr *
-		^
-		d <= geometry \
-
-
-$mol_icon $mol_svg_root
-	view_box \0 0 24 24
-	minimal_width 16
-	minimal_height 16
-	sub /
-		<= Path $mol_svg_path
-			geometry <= path \
-
 $mol_icon_close $mol_icon path \M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z
 
 $mol_search $mol_pop
@@ -716,8 +721,6 @@ $bog_theme_toggle $mol_pop
 			theme_auto <= theme_auto
 			close? <=> picker_close? null
 
-$mol_icon_library $mol_icon path \M12,8A3,3 0 0,0 15,5A3,3 0 0,0 12,2A3,3 0 0,0 9,5A3,3 0 0,0 12,8M12,11.54C9.64,9.35 6.5,8 3,8V19C6.5,19 9.64,20.35 12,22.54C14.36,20.35 17.5,19 21,19V8C17.5,8 14.36,9.35 12,11.54Z
-
 $bog_mediagram_app_nav_item $mol_view
 	label \
 	active \off
@@ -780,6 +783,8 @@ $bog_builderui_alert $bog_builderui_card
 $bog_mediagram_app $bog_builderui_div
 	plugins /
 		<= Theme $bog_theme_auto
+		<= Favicon $bog_favicon
+			Icon <= favicon_icon $mol_icon_library
 	attr *
 		^
 		bog_builderui_lights <= lights \dark
@@ -842,13 +847,10 @@ $bog_mediagram_app $bog_builderui_div
 						<= Brand_mark $mol_view
 						<= Brand_name $mol_view sub / \mediagram
 				<= Search $bog_builderui_field
-					hint \поиск
+					hint \поиск в библиотеке
 					value? <=> query? \
 				<= Theme_toggle $bog_theme_toggle
 					theme_auto <= Theme
-				<= Add_btn $bog_builderui_button
-					title \добавить
-					click? <=> add_click? null
 		<= Body $mol_scroll
 			sub /
 				<= Page $mol_view sub <= body_content /

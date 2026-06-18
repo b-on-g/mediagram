@@ -53,3 +53,4 @@
 	include \/mol/view/tree/test
 \/bog/mediagram/app
 	include \/mol/offline/install
+	deploy \/bog/mediagram/ext
