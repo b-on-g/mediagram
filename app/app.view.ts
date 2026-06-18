@@ -28,6 +28,14 @@ namespace $.$$ {
 		watching: string
 	}
 
+	type Circle_feed_item = {
+		id: string
+		title: string
+		by: string
+		meta: string
+		note: string
+	}
+
 	const KIND_LABEL: Record<Kind, string> = {
 		movie: 'фильм',
 		series: 'сериал',
@@ -70,6 +78,41 @@ namespace $.$$ {
 		couple: [
 			{ id: 'me', name: 'Я', role: 'смотрю', watching: 'Your Name' },
 			{ id: 'partner', name: 'Партнёр', role: 'смотрит', watching: 'La La Land' },
+		],
+	}
+
+	const CIRCLE_NOW_FEED: Record<Circle_type, Circle_feed_item[]> = {
+		family: [
+			{ id: 'frieren', title: 'Frieren: Beyond Journey’s End', by: 'Я смотрю', meta: 'аниме', note: '10 серия, можно обсудить после ужина' },
+			{ id: 'crown', title: 'The Crown', by: 'Мама смотрит', meta: 'сериал', note: 'новый сезон, спокойный вечерний темп' },
+			{ id: 'dune', title: 'Dune: Part Two', by: 'Папа смотрит', meta: 'фильм', note: 'пересматривает перед выходными' },
+		],
+		friends: [
+			{ id: 'jujutsu', title: 'Jujutsu Kaisen', by: 'Я смотрю', meta: 'аниме', note: 'арка уже разогналась, спойлеры опасны' },
+			{ id: 'blue-eye', title: 'Blue Eye Samurai', by: 'Аня смотрит', meta: 'аниме', note: 'советует всем из-за визуала' },
+			{ id: 'andor', title: 'Andor', by: 'Дима смотрит', meta: 'сериал', note: 'говорит, что это лучший Star Wars без шума' },
+			{ id: 'bear', title: 'The Bear', by: 'Ника смотрит', meta: 'сериал', note: 'короткие серии для буднего вечера' },
+		],
+		couple: [
+			{ id: 'your-name', title: 'Your Name', by: 'Я смотрю', meta: 'аниме', note: 'красивый вариант на вечер' },
+			{ id: 'la-la-land', title: 'La La Land', by: 'Партнёр смотрит', meta: 'фильм', note: 'оставили финал на потом' },
+		],
+	}
+
+	const CIRCLE_SUGGEST_FEED: Record<Circle_type, Circle_feed_item[]> = {
+		family: [
+			{ id: 'paddington', title: 'Paddington 2', by: 'Мама предложила', meta: 'вместе позже', note: 'лёгкий фильм на воскресенье' },
+			{ id: 'planet-earth', title: 'Planet Earth III', by: 'Папа предложил', meta: 'вместе позже', note: 'посмотреть одну серию всей семьёй' },
+			{ id: 'totoro', title: 'My Neighbor Totoro', by: 'Я предложил', meta: 'вместе позже', note: 'уютный вариант без тяжёлого сюжета' },
+		],
+		friends: [
+			{ id: 'oppenheimer', title: 'Oppenheimer', by: 'Дима предложил', meta: 'вместе позже', note: 'длинный вечер, нужен общий слот' },
+			{ id: 'scott-pilgrim', title: 'Scott Pilgrim Takes Off', by: 'Аня предложила', meta: 'вместе позже', note: 'короткий сезон для марафона' },
+			{ id: 'arcane', title: 'Arcane', by: 'Ника предложила', meta: 'вместе позже', note: 'пересмотреть перед новым обсуждением' },
+		],
+		couple: [
+			{ id: 'before-sunrise', title: 'Before Sunrise', by: 'Партнёр предложил', meta: 'вместе позже', note: 'оставить на тихий вечер' },
+			{ id: 'weathering', title: 'Weathering with You', by: 'Я предложил', meta: 'вместе позже', note: 'после Your Name будет в тему' },
 		],
 	}
 
@@ -334,6 +377,56 @@ namespace $.$$ {
 			return found
 		}
 
+		circle_now_items() {
+			const type = this.circle_detail()?.type ?? 'friends'
+			return CIRCLE_NOW_FEED[ type ]
+		}
+
+		circle_suggest_items() {
+			const type = this.circle_detail()?.type ?? 'friends'
+			return CIRCLE_SUGGEST_FEED[ type ]
+		}
+
+		circle_now_rows() {
+			return this.circle_now_items().map( item => this.Circle_now_item( item.id ) )
+		}
+
+		circle_suggest_rows() {
+			return this.circle_suggest_items().map( item => this.Circle_suggest_item( item.id ) )
+		}
+
+		@ $mol_mem_key
+		Circle_now_item( id: string ) {
+			const item = new $bog_mediagram_app_circle_feed_item()
+			item.title = () => this.circle_now_item( id ).title
+			item.by = () => this.circle_now_item( id ).by
+			item.meta = () => this.circle_now_item( id ).meta
+			item.note = () => this.circle_now_item( id ).note
+			return item
+		}
+
+		@ $mol_mem_key
+		Circle_suggest_item( id: string ) {
+			const item = new $bog_mediagram_app_circle_feed_item()
+			item.title = () => this.circle_suggest_item( id ).title
+			item.by = () => this.circle_suggest_item( id ).by
+			item.meta = () => this.circle_suggest_item( id ).meta
+			item.note = () => this.circle_suggest_item( id ).note
+			return item
+		}
+
+		circle_now_item( id: string ) {
+			const found = this.circle_now_items().find( item => item.id === id )
+			if( !found ) throw new Error( `circle now item ${ id } not found` )
+			return found
+		}
+
+		circle_suggest_item( id: string ) {
+			const found = this.circle_suggest_items().find( item => item.id === id )
+			if( !found ) throw new Error( `circle suggest item ${ id } not found` )
+			return found
+		}
+
 		type_chips() {
 			return KIND_ORDER.map( k => {
 				const chip = this.Chip( k )
@@ -507,5 +600,6 @@ namespace $.$$ {
 
 	export class $bog_mediagram_app_circle extends $.$bog_mediagram_app_circle {}
 	export class $bog_mediagram_app_circle_member extends $.$bog_mediagram_app_circle_member {}
+	export class $bog_mediagram_app_circle_feed_item extends $.$bog_mediagram_app_circle_feed_item {}
 
 }
