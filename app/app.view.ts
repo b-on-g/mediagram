@@ -1,10 +1,3 @@
-/**
- * Giper Baza entities ( подтягиваются в граф mam'а через JSDoc ):
- * - {@link $bog_mediagram_library} — личный home land
- * - {@link $bog_mediagram_circle} — circle land с лентой и watchlist'ом
- * - {@link $bog_mediagram_media}, {@link $bog_mediagram_entry}, {@link $bog_mediagram_share_rule}
- * - {@link $bog_mediagram_snapshot}, {@link $bog_mediagram_activity}, {@link $bog_mediagram_watch_item}
- */
 namespace $.$$ {
 
 	type Kind = 'movie' | 'series' | 'book' | 'anime'
@@ -284,40 +277,5 @@ namespace $.$$ {
 		}
 
 	}
-
-	export class $bog_mediagram_app_chip extends $.$bog_mediagram_app_chip {}
-	export class $bog_mediagram_app_card extends $.$bog_mediagram_app_card {}
-
-	export class $bog_mediagram_app_nav extends $.$bog_mediagram_app_nav {
-
-		library_active() { return this.tab() === 'library' ? 'on' : 'off' }
-		feed_active()    { return this.tab() === 'feed'    ? 'on' : 'off' }
-		circles_active() { return this.tab() === 'circles' ? 'on' : 'off' }
-		me_active()      { return this.tab() === 'me'      ? 'on' : 'off' }
-
-		library_click( e?: Event ) {
-			if( e ) e.preventDefault()
-			this.tab( 'library' )
-			return null
-		}
-		feed_click( e?: Event ) {
-			if( e ) e.preventDefault()
-			this.tab( 'feed' )
-			return null
-		}
-		circles_click( e?: Event ) {
-			if( e ) e.preventDefault()
-			this.tab( 'circles' )
-			return null
-		}
-		me_click( e?: Event ) {
-			if( e ) e.preventDefault()
-			this.tab( 'me' )
-			return null
-		}
-
-	}
-
-	export class $bog_mediagram_app_nav_item extends $.$bog_mediagram_app_nav_item {}
 
 }

@@ -1,0 +1,34 @@
+$bog_mediagram_app_card $bog_builderui_card
+	title \
+	year \
+	kind \
+	kind_label \
+	status_label \
+	status_class \
+	favorite false
+	fav_label \
+	rating null
+	rate_text \
+	initials \
+	color \
+	poster_bg \
+	attr *
+		^
+		bog_mediagram_status <= status_class
+		bog_mediagram_kind <= kind
+	sub /
+		<= Poster $mol_view
+			style *
+				background <= poster_bg
+			sub /
+				<= Kind_flag $mol_view sub / <= kind_label
+				<= Fav_view $mol_view sub / <= fav_label
+				<= Init $mol_view sub / <= initials
+				<= Pill $bog_builderui_badge
+					title <= status_label
+					variant \secondary
+				<= Rate_view $mol_view sub / <= rate_text
+		<= Meta $mol_view
+			sub /
+				<= Title_view $mol_view sub / <= title
+				<= Sub $mol_view sub / <= year
