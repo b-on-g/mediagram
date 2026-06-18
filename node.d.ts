@@ -2490,74 +2490,57 @@ declare namespace $ {
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_button__click_bog_mediagram_app_23 = $mol_type_enforce<
-		ReturnType< $bog_mediagram_app['group_start'] >
-		,
-		ReturnType< $mol_button['click'] >
-	>
-	type $mol_button__sub_bog_mediagram_app_24 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_button['sub'] >
-	>
-	type $mol_view__sub_bog_mediagram_app_25 = $mol_type_enforce<
+	type $mol_view__sub_bog_mediagram_app_23 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_string__hint_bog_mediagram_app_26 = $mol_type_enforce<
+	type $mol_string__hint_bog_mediagram_app_24 = $mol_type_enforce<
 		string
 		,
 		ReturnType< $mol_string['hint'] >
 	>
-	type $mol_string__value_bog_mediagram_app_27 = $mol_type_enforce<
+	type $mol_string__value_bog_mediagram_app_25 = $mol_type_enforce<
 		ReturnType< $bog_mediagram_app['group_name'] >
 		,
 		ReturnType< $mol_string['value'] >
 	>
-	type $mol_view__sub_bog_mediagram_app_28 = $mol_type_enforce<
+	type $mol_view__sub_bog_mediagram_app_26 = $mol_type_enforce<
 		ReturnType< $bog_mediagram_app['group_type_chips'] >
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_button__click_bog_mediagram_app_29 = $mol_type_enforce<
+	type $mol_button__click_bog_mediagram_app_27 = $mol_type_enforce<
 		ReturnType< $bog_mediagram_app['group_create'] >
 		,
 		ReturnType< $mol_button['click'] >
 	>
-	type $mol_button__sub_bog_mediagram_app_30 = $mol_type_enforce<
+	type $mol_button__sub_bog_mediagram_app_28 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_button['sub'] >
 	>
-	type $mol_view__attr_bog_mediagram_app_31 = $mol_type_enforce<
-		({ 
-			'bog_mediagram_group_open': ReturnType< $bog_mediagram_app['group_form_open'] >,
-		})  & ReturnType< $mol_view['attr'] >
-		,
-		ReturnType< $mol_view['attr'] >
-	>
-	type $mol_view__sub_bog_mediagram_app_32 = $mol_type_enforce<
+	type $mol_view__sub_bog_mediagram_app_29 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_view__sub_bog_mediagram_app_33 = $mol_type_enforce<
+	type $mol_view__sub_bog_mediagram_app_30 = $mol_type_enforce<
 		ReturnType< $bog_mediagram_app['group_rows'] >
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_view__sub_bog_mediagram_app_34 = $mol_type_enforce<
+	type $mol_view__sub_bog_mediagram_app_31 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_view__sub_bog_mediagram_app_35 = $mol_type_enforce<
+	type $mol_view__sub_bog_mediagram_app_32 = $mol_type_enforce<
 		ReturnType< $bog_mediagram_app['entries'] >
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_scroll__sub_bog_mediagram_app_36 = $mol_type_enforce<
+	type $mol_scroll__sub_bog_mediagram_app_33 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_scroll['sub'] >
@@ -2594,10 +2577,7 @@ declare namespace $ {
 		Groups_title( ): $mol_view
 		groups_count_label( ): string
 		Groups_count( ): $mol_view
-		group_start( next?: any ): any
-		Group_start( ): $mol_button
 		Groups_head( ): $mol_view
-		group_form_open( ): string
 		group_name( next?: string ): string
 		Group_name( ): $mol_string
 		group_type_chips( ): readonly(any)[]
@@ -2797,8 +2777,6 @@ declare namespace $.$$ {
         group_name(next?: string): string;
         group_type(next?: Group_type): Group_type;
         groups(next?: Group[]): Group[];
-        group_form_open(next?: string): string;
-        group_start(e?: Event): null;
         groups_count_label(): string;
         group_type_chips(): $bog_mediagram_app_chip[];
         group_create(e?: Event): null;
