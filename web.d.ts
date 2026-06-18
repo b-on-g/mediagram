@@ -1932,6 +1932,61 @@ declare namespace $ {
 }
 
 declare namespace $ {
+    let $mol_mem_persist: typeof $mol_wire_solid;
+}
+
+declare namespace $ {
+    let $mol_mem_cached: typeof $mol_wire_probe;
+}
+
+declare namespace $ {
+    /**
+     * Convert asynchronous (promise-based) API to synchronous by wrapping function and method calls in a fiber.
+     * @see https://mol.hyoo.ru/#!section=docs/=1fcpsq_1wh0h2
+     */
+    export function $mol_wire_sync<Host extends object>(obj: Host): ObjectOrFunctionResultAwaited<Host>;
+    type FunctionResultAwaited<Some> = Some extends (...args: infer Args) => infer Res ? (...args: Args) => Awaited<Res> : Some;
+    type ConstructorResultAwaited<Some> = Some extends new (...args: infer Args) => infer Res ? new (...args: Args) => Res : {};
+    type MethodsResultAwaited<Host extends Object> = {
+        [K in keyof Host]: FunctionResultAwaited<Host[K]>;
+    };
+    type ObjectOrFunctionResultAwaited<Some> = (Some extends (...args: any) => unknown ? FunctionResultAwaited<Some> : {}) & (Some extends Object ? MethodsResultAwaited<Some> & ConstructorResultAwaited<Some> : Some);
+    export {};
+}
+
+declare namespace $ {
+    function $mol_wait_user_async(this: $): Promise<unknown>;
+    function $mol_wait_user(this: $): unknown;
+}
+
+declare namespace $ {
+    class $mol_storage extends $mol_object2 {
+        static native(): StorageManager;
+        static persisted(next?: boolean, cache?: 'cache'): boolean;
+        static estimate(): StorageEstimate;
+        static dir(): FileSystemDirectoryHandle;
+    }
+}
+
+declare namespace $ {
+    class $mol_state_local<Value> extends $mol_object {
+        static 'native()': Pick<Storage, 'getItem' | 'setItem' | 'removeItem'>;
+        static native(): Storage | {
+            getItem(key: string): any;
+            setItem(key: string, value: string): void;
+            removeItem(key: string): void;
+        };
+        static changes(next?: StorageEvent): StorageEvent | undefined;
+        static value<Value>(key: string, next?: Value | null): Value | null;
+        prefix(): string;
+        value(key: string, next?: Value): Value | null;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
     function $mol_offline(): void;
 }
 
@@ -1991,12 +2046,12 @@ declare namespace $ {
 		ReturnType< $mol_view['sub'] >
 	>
 	type $mol_view__sub_bog_mediagram_app_10 = $mol_type_enforce<
-		ReturnType< $bog_mediagram_app['type_chips'] >
+		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
 	type $mol_view__sub_bog_mediagram_app_11 = $mol_type_enforce<
-		ReturnType< $bog_mediagram_app['status_chips'] >
+		ReturnType< $bog_mediagram_app['type_chips'] >
 		,
 		ReturnType< $mol_view['sub'] >
 	>
@@ -2011,7 +2066,7 @@ declare namespace $ {
 		ReturnType< $mol_view['sub'] >
 	>
 	type $mol_view__sub_bog_mediagram_app_14 = $mol_type_enforce<
-		readonly(any)[]
+		ReturnType< $bog_mediagram_app['status_chips'] >
 		,
 		ReturnType< $mol_view['sub'] >
 	>
@@ -2031,11 +2086,26 @@ declare namespace $ {
 		ReturnType< $mol_view['sub'] >
 	>
 	type $mol_view__sub_bog_mediagram_app_18 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_bog_mediagram_app_19 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_bog_mediagram_app_20 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_bog_mediagram_app_21 = $mol_type_enforce<
 		ReturnType< $bog_mediagram_app['entries'] >
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_scroll__sub_bog_mediagram_app_19 = $mol_type_enforce<
+	type $mol_scroll__sub_bog_mediagram_app_22 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_scroll['sub'] >
@@ -2053,8 +2123,11 @@ declare namespace $ {
 		add_click( next?: any ): any
 		Add_btn( ): $mol_button
 		Top( ): $mol_view
+		Type_filter_label( ): $mol_view
 		type_chips( ): readonly(any)[]
 		Types( ): $mol_view
+		Types_group( ): $mol_view
+		Status_filter_label( ): $mol_view
 		status_chips( ): readonly(any)[]
 		Status_chips( ): $mol_view
 		count_label( ): string
@@ -2106,27 +2179,27 @@ declare namespace $ {
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_view__sub_bog_mediagram_app_card_3 = $mol_type_enforce<
+	type $mol_button__click_bog_mediagram_app_card_3 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app_card['status_change'] >
+		,
+		ReturnType< $mol_button['click'] >
+	>
+	type $mol_button__sub_bog_mediagram_app_card_4 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_button['sub'] >
+	>
+	type $mol_view__sub_bog_mediagram_app_card_5 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_view__sub_bog_mediagram_app_card_4 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_view__style_bog_mediagram_app_card_5 = $mol_type_enforce<
+	type $mol_view__style_bog_mediagram_app_card_6 = $mol_type_enforce<
 		({ 
 			'background': ReturnType< $bog_mediagram_app_card['poster_bg'] >,
 		}) 
 		,
 		ReturnType< $mol_view['style'] >
-	>
-	type $mol_view__sub_bog_mediagram_app_card_6 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
 	>
 	type $mol_view__sub_bog_mediagram_app_card_7 = $mol_type_enforce<
 		readonly(any)[]
@@ -2143,10 +2216,16 @@ declare namespace $ {
 		,
 		ReturnType< $mol_view['sub'] >
 	>
+	type $mol_view__sub_bog_mediagram_app_card_10 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
 	export class $bog_mediagram_app_card extends $mol_view {
 		Kind_flag( ): $mol_view
 		Fav_view( ): $mol_view
-		Pill( ): $mol_view
+		status_change( next?: any ): any
+		Pill( ): $mol_button
 		Rate_view( ): $mol_view
 		Poster( ): $mol_view
 		Title_view( ): $mol_view
@@ -2214,6 +2293,8 @@ declare namespace $.$$ {
         Chip(id: string): $bog_mediagram_app_chip;
         entries(): $bog_mediagram_app_card[];
         Card(id: string): $bog_mediagram_app_card;
+        entry_status(id: string, next?: Status): Status;
+        status_next(status: Status): Status;
         entry(id: string): Entry;
         add_click(e?: Event): null;
     }

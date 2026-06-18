@@ -4346,12 +4346,27 @@ var $;
 			]);
 			return obj;
 		}
+		Type_filter_label(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => (["Тип"]);
+			return obj;
+		}
 		type_chips(){
 			return [];
 		}
 		Types(){
 			const obj = new this.$.$mol_view();
 			(obj.sub) = () => ((this.type_chips()));
+			return obj;
+		}
+		Types_group(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Type_filter_label()), (this.Types())]);
+			return obj;
+		}
+		Status_filter_label(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => (["Статус"]);
 			return obj;
 		}
 		status_chips(){
@@ -4372,12 +4387,16 @@ var $;
 		}
 		Status_row(){
 			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Status_chips()), (this.Count())]);
+			(obj.sub) = () => ([
+				(this.Status_filter_label()), 
+				(this.Status_chips()), 
+				(this.Count())
+			]);
 			return obj;
 		}
 		Filters(){
 			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Types()), (this.Status_row())]);
+			(obj.sub) = () => ([(this.Types_group()), (this.Status_row())]);
 			return obj;
 		}
 		banner_title(){
@@ -4436,7 +4455,10 @@ var $;
 	($mol_mem(($.$bog_mediagram_app.prototype), "add_click"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Add_btn"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Top"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Type_filter_label"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Types"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Types_group"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Status_filter_label"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Status_chips"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Count"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Status_row"));
@@ -4498,8 +4520,13 @@ var $;
 			(obj.sub) = () => ([(this.fav_label())]);
 			return obj;
 		}
+		status_change(next){
+			if(next !== undefined) return next;
+			return null;
+		}
 		Pill(){
-			const obj = new this.$.$mol_view();
+			const obj = new this.$.$mol_button();
+			(obj.click) = (next) => ((this.status_change(next)));
 			(obj.sub) = () => ([(this.status_label())]);
 			return obj;
 		}
@@ -4590,6 +4617,7 @@ var $;
 	};
 	($mol_mem(($.$bog_mediagram_app_card.prototype), "Kind_flag"));
 	($mol_mem(($.$bog_mediagram_app_card.prototype), "Fav_view"));
+	($mol_mem(($.$bog_mediagram_app_card.prototype), "status_change"));
 	($mol_mem(($.$bog_mediagram_app_card.prototype), "Pill"));
 	($mol_mem(($.$bog_mediagram_app_card.prototype), "Rate_view"));
 	($mol_mem(($.$bog_mediagram_app_card.prototype), "Poster"));
@@ -4738,6 +4766,217 @@ var $;
         $mol_state_arg.href($mol_dom.location.href);
     }
     self.addEventListener('hashchange', $mol_state_arg_change);
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $.$mol_mem_persist = $mol_wire_solid;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $.$mol_mem_cached = $mol_wire_probe;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    const factories = new WeakMap();
+    function factory(val) {
+        let make = factories.get(val);
+        if (make)
+            return make;
+        make = $mol_func_name_from((...args) => new val(...args), val);
+        factories.set(val, make);
+        return make;
+    }
+    const getters = new WeakMap();
+    function get_prop(host, field) {
+        let props = getters.get(host);
+        let get_val = props?.[field];
+        if (get_val)
+            return get_val;
+        get_val = (next) => {
+            if (next !== undefined)
+                host[field] = next;
+            return host[field];
+        };
+        Object.defineProperty(get_val, 'name', { value: field });
+        if (!props) {
+            props = {};
+            getters.set(host, props);
+        }
+        props[field] = get_val;
+        return get_val;
+    }
+    /**
+     * Convert asynchronous (promise-based) API to synchronous by wrapping function and method calls in a fiber.
+     * @see https://mol.hyoo.ru/#!section=docs/=1fcpsq_1wh0h2
+     */
+    function $mol_wire_sync(obj) {
+        return new Proxy(obj, {
+            get(obj, field) {
+                let val = obj[field];
+                const temp = $mol_wire_task.getter(typeof val === 'function' ? val : get_prop(obj, field));
+                if (typeof val !== 'function')
+                    return temp(obj, []).sync();
+                return function $mol_wire_sync(...args) {
+                    const fiber = temp(obj, args);
+                    return fiber.sync();
+                };
+            },
+            set(obj, field, next) {
+                const temp = $mol_wire_task.getter(get_prop(obj, field));
+                temp(obj, [next]).sync();
+                return true;
+            },
+            construct(obj, args) {
+                const temp = $mol_wire_task.getter(factory(obj));
+                return temp(obj, args).sync();
+            },
+            apply(obj, self, args) {
+                const temp = $mol_wire_task.getter(obj);
+                return temp(self, args).sync();
+            },
+        });
+    }
+    $.$mol_wire_sync = $mol_wire_sync;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    function $mol_wait_user_async() {
+        return new Promise(done => $mol_dom.addEventListener('click', function onclick() {
+            $mol_dom.removeEventListener('click', onclick);
+            done(null);
+        }));
+    }
+    $.$mol_wait_user_async = $mol_wait_user_async;
+    function $mol_wait_user() {
+        return this.$mol_wire_sync(this).$mol_wait_user_async();
+    }
+    $.$mol_wait_user = $mol_wait_user;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_storage extends $mol_object2 {
+        static native() {
+            return this.$.$mol_dom_context.navigator.storage ?? {
+                persisted: async () => false,
+                persist: async () => false,
+                estimate: async () => ({}),
+                getDirectory: async () => null,
+            };
+        }
+        static persisted(next, cache) {
+            $mol_mem_persist();
+            if (cache)
+                return Boolean(next);
+            const native = this.native();
+            if (next && !$mol_mem_cached(() => this.persisted())) {
+                this.$.$mol_wait_user_async()
+                    .then(() => native.persist())
+                    .then(actual => {
+                    setTimeout(() => this.persisted(actual, 'cache'), 5000);
+                    if (actual)
+                        this.$.$mol_log3_done({ place: `$mol_storage`, message: `Persist: Yes` });
+                    else
+                        this.$.$mol_log3_fail({ place: `$mol_storage`, message: `Persist: No` });
+                });
+            }
+            return next ?? $mol_wire_sync(native).persisted();
+        }
+        static estimate() {
+            return $mol_wire_sync(this.native() ?? {}).estimate();
+        }
+        static dir() {
+            return $mol_wire_sync(this.native()).getDirectory();
+        }
+    }
+    __decorate([
+        $mol_mem
+    ], $mol_storage, "native", null);
+    __decorate([
+        $mol_mem
+    ], $mol_storage, "persisted", null);
+    $.$mol_storage = $mol_storage;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    class $mol_state_local extends $mol_object {
+        static 'native()';
+        static native() {
+            if (this['native()'])
+                return this['native()'];
+            check: try {
+                const native = $mol_dom_context.localStorage;
+                if (!native)
+                    break check;
+                native.setItem('', '');
+                native.removeItem('');
+                return this['native()'] = native;
+            }
+            catch (error) {
+                console.warn(error);
+            }
+            return this['native()'] = {
+                getItem(key) {
+                    return this[':' + key];
+                },
+                setItem(key, value) {
+                    this[':' + key] = value;
+                },
+                removeItem(key) {
+                    this[':' + key] = void 0;
+                }
+            };
+        }
+        static changes(next) { return next; }
+        static value(key, next) {
+            this.changes();
+            if (next === void 0)
+                return JSON.parse(this.native().getItem(key) || 'null');
+            if (next === null) {
+                this.native().removeItem(key);
+            }
+            else {
+                this.native().setItem(key, JSON.stringify(next));
+                this.$.$mol_storage.persisted(true);
+            }
+            return next;
+        }
+        prefix() { return ''; }
+        value(key, next) {
+            return $mol_state_local.value(this.prefix() + '.' + key, next);
+        }
+    }
+    __decorate([
+        $mol_mem
+    ], $mol_state_local, "changes", null);
+    __decorate([
+        $mol_mem_key
+    ], $mol_state_local, "value", null);
+    $.$mol_state_local = $mol_state_local;
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    self.addEventListener('storage', event => $.$mol_state_local.changes(event));
 })($ || ($ = {}));
 
 ;
@@ -4925,6 +5164,7 @@ var $;
         ];
         const KIND_ORDER = ['all', 'movie', 'series', 'book', 'anime', 'youtube'];
         const STATUS_ORDER = ['all', 'want_to', 'doing', 'done', 'dropped'];
+        const STATUS_FLOW = ['want_to', 'doing', 'done', 'dropped'];
         function initials_of(title) {
             return title.replace(/[«»"']/g, '')
                 .split(/\s+/)
@@ -4974,7 +5214,7 @@ var $;
                 return this.entries_all().filter(e => {
                     if (q && !e.title.toLowerCase().includes(q))
                         return false;
-                    if (s !== 'all' && e.status !== s)
+                    if (s !== 'all' && this.entry_status(e.id) !== s)
                         return false;
                     if (k !== 'all' && e.kind !== k)
                         return false;
@@ -5031,11 +5271,17 @@ var $;
             Card(id) {
                 const card = new $bog_mediagram_app_card();
                 card.title = () => this.entry(id).title;
-                card.year = () => this.entry(id).year;
+                card.year = () => `год создания: ${this.entry(id).year}`;
                 card.kind = () => this.entry(id).kind;
                 card.kind_label = () => KIND_LABEL[this.entry(id).kind];
-                card.status_class = () => this.entry(id).status;
-                card.status_label = () => STATUS_VERB[this.entry(id).status](this.entry(id).kind);
+                card.status_class = () => this.entry_status(id);
+                card.status_label = () => STATUS_VERB[this.entry_status(id)](this.entry(id).kind);
+                card.status_change = (e) => {
+                    if (e)
+                        e.preventDefault();
+                    this.entry_status(id, this.status_next(this.entry_status(id)));
+                    return null;
+                };
                 card.favorite = () => this.entry(id).favorite;
                 card.fav_label = () => this.entry(id).favorite ? '❤' : '';
                 card.rating = () => this.entry(id).rating;
@@ -5048,6 +5294,15 @@ var $;
                     return `linear-gradient(180deg, #05050500 42%, #050505d9 100%), linear-gradient(150deg, color-mix(in srgb, ${c} 52%, #111), #090909), url("${this.entry(id).cover}")`;
                 };
                 return card;
+            }
+            entry_status(id, next) {
+                const key = `mediagram_status_${id}`;
+                const value = $mol_state_local.value(key, next);
+                return value ?? this.entry(id).status;
+            }
+            status_next(status) {
+                const index = STATUS_FLOW.indexOf(status);
+                return STATUS_FLOW[(index + 1) % STATUS_FLOW.length];
             }
             entry(id) {
                 const found = this.entries_all().find(e => e.id === id);
@@ -5088,6 +5343,9 @@ var $;
         __decorate([
             $mol_mem_key
         ], $bog_mediagram_app.prototype, "Card", null);
+        __decorate([
+            $mol_mem_key
+        ], $bog_mediagram_app.prototype, "entry_status", null);
         $$.$bog_mediagram_app = $bog_mediagram_app;
         class $bog_mediagram_app_chip extends $.$bog_mediagram_app_chip {
         }
@@ -5161,11 +5419,23 @@ var $;
             font: { weight: 700 },
         },
         Filters: {
-            flex: { direction: 'column', shrink: 0 },
-            gap: $mol_gap.block,
-            padding: { top: '12px', right: '32px', bottom: '12px', left: '32px' },
+            flex: { direction: 'row', wrap: 'wrap', shrink: 0 },
+            align: { items: 'center' },
+            gap: '14px',
+            padding: { top: '14px', right: '32px', bottom: '14px', left: '32px' },
             border: { bottom: { width: '1px', style: 'solid', color: '#ffffff10' } },
             background: { color: '#050505' },
+        },
+        Types_group: {
+            flex: { direction: 'row', wrap: 'wrap', shrink: 0 },
+            align: { items: 'center' },
+            gap: $mol_gap.text,
+        },
+        Type_filter_label: {
+            flex: { shrink: 0 },
+            color: '#ffffff99',
+            font: { size: '11px', weight: 800 },
+            textTransform: 'uppercase',
         },
         Types: {
             flex: { direction: 'row', wrap: 'wrap' },
@@ -5174,7 +5444,13 @@ var $;
         Status_row: {
             flex: { direction: 'row', wrap: 'wrap' },
             align: { items: 'center' },
-            gap: $mol_gap.block,
+            gap: $mol_gap.text,
+        },
+        Status_filter_label: {
+            flex: { shrink: 0 },
+            color: '#ffffff99',
+            font: { size: '11px', weight: 800 },
+            textTransform: 'uppercase',
         },
         Status_chips: {
             flex: { direction: 'row', wrap: 'wrap' },
@@ -5236,6 +5512,12 @@ var $;
                     Count: {
                         color: '#05050599',
                     },
+                    Type_filter_label: {
+                        color: '#05050599',
+                    },
+                    Status_filter_label: {
+                        color: '#05050599',
+                    },
                 },
             },
         },
@@ -5249,6 +5531,8 @@ var $;
         color: '#ffffff',
         border: { width: '1px', style: 'solid', color: '#ffffff26' },
         borderRadius: '6px',
+        padding: { top: '7px', right: '10px', bottom: '7px', left: '10px' },
+        minHeight: '34px',
         Swatch: {
             width: '8px',
             height: '8px',
@@ -5324,6 +5608,16 @@ var $;
             bottom: '8px',
             background: { color: '#e50914' },
             color: '#ffffff',
+            border: { width: '1px', style: 'solid', color: '#ffffff5c' },
+            borderRadius: '4px',
+            padding: { top: '3px', right: '8px', bottom: '3px', left: '8px' },
+            font: { size: '11px', weight: 800 },
+            cursor: 'pointer',
+            textTransform: 'uppercase',
+            ':hover': {
+                background: { color: '#ffffff' },
+                color: '#050505',
+            },
         },
         Rate_view: {
             position: 'absolute',
