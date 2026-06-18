@@ -34,9 +34,11 @@ namespace $.$$ {
 		dropped: () => 'бросил',
 	}
 
-	const FIXTURE: Entry[] = []
-
 	const KIND_ORDER: ( Kind | 'all' )[] = [ 'all', 'movie', 'series', 'book', 'anime' ]
+
+	function source_key( host: string ) {
+		return host.replace( /^www\./, '' ).split( '.' )[ 0 ]
+	}
 
 	function initials_of( title: string ) {
 		return title.replace( /[«»"']/g, '' )
@@ -96,9 +98,34 @@ namespace $.$$ {
 			return this.$.$mol_lights() ? 'light' : 'dark'
 		}
 
+		/** Home land библиотеки текущего юзера. Не мемоизируем — возвращает Pawn. */
+		library_node() {
+			return this.$.$giper_baza_glob.home().land().Data( this.$.$bog_mediagram_library )
+		}
+
+		/** Сырые entry-Pawn'ы из библиотеки. Не мемоизируем — возвращает Pawn[]. */
+		entries_baza() {
+			const list = this.library_node().Entries()
+			if( !list ) return []
+			return list.remote_list() as $bog_mediagram_entry[]
+		}
+
 		@ $mol_mem
-		entries_all() {
-			return FIXTURE
+		entries_all(): Entry[] {
+			return this.entries_baza().map( e => {
+				const media = e.Media()?.remote() as $bog_mediagram_media | null
+				const year_bint = media?.Year()?.val()
+				const rating_bint = e.Rating()?.val()
+				return {
+					id: e.link().str,
+					title: media?.Title()?.val() ?? '(без названия)',
+					year: year_bint != null ? String( year_bint ) : '',
+					kind: ( media?.Kind()?.val() ?? 'movie' ) as Kind,
+					status: ( e.Status()?.val() ?? 'want_to' ) as Status,
+					rating: rating_bint != null ? Number( rating_bint ) : null,
+					favorite: e.Favorite()?.val() ?? false,
+				}
+			} )
 		}
 
 		@ $mol_mem
@@ -205,7 +232,7 @@ namespace $.$$ {
 
 		add_click( e?: Event ) {
 			if( e ) e.preventDefault()
-			console.log( '[mediagram] manual add (TODO: open form)' )
+			this.add_from_snapshot()
 			return null
 		}
 
@@ -262,9 +289,35 @@ namespace $.$$ {
 
 		recognized_add( e?: Event ) {
 			if( e ) e.preventDefault()
+			this.add_from_snapshot()
+			return null
+		}
+
+		@ $mol_action
+		add_from_snapshot() {
 			const snap = this.snapshot()
-			if( !snap ) return null
-			console.log( '[mediagram] add', this.recognized_status(), snap )
+			if( !snap?.entity?.title ) return null
+
+			const lib = this.library_node()
+
+			const media = lib.Medias( 'auto' )!.make( null )
+			media.Title( 'auto' )!.val( snap.entity.title )
+			if( snap.entity.kind ) media.Kind( 'auto' )!.val( snap.entity.kind )
+			if( snap.entity.year ) {
+				try { media.Year( 'auto' )!.val( BigInt( snap.entity.year ) ) }
+				catch( _ ) { /* год не цифра — пропускаем */ }
+			}
+			media.AddedAt( 'auto' )!.val( new this.$.$mol_time_moment() )
+
+			const sources = media.SourceIds( 'auto' )!
+			sources.key( source_key( snap.host ), 'auto' )!.val( snap.source_url )
+
+			const entry = lib.Entries( 'auto' )!.make( null )
+			entry.Media( 'auto' )!.remote( media )
+			entry.Status( 'auto' )!.val( this.recognized_status() )
+			entry.Source( 'auto' )!.val( 'manual' )
+			entry.StartedAt( 'auto' )!.val( new this.$.$mol_time_moment() )
+
 			return null
 		}
 
