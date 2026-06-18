@@ -4393,6 +4393,210 @@ declare namespace $ {
 
 declare namespace $ {
 
+	type $mol_view__sub_bog_mediagram_app_nav_item_1 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	export class $bog_mediagram_app_nav_item extends $mol_view {
+		click( next?: any ): any
+		Label( ): $mol_view
+		label( ): string
+		active( ): string
+		Icon( ): $mol_view
+		attr( ): ({ 
+			'bog_mediagram_nav_active': ReturnType< $bog_mediagram_app_nav_item['active'] >,
+		})  & ReturnType< $mol_view['attr'] >
+		event( ): ({ 
+			click( next?: ReturnType< $bog_mediagram_app_nav_item['click'] > ): ReturnType< $bog_mediagram_app_nav_item['click'] >,
+		})  & ReturnType< $mol_view['event'] >
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=item.view.tree.d.ts.map
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	export class $mol_icon_history extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=history.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_group extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=group.view.tree.d.ts.map
+declare namespace $ {
+
+	export class $mol_icon_account extends $mol_icon {
+		path( ): string
+	}
+	
+}
+
+//# sourceMappingURL=account.view.tree.d.ts.map
+declare namespace $ {
+
+	type $bog_mediagram_app_nav_item__label_bog_mediagram_app_nav_1 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $bog_mediagram_app_nav_item['label'] >
+	>
+	type $bog_mediagram_app_nav_item__active_bog_mediagram_app_nav_2 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app_nav['library_active'] >
+		,
+		ReturnType< $bog_mediagram_app_nav_item['active'] >
+	>
+	type $bog_mediagram_app_nav_item__Icon_bog_mediagram_app_nav_3 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app_nav['Icon_library'] >
+		,
+		ReturnType< $bog_mediagram_app_nav_item['Icon'] >
+	>
+	type $bog_mediagram_app_nav_item__click_bog_mediagram_app_nav_4 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app_nav['library_click'] >
+		,
+		ReturnType< $bog_mediagram_app_nav_item['click'] >
+	>
+	type $bog_mediagram_app_nav_item__label_bog_mediagram_app_nav_5 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $bog_mediagram_app_nav_item['label'] >
+	>
+	type $bog_mediagram_app_nav_item__active_bog_mediagram_app_nav_6 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app_nav['feed_active'] >
+		,
+		ReturnType< $bog_mediagram_app_nav_item['active'] >
+	>
+	type $bog_mediagram_app_nav_item__Icon_bog_mediagram_app_nav_7 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app_nav['Icon_feed'] >
+		,
+		ReturnType< $bog_mediagram_app_nav_item['Icon'] >
+	>
+	type $bog_mediagram_app_nav_item__click_bog_mediagram_app_nav_8 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app_nav['feed_click'] >
+		,
+		ReturnType< $bog_mediagram_app_nav_item['click'] >
+	>
+	type $bog_mediagram_app_nav_item__label_bog_mediagram_app_nav_9 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $bog_mediagram_app_nav_item['label'] >
+	>
+	type $bog_mediagram_app_nav_item__active_bog_mediagram_app_nav_10 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app_nav['circles_active'] >
+		,
+		ReturnType< $bog_mediagram_app_nav_item['active'] >
+	>
+	type $bog_mediagram_app_nav_item__Icon_bog_mediagram_app_nav_11 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app_nav['Icon_circles'] >
+		,
+		ReturnType< $bog_mediagram_app_nav_item['Icon'] >
+	>
+	type $bog_mediagram_app_nav_item__click_bog_mediagram_app_nav_12 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app_nav['circles_click'] >
+		,
+		ReturnType< $bog_mediagram_app_nav_item['click'] >
+	>
+	type $bog_mediagram_app_nav_item__label_bog_mediagram_app_nav_13 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $bog_mediagram_app_nav_item['label'] >
+	>
+	type $bog_mediagram_app_nav_item__active_bog_mediagram_app_nav_14 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app_nav['me_active'] >
+		,
+		ReturnType< $bog_mediagram_app_nav_item['active'] >
+	>
+	type $bog_mediagram_app_nav_item__Icon_bog_mediagram_app_nav_15 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app_nav['Icon_me'] >
+		,
+		ReturnType< $bog_mediagram_app_nav_item['Icon'] >
+	>
+	type $bog_mediagram_app_nav_item__click_bog_mediagram_app_nav_16 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app_nav['me_click'] >
+		,
+		ReturnType< $bog_mediagram_app_nav_item['click'] >
+	>
+	export class $bog_mediagram_app_nav extends $mol_view {
+		library_active( ): string
+		Icon_library( ): $mol_icon_library
+		library_click( next?: any ): any
+		Tab_library( ): $bog_mediagram_app_nav_item
+		feed_active( ): string
+		Icon_feed( ): $mol_icon_history
+		feed_click( next?: any ): any
+		Tab_feed( ): $bog_mediagram_app_nav_item
+		circles_active( ): string
+		Icon_circles( ): $mol_icon_group
+		circles_click( next?: any ): any
+		Tab_circles( ): $bog_mediagram_app_nav_item
+		me_active( ): string
+		Icon_me( ): $mol_icon_account
+		me_click( next?: any ): any
+		Tab_me( ): $bog_mediagram_app_nav_item
+		tab( next?: string ): string
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=nav.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $bog_mediagram_app_nav extends $.$bog_mediagram_app_nav {
+        library_active(): "on" | "off";
+        feed_active(): "on" | "off";
+        circles_active(): "on" | "off";
+        me_active(): "on" | "off";
+        library_click(e?: Event): null;
+        feed_click(e?: Event): null;
+        circles_click(e?: Event): null;
+        me_click(e?: Event): null;
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	type $mol_view__sub_bog_builderui_alert_1 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_bog_builderui_alert_2 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	export class $bog_builderui_alert extends $bog_builderui_card {
+		Alert_title( ): $mol_view
+		Alert_text( ): $mol_view
+		title( ): string
+		text( ): string
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=alert.view.tree.d.ts.map
+/** @see $bog_builderui_tokens */
+declare namespace $ {
+}
+
+declare namespace $ {
+
 	export class $bog_theme_picker_row extends $mol_button_minor {
 		focused_str( ): string
 		hover( next?: any ): any
@@ -4626,210 +4830,6 @@ declare namespace $.$$ {
 }
 
 declare namespace $.$$ {
-}
-
-declare namespace $ {
-
-	type $mol_view__sub_bog_mediagram_app_nav_item_1 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	export class $bog_mediagram_app_nav_item extends $mol_view {
-		click( next?: any ): any
-		Label( ): $mol_view
-		label( ): string
-		active( ): string
-		Icon( ): $mol_view
-		attr( ): ({ 
-			'bog_mediagram_nav_active': ReturnType< $bog_mediagram_app_nav_item['active'] >,
-		})  & ReturnType< $mol_view['attr'] >
-		event( ): ({ 
-			click( next?: ReturnType< $bog_mediagram_app_nav_item['click'] > ): ReturnType< $bog_mediagram_app_nav_item['click'] >,
-		})  & ReturnType< $mol_view['event'] >
-		sub( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=item.view.tree.d.ts.map
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	export class $mol_icon_history extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=history.view.tree.d.ts.map
-declare namespace $ {
-
-	export class $mol_icon_group extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=group.view.tree.d.ts.map
-declare namespace $ {
-
-	export class $mol_icon_account extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=account.view.tree.d.ts.map
-declare namespace $ {
-
-	type $bog_mediagram_app_nav_item__label_bog_mediagram_app_nav_1 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $bog_mediagram_app_nav_item['label'] >
-	>
-	type $bog_mediagram_app_nav_item__active_bog_mediagram_app_nav_2 = $mol_type_enforce<
-		ReturnType< $bog_mediagram_app_nav['library_active'] >
-		,
-		ReturnType< $bog_mediagram_app_nav_item['active'] >
-	>
-	type $bog_mediagram_app_nav_item__Icon_bog_mediagram_app_nav_3 = $mol_type_enforce<
-		ReturnType< $bog_mediagram_app_nav['Icon_library'] >
-		,
-		ReturnType< $bog_mediagram_app_nav_item['Icon'] >
-	>
-	type $bog_mediagram_app_nav_item__click_bog_mediagram_app_nav_4 = $mol_type_enforce<
-		ReturnType< $bog_mediagram_app_nav['library_click'] >
-		,
-		ReturnType< $bog_mediagram_app_nav_item['click'] >
-	>
-	type $bog_mediagram_app_nav_item__label_bog_mediagram_app_nav_5 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $bog_mediagram_app_nav_item['label'] >
-	>
-	type $bog_mediagram_app_nav_item__active_bog_mediagram_app_nav_6 = $mol_type_enforce<
-		ReturnType< $bog_mediagram_app_nav['feed_active'] >
-		,
-		ReturnType< $bog_mediagram_app_nav_item['active'] >
-	>
-	type $bog_mediagram_app_nav_item__Icon_bog_mediagram_app_nav_7 = $mol_type_enforce<
-		ReturnType< $bog_mediagram_app_nav['Icon_feed'] >
-		,
-		ReturnType< $bog_mediagram_app_nav_item['Icon'] >
-	>
-	type $bog_mediagram_app_nav_item__click_bog_mediagram_app_nav_8 = $mol_type_enforce<
-		ReturnType< $bog_mediagram_app_nav['feed_click'] >
-		,
-		ReturnType< $bog_mediagram_app_nav_item['click'] >
-	>
-	type $bog_mediagram_app_nav_item__label_bog_mediagram_app_nav_9 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $bog_mediagram_app_nav_item['label'] >
-	>
-	type $bog_mediagram_app_nav_item__active_bog_mediagram_app_nav_10 = $mol_type_enforce<
-		ReturnType< $bog_mediagram_app_nav['circles_active'] >
-		,
-		ReturnType< $bog_mediagram_app_nav_item['active'] >
-	>
-	type $bog_mediagram_app_nav_item__Icon_bog_mediagram_app_nav_11 = $mol_type_enforce<
-		ReturnType< $bog_mediagram_app_nav['Icon_circles'] >
-		,
-		ReturnType< $bog_mediagram_app_nav_item['Icon'] >
-	>
-	type $bog_mediagram_app_nav_item__click_bog_mediagram_app_nav_12 = $mol_type_enforce<
-		ReturnType< $bog_mediagram_app_nav['circles_click'] >
-		,
-		ReturnType< $bog_mediagram_app_nav_item['click'] >
-	>
-	type $bog_mediagram_app_nav_item__label_bog_mediagram_app_nav_13 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $bog_mediagram_app_nav_item['label'] >
-	>
-	type $bog_mediagram_app_nav_item__active_bog_mediagram_app_nav_14 = $mol_type_enforce<
-		ReturnType< $bog_mediagram_app_nav['me_active'] >
-		,
-		ReturnType< $bog_mediagram_app_nav_item['active'] >
-	>
-	type $bog_mediagram_app_nav_item__Icon_bog_mediagram_app_nav_15 = $mol_type_enforce<
-		ReturnType< $bog_mediagram_app_nav['Icon_me'] >
-		,
-		ReturnType< $bog_mediagram_app_nav_item['Icon'] >
-	>
-	type $bog_mediagram_app_nav_item__click_bog_mediagram_app_nav_16 = $mol_type_enforce<
-		ReturnType< $bog_mediagram_app_nav['me_click'] >
-		,
-		ReturnType< $bog_mediagram_app_nav_item['click'] >
-	>
-	export class $bog_mediagram_app_nav extends $mol_view {
-		library_active( ): string
-		Icon_library( ): $mol_icon_library
-		library_click( next?: any ): any
-		Tab_library( ): $bog_mediagram_app_nav_item
-		feed_active( ): string
-		Icon_feed( ): $mol_icon_history
-		feed_click( next?: any ): any
-		Tab_feed( ): $bog_mediagram_app_nav_item
-		circles_active( ): string
-		Icon_circles( ): $mol_icon_group
-		circles_click( next?: any ): any
-		Tab_circles( ): $bog_mediagram_app_nav_item
-		me_active( ): string
-		Icon_me( ): $mol_icon_account
-		me_click( next?: any ): any
-		Tab_me( ): $bog_mediagram_app_nav_item
-		tab( next?: string ): string
-		sub( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=nav.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $bog_mediagram_app_nav extends $.$bog_mediagram_app_nav {
-        library_active(): "on" | "off";
-        feed_active(): "on" | "off";
-        circles_active(): "on" | "off";
-        me_active(): "on" | "off";
-        library_click(e?: Event): null;
-        feed_click(e?: Event): null;
-        circles_click(e?: Event): null;
-        me_click(e?: Event): null;
-    }
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
-
-	type $mol_view__sub_bog_builderui_alert_1 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_view__sub_bog_builderui_alert_2 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	export class $bog_builderui_alert extends $bog_builderui_card {
-		Alert_title( ): $mol_view
-		Alert_text( ): $mol_view
-		title( ): string
-		text( ): string
-		sub( ): readonly(any)[]
-	}
-	
-}
-
-//# sourceMappingURL=alert.view.tree.d.ts.map
-/** @see $bog_builderui_tokens */
-declare namespace $ {
 }
 
 declare namespace $ {
@@ -5105,91 +5105,106 @@ declare namespace $ {
 		ReturnType< $mol_view['sub'] >
 	>
 	type $mol_view__sub_bog_mediagram_app_24 = $mol_type_enforce<
-		readonly(any)[]
+		ReturnType< $bog_mediagram_app['top_content'] >
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $bog_builderui_field__hint_bog_mediagram_app_25 = $mol_type_enforce<
-		string
+	type $mol_view__sub_bog_mediagram_app_25 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app['body_content'] >
 		,
-		ReturnType< $bog_builderui_field['hint'] >
+		ReturnType< $mol_view['sub'] >
 	>
-	type $bog_builderui_field__value_bog_mediagram_app_26 = $mol_type_enforce<
-		ReturnType< $bog_mediagram_app['query'] >
+	type $mol_scroll__sub_bog_mediagram_app_26 = $mol_type_enforce<
+		readonly(any)[]
 		,
-		ReturnType< $bog_builderui_field['value'] >
+		ReturnType< $mol_scroll['sub'] >
 	>
-	type $bog_theme_toggle__theme_auto_bog_mediagram_app_27 = $mol_type_enforce<
-		ReturnType< $bog_mediagram_app['Theme'] >
+	type $bog_mediagram_app_nav__tab_bog_mediagram_app_27 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app['tab'] >
 		,
-		ReturnType< $bog_theme_toggle['theme_auto'] >
+		ReturnType< $bog_mediagram_app_nav['tab'] >
 	>
 	type $mol_view__sub_bog_mediagram_app_28 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $mol_view__sub_bog_mediagram_app_29 = $mol_type_enforce<
-		ReturnType< $bog_mediagram_app['body_content'] >
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_scroll__sub_bog_mediagram_app_30 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_scroll['sub'] >
-	>
-	type $bog_mediagram_app_nav__tab_bog_mediagram_app_31 = $mol_type_enforce<
-		ReturnType< $bog_mediagram_app['tab'] >
-		,
-		ReturnType< $bog_mediagram_app_nav['tab'] >
-	>
-	type $mol_view__sub_bog_mediagram_app_32 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $bog_builderui_alert__title_bog_mediagram_app_33 = $mol_type_enforce<
+	type $bog_builderui_alert__title_bog_mediagram_app_29 = $mol_type_enforce<
 		ReturnType< $bog_mediagram_app['banner_title'] >
 		,
 		ReturnType< $bog_builderui_alert['title'] >
 	>
-	type $bog_builderui_alert__text_bog_mediagram_app_34 = $mol_type_enforce<
+	type $bog_builderui_alert__text_bog_mediagram_app_30 = $mol_type_enforce<
 		ReturnType< $bog_mediagram_app['banner_text'] >
 		,
 		ReturnType< $bog_builderui_alert['text'] >
 	>
-	type $mol_view__sub_bog_mediagram_app_35 = $mol_type_enforce<
+	type $mol_view__sub_bog_mediagram_app_31 = $mol_type_enforce<
 		ReturnType< $bog_mediagram_app['entries'] >
 		,
 		ReturnType< $mol_view['sub'] >
 	>
-	type $bog_builderui_card__sub_bog_mediagram_app_36 = $mol_type_enforce<
+	type $bog_builderui_card__sub_bog_mediagram_app_32 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $bog_builderui_card['sub'] >
 	>
-	type $bog_builderui_card__sub_bog_mediagram_app_37 = $mol_type_enforce<
+	type $bog_builderui_card__sub_bog_mediagram_app_33 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $bog_builderui_card['sub'] >
 	>
-	type $bog_builderui_card__sub_bog_mediagram_app_38 = $mol_type_enforce<
+	type $bog_builderui_card__sub_bog_mediagram_app_34 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $bog_builderui_card['sub'] >
 	>
-	type $bog_builderui_card__attr_bog_mediagram_app_39 = $mol_type_enforce<
+	type $bog_builderui_card__attr_bog_mediagram_app_35 = $mol_type_enforce<
 		({ 
 			'bog_mediagram_page_kind': ReturnType< $bog_mediagram_app['recognized_page_kind'] >,
 		})  & ReturnType< $bog_builderui_card['attr'] >
 		,
 		ReturnType< $bog_builderui_card['attr'] >
 	>
-	type $bog_builderui_card__sub_bog_mediagram_app_40 = $mol_type_enforce<
+	type $bog_builderui_card__sub_bog_mediagram_app_36 = $mol_type_enforce<
 		readonly(any)[]
 		,
 		ReturnType< $bog_builderui_card['sub'] >
+	>
+	type $mol_view__sub_bog_mediagram_app_37 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $bog_builderui_field__hint_bog_mediagram_app_38 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $bog_builderui_field['hint'] >
+	>
+	type $bog_builderui_field__value_bog_mediagram_app_39 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app['query'] >
+		,
+		ReturnType< $bog_builderui_field['value'] >
+	>
+	type $bog_theme_toggle__theme_auto_bog_mediagram_app_40 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app['Theme'] >
+		,
+		ReturnType< $bog_theme_toggle['theme_auto'] >
+	>
+	type $bog_builderui_button__title_bog_mediagram_app_41 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $bog_builderui_button['title'] >
+	>
+	type $bog_builderui_button__hint_bog_mediagram_app_42 = $mol_type_enforce<
+		string
+		,
+		ReturnType< $bog_builderui_button['hint'] >
+	>
+	type $bog_builderui_button__click_bog_mediagram_app_43 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app['add_click'] >
+		,
+		ReturnType< $bog_builderui_button['click'] >
 	>
 	export class $bog_mediagram_app extends $bog_builderui_div {
 		Theme( ): $bog_theme_auto
@@ -5229,12 +5244,11 @@ declare namespace $ {
 		recognized_add( next?: any ): any
 		Recognized_add( ): $bog_builderui_button
 		Recognized_actions( ): $mol_view
-		Brand_mark( ): $mol_view
+		Brand_mark( ): $mol_icon_library
 		Brand_name( ): $mol_view
-		Brand( ): $mol_view
 		query( next?: string ): string
-		Search( ): $bog_builderui_field
-		Theme_toggle( ): $bog_theme_toggle
+		add_click( next?: any ): any
+		top_content( ): readonly(any)[]
 		Top( ): $mol_view
 		body_content( ): readonly(any)[]
 		Page( ): $mol_view
@@ -5258,6 +5272,10 @@ declare namespace $ {
 		Circles_pane( ): $bog_builderui_card
 		Me_pane( ): $bog_builderui_card
 		Recognized( ): $bog_builderui_card
+		Brand( ): $mol_view
+		Search( ): $bog_builderui_field
+		Theme_toggle( ): $bog_theme_toggle
+		Add_btn( ): $bog_builderui_button
 		sub( ): readonly(any)[]
 	}
 	
@@ -5300,6 +5318,8 @@ declare namespace $.$$ {
         entry(id: string): Entry;
         tab(next?: string): string;
         body_content(): any[];
+        top_content(): any[];
+        add_click(e?: Event): null;
         in_extension(): boolean;
         snapshot_tick(next?: number): number;
         snapshot(): any;

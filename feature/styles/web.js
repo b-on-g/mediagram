@@ -10424,6 +10424,358 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$bog_mediagram_app_nav_item) = class $bog_mediagram_app_nav_item extends ($.$mol_view) {
+		click(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Label(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.label())]);
+			return obj;
+		}
+		label(){
+			return "";
+		}
+		active(){
+			return "off";
+		}
+		Icon(){
+			const obj = new this.$.$mol_view();
+			return obj;
+		}
+		attr(){
+			return {...(super.attr()), "bog_mediagram_nav_active": (this.active())};
+		}
+		event(){
+			return {...(super.event()), "click": (next) => (this.click(next))};
+		}
+		sub(){
+			return [(this.Icon()), (this.Label())];
+		}
+	};
+	($mol_mem(($.$bog_mediagram_app_nav_item.prototype), "click"));
+	($mol_mem(($.$bog_mediagram_app_nav_item.prototype), "Label"));
+	($mol_mem(($.$bog_mediagram_app_nav_item.prototype), "Icon"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_define($bog_mediagram_app_nav_item, {
+        flex: { direction: 'column', grow: 1, basis: '0%' },
+        align: { items: 'center' },
+        justify: { content: 'center' },
+        gap: '2px',
+        padding: { top: '8px', right: $mol_gap.text, bottom: '8px', left: $mol_gap.text },
+        minWidth: 0,
+        minHeight: '56px',
+        cursor: 'pointer',
+        userSelect: 'none',
+        border: { radius: $bog_builderui_tokens.radius },
+        color: $bog_builderui_tokens.shade,
+        background: { color: 'transparent' },
+        transition: 'color 120ms ease, background-color 120ms ease',
+        Icon: {
+            width: '24px',
+            height: '24px',
+            color: 'inherit',
+        },
+        Label: {
+            font: { size: '11px', weight: 500 },
+            color: 'inherit',
+            whiteSpace: 'nowrap',
+        },
+        ':hover': {
+            background: { color: $bog_builderui_tokens.hover },
+            color: $bog_builderui_tokens.text,
+        },
+        '@': {
+            bog_mediagram_nav_active: {
+                on: {
+                    color: $bog_builderui_tokens.control,
+                },
+            },
+        },
+    });
+})($ || ($ = {}));
+
+;
+	($.$mol_icon_history) = class $mol_icon_history extends ($.$mol_icon) {
+		path(){
+			return "M13.5,8H12V13L16.28,15.54L17,14.33L13.5,12.25V8M13,3A9,9 0 0,0 4,12H1L4.96,16.03L9,12H6A7,7 0 0,1 13,5A7,7 0 0,1 20,12A7,7 0 0,1 13,19C11.07,19 9.32,18.21 8.06,16.94L6.64,18.36C8.27,20 10.5,21 13,21A9,9 0 0,0 22,12A9,9 0 0,0 13,3";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_icon_group) = class $mol_icon_group extends ($.$mol_icon) {
+		path(){
+			return "M1,1V5H2V19H1V23H5V22H19V23H23V19H22V5H23V1H19V2H5V1M5,4H19V5H20V19H19V20H5V19H4V5H5M6,6V14H9V18H18V9H14V6M8,8H12V12H8M14,11H16V16H11V14H14";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$mol_icon_account) = class $mol_icon_account extends ($.$mol_icon) {
+		path(){
+			return "M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z";
+		}
+	};
+
+
+;
+"use strict";
+
+
+;
+	($.$bog_mediagram_app_nav) = class $bog_mediagram_app_nav extends ($.$mol_view) {
+		library_active(){
+			return "off";
+		}
+		Icon_library(){
+			const obj = new this.$.$mol_icon_library();
+			return obj;
+		}
+		library_click(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Tab_library(){
+			const obj = new this.$.$bog_mediagram_app_nav_item();
+			(obj.label) = () => ("Библиотека");
+			(obj.active) = () => ((this.library_active()));
+			(obj.Icon) = () => ((this.Icon_library()));
+			(obj.click) = (next) => ((this.library_click(next)));
+			return obj;
+		}
+		feed_active(){
+			return "off";
+		}
+		Icon_feed(){
+			const obj = new this.$.$mol_icon_history();
+			return obj;
+		}
+		feed_click(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Tab_feed(){
+			const obj = new this.$.$bog_mediagram_app_nav_item();
+			(obj.label) = () => ("Лента");
+			(obj.active) = () => ((this.feed_active()));
+			(obj.Icon) = () => ((this.Icon_feed()));
+			(obj.click) = (next) => ((this.feed_click(next)));
+			return obj;
+		}
+		circles_active(){
+			return "off";
+		}
+		Icon_circles(){
+			const obj = new this.$.$mol_icon_group();
+			return obj;
+		}
+		circles_click(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Tab_circles(){
+			const obj = new this.$.$bog_mediagram_app_nav_item();
+			(obj.label) = () => ("Круги");
+			(obj.active) = () => ((this.circles_active()));
+			(obj.Icon) = () => ((this.Icon_circles()));
+			(obj.click) = (next) => ((this.circles_click(next)));
+			return obj;
+		}
+		me_active(){
+			return "off";
+		}
+		Icon_me(){
+			const obj = new this.$.$mol_icon_account();
+			return obj;
+		}
+		me_click(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Tab_me(){
+			const obj = new this.$.$bog_mediagram_app_nav_item();
+			(obj.label) = () => ("Я");
+			(obj.active) = () => ((this.me_active()));
+			(obj.Icon) = () => ((this.Icon_me()));
+			(obj.click) = (next) => ((this.me_click(next)));
+			return obj;
+		}
+		tab(next){
+			if(next !== undefined) return next;
+			return "library";
+		}
+		sub(){
+			return [
+				(this.Tab_library()), 
+				(this.Tab_feed()), 
+				(this.Tab_circles()), 
+				(this.Tab_me())
+			];
+		}
+	};
+	($mol_mem(($.$bog_mediagram_app_nav.prototype), "Icon_library"));
+	($mol_mem(($.$bog_mediagram_app_nav.prototype), "library_click"));
+	($mol_mem(($.$bog_mediagram_app_nav.prototype), "Tab_library"));
+	($mol_mem(($.$bog_mediagram_app_nav.prototype), "Icon_feed"));
+	($mol_mem(($.$bog_mediagram_app_nav.prototype), "feed_click"));
+	($mol_mem(($.$bog_mediagram_app_nav.prototype), "Tab_feed"));
+	($mol_mem(($.$bog_mediagram_app_nav.prototype), "Icon_circles"));
+	($mol_mem(($.$bog_mediagram_app_nav.prototype), "circles_click"));
+	($mol_mem(($.$bog_mediagram_app_nav.prototype), "Tab_circles"));
+	($mol_mem(($.$bog_mediagram_app_nav.prototype), "Icon_me"));
+	($mol_mem(($.$bog_mediagram_app_nav.prototype), "me_click"));
+	($mol_mem(($.$bog_mediagram_app_nav.prototype), "Tab_me"));
+	($mol_mem(($.$bog_mediagram_app_nav.prototype), "tab"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $bog_mediagram_app_nav extends $.$bog_mediagram_app_nav {
+            library_active() { return this.tab() === 'library' ? 'on' : 'off'; }
+            feed_active() { return this.tab() === 'feed' ? 'on' : 'off'; }
+            circles_active() { return this.tab() === 'circles' ? 'on' : 'off'; }
+            me_active() { return this.tab() === 'me' ? 'on' : 'off'; }
+            library_click(e) {
+                if (e)
+                    e.preventDefault();
+                this.tab('library');
+                return null;
+            }
+            feed_click(e) {
+                if (e)
+                    e.preventDefault();
+                this.tab('feed');
+                return null;
+            }
+            circles_click(e) {
+                if (e)
+                    e.preventDefault();
+                this.tab('circles');
+                return null;
+            }
+            me_click(e) {
+                if (e)
+                    e.preventDefault();
+                this.tab('me');
+                return null;
+            }
+        }
+        $$.$bog_mediagram_app_nav = $bog_mediagram_app_nav;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_define($bog_mediagram_app_nav, {
+        flex: { direction: 'row' },
+        padding: {
+            top: '6px',
+            right: $mol_gap.text,
+            bottom: '6px',
+            left: $mol_gap.text,
+        },
+        gap: '4px',
+        background: { color: $bog_builderui_tokens.card },
+        border: { top: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line } },
+    });
+})($ || ($ = {}));
+
+;
+	($.$bog_builderui_alert) = class $bog_builderui_alert extends ($.$bog_builderui_card) {
+		Alert_title(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.title())]);
+			return obj;
+		}
+		Alert_text(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.text())]);
+			return obj;
+		}
+		title(){
+			return "";
+		}
+		text(){
+			return "";
+		}
+		sub(){
+			return [(this.Alert_title()), (this.Alert_text())];
+		}
+	};
+	($mol_mem(($.$bog_builderui_alert.prototype), "Alert_title"));
+	($mol_mem(($.$bog_builderui_alert.prototype), "Alert_text"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+/** @see $bog_builderui_tokens */
+var $;
+(function ($) {
+    $mol_style_define($bog_builderui_alert, {
+        border: {
+            color: $bog_builderui_tokens.focus,
+        },
+        gap: '0.25rem',
+        flex: {
+            grow: 0,
+            shrink: 0,
+        },
+        align: {
+            self: 'stretch',
+        },
+        maxHeight: '140px',
+        Alert_title: {
+            font: {
+                family: $bog_builderui_tokens.font_head,
+                weight: 600,
+                size: '0.95rem',
+            },
+            color: $bog_builderui_tokens.text,
+        },
+        Alert_text: {
+            font: {
+                family: $bog_builderui_tokens.font_body,
+                size: '0.85rem',
+            },
+            color: $bog_builderui_tokens.shade,
+        },
+    });
+})($ || ($ = {}));
+
+;
 	($.$bog_theme_picker_row) = class $bog_theme_picker_row extends ($.$mol_button_minor) {
 		focused_str(){
 			return "";
@@ -11047,358 +11399,6 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$bog_mediagram_app_nav_item) = class $bog_mediagram_app_nav_item extends ($.$mol_view) {
-		click(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Label(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.label())]);
-			return obj;
-		}
-		label(){
-			return "";
-		}
-		active(){
-			return "off";
-		}
-		Icon(){
-			const obj = new this.$.$mol_view();
-			return obj;
-		}
-		attr(){
-			return {...(super.attr()), "bog_mediagram_nav_active": (this.active())};
-		}
-		event(){
-			return {...(super.event()), "click": (next) => (this.click(next))};
-		}
-		sub(){
-			return [(this.Icon()), (this.Label())];
-		}
-	};
-	($mol_mem(($.$bog_mediagram_app_nav_item.prototype), "click"));
-	($mol_mem(($.$bog_mediagram_app_nav_item.prototype), "Label"));
-	($mol_mem(($.$bog_mediagram_app_nav_item.prototype), "Icon"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_define($bog_mediagram_app_nav_item, {
-        flex: { direction: 'column', grow: 1, basis: '0%' },
-        align: { items: 'center' },
-        justify: { content: 'center' },
-        gap: '2px',
-        padding: { top: '8px', right: $mol_gap.text, bottom: '8px', left: $mol_gap.text },
-        minWidth: 0,
-        minHeight: '56px',
-        cursor: 'pointer',
-        userSelect: 'none',
-        border: { radius: $bog_builderui_tokens.radius },
-        color: $bog_builderui_tokens.shade,
-        background: { color: 'transparent' },
-        transition: 'color 120ms ease, background-color 120ms ease',
-        Icon: {
-            width: '24px',
-            height: '24px',
-            color: 'inherit',
-        },
-        Label: {
-            font: { size: '11px', weight: 500 },
-            color: 'inherit',
-            whiteSpace: 'nowrap',
-        },
-        ':hover': {
-            background: { color: $bog_builderui_tokens.hover },
-            color: $bog_builderui_tokens.text,
-        },
-        '@': {
-            bog_mediagram_nav_active: {
-                on: {
-                    color: $bog_builderui_tokens.control,
-                },
-            },
-        },
-    });
-})($ || ($ = {}));
-
-;
-	($.$mol_icon_history) = class $mol_icon_history extends ($.$mol_icon) {
-		path(){
-			return "M13.5,8H12V13L16.28,15.54L17,14.33L13.5,12.25V8M13,3A9,9 0 0,0 4,12H1L4.96,16.03L9,12H6A7,7 0 0,1 13,5A7,7 0 0,1 20,12A7,7 0 0,1 13,19C11.07,19 9.32,18.21 8.06,16.94L6.64,18.36C8.27,20 10.5,21 13,21A9,9 0 0,0 22,12A9,9 0 0,0 13,3";
-		}
-	};
-
-
-;
-"use strict";
-
-
-;
-	($.$mol_icon_group) = class $mol_icon_group extends ($.$mol_icon) {
-		path(){
-			return "M1,1V5H2V19H1V23H5V22H19V23H23V19H22V5H23V1H19V2H5V1M5,4H19V5H20V19H19V20H5V19H4V5H5M6,6V14H9V18H18V9H14V6M8,8H12V12H8M14,11H16V16H11V14H14";
-		}
-	};
-
-
-;
-"use strict";
-
-
-;
-	($.$mol_icon_account) = class $mol_icon_account extends ($.$mol_icon) {
-		path(){
-			return "M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z";
-		}
-	};
-
-
-;
-"use strict";
-
-
-;
-	($.$bog_mediagram_app_nav) = class $bog_mediagram_app_nav extends ($.$mol_view) {
-		library_active(){
-			return "off";
-		}
-		Icon_library(){
-			const obj = new this.$.$mol_icon_library();
-			return obj;
-		}
-		library_click(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Tab_library(){
-			const obj = new this.$.$bog_mediagram_app_nav_item();
-			(obj.label) = () => ("Библиотека");
-			(obj.active) = () => ((this.library_active()));
-			(obj.Icon) = () => ((this.Icon_library()));
-			(obj.click) = (next) => ((this.library_click(next)));
-			return obj;
-		}
-		feed_active(){
-			return "off";
-		}
-		Icon_feed(){
-			const obj = new this.$.$mol_icon_history();
-			return obj;
-		}
-		feed_click(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Tab_feed(){
-			const obj = new this.$.$bog_mediagram_app_nav_item();
-			(obj.label) = () => ("Лента");
-			(obj.active) = () => ((this.feed_active()));
-			(obj.Icon) = () => ((this.Icon_feed()));
-			(obj.click) = (next) => ((this.feed_click(next)));
-			return obj;
-		}
-		circles_active(){
-			return "off";
-		}
-		Icon_circles(){
-			const obj = new this.$.$mol_icon_group();
-			return obj;
-		}
-		circles_click(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Tab_circles(){
-			const obj = new this.$.$bog_mediagram_app_nav_item();
-			(obj.label) = () => ("Круги");
-			(obj.active) = () => ((this.circles_active()));
-			(obj.Icon) = () => ((this.Icon_circles()));
-			(obj.click) = (next) => ((this.circles_click(next)));
-			return obj;
-		}
-		me_active(){
-			return "off";
-		}
-		Icon_me(){
-			const obj = new this.$.$mol_icon_account();
-			return obj;
-		}
-		me_click(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Tab_me(){
-			const obj = new this.$.$bog_mediagram_app_nav_item();
-			(obj.label) = () => ("Я");
-			(obj.active) = () => ((this.me_active()));
-			(obj.Icon) = () => ((this.Icon_me()));
-			(obj.click) = (next) => ((this.me_click(next)));
-			return obj;
-		}
-		tab(next){
-			if(next !== undefined) return next;
-			return "library";
-		}
-		sub(){
-			return [
-				(this.Tab_library()), 
-				(this.Tab_feed()), 
-				(this.Tab_circles()), 
-				(this.Tab_me())
-			];
-		}
-	};
-	($mol_mem(($.$bog_mediagram_app_nav.prototype), "Icon_library"));
-	($mol_mem(($.$bog_mediagram_app_nav.prototype), "library_click"));
-	($mol_mem(($.$bog_mediagram_app_nav.prototype), "Tab_library"));
-	($mol_mem(($.$bog_mediagram_app_nav.prototype), "Icon_feed"));
-	($mol_mem(($.$bog_mediagram_app_nav.prototype), "feed_click"));
-	($mol_mem(($.$bog_mediagram_app_nav.prototype), "Tab_feed"));
-	($mol_mem(($.$bog_mediagram_app_nav.prototype), "Icon_circles"));
-	($mol_mem(($.$bog_mediagram_app_nav.prototype), "circles_click"));
-	($mol_mem(($.$bog_mediagram_app_nav.prototype), "Tab_circles"));
-	($mol_mem(($.$bog_mediagram_app_nav.prototype), "Icon_me"));
-	($mol_mem(($.$bog_mediagram_app_nav.prototype), "me_click"));
-	($mol_mem(($.$bog_mediagram_app_nav.prototype), "Tab_me"));
-	($mol_mem(($.$bog_mediagram_app_nav.prototype), "tab"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    var $$;
-    (function ($$) {
-        class $bog_mediagram_app_nav extends $.$bog_mediagram_app_nav {
-            library_active() { return this.tab() === 'library' ? 'on' : 'off'; }
-            feed_active() { return this.tab() === 'feed' ? 'on' : 'off'; }
-            circles_active() { return this.tab() === 'circles' ? 'on' : 'off'; }
-            me_active() { return this.tab() === 'me' ? 'on' : 'off'; }
-            library_click(e) {
-                if (e)
-                    e.preventDefault();
-                this.tab('library');
-                return null;
-            }
-            feed_click(e) {
-                if (e)
-                    e.preventDefault();
-                this.tab('feed');
-                return null;
-            }
-            circles_click(e) {
-                if (e)
-                    e.preventDefault();
-                this.tab('circles');
-                return null;
-            }
-            me_click(e) {
-                if (e)
-                    e.preventDefault();
-                this.tab('me');
-                return null;
-            }
-        }
-        $$.$bog_mediagram_app_nav = $bog_mediagram_app_nav;
-    })($$ = $.$$ || ($.$$ = {}));
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_define($bog_mediagram_app_nav, {
-        flex: { direction: 'row' },
-        padding: {
-            top: '6px',
-            right: $mol_gap.text,
-            bottom: '6px',
-            left: $mol_gap.text,
-        },
-        gap: '4px',
-        background: { color: $bog_builderui_tokens.card },
-        border: { top: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line } },
-    });
-})($ || ($ = {}));
-
-;
-	($.$bog_builderui_alert) = class $bog_builderui_alert extends ($.$bog_builderui_card) {
-		Alert_title(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.title())]);
-			return obj;
-		}
-		Alert_text(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.text())]);
-			return obj;
-		}
-		title(){
-			return "";
-		}
-		text(){
-			return "";
-		}
-		sub(){
-			return [(this.Alert_title()), (this.Alert_text())];
-		}
-	};
-	($mol_mem(($.$bog_builderui_alert.prototype), "Alert_title"));
-	($mol_mem(($.$bog_builderui_alert.prototype), "Alert_text"));
-
-
-;
-"use strict";
-
-
-;
-"use strict";
-/** @see $bog_builderui_tokens */
-var $;
-(function ($) {
-    $mol_style_define($bog_builderui_alert, {
-        border: {
-            color: $bog_builderui_tokens.focus,
-        },
-        gap: '0.25rem',
-        flex: {
-            grow: 0,
-            shrink: 0,
-        },
-        align: {
-            self: 'stretch',
-        },
-        maxHeight: '140px',
-        Alert_title: {
-            font: {
-                family: $bog_builderui_tokens.font_head,
-                weight: 600,
-                size: '0.95rem',
-            },
-            color: $bog_builderui_tokens.text,
-        },
-        Alert_text: {
-            font: {
-                family: $bog_builderui_tokens.font_body,
-                size: '0.85rem',
-            },
-            color: $bog_builderui_tokens.shade,
-        },
-    });
-})($ || ($ = {}));
-
-;
 	($.$bog_mediagram_app) = class $bog_mediagram_app extends ($.$bog_builderui_div) {
 		Theme(){
 			const obj = new this.$.$bog_theme_auto();
@@ -11559,7 +11559,7 @@ var $;
 			return obj;
 		}
 		Brand_mark(){
-			const obj = new this.$.$mol_view();
+			const obj = new this.$.$mol_icon_library();
 			return obj;
 		}
 		Brand_name(){
@@ -11567,33 +11567,20 @@ var $;
 			(obj.sub) = () => (["mediagram"]);
 			return obj;
 		}
-		Brand(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Brand_mark()), (this.Brand_name())]);
-			return obj;
-		}
 		query(next){
 			if(next !== undefined) return next;
 			return "";
 		}
-		Search(){
-			const obj = new this.$.$bog_builderui_field();
-			(obj.hint) = () => ("поиск в библиотеке");
-			(obj.value) = (next) => ((this.query(next)));
-			return obj;
+		add_click(next){
+			if(next !== undefined) return next;
+			return null;
 		}
-		Theme_toggle(){
-			const obj = new this.$.$bog_theme_toggle();
-			(obj.theme_auto) = () => ((this.Theme()));
-			return obj;
+		top_content(){
+			return [];
 		}
 		Top(){
 			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([
-				(this.Brand()), 
-				(this.Search()), 
-				(this.Theme_toggle())
-			]);
+			(obj.sub) = () => ((this.top_content()));
 			return obj;
 		}
 		body_content(){
@@ -11672,6 +11659,29 @@ var $;
 			]);
 			return obj;
 		}
+		Brand(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Brand_mark()), (this.Brand_name())]);
+			return obj;
+		}
+		Search(){
+			const obj = new this.$.$bog_builderui_field();
+			(obj.hint) = () => ("поиск в библиотеке");
+			(obj.value) = (next) => ((this.query(next)));
+			return obj;
+		}
+		Theme_toggle(){
+			const obj = new this.$.$bog_theme_toggle();
+			(obj.theme_auto) = () => ((this.Theme()));
+			return obj;
+		}
+		Add_btn(){
+			const obj = new this.$.$bog_builderui_button();
+			(obj.title) = () => ("+");
+			(obj.hint) = () => ("добавить вручную");
+			(obj.click) = (next) => ((this.add_click(next)));
+			return obj;
+		}
 		sub(){
 			return [
 				(this.Top()), 
@@ -11707,10 +11717,8 @@ var $;
 	($mol_mem(($.$bog_mediagram_app.prototype), "Recognized_actions"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Brand_mark"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Brand_name"));
-	($mol_mem(($.$bog_mediagram_app.prototype), "Brand"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "query"));
-	($mol_mem(($.$bog_mediagram_app.prototype), "Search"));
-	($mol_mem(($.$bog_mediagram_app.prototype), "Theme_toggle"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "add_click"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Top"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Page"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Body"));
@@ -11722,6 +11730,10 @@ var $;
 	($mol_mem(($.$bog_mediagram_app.prototype), "Circles_pane"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Me_pane"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Recognized"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Brand"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Search"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Theme_toggle"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Add_btn"));
 
 
 ;
@@ -12232,22 +12244,7 @@ var $;
             done: k => k === 'book' ? 'прочитал' : 'готово',
             dropped: () => 'бросил',
         };
-        const FIXTURE = [
-            { id: '1', title: 'Frieren', year: '2023', kind: 'anime', status: 'doing', rating: null, favorite: true },
-            { id: '2', title: 'Dune: Part Two', year: '2024', kind: 'movie', status: 'done', rating: 9, favorite: true },
-            { id: '4', title: 'Дюна', year: '1965', kind: 'book', status: 'doing', rating: 8, favorite: false },
-            { id: '5', title: 'Severance', year: '2022', kind: 'series', status: 'done', rating: 9, favorite: false },
-            { id: '6', title: 'Цветы для Элджернона', year: '1966', kind: 'book', status: 'want_to', rating: null, favorite: false },
-            { id: '7', title: 'Blue Eye Samurai', year: '2023', kind: 'anime', status: 'done', rating: 8, favorite: false },
-            { id: '9', title: 'Andor', year: '2022', kind: 'series', status: 'doing', rating: 9, favorite: true },
-            { id: '10', title: 'Оппенгеймер', year: '2023', kind: 'movie', status: 'done', rating: 8, favorite: false },
-            { id: '11', title: 'Vinland Saga', year: '2019', kind: 'anime', status: 'dropped', rating: 6, favorite: false },
-            { id: '12', title: 'Атака титанов', year: '2013', kind: 'anime', status: 'done', rating: 9, favorite: true },
-            { id: '13', title: '1984', year: '1949', kind: 'book', status: 'done', rating: 9, favorite: false },
-            { id: '15', title: 'The Bear', year: '2022', kind: 'series', status: 'want_to', rating: null, favorite: false },
-            { id: '16', title: 'Поднятие уровня в одиночку', year: '2024', kind: 'anime', status: 'doing', rating: 7, favorite: false },
-            { id: '17', title: 'Достучаться до небес', year: '1997', kind: 'movie', status: 'want_to', rating: null, favorite: false },
-        ];
+        const FIXTURE = [];
         const KIND_ORDER = ['all', 'movie', 'series', 'book', 'anime'];
         function initials_of(title) {
             return title.replace(/[«»"']/g, '')
@@ -12389,6 +12386,18 @@ var $;
                     }
                 }
             }
+            top_content() {
+                const items = [this.Brand(), this.Search(), this.Theme_toggle()];
+                if (this.in_extension())
+                    items.push(this.Add_btn());
+                return items;
+            }
+            add_click(e) {
+                if (e)
+                    e.preventDefault();
+                console.log('[mediagram] manual add (TODO: open form)');
+                return null;
+            }
             in_extension() {
                 return Boolean(globalThis.chrome?.runtime?.id);
             }
@@ -12518,8 +12527,7 @@ var $;
         Brand_mark: {
             width: '24px',
             height: '24px',
-            borderRadius: '7px',
-            background: { color: $bog_builderui_tokens.control },
+            color: $bog_builderui_tokens.control,
         },
         Search: {
             flex: { grow: 1, basis: '200px' },
