@@ -716,6 +716,53 @@ $bog_theme_toggle $mol_pop
 			theme_auto <= theme_auto
 			close? <=> picker_close? null
 
+$mol_icon_library $mol_icon path \M12,8A3,3 0 0,0 15,5A3,3 0 0,0 12,2A3,3 0 0,0 9,5A3,3 0 0,0 12,8M12,11.54C9.64,9.35 6.5,8 3,8V19C6.5,19 9.64,20.35 12,22.54C14.36,20.35 17.5,19 21,19V8C17.5,8 14.36,9.35 12,11.54Z
+
+$bog_mediagram_app_nav_item $mol_view
+	label \
+	active \off
+	Icon $mol_view
+	click?event null
+	attr *
+		^
+		bog_mediagram_nav_active <= active
+	event *
+		^
+		click?event <=> click?event null
+	sub /
+		<= Icon
+		<= Label $mol_view sub / <= label
+
+$mol_icon_history $mol_icon path \M13.5,8H12V13L16.28,15.54L17,14.33L13.5,12.25V8M13,3A9,9 0 0,0 4,12H1L4.96,16.03L9,12H6A7,7 0 0,1 13,5A7,7 0 0,1 20,12A7,7 0 0,1 13,19C11.07,19 9.32,18.21 8.06,16.94L6.64,18.36C8.27,20 10.5,21 13,21A9,9 0 0,0 22,12A9,9 0 0,0 13,3
+
+$mol_icon_group $mol_icon path \M1,1V5H2V19H1V23H5V22H19V23H23V19H22V5H23V1H19V2H5V1M5,4H19V5H20V19H19V20H5V19H4V5H5M6,6V14H9V18H18V9H14V6M8,8H12V12H8M14,11H16V16H11V14H14
+
+$mol_icon_account $mol_icon path \M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z
+
+$bog_mediagram_app_nav $mol_view
+	tab?val \library
+	sub /
+		<= Tab_library $bog_mediagram_app_nav_item
+			label \Библиотека
+			active <= library_active \off
+			Icon <= Icon_library $mol_icon_library
+			click?event <=> library_click?event null
+		<= Tab_feed $bog_mediagram_app_nav_item
+			label \Лента
+			active <= feed_active \off
+			Icon <= Icon_feed $mol_icon_history
+			click?event <=> feed_click?event null
+		<= Tab_circles $bog_mediagram_app_nav_item
+			label \Круги
+			active <= circles_active \off
+			Icon <= Icon_circles $mol_icon_group
+			click?event <=> circles_click?event null
+		<= Tab_me $bog_mediagram_app_nav_item
+			label \Я
+			active <= me_active \off
+			Icon <= Icon_me $mol_icon_account
+			click?event <=> me_click?event null
+
 $bog_builderui_alert $bog_builderui_card
 	title \
 	text \
@@ -724,23 +771,6 @@ $bog_builderui_alert $bog_builderui_card
 			<= title
 		<= Alert_text $mol_view sub /
 			<= text
-
-$bog_builderui_badge $bog_builderui_div
-	title \
-	variant \default
-	attr *
-		^
-		bog_builderui_badge_variant <= variant
-	sub /
-		<= title
-
-$mol_icon_library $mol_icon path \M12,8A3,3 0 0,0 15,5A3,3 0 0,0 12,2A3,3 0 0,0 9,5A3,3 0 0,0 12,8M12,11.54C9.64,9.35 6.5,8 3,8V19C6.5,19 9.64,20.35 12,22.54C14.36,20.35 17.5,19 21,19V8C17.5,8 14.36,9.35 12,11.54Z
-
-$mol_icon_history $mol_icon path \M13.5,8H12V13L16.28,15.54L17,14.33L13.5,12.25V8M13,3A9,9 0 0,0 4,12H1L4.96,16.03L9,12H6A7,7 0 0,1 13,5A7,7 0 0,1 20,12A7,7 0 0,1 13,19C11.07,19 9.32,18.21 8.06,16.94L6.64,18.36C8.27,20 10.5,21 13,21A9,9 0 0,0 22,12A9,9 0 0,0 13,3
-
-$mol_icon_group $mol_icon path \M1,1V5H2V19H1V23H5V22H19V23H23V19H22V5H23V1H19V2H5V1M5,4H19V5H20V19H19V20H5V19H4V5H5M6,6V14H9V18H18V9H14V6M8,8H12V12H8M14,11H16V16H11V14H14
-
-$mol_icon_account $mol_icon path \M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z
 
 - mediagram — webapp + Chrome side panel
 - Одна сборка $mol-аппа адаптируется по ширине через container queries
@@ -838,6 +868,15 @@ $bog_mediagram_app_chip $bog_builderui_button
 		<= Swatch $mol_view
 		<= Label $mol_view sub / <= label
 
+$bog_builderui_badge $bog_builderui_div
+	title \
+	variant \default
+	attr *
+		^
+		bog_builderui_badge_variant <= variant
+	sub /
+		<= title
+
 $bog_mediagram_app_card $bog_builderui_card
 	title \
 	year \
@@ -872,42 +911,3 @@ $bog_mediagram_app_card $bog_builderui_card
 			sub /
 				<= Title_view $mol_view sub / <= title
 				<= Sub $mol_view sub / <= year
-
-$bog_mediagram_app_nav $mol_view
-	tab?val \library
-	sub /
-		<= Tab_library $bog_mediagram_app_nav_item
-			label \Библиотека
-			active <= library_active \off
-			Icon <= Icon_library $mol_icon_library
-			click?event <=> library_click?event null
-		<= Tab_feed $bog_mediagram_app_nav_item
-			label \Лента
-			active <= feed_active \off
-			Icon <= Icon_feed $mol_icon_history
-			click?event <=> feed_click?event null
-		<= Tab_circles $bog_mediagram_app_nav_item
-			label \Круги
-			active <= circles_active \off
-			Icon <= Icon_circles $mol_icon_group
-			click?event <=> circles_click?event null
-		<= Tab_me $bog_mediagram_app_nav_item
-			label \Я
-			active <= me_active \off
-			Icon <= Icon_me $mol_icon_account
-			click?event <=> me_click?event null
-
-$bog_mediagram_app_nav_item $mol_view
-	label \
-	active \off
-	Icon $mol_view
-	click?event null
-	attr *
-		^
-		bog_mediagram_nav_active <= active
-	event *
-		^
-		click?event <=> click?event null
-	sub /
-		<= Icon
-		<= Label $mol_view sub / <= label
