@@ -143,6 +143,18 @@ namespace $.$$ {
 			return $mol_state_local.value( 'mediagram_groups', next ) as Group[] ?? []
 		}
 
+		@ $mol_mem
+		group_form_open( next?: string ) {
+			return $mol_state_local.value( 'mediagram_group_form_open', next ) as string ?? 'false'
+		}
+
+		@ $mol_action
+		group_start( e?: Event ) {
+			if( e ) e.preventDefault()
+			this.group_form_open( 'true' )
+			return null
+		}
+
 		groups_count_label() {
 			return `${ this.groups().length } групп`
 		}
@@ -173,6 +185,7 @@ namespace $.$$ {
 				{ id: `${ Date.now() }`, title, type },
 			] )
 			this.group_name( '' )
+			this.group_form_open( 'false' )
 			return null
 		}
 

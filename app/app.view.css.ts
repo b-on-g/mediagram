@@ -164,6 +164,15 @@ namespace $ {
 			font: { size: '12px' },
 		},
 
+		Group_start: {
+			flex: { shrink: 0 },
+			background: { color: '#ffffff' },
+			color: '#050505',
+			border: { width: '1px', style: 'solid', color: '#ffffff' },
+			borderRadius: '6px',
+			font: { weight: 700 },
+		},
+
 		Groups_form: {
 			flex: { direction: 'row', wrap: 'wrap' },
 			align: { items: 'center' },
@@ -246,6 +255,12 @@ namespace $ {
 						color: '#05050599',
 					},
 
+					Group_start: {
+						background: { color: '#050505' },
+						color: '#ffffff',
+						border: { width: '1px', style: 'solid', color: '#050505' },
+					},
+
 					Count: {
 						color: '#05050599',
 					},
@@ -295,6 +310,18 @@ namespace $ {
 					background: { color: '#e50914' },
 					color: '#ffffff',
 					border: { width: '1px', style: 'solid', color: '#e50914' },
+				},
+			},
+		},
+	} )
+
+	$mol_style_define( $bog_mediagram_app, {
+		Groups_form: {
+			'@': {
+				bog_mediagram_group_open: {
+					false: {
+						display: 'none',
+					},
 				},
 			},
 		},

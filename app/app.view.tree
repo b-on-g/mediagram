@@ -41,7 +41,13 @@ $bog_mediagram_app $mol_view
 					sub /
 						<= Groups_title $mol_view sub / \Группы
 						<= Groups_count $mol_view sub / <= groups_count_label \
+						<= Group_start $mol_button
+							click? <=> group_start? null
+							sub / \создать группу
 				<= Groups_form $mol_view
+					attr *
+						^
+						bog_mediagram_group_open <= group_form_open \false
 					sub /
 						<= Group_name $mol_string
 							hint \название группы
