@@ -1,0 +1,59 @@
+{
+	"name": "mediagram",
+	"short_name": "mediagram",
+	"description": "Социальный трекер медиа: книги, фильмы, сериалы, аниме",
+	"id": "bog_mediagram_app",
+	"start_url": ".",
+	"display": "standalone",
+	"background_color": "#000000",
+	"theme_color": "#000000",
+	"manifest_version": 3,
+	"version": "0.1.0",
+	"action": {
+		"default_title": "mediagram"
+	},
+	"background": {
+		"service_worker": "bog/mediagram/ext/background.js",
+		"type": "module"
+	},
+	"side_panel": {
+		"default_path": "index.html"
+	},
+	"permissions": [
+		"sidePanel",
+		"storage",
+		"tabs"
+	],
+	"host_permissions": [
+		"*://*.animego.org/*",
+		"*://*.kinopoisk.ru/*",
+		"*://*.shikimori.one/*",
+		"*://*.imdb.com/*",
+		"*://*.myshows.me/*",
+		"*://*.letterboxd.com/*",
+		"*://*.goodreads.com/*",
+		"*://*.livelib.ru/*",
+		"*://*.fantlab.ru/*",
+		"*://*.myanimelist.net/*"
+	],
+	"content_scripts": [
+		{
+			"matches": [
+				"*://*.animego.org/*",
+				"*://*.kinopoisk.ru/*",
+				"*://*.shikimori.one/*",
+				"*://*.imdb.com/*",
+				"*://*.myshows.me/*",
+				"*://*.letterboxd.com/*",
+				"*://*.goodreads.com/*",
+				"*://*.livelib.ru/*",
+				"*://*.fantlab.ru/*",
+				"*://*.myanimelist.net/*"
+			],
+			"js": [
+				"bog/mediagram/ext/content.js"
+			],
+			"run_at": "document_idle"
+		}
+	]
+}
