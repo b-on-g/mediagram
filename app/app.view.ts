@@ -1,3 +1,10 @@
+/**
+ * Giper Baza entities ( подтягиваются в граф mam'а через JSDoc ):
+ * - {@link $bog_mediagram_library} — личный home land
+ * - {@link $bog_mediagram_circle} — circle land с лентой и watchlist'ом
+ * - {@link $bog_mediagram_media}, {@link $bog_mediagram_entry}, {@link $bog_mediagram_share_rule}
+ * - {@link $bog_mediagram_snapshot}, {@link $bog_mediagram_activity}, {@link $bog_mediagram_watch_item}
+ */
 namespace $.$$ {
 
 	type Kind = 'movie' | 'series' | 'book' | 'anime'
