@@ -11122,6 +11122,201 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$bog_builderui_dialog) = class $bog_builderui_dialog extends ($.$bog_builderui_div) {
+		close(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Backdrop(){
+			const obj = new this.$.$mol_view();
+			(obj.event) = () => ({"click": (next) => (this.close(next))});
+			return obj;
+		}
+		Surface_title(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.title())]);
+			return obj;
+		}
+		Surface_text(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.text())]);
+			return obj;
+		}
+		Surface_content(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.content()));
+			return obj;
+		}
+		Cancel(){
+			const obj = new this.$.$bog_builderui_button();
+			(obj.title) = () => ("Cancel");
+			(obj.click) = (next) => ((this.close(next)));
+			return obj;
+		}
+		confirm(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Confirm(){
+			const obj = new this.$.$bog_builderui_button();
+			(obj.title) = () => ((this.confirm_title()));
+			(obj.click) = (next) => ((this.confirm(next)));
+			return obj;
+		}
+		Surface_actions(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Cancel()), (this.Confirm())]);
+			return obj;
+		}
+		Surface(){
+			const obj = new this.$.$bog_builderui_card();
+			(obj.sub) = () => ([
+				(this.Surface_title()), 
+				(this.Surface_text()), 
+				(this.Surface_content()), 
+				(this.Surface_actions())
+			]);
+			return obj;
+		}
+		showed(next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		title(){
+			return "";
+		}
+		text(){
+			return "";
+		}
+		content(){
+			return [];
+		}
+		confirm_title(){
+			return "Confirm";
+		}
+		attr(){
+			return {"bog_builderui_dialog_showed": (this.showed())};
+		}
+		sub(){
+			return [(this.Backdrop()), (this.Surface())];
+		}
+	};
+	($mol_mem(($.$bog_builderui_dialog.prototype), "close"));
+	($mol_mem(($.$bog_builderui_dialog.prototype), "Backdrop"));
+	($mol_mem(($.$bog_builderui_dialog.prototype), "Surface_title"));
+	($mol_mem(($.$bog_builderui_dialog.prototype), "Surface_text"));
+	($mol_mem(($.$bog_builderui_dialog.prototype), "Surface_content"));
+	($mol_mem(($.$bog_builderui_dialog.prototype), "Cancel"));
+	($mol_mem(($.$bog_builderui_dialog.prototype), "confirm"));
+	($mol_mem(($.$bog_builderui_dialog.prototype), "Confirm"));
+	($mol_mem(($.$bog_builderui_dialog.prototype), "Surface_actions"));
+	($mol_mem(($.$bog_builderui_dialog.prototype), "Surface"));
+	($mol_mem(($.$bog_builderui_dialog.prototype), "showed"));
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("bog/builderui/dialog/dialog.view.css", "[bog_builderui_dialog][bog_builderui_dialog_showed=\"true\"] {\n\tdisplay: flex;\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+"use strict";
+/** @see $bog_builderui_tokens */
+var $;
+(function ($) {
+    $mol_style_define($bog_builderui_dialog, {
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100vw',
+        height: '100vh',
+        zIndex: 1000,
+        display: 'none',
+        justify: {
+            content: 'center',
+        },
+        align: {
+            items: 'center',
+        },
+        Backdrop: {
+            position: 'absolute',
+            top: 0,
+            right: 0,
+            bottom: 0,
+            left: 0,
+            background: {
+                color: '#0000008c',
+            },
+        },
+        Surface: {
+            position: 'relative',
+            zIndex: 1,
+            maxWidth: '420px',
+            width: '90%',
+            gap: '0.5rem',
+            maxHeight: 'min-content',
+            flex: {
+                basis: 'auto',
+                grow: 0,
+                shrink: 0,
+            },
+        },
+        Surface_title: {
+            font: {
+                family: $bog_builderui_tokens.font_head,
+                weight: 600,
+                size: '1.125rem',
+            },
+            color: $bog_builderui_tokens.text,
+        },
+        Surface_text: {
+            color: $bog_builderui_tokens.shade,
+            font: {
+                size: '0.9rem',
+            },
+        },
+        Surface_content: {
+            flex: {
+                direction: 'column',
+            },
+            gap: '0.5rem',
+            padding: {
+                top: '0.25rem',
+            },
+        },
+        Surface_actions: {
+            flex: {
+                direction: 'row',
+            },
+            gap: '0.5rem',
+            justify: {
+                content: 'center',
+            },
+            padding: {
+                top: '0.5rem',
+            },
+        },
+        Cancel: {
+            background: {
+                color: 'transparent',
+            },
+            color: $bog_builderui_tokens.text,
+            border: {
+                width: '1px',
+                style: 'solid',
+                color: $bog_builderui_tokens.line,
+            },
+        },
+    });
+})($ || ($ = {}));
+
+;
 	($.$bog_builderui_alert) = class $bog_builderui_alert extends ($.$bog_builderui_card) {
 		Alert_title(){
 			const obj = new this.$.$mol_view();
@@ -11811,6 +12006,71 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$bog_builderui_badge) = class $bog_builderui_badge extends ($.$bog_builderui_div) {
+		title(){
+			return "";
+		}
+		variant(){
+			return "default";
+		}
+		attr(){
+			return {...(super.attr()), "bog_builderui_badge_variant": (this.variant())};
+		}
+		sub(){
+			return [(this.title())];
+		}
+	};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("bog/builderui/badge/badge.view.css", "[bog_builderui_badge][bog_builderui_badge_variant=\"secondary\"] {\n\tbackground-color: var(--bog_builderui_field);\n\tcolor: var(--bog_builderui_text);\n}\n\n[bog_builderui_badge][bog_builderui_badge_variant=\"outline\"] {\n\tbackground-color: transparent;\n\tcolor: var(--bog_builderui_text);\n\tborder: 1px solid var(--bog_builderui_line);\n}\n\n[bog_builderui_badge][bog_builderui_badge_variant=\"destructive\"] {\n\tbackground-color: var(--bog_builderui_special);\n\tcolor: var(--bog_builderui_back);\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+"use strict";
+/** @see $bog_builderui_tokens */
+var $;
+(function ($) {
+    $mol_style_define($bog_builderui_badge, {
+        display: 'inline-flex',
+        flex: {
+            direction: 'row',
+            grow: 0,
+        },
+        align: {
+            self: 'flex-start',
+            items: 'center',
+        },
+        padding: {
+            top: '0.125rem',
+            bottom: '0.125rem',
+            left: '0.625rem',
+            right: '0.625rem',
+        },
+        border: {
+            radius: '9999px',
+            width: 0,
+        },
+        background: {
+            color: $bog_builderui_tokens.control,
+        },
+        color: $bog_builderui_tokens.back,
+        font: {
+            family: $bog_builderui_tokens.font_body,
+            weight: 500,
+            size: '0.75rem',
+        },
+    });
+})($ || ($ = {}));
+
+;
 	($.$bog_mediagram_app) = class $bog_mediagram_app extends ($.$bog_builderui_div) {
 		Theme(){
 			const obj = new this.$.$bog_theme_auto();
@@ -11890,9 +12150,32 @@ var $;
 			(obj.sub) = () => (["Круги"]);
 			return obj;
 		}
+		circle_create_open(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Circle_create_btn(){
+			const obj = new this.$.$bog_builderui_button();
+			(obj.title) = () => ("создать круг");
+			(obj.click) = (next) => ((this.circle_create_open(next)));
+			return obj;
+		}
+		Circles_head(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Circles_title()), (this.Circle_create_btn())]);
+			return obj;
+		}
 		Circles_text(){
 			const obj = new this.$.$mol_view();
-			(obj.sub) = () => (["приватные группы — семья и друзья"]);
+			(obj.sub) = () => (["приватные группы — семья, друзья и пары"]);
+			return obj;
+		}
+		circle_rows(){
+			return [];
+		}
+		Circles_list(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.circle_rows()));
 			return obj;
 		}
 		Me_title(){
@@ -12013,6 +12296,66 @@ var $;
 			(obj.tab) = (next) => ((this.tab(next)));
 			return obj;
 		}
+		circle_dialog_showed(next){
+			if(next !== undefined) return next;
+			return false;
+		}
+		circle_create_close(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		circle_create_confirm(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		circle_name(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		Circle_name_field(){
+			const obj = new this.$.$bog_builderui_field();
+			(obj.hint) = () => ("Название");
+			(obj.value) = (next) => ((this.circle_name(next)));
+			return obj;
+		}
+		circle_type(next){
+			if(next !== undefined) return next;
+			return "family";
+		}
+		circle_type_options(){
+			return {};
+		}
+		Circle_type_field(){
+			const obj = new this.$.$bog_builderui_select();
+			(obj.value) = (next) => ((this.circle_type(next)));
+			(obj.dictionary) = () => ((this.circle_type_options()));
+			return obj;
+		}
+		circle_description(next){
+			if(next !== undefined) return next;
+			return "";
+		}
+		Circle_description_field(){
+			const obj = new this.$.$bog_builderui_field();
+			(obj.hint) = () => ("Описание");
+			(obj.value) = (next) => ((this.circle_description(next)));
+			return obj;
+		}
+		Circle_create_dialog(){
+			const obj = new this.$.$bog_builderui_dialog();
+			(obj.showed) = (next) => ((this.circle_dialog_showed(next)));
+			(obj.title) = () => ("Создать круг");
+			(obj.text) = () => ("Заполните поля, чтобы добавить приватный круг.");
+			(obj.confirm_title) = () => ("создать круг");
+			(obj.close) = (next) => ((this.circle_create_close(next)));
+			(obj.confirm) = (next) => ((this.circle_create_confirm(next)));
+			(obj.content) = () => ([
+				(this.Circle_name_field()), 
+				(this.Circle_type_field()), 
+				(this.Circle_description_field())
+			]);
+			return obj;
+		}
 		plugins(){
 			return [(this.Theme()), (this.Favicon())];
 		}
@@ -12052,7 +12395,11 @@ var $;
 		}
 		Circles_pane(){
 			const obj = new this.$.$bog_builderui_card();
-			(obj.sub) = () => ([(this.Circles_title()), (this.Circles_text())]);
+			(obj.sub) = () => ([
+				(this.Circles_head()), 
+				(this.Circles_text()), 
+				(this.Circles_list())
+			]);
 			return obj;
 		}
 		Me_pane(){
@@ -12098,7 +12445,8 @@ var $;
 			return [
 				(this.Top()), 
 				(this.Body()), 
-				(this.Nav())
+				(this.Nav()), 
+				(this.Circle_create_dialog())
 			];
 		}
 	};
@@ -12114,7 +12462,11 @@ var $;
 	($mol_mem(($.$bog_mediagram_app.prototype), "Feed_title"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Feed_text"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Circles_title"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "circle_create_open"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Circle_create_btn"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Circles_head"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Circles_text"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Circles_list"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Me_title"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Me_text"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Recognized_badge"));
@@ -12135,6 +12487,16 @@ var $;
 	($mol_mem(($.$bog_mediagram_app.prototype), "Page"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Body"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Nav"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "circle_dialog_showed"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "circle_create_close"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "circle_create_confirm"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "circle_name"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Circle_name_field"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "circle_type"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Circle_type_field"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "circle_description"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Circle_description_field"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Circle_create_dialog"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Library_filters"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Library_banner"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Library_grid"));
@@ -12146,6 +12508,42 @@ var $;
 	($mol_mem(($.$bog_mediagram_app.prototype), "Search"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Theme_toggle"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Add_btn"));
+	($.$bog_mediagram_app_circle) = class $bog_mediagram_app_circle extends ($.$bog_builderui_card) {
+		Circle_row_type(){
+			const obj = new this.$.$bog_builderui_badge();
+			(obj.title) = () => ((this.type_label()));
+			return obj;
+		}
+		Circle_row_title(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.title())]);
+			return obj;
+		}
+		Circle_row_description(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.description())]);
+			return obj;
+		}
+		title(){
+			return "";
+		}
+		type_label(){
+			return "";
+		}
+		description(){
+			return "";
+		}
+		sub(){
+			return [
+				(this.Circle_row_type()), 
+				(this.Circle_row_title()), 
+				(this.Circle_row_description())
+			];
+		}
+	};
+	($mol_mem(($.$bog_mediagram_app_circle.prototype), "Circle_row_type"));
+	($mol_mem(($.$bog_mediagram_app_circle.prototype), "Circle_row_title"));
+	($mol_mem(($.$bog_mediagram_app_circle.prototype), "Circle_row_description"));
 
 
 ;
@@ -20335,71 +20733,6 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$bog_builderui_badge) = class $bog_builderui_badge extends ($.$bog_builderui_div) {
-		title(){
-			return "";
-		}
-		variant(){
-			return "default";
-		}
-		attr(){
-			return {...(super.attr()), "bog_builderui_badge_variant": (this.variant())};
-		}
-		sub(){
-			return [(this.title())];
-		}
-	};
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("bog/builderui/badge/badge.view.css", "[bog_builderui_badge][bog_builderui_badge_variant=\"secondary\"] {\n\tbackground-color: var(--bog_builderui_field);\n\tcolor: var(--bog_builderui_text);\n}\n\n[bog_builderui_badge][bog_builderui_badge_variant=\"outline\"] {\n\tbackground-color: transparent;\n\tcolor: var(--bog_builderui_text);\n\tborder: 1px solid var(--bog_builderui_line);\n}\n\n[bog_builderui_badge][bog_builderui_badge_variant=\"destructive\"] {\n\tbackground-color: var(--bog_builderui_special);\n\tcolor: var(--bog_builderui_back);\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
-"use strict";
-/** @see $bog_builderui_tokens */
-var $;
-(function ($) {
-    $mol_style_define($bog_builderui_badge, {
-        display: 'inline-flex',
-        flex: {
-            direction: 'row',
-            grow: 0,
-        },
-        align: {
-            self: 'flex-start',
-            items: 'center',
-        },
-        padding: {
-            top: '0.125rem',
-            bottom: '0.125rem',
-            left: '0.625rem',
-            right: '0.625rem',
-        },
-        border: {
-            radius: '9999px',
-            width: 0,
-        },
-        background: {
-            color: $bog_builderui_tokens.control,
-        },
-        color: $bog_builderui_tokens.back,
-        font: {
-            family: $bog_builderui_tokens.font_body,
-            weight: 500,
-            size: '0.75rem',
-        },
-    });
-})($ || ($ = {}));
-
-;
 	($.$bog_mediagram_app_card) = class $bog_mediagram_app_card extends ($.$bog_builderui_card) {
 		Kind_flag(){
 			const obj = new this.$.$mol_view();
@@ -21507,6 +21840,11 @@ var $;
             done: k => k === 'book' ? 'прочитал' : 'готово',
             dropped: () => 'бросил',
         };
+        const CIRCLE_TYPE_LABEL = {
+            family: 'семья',
+            friends: 'друзья',
+            couple: 'пара',
+        };
         const KIND_ORDER = ['all', 'movie', 'series', 'book', 'anime'];
         function source_key(host) {
             return host.replace(/^www\./, '').split('.')[0];
@@ -21552,6 +21890,9 @@ var $;
                     done: 'готово',
                     dropped: 'бросил',
                 };
+            }
+            circle_type_options() {
+                return CIRCLE_TYPE_LABEL;
             }
             lights() {
                 const mode = this.Theme().mode();
@@ -21610,6 +21951,68 @@ var $;
             }
             banner_text() {
                 return 'авто из плеера — undo в истории';
+            }
+            circle_dialog_showed(next) {
+                return $mol_state_local.value('mediagram_circle_dialog_showed', next) ?? false;
+            }
+            circle_name(next) {
+                return $mol_state_local.value('mediagram_circle_name', next) ?? '';
+            }
+            circle_type(next) {
+                return $mol_state_local.value('mediagram_circle_type', next) ?? 'family';
+            }
+            circle_description(next) {
+                return $mol_state_local.value('mediagram_circle_description', next) ?? '';
+            }
+            circles(next) {
+                return $mol_state_local.value('mediagram_circles', next) ?? [];
+            }
+            circle_create_open(e) {
+                if (e)
+                    e.preventDefault();
+                this.circle_dialog_showed(true);
+                return null;
+            }
+            circle_create_close(e) {
+                if (e)
+                    e.preventDefault();
+                this.circle_dialog_showed(false);
+                return null;
+            }
+            circle_create_confirm(e) {
+                if (e)
+                    e.preventDefault();
+                const type = this.circle_type();
+                const title = this.circle_name().trim() || CIRCLE_TYPE_LABEL[type];
+                this.circles([
+                    ...this.circles(),
+                    {
+                        id: `${Date.now()}`,
+                        title,
+                        type,
+                        description: this.circle_description().trim(),
+                    },
+                ]);
+                this.circle_name('');
+                this.circle_description('');
+                this.circle_dialog_showed(false);
+                return null;
+            }
+            circle_rows() {
+                return this.circles().map(circle => this.Circle(circle.id));
+            }
+            Circle(id) {
+                const circle = new $bog_mediagram_app_circle();
+                circle.title = () => this.circle(id).title;
+                circle.type_label = () => CIRCLE_TYPE_LABEL[this.circle(id).type];
+                circle.description = () => this.circle(id).description || 'без описания';
+                return circle;
+            }
+            circle(id) {
+                const found = this.circles().find(circle => circle.id === id);
+                if (!found)
+                    throw new Error(`circle ${id} not found`);
+                return found;
             }
             type_chips() {
                 return KIND_ORDER.map(k => {
@@ -21778,6 +22181,27 @@ var $;
             $mol_mem
         ], $bog_mediagram_app.prototype, "entries_filtered", null);
         __decorate([
+            $mol_mem
+        ], $bog_mediagram_app.prototype, "circle_dialog_showed", null);
+        __decorate([
+            $mol_mem
+        ], $bog_mediagram_app.prototype, "circle_name", null);
+        __decorate([
+            $mol_mem
+        ], $bog_mediagram_app.prototype, "circle_type", null);
+        __decorate([
+            $mol_mem
+        ], $bog_mediagram_app.prototype, "circle_description", null);
+        __decorate([
+            $mol_mem
+        ], $bog_mediagram_app.prototype, "circles", null);
+        __decorate([
+            $mol_action
+        ], $bog_mediagram_app.prototype, "circle_create_confirm", null);
+        __decorate([
+            $mol_mem_key
+        ], $bog_mediagram_app.prototype, "Circle", null);
+        __decorate([
             $mol_mem_key
         ], $bog_mediagram_app.prototype, "Chip", null);
         __decorate([
@@ -21799,6 +22223,9 @@ var $;
             $mol_action
         ], $bog_mediagram_app.prototype, "add_from_snapshot", null);
         $$.$bog_mediagram_app = $bog_mediagram_app;
+        class $bog_mediagram_app_circle extends $.$bog_mediagram_app_circle {
+        }
+        $$.$bog_mediagram_app_circle = $bog_mediagram_app_circle;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -21905,6 +22332,38 @@ var $;
             flex: { direction: 'column' },
             gap: $mol_gap.text,
         },
+        Circles_head: {
+            flex: { direction: 'row', wrap: 'wrap' },
+            align: { items: 'center' },
+            gap: $mol_gap.text,
+        },
+        Circles_title: {
+            font: {
+                family: $bog_builderui_tokens.font_head,
+                size: '18px',
+                weight: 700,
+            },
+        },
+        Circle_create_btn: {
+            marginLeft: 'auto',
+        },
+        Circles_text: {
+            color: $bog_builderui_tokens.shade,
+        },
+        Circles_list: {
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(190px, 1fr))',
+            gap: $mol_gap.text,
+        },
+        Circle_name_field: {
+            width: '100%',
+        },
+        Circle_type_field: {
+            width: '100%',
+        },
+        Circle_description_field: {
+            width: '100%',
+        },
         Me_pane: {
             margin: { top: $mol_gap.block, right: $mol_gap.block, left: $mol_gap.block },
             flex: { direction: 'column' },
@@ -21954,6 +22413,24 @@ var $;
             flex: { direction: 'row', wrap: 'wrap' },
             gap: $mol_gap.text,
             align: { items: 'center' },
+        },
+    });
+    $mol_style_define($bog_mediagram_app_circle, {
+        flex: { direction: 'column' },
+        gap: $mol_gap.text,
+        Circle_row_type: {
+            align: { self: 'flex-start' },
+        },
+        Circle_row_title: {
+            font: {
+                family: $bog_builderui_tokens.font_head,
+                size: '16px',
+                weight: 700,
+            },
+        },
+        Circle_row_description: {
+            color: $bog_builderui_tokens.shade,
+            font: { size: '13px' },
         },
     });
 })($ || ($ = {}));

@@ -702,6 +702,34 @@ $bog_mediagram_app_nav $mol_view
 			Icon <= Icon_me $mol_icon_account
 			click? <=> me_click? null
 
+$bog_builderui_dialog $bog_builderui_div
+	showed? false
+	title \
+	text \
+	content /
+	confirm_title \Confirm
+	close? null
+	confirm? null
+	attr *
+		bog_builderui_dialog_showed <= showed?
+	sub /
+		<= Backdrop $mol_view
+			event *
+				click? <=> close? null
+		<= Surface $bog_builderui_card sub /
+			<= Surface_title $mol_view sub /
+				<= title
+			<= Surface_text $mol_view sub /
+				<= text
+			<= Surface_content $mol_view sub <= content
+			<= Surface_actions $mol_view sub /
+				<= Cancel $bog_builderui_button
+					title \Cancel
+					click? <=> close? null
+				<= Confirm $bog_builderui_button
+					title <= confirm_title
+					click? <=> confirm? null
+
 $bog_builderui_alert $bog_builderui_card
 	title \
 	text \
@@ -775,6 +803,15 @@ $bog_theme_toggle $mol_pop
 			theme_auto <= theme_auto
 			close? <=> picker_close? null
 
+$bog_builderui_badge $bog_builderui_div
+	title \
+	variant \default
+	attr *
+		^
+		bog_builderui_badge_variant <= variant
+	sub /
+		<= title
+
 - mediagram — webapp + Chrome side panel
 - Одна сборка $mol-аппа адаптируется по ширине через container queries
 - Пресет builderui: zinc / sky / yellow / eb-garamond / large
@@ -814,8 +851,14 @@ $bog_mediagram_app $bog_builderui_div
 			<= Feed_text $mol_view sub / \тут появятся события из ваших кругов
 	Circles_pane $bog_builderui_card
 		sub /
-			<= Circles_title $mol_view sub / \Круги
-			<= Circles_text $mol_view sub / \приватные группы — семья и друзья
+			<= Circles_head $mol_view
+				sub /
+					<= Circles_title $mol_view sub / \Круги
+					<= Circle_create_btn $bog_builderui_button
+						title \создать круг
+						click? <=> circle_create_open? null
+			<= Circles_text $mol_view sub / \приватные группы — семья, друзья и пары
+			<= Circles_list $mol_view sub <= circle_rows /
 	Me_pane $bog_builderui_card
 		sub /
 			<= Me_title $mol_view sub / \Я
@@ -859,6 +902,33 @@ $bog_mediagram_app $bog_builderui_div
 				<= Page $mol_view sub <= body_content /
 		<= Nav $bog_mediagram_app_nav
 			tab? <=> tab? \library
+		<= Circle_create_dialog $bog_builderui_dialog
+			showed? <=> circle_dialog_showed? false
+			title \Создать круг
+			text \Заполните поля, чтобы добавить приватный круг.
+			confirm_title \создать круг
+			close? <=> circle_create_close? null
+			confirm? <=> circle_create_confirm? null
+			content /
+				<= Circle_name_field $bog_builderui_field
+					hint \Название
+					value? <=> circle_name? \
+				<= Circle_type_field $bog_builderui_select
+					value? <=> circle_type? \family
+					dictionary <= circle_type_options *
+				<= Circle_description_field $bog_builderui_field
+					hint \Описание
+					value? <=> circle_description? \
+
+$bog_mediagram_app_circle $bog_builderui_card
+	title \
+	type_label \
+	description \
+	sub /
+		<= Circle_row_type $bog_builderui_badge
+			title <= type_label
+		<= Circle_row_title $mol_view sub / <= title
+		<= Circle_row_description $mol_view sub / <= description
 
 $bog_mediagram_app_chip $bog_builderui_button
 	kind \
@@ -872,15 +942,6 @@ $bog_mediagram_app_chip $bog_builderui_button
 	sub /
 		<= Swatch $mol_view
 		<= Label $mol_view sub / <= label
-
-$bog_builderui_badge $bog_builderui_div
-	title \
-	variant \default
-	attr *
-		^
-		bog_builderui_badge_variant <= variant
-	sub /
-		<= title
 
 $bog_mediagram_app_card $bog_builderui_card
 	title \

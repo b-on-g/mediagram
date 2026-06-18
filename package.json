@@ -225,6 +225,7 @@
     "$mol_icon_history",
     "$mol_icon_group",
     "$mol_icon_account",
+    "$bog_builderui_dialog",
     "$bog_builderui_alert",
     "$bog_theme_toggle",
     "$bog_theme_picker",
@@ -235,6 +236,7 @@
     "$mol_icon_weather_night",
     "$mol_icon_weather",
     "$mol_icon_monitor",
+    "$bog_builderui_badge",
     "$giper_baza_glob",
     "$giper_baza",
     "$giper",
@@ -354,7 +356,6 @@
     "$bog_mediagram_media",
     "$bog_mediagram_app_chip",
     "$bog_mediagram_app_card",
-    "$bog_builderui_badge",
     "$mol_offline_install",
     "$mol_offline"
   ],
