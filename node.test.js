@@ -12234,6 +12234,32 @@ var $;
 			(obj.sub) = () => ((this.circle_member_rows()));
 			return obj;
 		}
+		Circle_now_title(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => (["Сейчас смотрят"]);
+			return obj;
+		}
+		circle_now_rows(){
+			return [];
+		}
+		Circle_now_feed(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.circle_now_rows()));
+			return obj;
+		}
+		Circle_suggest_title(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => (["Предлагают посмотреть вместе"]);
+			return obj;
+		}
+		circle_suggest_rows(){
+			return [];
+		}
+		Circle_suggest_feed(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.circle_suggest_rows()));
+			return obj;
+		}
 		Me_title(){
 			const obj = new this.$.$mol_view();
 			(obj.sub) = () => (["Я"]);
@@ -12464,7 +12490,11 @@ var $;
 				(this.Circle_detail_head()), 
 				(this.Circle_detail_description()), 
 				(this.Circle_members_title()), 
-				(this.Circle_members_list())
+				(this.Circle_members_list()), 
+				(this.Circle_now_title()), 
+				(this.Circle_now_feed()), 
+				(this.Circle_suggest_title()), 
+				(this.Circle_suggest_feed())
 			]);
 			return obj;
 		}
@@ -12541,6 +12571,10 @@ var $;
 	($mol_mem(($.$bog_mediagram_app.prototype), "Circle_detail_description"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Circle_members_title"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Circle_members_list"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Circle_now_title"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Circle_now_feed"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Circle_suggest_title"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Circle_suggest_feed"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Me_title"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Me_text"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Recognized_badge"));
@@ -12665,6 +12699,57 @@ var $;
 	($mol_mem(($.$bog_mediagram_app_circle_member.prototype), "Member_role"));
 	($mol_mem(($.$bog_mediagram_app_circle_member.prototype), "Member_head"));
 	($mol_mem(($.$bog_mediagram_app_circle_member.prototype), "Member_watching"));
+	($.$bog_mediagram_app_circle_feed_item) = class $bog_mediagram_app_circle_feed_item extends ($.$bog_builderui_card) {
+		Feed_item_title(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.title())]);
+			return obj;
+		}
+		Feed_item_meta(){
+			const obj = new this.$.$bog_builderui_badge();
+			(obj.title) = () => ((this.meta()));
+			return obj;
+		}
+		Feed_item_head(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Feed_item_title()), (this.Feed_item_meta())]);
+			return obj;
+		}
+		Feed_item_by(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.by())]);
+			return obj;
+		}
+		Feed_item_note(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.note())]);
+			return obj;
+		}
+		title(){
+			return "";
+		}
+		by(){
+			return "";
+		}
+		meta(){
+			return "";
+		}
+		note(){
+			return "";
+		}
+		sub(){
+			return [
+				(this.Feed_item_head()), 
+				(this.Feed_item_by()), 
+				(this.Feed_item_note())
+			];
+		}
+	};
+	($mol_mem(($.$bog_mediagram_app_circle_feed_item.prototype), "Feed_item_title"));
+	($mol_mem(($.$bog_mediagram_app_circle_feed_item.prototype), "Feed_item_meta"));
+	($mol_mem(($.$bog_mediagram_app_circle_feed_item.prototype), "Feed_item_head"));
+	($mol_mem(($.$bog_mediagram_app_circle_feed_item.prototype), "Feed_item_by"));
+	($mol_mem(($.$bog_mediagram_app_circle_feed_item.prototype), "Feed_item_note"));
 
 
 ;
@@ -21983,6 +22068,39 @@ var $;
                 { id: 'partner', name: 'Партнёр', role: 'смотрит', watching: 'La La Land' },
             ],
         };
+        const CIRCLE_NOW_FEED = {
+            family: [
+                { id: 'frieren', title: 'Frieren: Beyond Journey’s End', by: 'Я смотрю', meta: 'аниме', note: '10 серия, можно обсудить после ужина' },
+                { id: 'crown', title: 'The Crown', by: 'Мама смотрит', meta: 'сериал', note: 'новый сезон, спокойный вечерний темп' },
+                { id: 'dune', title: 'Dune: Part Two', by: 'Папа смотрит', meta: 'фильм', note: 'пересматривает перед выходными' },
+            ],
+            friends: [
+                { id: 'jujutsu', title: 'Jujutsu Kaisen', by: 'Я смотрю', meta: 'аниме', note: 'арка уже разогналась, спойлеры опасны' },
+                { id: 'blue-eye', title: 'Blue Eye Samurai', by: 'Аня смотрит', meta: 'аниме', note: 'советует всем из-за визуала' },
+                { id: 'andor', title: 'Andor', by: 'Дима смотрит', meta: 'сериал', note: 'говорит, что это лучший Star Wars без шума' },
+                { id: 'bear', title: 'The Bear', by: 'Ника смотрит', meta: 'сериал', note: 'короткие серии для буднего вечера' },
+            ],
+            couple: [
+                { id: 'your-name', title: 'Your Name', by: 'Я смотрю', meta: 'аниме', note: 'красивый вариант на вечер' },
+                { id: 'la-la-land', title: 'La La Land', by: 'Партнёр смотрит', meta: 'фильм', note: 'оставили финал на потом' },
+            ],
+        };
+        const CIRCLE_SUGGEST_FEED = {
+            family: [
+                { id: 'paddington', title: 'Paddington 2', by: 'Мама предложила', meta: 'вместе позже', note: 'лёгкий фильм на воскресенье' },
+                { id: 'planet-earth', title: 'Planet Earth III', by: 'Папа предложил', meta: 'вместе позже', note: 'посмотреть одну серию всей семьёй' },
+                { id: 'totoro', title: 'My Neighbor Totoro', by: 'Я предложил', meta: 'вместе позже', note: 'уютный вариант без тяжёлого сюжета' },
+            ],
+            friends: [
+                { id: 'oppenheimer', title: 'Oppenheimer', by: 'Дима предложил', meta: 'вместе позже', note: 'длинный вечер, нужен общий слот' },
+                { id: 'scott-pilgrim', title: 'Scott Pilgrim Takes Off', by: 'Аня предложила', meta: 'вместе позже', note: 'короткий сезон для марафона' },
+                { id: 'arcane', title: 'Arcane', by: 'Ника предложила', meta: 'вместе позже', note: 'пересмотреть перед новым обсуждением' },
+            ],
+            couple: [
+                { id: 'before-sunrise', title: 'Before Sunrise', by: 'Партнёр предложил', meta: 'вместе позже', note: 'оставить на тихий вечер' },
+                { id: 'weathering', title: 'Weathering with You', by: 'Я предложил', meta: 'вместе позже', note: 'после Your Name будет в тему' },
+            ],
+        };
         const KIND_ORDER = ['all', 'movie', 'series', 'book', 'anime'];
         function source_key(host) {
             return host.replace(/^www\./, '').split('.')[0];
@@ -22204,6 +22322,48 @@ var $;
                     throw new Error(`circle member ${id} not found`);
                 return found;
             }
+            circle_now_items() {
+                const type = this.circle_detail()?.type ?? 'friends';
+                return CIRCLE_NOW_FEED[type];
+            }
+            circle_suggest_items() {
+                const type = this.circle_detail()?.type ?? 'friends';
+                return CIRCLE_SUGGEST_FEED[type];
+            }
+            circle_now_rows() {
+                return this.circle_now_items().map(item => this.Circle_now_item(item.id));
+            }
+            circle_suggest_rows() {
+                return this.circle_suggest_items().map(item => this.Circle_suggest_item(item.id));
+            }
+            Circle_now_item(id) {
+                const item = new $bog_mediagram_app_circle_feed_item();
+                item.title = () => this.circle_now_item(id).title;
+                item.by = () => this.circle_now_item(id).by;
+                item.meta = () => this.circle_now_item(id).meta;
+                item.note = () => this.circle_now_item(id).note;
+                return item;
+            }
+            Circle_suggest_item(id) {
+                const item = new $bog_mediagram_app_circle_feed_item();
+                item.title = () => this.circle_suggest_item(id).title;
+                item.by = () => this.circle_suggest_item(id).by;
+                item.meta = () => this.circle_suggest_item(id).meta;
+                item.note = () => this.circle_suggest_item(id).note;
+                return item;
+            }
+            circle_now_item(id) {
+                const found = this.circle_now_items().find(item => item.id === id);
+                if (!found)
+                    throw new Error(`circle now item ${id} not found`);
+                return found;
+            }
+            circle_suggest_item(id) {
+                const found = this.circle_suggest_items().find(item => item.id === id);
+                if (!found)
+                    throw new Error(`circle suggest item ${id} not found`);
+                return found;
+            }
             type_chips() {
                 return KIND_ORDER.map(k => {
                     const chip = this.Chip(k);
@@ -22400,6 +22560,12 @@ var $;
         ], $bog_mediagram_app.prototype, "Circle_member", null);
         __decorate([
             $mol_mem_key
+        ], $bog_mediagram_app.prototype, "Circle_now_item", null);
+        __decorate([
+            $mol_mem_key
+        ], $bog_mediagram_app.prototype, "Circle_suggest_item", null);
+        __decorate([
+            $mol_mem_key
         ], $bog_mediagram_app.prototype, "Chip", null);
         __decorate([
             $mol_mem_key
@@ -22426,6 +22592,9 @@ var $;
         class $bog_mediagram_app_circle_member extends $.$bog_mediagram_app_circle_member {
         }
         $$.$bog_mediagram_app_circle_member = $bog_mediagram_app_circle_member;
+        class $bog_mediagram_app_circle_feed_item extends $.$bog_mediagram_app_circle_feed_item {
+        }
+        $$.$bog_mediagram_app_circle_feed_item = $bog_mediagram_app_circle_feed_item;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -22587,6 +22756,30 @@ var $;
             gridTemplateColumns: 'repeat(auto-fill, minmax(210px, 1fr))',
             gap: $mol_gap.text,
         },
+        Circle_now_title: {
+            font: {
+                family: $bog_builderui_tokens.font_head,
+                size: '16px',
+                weight: 700,
+            },
+        },
+        Circle_suggest_title: {
+            font: {
+                family: $bog_builderui_tokens.font_head,
+                size: '16px',
+                weight: 700,
+            },
+        },
+        Circle_now_feed: {
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(210px, 1fr))',
+            gap: $mol_gap.text,
+        },
+        Circle_suggest_feed: {
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(210px, 1fr))',
+            gap: $mol_gap.text,
+        },
         Circle_name_field: {
             width: '100%',
         },
@@ -22682,6 +22875,30 @@ var $;
             },
         },
         Member_watching: {
+            color: $bog_builderui_tokens.shade,
+            font: { size: '13px' },
+        },
+    });
+    $mol_style_define($bog_mediagram_app_circle_feed_item, {
+        flex: { direction: 'column' },
+        gap: $mol_gap.text,
+        Feed_item_head: {
+            flex: { direction: 'row', wrap: 'wrap' },
+            align: { items: 'center' },
+            gap: $mol_gap.text,
+        },
+        Feed_item_title: {
+            font: {
+                family: $bog_builderui_tokens.font_head,
+                size: '16px',
+                weight: 700,
+            },
+        },
+        Feed_item_by: {
+            color: $bog_builderui_tokens.control,
+            font: { size: '13px', weight: 600 },
+        },
+        Feed_item_note: {
             color: $bog_builderui_tokens.shade,
             font: { size: '13px' },
         },

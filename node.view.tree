@@ -872,6 +872,10 @@ $bog_mediagram_app $bog_builderui_div
 			<= Circle_detail_description $mol_view sub / <= circle_detail_description \
 			<= Circle_members_title $mol_view sub / \Участники
 			<= Circle_members_list $mol_view sub <= circle_member_rows /
+			<= Circle_now_title $mol_view sub / \Сейчас смотрят
+			<= Circle_now_feed $mol_view sub <= circle_now_rows /
+			<= Circle_suggest_title $mol_view sub / \Предлагают посмотреть вместе
+			<= Circle_suggest_feed $mol_view sub <= circle_suggest_rows /
 	Me_pane $bog_builderui_card
 		sub /
 			<= Me_title $mol_view sub / \Я
@@ -958,6 +962,20 @@ $bog_mediagram_app_circle_member $bog_builderui_card
 				<= Member_role $bog_builderui_badge
 					title <= role
 		<= Member_watching $mol_view sub / <= watching
+
+$bog_mediagram_app_circle_feed_item $bog_builderui_card
+	title \
+	by \
+	meta \
+	note \
+	sub /
+		<= Feed_item_head $mol_view
+			sub /
+				<= Feed_item_title $mol_view sub / <= title
+				<= Feed_item_meta $bog_builderui_badge
+					title <= meta
+		<= Feed_item_by $mol_view sub / <= by
+		<= Feed_item_note $mol_view sub / <= note
 
 $bog_mediagram_app_chip $bog_builderui_button
 	kind \
