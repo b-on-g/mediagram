@@ -2,6 +2,7 @@ namespace $.$$ {
 
 	type Kind = 'movie' | 'series' | 'book' | 'anime'
 	type Status = 'want_to' | 'doing' | 'done' | 'dropped'
+	type Circle_type = 'family' | 'friends' | 'couple'
 
 	type Entry = {
 		id: string
@@ -11,6 +12,13 @@ namespace $.$$ {
 		status: Status
 		rating: number | null
 		favorite: boolean
+	}
+
+	type Circle = {
+		id: string
+		title: string
+		type: Circle_type
+		description: string
 	}
 
 	const KIND_LABEL: Record<Kind, string> = {
@@ -32,6 +40,12 @@ namespace $.$$ {
 		doing: k => k === 'book' ? 'читаю' : 'смотрю',
 		done: k => k === 'book' ? 'прочитал' : 'готово',
 		dropped: () => 'бросил',
+	}
+
+	const CIRCLE_TYPE_LABEL: Record<Circle_type, string> = {
+		family: 'семья',
+		friends: 'друзья',
+		couple: 'пара',
 	}
 
 	const KIND_ORDER: ( Kind | 'all' )[] = [ 'all', 'movie', 'series', 'book', 'anime' ]
@@ -89,6 +103,10 @@ namespace $.$$ {
 				done: 'готово',
 				dropped: 'бросил',
 			}
+		}
+
+		circle_type_options() {
+			return CIRCLE_TYPE_LABEL
 		}
 
 		lights() {
@@ -151,6 +169,82 @@ namespace $.$$ {
 
 		banner_text() {
 			return 'авто из плеера — undo в истории'
+		}
+
+		@ $mol_mem
+		circle_dialog_showed( next?: boolean ) {
+			return $mol_state_local.value( 'mediagram_circle_dialog_showed', next ) as boolean ?? false
+		}
+
+		@ $mol_mem
+		circle_name( next?: string ) {
+			return $mol_state_local.value( 'mediagram_circle_name', next ) as string ?? ''
+		}
+
+		@ $mol_mem
+		circle_type( next?: Circle_type ) {
+			return $mol_state_local.value( 'mediagram_circle_type', next ) as Circle_type ?? 'family'
+		}
+
+		@ $mol_mem
+		circle_description( next?: string ) {
+			return $mol_state_local.value( 'mediagram_circle_description', next ) as string ?? ''
+		}
+
+		@ $mol_mem
+		circles( next?: Circle[] ) {
+			return $mol_state_local.value( 'mediagram_circles', next ) as Circle[] ?? []
+		}
+
+		circle_create_open( e?: Event ) {
+			if( e ) e.preventDefault()
+			this.circle_dialog_showed( true )
+			return null
+		}
+
+		circle_create_close( e?: Event ) {
+			if( e ) e.preventDefault()
+			this.circle_dialog_showed( false )
+			return null
+		}
+
+		@ $mol_action
+		circle_create_confirm( e?: Event ) {
+			if( e ) e.preventDefault()
+			const type = this.circle_type()
+			const title = this.circle_name().trim() || CIRCLE_TYPE_LABEL[ type ]
+			this.circles( [
+				... this.circles(),
+				{
+					id: `${ Date.now() }`,
+					title,
+					type,
+					description: this.circle_description().trim(),
+				},
+			] )
+			this.circle_name( '' )
+			this.circle_description( '' )
+			this.circle_dialog_showed( false )
+			return null
+		}
+
+		circle_rows() {
+			return this.circles().map( circle => this.Circle( circle.id ) )
+		}
+
+		@ $mol_mem_key
+		Circle( id: string ) {
+			const circle = new $bog_mediagram_app_circle()
+			circle.title = () => this.circle( id ).title
+			circle.type_label = () => CIRCLE_TYPE_LABEL[ this.circle( id ).type ]
+			circle.description = () => this.circle( id ).description || 'без описания'
+			return circle
+		}
+
+		circle( id: string ) {
+			const found = this.circles().find( circle => circle.id === id )
+			if( !found ) throw new Error( `circle ${ id } not found` )
+			return found
 		}
 
 		type_chips() {
@@ -322,5 +416,7 @@ namespace $.$$ {
 		}
 
 	}
+
+	export class $bog_mediagram_app_circle extends $.$bog_mediagram_app_circle {}
 
 }

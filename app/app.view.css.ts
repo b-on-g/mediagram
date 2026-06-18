@@ -115,6 +115,46 @@ namespace $ {
 			gap: $mol_gap.text,
 		},
 
+		Circles_head: {
+			flex: { direction: 'row', wrap: 'wrap' },
+			align: { items: 'center' },
+			gap: $mol_gap.text,
+		},
+
+		Circles_title: {
+			font: {
+				family: $bog_builderui_tokens.font_head,
+				size: '18px',
+				weight: 700,
+			},
+		},
+
+		Circle_create_btn: {
+			marginLeft: 'auto',
+		},
+
+		Circles_text: {
+			color: $bog_builderui_tokens.shade,
+		},
+
+		Circles_list: {
+			display: 'grid',
+			gridTemplateColumns: 'repeat(auto-fill, minmax(190px, 1fr))',
+			gap: $mol_gap.text,
+		},
+
+		Circle_name_field: {
+			width: '100%',
+		},
+
+		Circle_type_field: {
+			width: '100%',
+		},
+
+		Circle_description_field: {
+			width: '100%',
+		},
+
 		Me_pane: {
 			margin: { top: $mol_gap.block, right: $mol_gap.block, left: $mol_gap.block },
 			flex: { direction: 'column' },
@@ -174,5 +214,27 @@ namespace $ {
 			align: { items: 'center' },
 		},
 
+	} )
+
+	$mol_style_define( $bog_mediagram_app_circle, {
+		flex: { direction: 'column' },
+		gap: $mol_gap.text,
+
+		Circle_row_type: {
+			align: { self: 'flex-start' },
+		},
+
+		Circle_row_title: {
+			font: {
+				family: $bog_builderui_tokens.font_head,
+				size: '16px',
+				weight: 700,
+			},
+		},
+
+		Circle_row_description: {
+			color: $bog_builderui_tokens.shade,
+			font: { size: '13px' },
+		},
 	} )
 }

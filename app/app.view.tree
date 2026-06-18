@@ -37,8 +37,14 @@ $bog_mediagram_app $bog_builderui_div
 			<= Feed_text $mol_view sub / \тут появятся события из ваших кругов
 	Circles_pane $bog_builderui_card
 		sub /
-			<= Circles_title $mol_view sub / \Круги
-			<= Circles_text $mol_view sub / \приватные группы — семья и друзья
+			<= Circles_head $mol_view
+				sub /
+					<= Circles_title $mol_view sub / \Круги
+					<= Circle_create_btn $bog_builderui_button
+						title \создать круг
+						click? <=> circle_create_open? null
+			<= Circles_text $mol_view sub / \приватные группы — семья, друзья и пары
+			<= Circles_list $mol_view sub <= circle_rows /
 	Me_pane $bog_builderui_card
 		sub /
 			<= Me_title $mol_view sub / \Я
@@ -82,3 +88,30 @@ $bog_mediagram_app $bog_builderui_div
 				<= Page $mol_view sub <= body_content /
 		<= Nav $bog_mediagram_app_nav
 			tab? <=> tab? \library
+		<= Circle_create_dialog $bog_builderui_dialog
+			showed? <=> circle_dialog_showed? false
+			title \Создать круг
+			text \Заполните поля, чтобы добавить приватный круг.
+			confirm_title \создать круг
+			close? <=> circle_create_close? null
+			confirm? <=> circle_create_confirm? null
+			content /
+				<= Circle_name_field $bog_builderui_field
+					hint \Название
+					value? <=> circle_name? \
+				<= Circle_type_field $bog_builderui_select
+					value? <=> circle_type? \family
+					dictionary <= circle_type_options *
+				<= Circle_description_field $bog_builderui_field
+					hint \Описание
+					value? <=> circle_description? \
+
+$bog_mediagram_app_circle $bog_builderui_card
+	title \
+	type_label \
+	description \
+	sub /
+		<= Circle_row_type $bog_builderui_badge
+			title <= type_label
+		<= Circle_row_title $mol_view sub / <= title
+		<= Circle_row_description $mol_view sub / <= description
