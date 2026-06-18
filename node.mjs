@@ -5158,10 +5158,27 @@ var $;
 			(obj.sub) = () => ([(this.groups_count_label())]);
 			return obj;
 		}
+		group_start(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Group_start(){
+			const obj = new this.$.$mol_button();
+			(obj.click) = (next) => ((this.group_start(next)));
+			(obj.sub) = () => (["создать группу"]);
+			return obj;
+		}
 		Groups_head(){
 			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Groups_title()), (this.Groups_count())]);
+			(obj.sub) = () => ([
+				(this.Groups_title()), 
+				(this.Groups_count()), 
+				(this.Group_start())
+			]);
 			return obj;
+		}
+		group_form_open(){
+			return "false";
 		}
 		group_name(next){
 			if(next !== undefined) return next;
@@ -5193,6 +5210,7 @@ var $;
 		}
 		Groups_form(){
 			const obj = new this.$.$mol_view();
+			(obj.attr) = () => ({...(this.$.$mol_view.prototype.attr.call(obj)), "bog_mediagram_group_open": (this.group_form_open())});
 			(obj.sub) = () => ([
 				(this.Group_name()), 
 				(this.Group_types()), 
@@ -5266,6 +5284,8 @@ var $;
 	($mol_mem(($.$bog_mediagram_app.prototype), "Banner"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Groups_title"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Groups_count"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "group_start"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Group_start"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Groups_head"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "group_name"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Group_name"));
@@ -6718,6 +6738,15 @@ var $;
             groups(next) {
                 return $mol_state_local.value('mediagram_groups', next) ?? [];
             }
+            group_form_open(next) {
+                return $mol_state_local.value('mediagram_group_form_open', next) ?? 'false';
+            }
+            group_start(e) {
+                if (e)
+                    e.preventDefault();
+                this.group_form_open('true');
+                return null;
+            }
             groups_count_label() {
                 return `${this.groups().length} групп`;
             }
@@ -6747,6 +6776,7 @@ var $;
                     { id: `${Date.now()}`, title, type },
                 ]);
                 this.group_name('');
+                this.group_form_open('false');
                 return null;
             }
             group_rows() {
@@ -6901,6 +6931,12 @@ var $;
         __decorate([
             $mol_mem
         ], $bog_mediagram_app.prototype, "groups", null);
+        __decorate([
+            $mol_mem
+        ], $bog_mediagram_app.prototype, "group_form_open", null);
+        __decorate([
+            $mol_action
+        ], $bog_mediagram_app.prototype, "group_start", null);
         __decorate([
             $mol_action
         ], $bog_mediagram_app.prototype, "group_create", null);
@@ -7080,6 +7116,14 @@ var $;
             color: '#ffffff99',
             font: { size: '12px' },
         },
+        Group_start: {
+            flex: { shrink: 0 },
+            background: { color: '#ffffff' },
+            color: '#050505',
+            border: { width: '1px', style: 'solid', color: '#ffffff' },
+            borderRadius: '6px',
+            font: { weight: 700 },
+        },
         Groups_form: {
             flex: { direction: 'row', wrap: 'wrap' },
             align: { items: 'center' },
@@ -7147,6 +7191,11 @@ var $;
                     Groups_count: {
                         color: '#05050599',
                     },
+                    Group_start: {
+                        background: { color: '#050505' },
+                        color: '#ffffff',
+                        border: { width: '1px', style: 'solid', color: '#050505' },
+                    },
                     Count: {
                         color: '#05050599',
                     },
@@ -7190,6 +7239,17 @@ var $;
                     background: { color: '#e50914' },
                     color: '#ffffff',
                     border: { width: '1px', style: 'solid', color: '#e50914' },
+                },
+            },
+        },
+    });
+    $mol_style_define($bog_mediagram_app, {
+        Groups_form: {
+            '@': {
+                bog_mediagram_group_open: {
+                    false: {
+                        display: 'none',
+                    },
                 },
             },
         },
