@@ -45,6 +45,19 @@ $bog_mediagram_app $bog_builderui_div
 						click? <=> circle_create_open? null
 			<= Circles_text $mol_view sub / \приватные группы — семья, друзья и пары
 			<= Circles_list $mol_view sub <= circle_rows /
+	Circle_detail_pane $bog_builderui_card
+		sub /
+			<= Circle_detail_head $mol_view
+				sub /
+					<= Circle_back_btn $bog_builderui_button
+						title \назад
+						click? <=> circle_back? null
+					<= Circle_detail_title $mol_view sub / <= circle_detail_title \
+					<= Circle_detail_type $bog_builderui_badge
+						title <= circle_detail_type_label \
+			<= Circle_detail_description $mol_view sub / <= circle_detail_description \
+			<= Circle_members_title $mol_view sub / \Участники
+			<= Circle_members_list $mol_view sub <= circle_member_rows /
 	Me_pane $bog_builderui_card
 		sub /
 			<= Me_title $mol_view sub / \Я
@@ -110,8 +123,24 @@ $bog_mediagram_app_circle $bog_builderui_card
 	title \
 	type_label \
 	description \
+	open? null
+	event *
+		^
+		click? <=> open? null
 	sub /
 		<= Circle_row_type $bog_builderui_badge
 			title <= type_label
 		<= Circle_row_title $mol_view sub / <= title
 		<= Circle_row_description $mol_view sub / <= description
+
+$bog_mediagram_app_circle_member $bog_builderui_card
+	name \
+	role \
+	watching \
+	sub /
+		<= Member_head $mol_view
+			sub /
+				<= Member_name $mol_view sub / <= name
+				<= Member_role $bog_builderui_badge
+					title <= role
+		<= Member_watching $mol_view sub / <= watching

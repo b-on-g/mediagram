@@ -21,6 +21,13 @@ namespace $.$$ {
 		description: string
 	}
 
+	type Circle_member = {
+		id: string
+		name: string
+		role: string
+		watching: string
+	}
+
 	const KIND_LABEL: Record<Kind, string> = {
 		movie: 'фильм',
 		series: 'сериал',
@@ -46,6 +53,24 @@ namespace $.$$ {
 		family: 'семья',
 		friends: 'друзья',
 		couple: 'пара',
+	}
+
+	const CIRCLE_MEMBERS: Record<Circle_type, Circle_member[]> = {
+		family: [
+			{ id: 'me', name: 'Я', role: 'смотрю', watching: 'Frieren: Beyond Journey’s End' },
+			{ id: 'mom', name: 'Мама', role: 'смотрит', watching: 'The Crown' },
+			{ id: 'dad', name: 'Папа', role: 'смотрит', watching: 'Dune: Part Two' },
+		],
+		friends: [
+			{ id: 'me', name: 'Я', role: 'смотрю', watching: 'Jujutsu Kaisen' },
+			{ id: 'anya', name: 'Аня', role: 'смотрит', watching: 'Blue Eye Samurai' },
+			{ id: 'dima', name: 'Дима', role: 'смотрит', watching: 'Andor' },
+			{ id: 'nika', name: 'Ника', role: 'смотрит', watching: 'The Bear' },
+		],
+		couple: [
+			{ id: 'me', name: 'Я', role: 'смотрю', watching: 'Your Name' },
+			{ id: 'partner', name: 'Партнёр', role: 'смотрит', watching: 'La La Land' },
+		],
 	}
 
 	const KIND_ORDER: ( Kind | 'all' )[] = [ 'all', 'movie', 'series', 'book', 'anime' ]
@@ -238,12 +263,74 @@ namespace $.$$ {
 			circle.title = () => this.circle( id ).title
 			circle.type_label = () => CIRCLE_TYPE_LABEL[ this.circle( id ).type ]
 			circle.description = () => this.circle( id ).description || 'без описания'
+			circle.open = ( e?: Event ) => this.circle_open( id, e )
 			return circle
+		}
+
+		circle_open( id: string, e?: Event ) {
+			if( e ) e.preventDefault()
+			this.circle_current( id )
+			this.tab( 'circle' )
+			return null
+		}
+
+		circle_back( e?: Event ) {
+			if( e ) e.preventDefault()
+			this.circle_current( '' )
+			this.tab( 'circles' )
+			return null
+		}
+
+		@ $mol_mem
+		circle_current( next?: string ) {
+			return $mol_state_arg.value( 'circle', next ) ?? ''
 		}
 
 		circle( id: string ) {
 			const found = this.circles().find( circle => circle.id === id )
 			if( !found ) throw new Error( `circle ${ id } not found` )
+			return found
+		}
+
+		circle_detail() {
+			const id = this.circle_current()
+			return this.circles().find( circle => circle.id === id ) ?? null
+		}
+
+		circle_detail_title() {
+			return this.circle_detail()?.title ?? 'Круг'
+		}
+
+		circle_detail_type_label() {
+			const type = this.circle_detail()?.type ?? 'friends'
+			return CIRCLE_TYPE_LABEL[ type ]
+		}
+
+		circle_detail_description() {
+			return this.circle_detail()?.description || 'без описания'
+		}
+
+		circle_members() {
+			const type = this.circle_detail()?.type ?? 'friends'
+			return CIRCLE_MEMBERS[ type ]
+		}
+
+		circle_member_rows() {
+			return this.circle_members().map( member => this.Circle_member( member.id ) )
+		}
+
+		@ $mol_mem_key
+		Circle_member( id: string ) {
+			const member = new $bog_mediagram_app_circle_member()
+			member.name = () => this.circle_member( id ).name
+			member.role = () => this.circle_member( id ).role
+			member.watching = () => this.circle_member( id ).watching
+			return member
+		}
+
+		circle_member( id: string ) {
+			const found = this.circle_members().find( member => member.id === id )
+			if( !found ) throw new Error( `circle member ${ id } not found` )
 			return found
 		}
 
@@ -308,6 +395,7 @@ namespace $.$$ {
 			switch( this.tab() ) {
 				case 'feed': return [ this.Feed_pane() ]
 				case 'circles': return [ this.Circles_pane() ]
+				case 'circle': return this.circle_detail() ? [ this.Circle_detail_pane() ] : [ this.Circles_pane() ]
 				case 'me': return [ this.Me_pane() ]
 				default: {
 					const items: any[] = []
@@ -418,5 +506,6 @@ namespace $.$$ {
 	}
 
 	export class $bog_mediagram_app_circle extends $.$bog_mediagram_app_circle {}
+	export class $bog_mediagram_app_circle_member extends $.$bog_mediagram_app_circle_member {}
 
 }

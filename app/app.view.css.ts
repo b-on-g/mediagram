@@ -143,6 +143,44 @@ namespace $ {
 			gap: $mol_gap.text,
 		},
 
+		Circle_detail_pane: {
+			margin: { top: $mol_gap.block, right: $mol_gap.block, left: $mol_gap.block },
+			flex: { direction: 'column' },
+			gap: $mol_gap.text,
+		},
+
+		Circle_detail_head: {
+			flex: { direction: 'row', wrap: 'wrap' },
+			align: { items: 'center' },
+			gap: $mol_gap.text,
+		},
+
+		Circle_detail_title: {
+			font: {
+				family: $bog_builderui_tokens.font_head,
+				size: '18px',
+				weight: 700,
+			},
+		},
+
+		Circle_detail_description: {
+			color: $bog_builderui_tokens.shade,
+		},
+
+		Circle_members_title: {
+			font: {
+				family: $bog_builderui_tokens.font_head,
+				size: '16px',
+				weight: 700,
+			},
+		},
+
+		Circle_members_list: {
+			display: 'grid',
+			gridTemplateColumns: 'repeat(auto-fill, minmax(210px, 1fr))',
+			gap: $mol_gap.text,
+		},
+
 		Circle_name_field: {
 			width: '100%',
 		},
@@ -219,6 +257,7 @@ namespace $ {
 	$mol_style_define( $bog_mediagram_app_circle, {
 		flex: { direction: 'column' },
 		gap: $mol_gap.text,
+		cursor: 'pointer',
 
 		Circle_row_type: {
 			align: { self: 'flex-start' },
@@ -233,6 +272,30 @@ namespace $ {
 		},
 
 		Circle_row_description: {
+			color: $bog_builderui_tokens.shade,
+			font: { size: '13px' },
+		},
+	} )
+
+	$mol_style_define( $bog_mediagram_app_circle_member, {
+		flex: { direction: 'column' },
+		gap: $mol_gap.text,
+
+		Member_head: {
+			flex: { direction: 'row', wrap: 'wrap' },
+			align: { items: 'center' },
+			gap: $mol_gap.text,
+		},
+
+		Member_name: {
+			font: {
+				family: $bog_builderui_tokens.font_head,
+				size: '16px',
+				weight: 700,
+			},
+		},
+
+		Member_watching: {
 			color: $bog_builderui_tokens.shade,
 			font: { size: '13px' },
 		},
