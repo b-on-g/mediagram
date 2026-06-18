@@ -193,11 +193,6 @@ namespace $.$$ {
 			return found
 		}
 
-		add_click( e?: Event ) {
-			if( e ) e.preventDefault()
-			return null
-		}
-
 		@ $mol_mem
 		tab( next?: string ) {
 			return $mol_state_arg.value( 'tab', next ) ?? 'library'

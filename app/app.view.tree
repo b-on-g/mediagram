@@ -6,6 +6,8 @@
 $bog_mediagram_app $bog_builderui_div
 	plugins /
 		<= Theme $bog_theme_auto
+		<= Favicon $bog_favicon
+			Icon <= favicon_icon $mol_icon_library
 	attr *
 		^
 		bog_builderui_lights <= lights \dark
@@ -68,13 +70,10 @@ $bog_mediagram_app $bog_builderui_div
 						<= Brand_mark $mol_view
 						<= Brand_name $mol_view sub / \mediagram
 				<= Search $bog_builderui_field
-					hint \поиск
+					hint \поиск в библиотеке
 					value? <=> query? \
 				<= Theme_toggle $bog_theme_toggle
 					theme_auto <= Theme
-				<= Add_btn $bog_builderui_button
-					title \добавить
-					click? <=> add_click? null
 		<= Body $mol_scroll
 			sub /
 				<= Page $mol_view sub <= body_content /

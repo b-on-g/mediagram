@@ -9,6 +9,24 @@ namespace $.$$ {
 		// если Kind=rated и ShareRating
 		Rating: $giper_baza_atom_bint,
 		At: $giper_baza_atom_time,
-	}) {}
+	}) {
+
+		static readonly kinds = [
+			'started', 'finished', 'rated', 'dropped', 'added', 'circle_watched',
+		] as const
+
+		valid_kind() {
+			const v = this.Kind()?.val()
+			return v != null && ($bog_mediagram_activity.kinds as readonly string[]).includes(v)
+		}
+
+		/** Rating требуется только если Kind='rated' */
+		valid_rating() {
+			if (this.Kind()?.val() !== 'rated') return true
+			const v = this.Rating()?.val()
+			return v != null && v >= 1n && v <= 10n
+		}
+
+	}
 
 }

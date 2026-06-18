@@ -10,6 +10,26 @@ namespace $.$$ {
 		SeenBy: $giper_baza_list_str,
 		// заполнен → запись в архиве
 		WatchedAt: $giper_baza_atom_time,
-	}) {}
+	}) {
+
+		archived() {
+			return this.WatchedAt()?.val() != null
+		}
+
+		/** Голос lord'а считается один раз, даже если он повторно нажал «+1» */
+		toggle_vote(lord_id: string) {
+			this.Votes()?.has(lord_id, !(this.Votes()?.has(lord_id) ?? false))
+		}
+
+		mark_seen(lord_id: string) {
+			this.SeenBy()?.has(lord_id, true)
+		}
+
+		/** Сортировка по количеству голосов (PRD: «голоса +1, сортировка по голосам») */
+		votes_count() {
+			return this.Votes()?.units().length ?? 0
+		}
+
+	}
 
 }

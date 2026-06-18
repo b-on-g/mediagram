@@ -14,6 +14,31 @@ namespace $.$$ {
 		// 'wikidata' → 'Q…', 'kinopoisk' → …, 'imdb' → 'tt…' и т.д.
 		SourceIds: $giper_baza_dict_to($giper_baza_atom_text),
 		AddedAt: $giper_baza_atom_time,
-	}) {}
+	}) {
+
+		static readonly kinds = [ 'movie', 'series', 'book', 'anime' ] as const
+
+		static readonly poster_thumb_max_bytes = 5 * 1024
+		static readonly poster_card_max_bytes = 30 * 1024
+
+		/** Kind должен входить в {@link $bog_mediagram_media.kinds} */
+		valid_kind() {
+			const v = this.Kind()?.val()
+			return v != null && ($bog_mediagram_media.kinds as readonly string[]).includes(v)
+		}
+
+		/** Хоть один source-id (минимум для матчинга между юзерами) */
+		valid_source_ids() {
+			const dict = this.SourceIds()
+			return Boolean(dict && dict.units().length > 0)
+		}
+
+		/** Title непустой */
+		valid_title() {
+			const v = this.Title()?.val()
+			return typeof v === 'string' && v.trim().length > 0
+		}
+
+	}
 
 }
