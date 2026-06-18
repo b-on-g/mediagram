@@ -10845,6 +10845,71 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$bog_builderui_badge) = class $bog_builderui_badge extends ($.$bog_builderui_div) {
+		title(){
+			return "";
+		}
+		variant(){
+			return "default";
+		}
+		attr(){
+			return {...(super.attr()), "bog_builderui_badge_variant": (this.variant())};
+		}
+		sub(){
+			return [(this.title())];
+		}
+	};
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("bog/builderui/badge/badge.view.css", "[bog_builderui_badge][bog_builderui_badge_variant=\"secondary\"] {\n\tbackground-color: var(--bog_builderui_field);\n\tcolor: var(--bog_builderui_text);\n}\n\n[bog_builderui_badge][bog_builderui_badge_variant=\"outline\"] {\n\tbackground-color: transparent;\n\tcolor: var(--bog_builderui_text);\n\tborder: 1px solid var(--bog_builderui_line);\n}\n\n[bog_builderui_badge][bog_builderui_badge_variant=\"destructive\"] {\n\tbackground-color: var(--bog_builderui_special);\n\tcolor: var(--bog_builderui_back);\n}\n");
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+"use strict";
+/** @see $bog_builderui_tokens */
+var $;
+(function ($) {
+    $mol_style_define($bog_builderui_badge, {
+        display: 'inline-flex',
+        flex: {
+            direction: 'row',
+            grow: 0,
+        },
+        align: {
+            self: 'flex-start',
+            items: 'center',
+        },
+        padding: {
+            top: '0.125rem',
+            bottom: '0.125rem',
+            left: '0.625rem',
+            right: '0.625rem',
+        },
+        border: {
+            radius: '9999px',
+            width: 0,
+        },
+        background: {
+            color: $bog_builderui_tokens.control,
+        },
+        color: $bog_builderui_tokens.back,
+        font: {
+            family: $bog_builderui_tokens.font_body,
+            weight: 500,
+            size: '0.75rem',
+        },
+    });
+})($ || ($ = {}));
+
+;
 	($.$bog_mediagram_app_nav_item) = class $bog_mediagram_app_nav_item extends ($.$mol_view) {
 		click(next){
 			if(next !== undefined) return next;
@@ -12015,71 +12080,6 @@ var $;
 })($ || ($ = {}));
 
 ;
-	($.$bog_builderui_badge) = class $bog_builderui_badge extends ($.$bog_builderui_div) {
-		title(){
-			return "";
-		}
-		variant(){
-			return "default";
-		}
-		attr(){
-			return {...(super.attr()), "bog_builderui_badge_variant": (this.variant())};
-		}
-		sub(){
-			return [(this.title())];
-		}
-	};
-
-
-;
-"use strict";
-var $;
-(function ($) {
-    $mol_style_attach("bog/builderui/badge/badge.view.css", "[bog_builderui_badge][bog_builderui_badge_variant=\"secondary\"] {\n\tbackground-color: var(--bog_builderui_field);\n\tcolor: var(--bog_builderui_text);\n}\n\n[bog_builderui_badge][bog_builderui_badge_variant=\"outline\"] {\n\tbackground-color: transparent;\n\tcolor: var(--bog_builderui_text);\n\tborder: 1px solid var(--bog_builderui_line);\n}\n\n[bog_builderui_badge][bog_builderui_badge_variant=\"destructive\"] {\n\tbackground-color: var(--bog_builderui_special);\n\tcolor: var(--bog_builderui_back);\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
-
-
-;
-"use strict";
-/** @see $bog_builderui_tokens */
-var $;
-(function ($) {
-    $mol_style_define($bog_builderui_badge, {
-        display: 'inline-flex',
-        flex: {
-            direction: 'row',
-            grow: 0,
-        },
-        align: {
-            self: 'flex-start',
-            items: 'center',
-        },
-        padding: {
-            top: '0.125rem',
-            bottom: '0.125rem',
-            left: '0.625rem',
-            right: '0.625rem',
-        },
-        border: {
-            radius: '9999px',
-            width: 0,
-        },
-        background: {
-            color: $bog_builderui_tokens.control,
-        },
-        color: $bog_builderui_tokens.back,
-        font: {
-            family: $bog_builderui_tokens.font_body,
-            weight: 500,
-            size: '0.75rem',
-        },
-    });
-})($ || ($ = {}));
-
-;
 	($.$bog_mediagram_app) = class $bog_mediagram_app extends ($.$bog_builderui_div) {
 		Theme(){
 			const obj = new this.$.$bog_theme_auto();
@@ -12185,6 +12185,62 @@ var $;
 		Circles_list(){
 			const obj = new this.$.$mol_view();
 			(obj.sub) = () => ((this.circle_rows()));
+			return obj;
+		}
+		circle_back(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Circle_back_btn(){
+			const obj = new this.$.$bog_builderui_button();
+			(obj.title) = () => ("назад");
+			(obj.click) = (next) => ((this.circle_back(next)));
+			return obj;
+		}
+		circle_detail_title(){
+			return "";
+		}
+		Circle_detail_title(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.circle_detail_title())]);
+			return obj;
+		}
+		circle_detail_type_label(){
+			return "";
+		}
+		Circle_detail_type(){
+			const obj = new this.$.$bog_builderui_badge();
+			(obj.title) = () => ((this.circle_detail_type_label()));
+			return obj;
+		}
+		Circle_detail_head(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([
+				(this.Circle_back_btn()), 
+				(this.Circle_detail_title()), 
+				(this.Circle_detail_type())
+			]);
+			return obj;
+		}
+		circle_detail_description(){
+			return "";
+		}
+		Circle_detail_description(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.circle_detail_description())]);
+			return obj;
+		}
+		Circle_members_title(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => (["Участники"]);
+			return obj;
+		}
+		circle_member_rows(){
+			return [];
+		}
+		Circle_members_list(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ((this.circle_member_rows()));
 			return obj;
 		}
 		Me_title(){
@@ -12411,6 +12467,16 @@ var $;
 			]);
 			return obj;
 		}
+		Circle_detail_pane(){
+			const obj = new this.$.$bog_builderui_card();
+			(obj.sub) = () => ([
+				(this.Circle_detail_head()), 
+				(this.Circle_detail_description()), 
+				(this.Circle_members_title()), 
+				(this.Circle_members_list())
+			]);
+			return obj;
+		}
 		Me_pane(){
 			const obj = new this.$.$bog_builderui_card();
 			(obj.sub) = () => ([(this.Me_title()), (this.Me_text())]);
@@ -12476,6 +12542,14 @@ var $;
 	($mol_mem(($.$bog_mediagram_app.prototype), "Circles_head"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Circles_text"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Circles_list"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "circle_back"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Circle_back_btn"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Circle_detail_title"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Circle_detail_type"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Circle_detail_head"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Circle_detail_description"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Circle_members_title"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Circle_members_list"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Me_title"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Me_text"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Recognized_badge"));
@@ -12511,6 +12585,7 @@ var $;
 	($mol_mem(($.$bog_mediagram_app.prototype), "Library_grid"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Feed_pane"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Circles_pane"));
+	($mol_mem(($.$bog_mediagram_app.prototype), "Circle_detail_pane"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Me_pane"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Recognized"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Brand"));
@@ -12518,6 +12593,10 @@ var $;
 	($mol_mem(($.$bog_mediagram_app.prototype), "Theme_toggle"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Add_btn"));
 	($.$bog_mediagram_app_circle) = class $bog_mediagram_app_circle extends ($.$bog_builderui_card) {
+		open(next){
+			if(next !== undefined) return next;
+			return null;
+		}
 		Circle_row_type(){
 			const obj = new this.$.$bog_builderui_badge();
 			(obj.title) = () => ((this.type_label()));
@@ -12542,6 +12621,9 @@ var $;
 		description(){
 			return "";
 		}
+		event(){
+			return {...(super.event()), "click": (next) => (this.open(next))};
+		}
 		sub(){
 			return [
 				(this.Circle_row_type()), 
@@ -12550,9 +12632,48 @@ var $;
 			];
 		}
 	};
+	($mol_mem(($.$bog_mediagram_app_circle.prototype), "open"));
 	($mol_mem(($.$bog_mediagram_app_circle.prototype), "Circle_row_type"));
 	($mol_mem(($.$bog_mediagram_app_circle.prototype), "Circle_row_title"));
 	($mol_mem(($.$bog_mediagram_app_circle.prototype), "Circle_row_description"));
+	($.$bog_mediagram_app_circle_member) = class $bog_mediagram_app_circle_member extends ($.$bog_builderui_card) {
+		Member_name(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.name())]);
+			return obj;
+		}
+		Member_role(){
+			const obj = new this.$.$bog_builderui_badge();
+			(obj.title) = () => ((this.role()));
+			return obj;
+		}
+		Member_head(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Member_name()), (this.Member_role())]);
+			return obj;
+		}
+		Member_watching(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.watching())]);
+			return obj;
+		}
+		name(){
+			return "";
+		}
+		role(){
+			return "";
+		}
+		watching(){
+			return "";
+		}
+		sub(){
+			return [(this.Member_head()), (this.Member_watching())];
+		}
+	};
+	($mol_mem(($.$bog_mediagram_app_circle_member.prototype), "Member_name"));
+	($mol_mem(($.$bog_mediagram_app_circle_member.prototype), "Member_role"));
+	($mol_mem(($.$bog_mediagram_app_circle_member.prototype), "Member_head"));
+	($mol_mem(($.$bog_mediagram_app_circle_member.prototype), "Member_watching"));
 
 
 ;
@@ -21854,6 +21975,23 @@ var $;
             friends: 'друзья',
             couple: 'пара',
         };
+        const CIRCLE_MEMBERS = {
+            family: [
+                { id: 'me', name: 'Я', role: 'смотрю', watching: 'Frieren: Beyond Journey’s End' },
+                { id: 'mom', name: 'Мама', role: 'смотрит', watching: 'The Crown' },
+                { id: 'dad', name: 'Папа', role: 'смотрит', watching: 'Dune: Part Two' },
+            ],
+            friends: [
+                { id: 'me', name: 'Я', role: 'смотрю', watching: 'Jujutsu Kaisen' },
+                { id: 'anya', name: 'Аня', role: 'смотрит', watching: 'Blue Eye Samurai' },
+                { id: 'dima', name: 'Дима', role: 'смотрит', watching: 'Andor' },
+                { id: 'nika', name: 'Ника', role: 'смотрит', watching: 'The Bear' },
+            ],
+            couple: [
+                { id: 'me', name: 'Я', role: 'смотрю', watching: 'Your Name' },
+                { id: 'partner', name: 'Партнёр', role: 'смотрит', watching: 'La La Land' },
+            ],
+        };
         const KIND_ORDER = ['all', 'movie', 'series', 'book', 'anime'];
         function source_key(host) {
             return host.replace(/^www\./, '').split('.')[0];
@@ -22015,12 +22153,64 @@ var $;
                 circle.title = () => this.circle(id).title;
                 circle.type_label = () => CIRCLE_TYPE_LABEL[this.circle(id).type];
                 circle.description = () => this.circle(id).description || 'без описания';
+                circle.open = (e) => this.circle_open(id, e);
                 return circle;
+            }
+            circle_open(id, e) {
+                if (e)
+                    e.preventDefault();
+                this.circle_current(id);
+                this.tab('circle');
+                return null;
+            }
+            circle_back(e) {
+                if (e)
+                    e.preventDefault();
+                this.circle_current('');
+                this.tab('circles');
+                return null;
+            }
+            circle_current(next) {
+                return $mol_state_arg.value('circle', next) ?? '';
             }
             circle(id) {
                 const found = this.circles().find(circle => circle.id === id);
                 if (!found)
                     throw new Error(`circle ${id} not found`);
+                return found;
+            }
+            circle_detail() {
+                const id = this.circle_current();
+                return this.circles().find(circle => circle.id === id) ?? null;
+            }
+            circle_detail_title() {
+                return this.circle_detail()?.title ?? 'Круг';
+            }
+            circle_detail_type_label() {
+                const type = this.circle_detail()?.type ?? 'friends';
+                return CIRCLE_TYPE_LABEL[type];
+            }
+            circle_detail_description() {
+                return this.circle_detail()?.description || 'без описания';
+            }
+            circle_members() {
+                const type = this.circle_detail()?.type ?? 'friends';
+                return CIRCLE_MEMBERS[type];
+            }
+            circle_member_rows() {
+                return this.circle_members().map(member => this.Circle_member(member.id));
+            }
+            Circle_member(id) {
+                const member = new $bog_mediagram_app_circle_member();
+                member.name = () => this.circle_member(id).name;
+                member.role = () => this.circle_member(id).role;
+                member.watching = () => this.circle_member(id).watching;
+                return member;
+            }
+            circle_member(id) {
+                const found = this.circle_members().find(member => member.id === id);
+                if (!found)
+                    throw new Error(`circle member ${id} not found`);
                 return found;
             }
             type_chips() {
@@ -22077,6 +22267,7 @@ var $;
                 switch (this.tab()) {
                     case 'feed': return [this.Feed_pane()];
                     case 'circles': return [this.Circles_pane()];
+                    case 'circle': return this.circle_detail() ? [this.Circle_detail_pane()] : [this.Circles_pane()];
                     case 'me': return [this.Me_pane()];
                     default: {
                         const items = [];
@@ -22211,6 +22402,12 @@ var $;
             $mol_mem_key
         ], $bog_mediagram_app.prototype, "Circle", null);
         __decorate([
+            $mol_mem
+        ], $bog_mediagram_app.prototype, "circle_current", null);
+        __decorate([
+            $mol_mem_key
+        ], $bog_mediagram_app.prototype, "Circle_member", null);
+        __decorate([
             $mol_mem_key
         ], $bog_mediagram_app.prototype, "Chip", null);
         __decorate([
@@ -22235,6 +22432,9 @@ var $;
         class $bog_mediagram_app_circle extends $.$bog_mediagram_app_circle {
         }
         $$.$bog_mediagram_app_circle = $bog_mediagram_app_circle;
+        class $bog_mediagram_app_circle_member extends $.$bog_mediagram_app_circle_member {
+        }
+        $$.$bog_mediagram_app_circle_member = $bog_mediagram_app_circle_member;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -22364,6 +22564,38 @@ var $;
             gridTemplateColumns: 'repeat(auto-fill, minmax(190px, 1fr))',
             gap: $mol_gap.text,
         },
+        Circle_detail_pane: {
+            margin: { top: $mol_gap.block, right: $mol_gap.block, left: $mol_gap.block },
+            flex: { direction: 'column' },
+            gap: $mol_gap.text,
+        },
+        Circle_detail_head: {
+            flex: { direction: 'row', wrap: 'wrap' },
+            align: { items: 'center' },
+            gap: $mol_gap.text,
+        },
+        Circle_detail_title: {
+            font: {
+                family: $bog_builderui_tokens.font_head,
+                size: '18px',
+                weight: 700,
+            },
+        },
+        Circle_detail_description: {
+            color: $bog_builderui_tokens.shade,
+        },
+        Circle_members_title: {
+            font: {
+                family: $bog_builderui_tokens.font_head,
+                size: '16px',
+                weight: 700,
+            },
+        },
+        Circle_members_list: {
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(210px, 1fr))',
+            gap: $mol_gap.text,
+        },
         Circle_name_field: {
             width: '100%',
         },
@@ -22427,6 +22659,7 @@ var $;
     $mol_style_define($bog_mediagram_app_circle, {
         flex: { direction: 'column' },
         gap: $mol_gap.text,
+        cursor: 'pointer',
         Circle_row_type: {
             align: { self: 'flex-start' },
         },
@@ -22438,6 +22671,26 @@ var $;
             },
         },
         Circle_row_description: {
+            color: $bog_builderui_tokens.shade,
+            font: { size: '13px' },
+        },
+    });
+    $mol_style_define($bog_mediagram_app_circle_member, {
+        flex: { direction: 'column' },
+        gap: $mol_gap.text,
+        Member_head: {
+            flex: { direction: 'row', wrap: 'wrap' },
+            align: { items: 'center' },
+            gap: $mol_gap.text,
+        },
+        Member_name: {
+            font: {
+                family: $bog_builderui_tokens.font_head,
+                size: '16px',
+                weight: 700,
+            },
+        },
+        Member_watching: {
             color: $bog_builderui_tokens.shade,
             font: { size: '13px' },
         },
