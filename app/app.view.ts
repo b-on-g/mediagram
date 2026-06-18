@@ -207,8 +207,7 @@ namespace $.$$ {
 			card.color = () => KIND_COLOR[ this.entry( id ).kind ]
 			card.theme = () => this.theme()
 			card.poster_bg = () => {
-				const c = KIND_COLOR[ this.entry( id ).kind ]
-				return `linear-gradient(180deg, #05050500 42%, #050505d9 100%), linear-gradient(150deg, color-mix(in srgb, ${ c } 52%, #111), #090909), url("${ this.entry( id ).cover }")`
+				return `linear-gradient(180deg, #05050500 36%, #050505d9 100%), url("${ this.entry( id ).cover }")`
 			}
 			return card
 		}
