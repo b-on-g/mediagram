@@ -1,127 +1,84 @@
-$bog_mediagram_app $mol_view
-	attr *
-		^
-		bog_mediagram_theme <= theme \dark
-	sub /
-		<= Top $mol_view
-			sub /
-				<= Brand $mol_view
-					sub /
-						<= Brand_mark $mol_view
-						<= Brand_name $mol_view sub / \mediagram
-				<= Search $mol_string
-					hint \поиск по библиотеке
-					value? <=> query? \
-				<= Theme_btn $mol_button
-					click? <=> theme_toggle? null
-					sub / <= theme_label \
-				<= Add_btn $mol_button
-					click? <=> add_click? null
-					sub / \добавить
-		<= Filters $mol_view
-			sub /
-				<= Types_group $mol_view
-					sub /
-						<= Type_filter_label $mol_view sub / \Тип
-						<= Types $mol_view
-							sub <= type_chips /
-				<= Status_row $mol_view
-					sub /
-						<= Status_filter_label $mol_view sub / \Статус
-						<= Status_chips $mol_view
-							sub <= status_chips /
-						<= Count $mol_view sub / <= count_label \
-		<= Banner $mol_view
-			sub /
-				<= Banner_title $mol_view sub / <= banner_title \
-				<= Banner_text $mol_view sub / <= banner_text \
-		<= Groups $mol_view
-			sub /
-				<= Groups_head $mol_view
-					sub /
-						<= Groups_title $mol_view sub / \Группы
-						<= Groups_count $mol_view sub / <= groups_count_label \
-				<= Groups_form $mol_view
-					sub /
-						<= Group_name $mol_string
-							hint \название группы
-							value? <=> group_name? \
-						<= Group_types $mol_view
-							sub <= group_type_chips /
-						<= Group_create $mol_button
-							click? <=> group_create? null
-							sub / \создать
-				<= Groups_list $mol_view
-					sub <= group_rows /
-		<= Library $mol_scroll
-			sub /
-				<= Grid $mol_view
-					sub <= entries /
+- mediagram — webapp + Chrome side panel
+- Одна сборка $mol-аппа адаптируется по ширине через container queries
+- Пресет builderui: zinc / sky / yellow / eb-garamond / large
+- Тема светает/тёмная переключается через $bog_theme_toggle
 
-$bog_mediagram_app_chip $mol_button
-	kind \
-	label \
-	active \off
-	theme \dark
-	click? null
+$bog_mediagram_app $bog_builderui_div
+	plugins /
+		<= Theme $bog_theme_auto
+		<= Favicon $bog_favicon
+			Icon <= favicon_icon $mol_icon_library
 	attr *
 		^
-		bog_mediagram_chip_kind <= kind
-		bog_mediagram_chip_active <= active
-		bog_mediagram_theme <= theme
+		bog_builderui_lights <= lights \dark
+		bog_builderui_base \zinc
+		bog_builderui_theme \sky
+		bog_builderui_chart \yellow
+		bog_builderui_radius \large
+		bog_builderui_font_body \eb-garamond
+		bog_builderui_font_head \eb-garamond
+		bog_mediagram_tab <= tab \library
+	Library_filters $mol_view
+		sub /
+			<= Types $mol_view sub <= type_chips /
+			<= Status_row $mol_view
+				sub /
+					<= Status_tabs $bog_builderui_tabs
+						value? <=> status? \all
+						options <= status_options *
+					<= Count $mol_view sub / <= count_label \
+	Library_banner $bog_builderui_alert
+		title <= banner_title \
+		text <= banner_text \
+	Library_grid $mol_view sub <= entries /
+	Feed_pane $bog_builderui_card
+		sub /
+			<= Feed_title $mol_view sub / \Лента активности
+			<= Feed_text $mol_view sub / \тут появятся события из ваших кругов
+	Circles_pane $bog_builderui_card
+		sub /
+			<= Circles_title $mol_view sub / \Круги
+			<= Circles_text $mol_view sub / \приватные группы — семья и друзья
+	Me_pane $bog_builderui_card
+		sub /
+			<= Me_title $mol_view sub / \Я
+			<= Me_text $mol_view sub / \профиль, перенос аккаунта, share-правила
+	Recognized $bog_builderui_card
+		attr *
+			^
+			bog_mediagram_page_kind <= recognized_page_kind \info
+		sub /
+			<= Recognized_head $mol_view
+				sub /
+					<= Recognized_badge $mol_view sub / \распознано на странице
+					<= Recognized_host $mol_view sub / <= recognized_host \
+			<= Recognized_title $mol_view sub / <= recognized_title \
+			<= Recognized_meta $mol_view sub / <= recognized_meta \
+			<= Recognized_actions $mol_view
+				sub /
+					<= Recognized_status $bog_builderui_select
+						value? <=> recognized_status? \want_to
+						dictionary <= recognized_status_options *
+					<= Recognized_add $bog_builderui_button
+						title \добавить
+						click? <=> recognized_add? null
+	Brand $mol_view
+		sub /
+			<= Brand_mark $mol_icon_library
+			<= Brand_name $mol_view sub / \mediagram
+	Search $bog_builderui_field
+		hint \поиск в библиотеке
+		value? <=> query? \
+	Theme_toggle $bog_theme_toggle
+		theme_auto <= Theme
+	Add_btn $bog_builderui_button
+		title \+
+		hint \добавить вручную
+		click? <=> add_click? null
 	sub /
-		<= Swatch $mol_view
-		<= Label $mol_view sub / <= label
-
-$bog_mediagram_app_card $mol_view
-	title \
-	year \
-	kind \
-	kind_label \
-	status_label \
-	status_class \
-	status_change? null
-	favorite false
-	fav_label \
-	rating null
-	rate_text \
-	initials \
-	color \
-	poster_bg \
-	theme \dark
-	attr *
-		^
-		bog_mediagram_status <= status_class
-		bog_mediagram_kind <= kind
-		bog_mediagram_theme <= theme
-	sub /
-		<= Poster $mol_view
-			style *
-				background <= poster_bg
+		<= Top $mol_view sub <= top_content /
+		<= Body $mol_scroll
 			sub /
-				<= Kind_flag $mol_view sub / <= kind_label
-				<= Fav_view $mol_view sub / <= fav_label
-				<= Pill $mol_button
-					click? <=> status_change? null
-					sub / <= status_label
-				<= Rate_view $mol_view sub / <= rate_text
-		<= Meta $mol_view
-			sub /
-				<= Title_view $mol_view sub / <= title
-				<= Sub $mol_view sub / <= year
-
-$bog_mediagram_app_group $mol_view
-	title \
-	type_label \
-	type_class \
-	theme \dark
-	attr *
-		^
-		bog_mediagram_group_type <= type_class
-		bog_mediagram_theme <= theme
-	sub /
-		<= Group_icon $mol_view sub / <= type_label
-		<= Group_meta $mol_view
-			sub /
-				<= Group_title $mol_view sub / <= title
-				<= Group_sub $mol_view sub / <= type_label
+				<= Page $mol_view sub <= body_content /
+		<= Nav $bog_mediagram_app_nav
+			tab? <=> tab? \library

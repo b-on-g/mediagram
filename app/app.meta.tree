@@ -1,1 +1,6 @@
 include \/mol/offline/install
+include \/bog/builderui
+include \/bog/theme
+include \/bog/favicon
+
+deploy \/bog/mediagram/ext

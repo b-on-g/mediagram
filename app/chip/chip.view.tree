@@ -1,0 +1,12 @@
+$bog_mediagram_app_chip $bog_builderui_button
+	kind \
+	label \
+	active \off
+	variant \ghost
+	attr *
+		^
+		bog_mediagram_chip_kind <= kind
+		bog_mediagram_chip_active <= active
+	sub /
+		<= Swatch $mol_view
+		<= Label $mol_view sub / <= label

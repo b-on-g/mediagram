@@ -1,8 +1,7 @@
 namespace $.$$ {
 
-	type Kind = 'movie' | 'series' | 'book' | 'anime' | 'youtube'
+	type Kind = 'movie' | 'series' | 'book' | 'anime'
 	type Status = 'want_to' | 'doing' | 'done' | 'dropped'
-	type Group_type = 'family' | 'friends' | 'couple'
 
 	type Entry = {
 		id: string
@@ -12,13 +11,6 @@ namespace $.$$ {
 		status: Status
 		rating: number | null
 		favorite: boolean
-		cover: string
-	}
-
-	type Group = {
-		id: string
-		title: string
-		type: Group_type
 	}
 
 	const KIND_LABEL: Record<Kind, string> = {
@@ -26,15 +18,13 @@ namespace $.$$ {
 		series: 'сериал',
 		book: 'книга',
 		anime: 'аниме',
-		youtube: 'YouTube',
 	}
 
 	const KIND_COLOR: Record<Kind, string> = {
-		movie: '#e50914',
-		series: '#ffffff',
-		book: '#111111',
-		anime: '#e50914',
-		youtube: '#ff0000',
+		movie: '#6f8ed4',
+		series: '#57b0a6',
+		book: '#cba65f',
+		anime: '#c189bd',
 	}
 
 	const STATUS_VERB: Record<Status, (k: Kind) => string> = {
@@ -44,37 +34,11 @@ namespace $.$$ {
 		dropped: () => 'бросил',
 	}
 
-	const GROUP_LABEL: Record<Group_type, string> = {
-		family: 'семья',
-		friends: 'друзья',
-		couple: 'пара',
+	const KIND_ORDER: ( Kind | 'all' )[] = [ 'all', 'movie', 'series', 'book', 'anime' ]
+
+	function source_key( host: string ) {
+		return host.replace( /^www\./, '' ).split( '.' )[ 0 ]
 	}
-
-	const FIXTURE: Entry[] = [
-		{ id: '1', title: 'Frieren', year: '2023', kind: 'anime', status: 'doing', rating: null, favorite: true, cover: 'https://image.tmdb.org/t/p/w500/dqZENchTd7lp5zht7BdlqM7RBhD.jpg' },
-		{ id: '2', title: 'Dune: Part Two', year: '2024', kind: 'movie', status: 'done', rating: 9, favorite: true, cover: 'https://image.tmdb.org/t/p/w500/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg' },
-		{ id: '3', title: 'Kurzgesagt: Black Holes', year: '2024', kind: 'youtube', status: 'doing', rating: 10, favorite: true, cover: 'https://i.ytimg.com/vi/QqsLTNkzvaY/hq720.jpg' },
-		{ id: '4', title: 'Дюна', year: '1965', kind: 'book', status: 'doing', rating: 8, favorite: false, cover: 'https://covers.openlibrary.org/b/isbn/9780441172719-L.jpg' },
-		{ id: '5', title: 'Severance', year: '2022', kind: 'series', status: 'done', rating: 9, favorite: false, cover: 'https://image.tmdb.org/t/p/w500/pPHpeI2X1qEd1CS1SeyrdhZ4qnT.jpg' },
-		{ id: '6', title: 'Цветы для Элджернона', year: '1966', kind: 'book', status: 'want_to', rating: null, favorite: false, cover: 'https://covers.openlibrary.org/b/isbn/9780156030083-L.jpg' },
-		{ id: '7', title: 'Blue Eye Samurai', year: '2023', kind: 'anime', status: 'done', rating: 8, favorite: false, cover: 'https://image.tmdb.org/t/p/w500/fXm3JT4WLQVnwukdvghtAblc1wc.jpg' },
-		{ id: '8', title: 'Veritasium: The Most Misunderstood Concept', year: '2021', kind: 'youtube', status: 'want_to', rating: null, favorite: false, cover: 'https://i.ytimg.com/vi/pTn6Ewhb27k/hq720.jpg' },
-		{ id: '9', title: 'Andor', year: '2022', kind: 'series', status: 'doing', rating: 9, favorite: true, cover: 'https://image.tmdb.org/t/p/w500/khZqmwHQicTYoS7Flreb9EddFZC.jpg' },
-		{ id: '10', title: 'Оппенгеймер', year: '2023', kind: 'movie', status: 'done', rating: 8, favorite: false, cover: 'https://image.tmdb.org/t/p/w500/8Gxv8gSFCU0XGDykEGv7zR1n2ua.jpg' },
-		{ id: '11', title: 'Vinland Saga', year: '2019', kind: 'anime', status: 'dropped', rating: 6, favorite: false, cover: 'https://image.tmdb.org/t/p/w500/rK3FOkHBFQXqxEgTYZ9NqXSthYP.jpg' },
-		{ id: '12', title: 'Атака титанов', year: '2013', kind: 'anime', status: 'done', rating: 9, favorite: true, cover: 'https://image.tmdb.org/t/p/w500/hTP1DtLGFamjfu8WqjnuQdP1n4i.jpg' },
-		{ id: '13', title: '1984', year: '1949', kind: 'book', status: 'done', rating: 9, favorite: false, cover: 'https://covers.openlibrary.org/b/isbn/9780451524935-L.jpg' },
-		{ id: '14', title: 'Marques Brownlee: AI Hardware', year: '2024', kind: 'youtube', status: 'doing', rating: 10, favorite: true, cover: 'https://i.ytimg.com/vi/ddTV12hErTc/hq720.jpg' },
-		{ id: '15', title: 'The Bear', year: '2022', kind: 'series', status: 'want_to', rating: null, favorite: false, cover: 'https://image.tmdb.org/t/p/w500/sHFlbKS3WLqMnp9t2ghADIJFnuQ.jpg' },
-		{ id: '16', title: 'Поднятие уровня в одиночку', year: '2024', kind: 'anime', status: 'doing', rating: 7, favorite: false, cover: 'https://image.tmdb.org/t/p/w500/geCRueV3ElhRTr0xtJuEWJt6dJ1.jpg' },
-		{ id: '17', title: 'Достучаться до небес', year: '1997', kind: 'movie', status: 'want_to', rating: null, favorite: false, cover: 'https://image.tmdb.org/t/p/w500/oY6E8n9s56pmY3z0NwJtYDR2h5b.jpg' },
-		{ id: '18', title: 'TED-Ed: Time Travel', year: '2022', kind: 'youtube', status: 'done', rating: 10, favorite: true, cover: 'https://i.ytimg.com/vi/d3zTfXvYZ9s/hq720.jpg' },
-	]
-
-	const KIND_ORDER: ( Kind | 'all' )[] = [ 'all', 'movie', 'series', 'book', 'anime', 'youtube' ]
-	const STATUS_ORDER: ( Status | 'all' )[] = [ 'all', 'want_to', 'doing', 'done', 'dropped' ]
-	const STATUS_FLOW: Status[] = [ 'want_to', 'doing', 'done', 'dropped' ]
-	const GROUP_ORDER: Group_type[] = [ 'family', 'friends', 'couple' ]
 
 	function initials_of( title: string ) {
 		return title.replace( /[«»"']/g, '' )
@@ -86,6 +50,21 @@ namespace $.$$ {
 	}
 
 	export class $bog_mediagram_app extends $.$bog_mediagram_app {
+
+		static {
+			const c = ( globalThis as any ).chrome
+			if( c?.runtime?.onMessage ) {
+				c.runtime.onMessage.addListener( ( msg: any ) => {
+					if( msg?.type === 'mediagram_snapshot_changed' ) {
+						try {
+							const root = $bog_mediagram_app.Root( 0 )
+							root.snapshot_tick( root.snapshot_tick() + 1 )
+						} catch( e ) { /* root not mounted yet */ }
+					}
+					return false
+				} )
+			}
+		}
 
 		@ $mol_mem
 		query( next?: string ) {
@@ -102,22 +81,6 @@ namespace $.$$ {
 			return $mol_state_arg.value( 'kind', next ) ?? 'all'
 		}
 
-		@ $mol_mem
-		theme( next?: string ) {
-			return $mol_state_arg.value( 'theme', next ) ?? 'dark'
-		}
-
-		theme_label() {
-			return this.theme() === 'light' ? 'тёмная' : 'светлая'
-		}
-
-		@ $mol_action
-		theme_toggle( e?: Event ) {
-			if( e ) e.preventDefault()
-			this.theme( this.theme() === 'light' ? 'dark' : 'light' )
-			return null
-		}
-
 		status_options() {
 			return {
 				all: 'всё',
@@ -128,61 +91,41 @@ namespace $.$$ {
 			}
 		}
 
-		@ $mol_mem
-		group_name( next?: string ) {
-			return $mol_state_local.value( 'mediagram_group_name', next ) as string ?? ''
+		lights() {
+			const mode = this.Theme().mode()
+			if( mode === 'light' ) return 'light'
+			if( mode === 'dark' ) return 'dark'
+			return this.$.$mol_lights() ? 'light' : 'dark'
+		}
+
+		/** Home land библиотеки текущего юзера. Не мемоизируем — возвращает Pawn. */
+		library_node() {
+			return this.$.$giper_baza_glob.home().land().Data( this.$.$bog_mediagram_library )
+		}
+
+		/** Сырые entry-Pawn'ы из библиотеки. Не мемоизируем — возвращает Pawn[]. */
+		entries_baza() {
+			const list = this.library_node().Entries()
+			if( !list ) return []
+			return list.remote_list() as $bog_mediagram_entry[]
 		}
 
 		@ $mol_mem
-		group_type( next?: Group_type ) {
-			return $mol_state_local.value( 'mediagram_group_type', next ) as Group_type ?? 'family'
-		}
-
-		@ $mol_mem
-		groups( next?: Group[] ) {
-			return $mol_state_local.value( 'mediagram_groups', next ) as Group[] ?? []
-		}
-
-		groups_count_label() {
-			return `${ this.groups().length } групп`
-		}
-
-		group_type_chips() {
-			return GROUP_ORDER.map( type => {
-				const chip = this.Chip( `group-${ type }` )
-				chip.kind = () => type
-				chip.label = () => GROUP_LABEL[ type ]
-				chip.active = () => this.group_type() === type ? 'on' : 'off'
-				chip.theme = () => this.theme()
-				chip.click = ( e?: Event ) => {
-					if( e ) e.preventDefault()
-					this.group_type( type )
-					return null
+		entries_all(): Entry[] {
+			return this.entries_baza().map( e => {
+				const media = e.Media()?.remote() as $bog_mediagram_media | null
+				const year_bint = media?.Year()?.val()
+				const rating_bint = e.Rating()?.val()
+				return {
+					id: e.link().str,
+					title: media?.Title()?.val() ?? '(без названия)',
+					year: year_bint != null ? String( year_bint ) : '',
+					kind: ( media?.Kind()?.val() ?? 'movie' ) as Kind,
+					status: ( e.Status()?.val() ?? 'want_to' ) as Status,
+					rating: rating_bint != null ? Number( rating_bint ) : null,
+					favorite: e.Favorite()?.val() ?? false,
 				}
-				return chip
 			} )
-		}
-
-		@ $mol_action
-		group_create( e?: Event ) {
-			if( e ) e.preventDefault()
-			const type = this.group_type()
-			const title = this.group_name().trim() || GROUP_LABEL[ type ]
-			this.groups( [
-				... this.groups(),
-				{ id: `${ Date.now() }`, title, type },
-			] )
-			this.group_name( '' )
-			return null
-		}
-
-		group_rows() {
-			return this.groups().map( group => this.Group( group.id ) )
-		}
-
-		@ $mol_mem
-		entries_all() {
-			return FIXTURE
 		}
 
 		@ $mol_mem
@@ -192,7 +135,7 @@ namespace $.$$ {
 			const k = this.kind_filter()
 			return this.entries_all().filter( e => {
 				if( q && !e.title.toLowerCase().includes( q ) ) return false
-				if( s !== 'all' && this.entry_status( e.id ) !== s ) return false
+				if( s !== 'all' && e.status !== s ) return false
 				if( k !== 'all' && e.kind !== k ) return false
 				return true
 			} )
@@ -216,26 +159,9 @@ namespace $.$$ {
 				chip.kind = () => k
 				chip.label = () => k === 'all' ? 'всё' : KIND_LABEL[ k as Kind ]
 				chip.active = () => this.kind_filter() === k ? 'on' : 'off'
-				chip.theme = () => this.theme()
 				chip.click = ( e?: Event ) => {
 					if( e ) e.preventDefault()
 					this.kind_filter( k )
-					return null
-				}
-				return chip
-			} )
-		}
-
-		status_chips() {
-			return STATUS_ORDER.map( s => {
-				const chip = this.Chip( `status-${ s }` )
-				chip.kind = () => String( s )
-				chip.label = () => this.status_options()[ s ]
-				chip.active = () => this.status() === s ? 'on' : 'off'
-				chip.theme = () => this.theme()
-				chip.click = ( e?: Event ) => {
-					if( e ) e.preventDefault()
-					this.status( s )
 					return null
 				}
 				return chip
@@ -247,22 +173,6 @@ namespace $.$$ {
 			return new $bog_mediagram_app_chip()
 		}
 
-		@ $mol_mem_key
-		Group( id: string ) {
-			const row = new $bog_mediagram_app_group()
-			row.title = () => this.group( id ).title
-			row.type_label = () => GROUP_LABEL[ this.group( id ).type ]
-			row.type_class = () => this.group( id ).type
-			row.theme = () => this.theme()
-			return row
-		}
-
-		group( id: string ) {
-			const found = this.groups().find( group => group.id === id )
-			if( !found ) throw new Error( `group ${ id } not found` )
-			return found
-		}
-
 		entries() {
 			return this.entries_filtered().map( e => this.Card( e.id ) )
 		}
@@ -271,39 +181,22 @@ namespace $.$$ {
 		Card( id: string ) {
 			const card = new $bog_mediagram_app_card()
 			card.title = () => this.entry( id ).title
-			card.year = () => `год создания: ${ this.entry( id ).year }`
+			card.year = () => this.entry( id ).year
 			card.kind = () => this.entry( id ).kind
 			card.kind_label = () => KIND_LABEL[ this.entry( id ).kind ]
-			card.status_class = () => this.entry_status( id )
-			card.status_label = () => STATUS_VERB[ this.entry_status( id ) ]( this.entry( id ).kind )
-			card.status_change = ( e?: Event ) => {
-				if( e ) e.preventDefault()
-				this.entry_status( id, this.status_next( this.entry_status( id ) ) )
-				return null
-			}
+			card.status_class = () => this.entry( id ).status
+			card.status_label = () => STATUS_VERB[ this.entry( id ).status ]( this.entry( id ).kind )
 			card.favorite = () => this.entry( id ).favorite
 			card.fav_label = () => this.entry( id ).favorite ? '❤' : ''
 			card.rating = () => this.entry( id ).rating
 			card.rate_text = () => this.entry( id ).rating !== null ? String( this.entry( id ).rating ) : ''
 			card.initials = () => initials_of( this.entry( id ).title )
 			card.color = () => KIND_COLOR[ this.entry( id ).kind ]
-			card.theme = () => this.theme()
 			card.poster_bg = () => {
-				return `linear-gradient(180deg, #05050500 36%, #050505d9 100%), url("${ this.entry( id ).cover }")`
+				const c = KIND_COLOR[ this.entry( id ).kind ]
+				return `linear-gradient(150deg, color-mix(in srgb, ${ c } 78%, #0a0b0e), color-mix(in srgb, ${ c } 34%, #0a0b0e))`
 			}
 			return card
-		}
-
-		@ $mol_mem_key
-		entry_status( id: string, next?: Status ) {
-			const key = `mediagram_status_${ id }`
-			const value = $mol_state_local.value( key, next ) as Status | null
-			return value ?? this.entry( id ).status
-		}
-
-		status_next( status: Status ) {
-			const index = STATUS_FLOW.indexOf( status )
-			return STATUS_FLOW[ ( index + 1 ) % STATUS_FLOW.length ]
 		}
 
 		entry( id: string ) {
@@ -312,15 +205,122 @@ namespace $.$$ {
 			return found
 		}
 
+		@ $mol_mem
+		tab( next?: string ) {
+			return $mol_state_arg.value( 'tab', next ) ?? 'library'
+		}
+
+		body_content() {
+			switch( this.tab() ) {
+				case 'feed': return [ this.Feed_pane() ]
+				case 'circles': return [ this.Circles_pane() ]
+				case 'me': return [ this.Me_pane() ]
+				default: {
+					const items: any[] = []
+					if( this.snapshot() ) items.push( this.Recognized() )
+					items.push( this.Library_filters(), this.Library_banner(), this.Library_grid() )
+					return items
+				}
+			}
+		}
+
+		top_content() {
+			const items: any[] = [ this.Brand(), this.Search(), this.Theme_toggle() ]
+			if( this.in_extension() ) items.push( this.Add_btn() )
+			return items
+		}
+
 		add_click( e?: Event ) {
 			if( e ) e.preventDefault()
+			this.add_from_snapshot()
+			return null
+		}
+
+		in_extension() {
+			return Boolean( ( globalThis as any ).chrome?.runtime?.id )
+		}
+
+		@ $mol_mem
+		snapshot_tick( next?: number ) {
+			return next ?? 0
+		}
+
+		@ $mol_mem
+		snapshot(): any {
+			this.snapshot_tick()
+			if( !this.in_extension() ) return null
+			const c = ( globalThis as any ).chrome
+			if( !c?.runtime?.sendMessage ) return null
+			const reply = $mol_wire_sync( c.runtime ).sendMessage({ type: 'mediagram_whoami' })
+			return reply?.payload ?? null
+		}
+
+		recognized_host() {
+			return this.snapshot()?.host ?? ''
+		}
+
+		recognized_title() {
+			return this.snapshot()?.entity?.title ?? ''
+		}
+
+		recognized_meta() {
+			const snap = this.snapshot()
+			if( !snap ) return ''
+			const e = snap.entity
+			const kind = e?.kind ? ( KIND_LABEL[ e.kind as Kind ] ?? e.kind ) : '—'
+			const year = e?.year ? ` · ${ e.year }` : ''
+			const pk = snap.page_kind === 'player' ? ' · идёт воспроизведение' : ''
+			return `${ kind }${ year }${ pk }`
+		}
+
+		recognized_page_kind() {
+			return this.snapshot()?.page_kind ?? 'info'
+		}
+
+		recognized_status_options() {
+			return { want_to: 'хочу', doing: 'смотрю' }
+		}
+
+		@ $mol_mem
+		recognized_status( next?: string ): string {
+			if( next !== undefined ) return next
+			return this.snapshot()?.page_kind === 'player' ? 'doing' : 'want_to'
+		}
+
+		recognized_add( e?: Event ) {
+			if( e ) e.preventDefault()
+			this.add_from_snapshot()
+			return null
+		}
+
+		@ $mol_action
+		add_from_snapshot() {
+			const snap = this.snapshot()
+			if( !snap?.entity?.title ) return null
+
+			const lib = this.library_node()
+
+			const media = lib.Medias( 'auto' )!.make( null )
+			media.Title( 'auto' )!.val( snap.entity.title )
+			if( snap.entity.kind ) media.Kind( 'auto' )!.val( snap.entity.kind )
+			if( snap.entity.year ) {
+				try { media.Year( 'auto' )!.val( BigInt( snap.entity.year ) ) }
+				catch( _ ) { /* год не цифра — пропускаем */ }
+			}
+			media.AddedAt( 'auto' )!.val( new $mol_time_moment() )
+
+			const sources = media.SourceIds( 'auto' )!
+			sources.key( source_key( snap.host ), 'auto' )!.val( snap.source_url )
+
+			const entry = lib.Entries( 'auto' )!.make( null )
+			entry.Media( 'auto' )!.remote( media )
+			entry.Status( 'auto' )!.val( this.recognized_status() )
+			entry.Source( 'auto' )!.val( 'manual' )
+			entry.StartedAt( 'auto' )!.val( new $mol_time_moment() )
+
 			return null
 		}
 
 	}
-
-	export class $bog_mediagram_app_chip extends $.$bog_mediagram_app_chip {}
-	export class $bog_mediagram_app_card extends $.$bog_mediagram_app_card {}
-	export class $bog_mediagram_app_group extends $.$bog_mediagram_app_group {}
 
 }
