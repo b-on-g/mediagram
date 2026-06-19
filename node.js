@@ -20738,7 +20738,7 @@ var $;
     (function ($$) {
         /** Состояние пользователя по конкретному медиа (статус, оценка, ревью) */
         class $bog_mediagram_entry extends $giper_baza_dict.with({
-            Media: $giper_baza_atom_link_to(() => $bog_mediagram_media),
+            Media: $giper_baza_atom_link.to(() => $bog_mediagram_media),
             // 'want_to' | 'doing' | 'done' | 'dropped'
             Status: $giper_baza_atom_text,
             Favorite: $giper_baza_atom_bool,
@@ -20841,9 +20841,9 @@ var $;
         /** Личный home land юзера — корневая entity библиотеки */
         class $bog_mediagram_library extends $giper_baza_dict.with({
             Name: $giper_baza_atom_text,
-            Medias: $giper_baza_list_link_to(() => $bog_mediagram_media),
-            Entries: $giper_baza_list_link_to(() => $bog_mediagram_entry),
-            ShareRules: $giper_baza_list_link_to(() => $bog_mediagram_share_rule),
+            Medias: $giper_baza_list_link.to(() => $bog_mediagram_media),
+            Entries: $giper_baza_list_link.to(() => $bog_mediagram_entry),
+            ShareRules: $giper_baza_list_link.to(() => $bog_mediagram_share_rule),
             Circles: $giper_baza_list_str,
         }) {
         }
