@@ -25,30 +25,12 @@
 		"tabs"
 	],
 	"host_permissions": [
-		"*://*.animego.org/*",
-		"*://*.kinopoisk.ru/*",
-		"*://*.shikimori.one/*",
-		"*://*.imdb.com/*",
-		"*://*.myshows.me/*",
-		"*://*.letterboxd.com/*",
-		"*://*.goodreads.com/*",
-		"*://*.livelib.ru/*",
-		"*://*.fantlab.ru/*",
-		"*://*.myanimelist.net/*"
+		"*"
 	],
 	"content_scripts": [
 		{
 			"matches": [
-				"*://*.animego.org/*",
-				"*://*.kinopoisk.ru/*",
-				"*://*.shikimori.one/*",
-				"*://*.imdb.com/*",
-				"*://*.myshows.me/*",
-				"*://*.letterboxd.com/*",
-				"*://*.goodreads.com/*",
-				"*://*.livelib.ru/*",
-				"*://*.fantlab.ru/*",
-				"*://*.myanimelist.net/*"
+				"*"
 			],
 			"js": [
 				"bog/mediagram/ext/content.js"
