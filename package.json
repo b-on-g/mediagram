@@ -357,13 +357,7 @@
     "$bog_mediagram_media",
     "$bog_mediagram_entry",
     "$bog_mediagram_share_rule",
-    "$bog_mediagram_share",
-    "$bog_mediagram_app_circle",
-    "$bog_mediagram_app_circle_member",
-    "$bog_mediagram_app_circle_feed_item",
-    "$bog_mediagram_app_circle_feed",
-    "$bog_mediagram_app_chip",
-    "$bog_mediagram_app_card"
+    "$bog_mediagram_share"
   ],
   "dependencies": {
     "autoinstall": "*",
