@@ -171,50 +171,50 @@ namespace $.$$ {
 
 		/** Home land библиотеки текущего юзера. Не мемоизируем — возвращает Pawn. */
 		library_node() {
-			console.log( '[mediagram] library_node()' )
-			const r = this.$.$giper_baza_glob.home().land().Data( this.$.$bog_mediagram_library )
-			console.log( '[mediagram] library_node() ✓' )
-			return r
+			return this.$.$giper_baza_glob.home().land().Data( this.$.$bog_mediagram_library )
 		}
 
 		/** Сырые entry-Pawn'ы из библиотеки. Не мемоизируем — возвращает Pawn[]. */
 		entries_baza() {
-			console.log( '[mediagram] entries_baza()' )
 			const list = this.library_node().Entries()
-			if( !list ) {
-				console.log( '[mediagram] entries_baza() → empty (no Entries)' )
-				return []
+			if( !list ) return []
+			return list.remote_list() as $bog_mediagram_entry[]
+		}
+
+		/** Идентификаторы entries — лёгкий @$mol_mem (subscribe только на длину/состав, не на media). */
+		@ $mol_mem
+		entry_ids(): string[] {
+			const ids = this.entries_baza().map( e => e.link().str )
+			console.log( '[mediagram] entry_ids() count=', ids.length )
+			return ids
+		}
+
+		/** Один Entry — per-id @$mol_mem_key. Изолированная фибра на каждый ряд:
+		 * Promise от Media().remote() ретраит ТОЛЬКО эту строку, а не всю library_grid. */
+		@ $mol_mem_key
+		entry( id: string ): Entry {
+			const e = this.entries_baza().find( e => e.link().str === id )
+			if( !e ) throw new Error( `entry ${ id } not found` )
+			const media = e.Media()?.remote() as $bog_mediagram_media | null
+			const year_bint = media?.Year()?.val()
+			const rating_bint = e.Rating()?.val()
+			return {
+				id,
+				title: media?.Title()?.val() ?? '(без названия)',
+				year: year_bint != null ? String( year_bint ) : '',
+				kind: ( media?.Kind()?.val() ?? 'movie' ) as Kind,
+				status: ( e.Status()?.val() ?? 'want_to' ) as Status,
+				rating: rating_bint != null ? Number( rating_bint ) : null,
+				favorite: e.Favorite()?.val() ?? false,
 			}
-			const r = list.remote_list() as $bog_mediagram_entry[]
-			console.log( '[mediagram] entries_baza() ✓ count=', r.length )
-			return r
 		}
 
-		@ $mol_mem
-		entries_all(): Entry[] {
-			console.log( '[mediagram] entries_all() — start' )
-			return this.entries_baza().map( e => {
-				const media = e.Media()?.remote() as $bog_mediagram_media | null
-				const year_bint = media?.Year()?.val()
-				const rating_bint = e.Rating()?.val()
-				return {
-					id: e.link().str,
-					title: media?.Title()?.val() ?? '(без названия)',
-					year: year_bint != null ? String( year_bint ) : '',
-					kind: ( media?.Kind()?.val() ?? 'movie' ) as Kind,
-					status: ( e.Status()?.val() ?? 'want_to' ) as Status,
-					rating: rating_bint != null ? Number( rating_bint ) : null,
-					favorite: e.Favorite()?.val() ?? false,
-				}
-			} )
-		}
-
-		@ $mol_mem
-		entries_filtered() {
+		entries_filtered_ids(): string[] {
 			const q = this.query().trim().toLowerCase()
 			const s = this.status()
 			const k = this.kind_filter()
-			return this.entries_all().filter( e => {
+			return this.entry_ids().filter( id => {
+				const e = this.entry( id )
 				if( q && !e.title.toLowerCase().includes( q ) ) return false
 				if( s !== 'all' && e.status !== s ) return false
 				if( k !== 'all' && e.kind !== k ) return false
@@ -223,7 +223,7 @@ namespace $.$$ {
 		}
 
 		count_label() {
-			return `${ this.entries_filtered().length } записей`
+			return `${ this.entries_filtered_ids().length } записей`
 		}
 
 		banner_title() {
@@ -236,7 +236,7 @@ namespace $.$$ {
 
 		@ $mol_mem
 		circle_dialog_showed( next?: boolean ) {
-			return $mol_state_local.value( 'mediagram_circle_dialog_showed', next ) as boolean ?? false
+			return next ?? false
 		}
 
 		@ $mol_mem
@@ -259,20 +259,27 @@ namespace $.$$ {
 			return $mol_state_local.value( 'mediagram_circles', next ) as Circle[] ?? []
 		}
 
+		@ $mol_action
 		circle_create_open( e?: Event ) {
+			console.log( '[mediagram] CLICK circle_create_open' )
 			if( e ) e.preventDefault()
 			this.circle_dialog_showed( true )
+			console.log( '[mediagram] CLICK circle_create_open ✓' )
 			return null
 		}
 
+		@ $mol_action
 		circle_create_close( e?: Event ) {
+			console.log( '[mediagram] CLICK circle_create_close' )
 			if( e ) e.preventDefault()
 			this.circle_dialog_showed( false )
+			console.log( '[mediagram] CLICK circle_create_close ✓' )
 			return null
 		}
 
 		@ $mol_action
 		circle_create_confirm( e?: Event ) {
+			console.log( '[mediagram] CLICK circle_create_confirm' )
 			if( e ) e.preventDefault()
 			const type = this.circle_type()
 			const title = this.circle_name().trim() || CIRCLE_TYPE_LABEL[ type ]
@@ -288,6 +295,7 @@ namespace $.$$ {
 			this.circle_name( '' )
 			this.circle_description( '' )
 			this.circle_dialog_showed( false )
+			console.log( '[mediagram] CLICK circle_create_confirm ✓' )
 			return null
 		}
 
@@ -305,23 +313,24 @@ namespace $.$$ {
 			return circle
 		}
 
+		@ $mol_action
 		circle_open( id: string, e?: Event ) {
+			console.log( '[mediagram] CLICK circle_open id=', id )
 			if( e ) e.preventDefault()
 			this.circle_current( id )
 			this.tab( 'circle' )
+			console.log( '[mediagram] CLICK circle_open ✓' )
 			return null
 		}
 
+		@ $mol_action
 		circle_back( e?: Event ) {
+			console.log( '[mediagram] CLICK circle_back' )
 			if( e ) e.preventDefault()
 			this.circle_current( '' )
 			this.tab( 'circles' )
+			console.log( '[mediagram] CLICK circle_back ✓' )
 			return null
-		}
-
-		@ $mol_mem
-		circle_current( next?: string ) {
-			return $mol_state_arg.value( 'circle', next ) ?? ''
 		}
 
 		circle( id: string ) {
@@ -443,7 +452,7 @@ namespace $.$$ {
 		}
 
 		entries() {
-			return this.entries_filtered().map( e => this.Card( e.id ) )
+			return this.entries_filtered_ids().map( id => this.Card( id ) )
 		}
 
 		@ $mol_mem_key
@@ -468,22 +477,22 @@ namespace $.$$ {
 			return card
 		}
 
-		entry( id: string ) {
-			const found = this.entries_all().find( e => e.id === id )
-			if( !found ) throw new Error( `entry ${ id } not found` )
-			return found
+		@ $mol_mem
+		tab( next?: string ) {
+			if( next !== undefined ) console.log( '[mediagram] tab() SET ←', next )
+			const v = $mol_state_arg.value( 'tab', next ) ?? 'library'
+			if( next !== undefined ) console.log( '[mediagram] tab() SET ✓ →', v )
+			return v
 		}
 
 		@ $mol_mem
-		tab( next?: string ) {
-			if( next !== undefined ) console.log( '[mediagram] tab() ←', next )
-			const v = $mol_state_arg.value( 'tab', next ) ?? 'library'
-			return v
+		circle_current( next?: string ) {
+			if( next !== undefined ) console.log( '[mediagram] circle_current() SET ←', next )
+			return $mol_state_arg.value( 'circle', next ) ?? ''
 		}
 
 		body_content() {
 			const tab = this.tab()
-			console.log( '[mediagram] body_content() tab=', tab )
 			switch( tab ) {
 				case 'feed': return [ this.Feed_pane() ]
 				case 'circles': return [ this.Circles_pane() ]

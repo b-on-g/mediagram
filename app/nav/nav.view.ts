@@ -7,26 +7,36 @@ namespace $.$$ {
 		circles_active() { return this.tab() === 'circles' ? 'on' : 'off' }
 		me_active()      { return this.tab() === 'me'      ? 'on' : 'off' }
 
+		@ $mol_action
 		library_click( e?: Event ) {
+			console.log( '[mediagram] NAV CLICK library' )
 			if( e ) e.preventDefault()
 			this.tab( 'library' )
+			console.log( '[mediagram] NAV CLICK library ✓' )
 			return null
 		}
+		@ $mol_action
 		feed_click( e?: Event ) {
+			console.log( '[mediagram] NAV CLICK feed' )
 			if( e ) e.preventDefault()
 			this.tab( 'feed' )
+			console.log( '[mediagram] NAV CLICK feed ✓' )
 			return null
 		}
+		@ $mol_action
 		circles_click( e?: Event ) {
+			console.log( '[mediagram] NAV CLICK circles' )
 			if( e ) e.preventDefault()
-			console.log( '[mediagram] nav.circles_click — calling this.tab("circles")' )
 			this.tab( 'circles' )
-			console.log( '[mediagram] nav.circles_click — done' )
+			console.log( '[mediagram] NAV CLICK circles ✓' )
 			return null
 		}
+		@ $mol_action
 		me_click( e?: Event ) {
+			console.log( '[mediagram] NAV CLICK me' )
 			if( e ) e.preventDefault()
 			this.tab( 'me' )
+			console.log( '[mediagram] NAV CLICK me ✓' )
 			return null
 		}
 
