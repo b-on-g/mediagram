@@ -10087,13 +10087,6 @@ var $;
 
 ;
 "use strict";
-var $;
-(function ($) {
-    $mol_style_attach("bog/builderui/select/select.view.css", "[bog_builderui_select] {\n\ttransition: background-color 120ms, border-color 120ms;\n\tcursor: pointer;\n}\n\n[bog_builderui_select]:hover {\n\tbackground-color: var(--bog_builderui_hover);\n\tborder-color: var(--bog_builderui_focus);\n}\n\n[bog_builderui_select] [mol_select_trigger],\n[bog_builderui_select] [mol_select_trigger]:hover,\n[bog_builderui_select] [mol_select_trigger]:focus,\n[bog_builderui_select] [mol_select_trigger]:focus-visible,\n[bog_builderui_select] [mol_check],\n[bog_builderui_select] [mol_check]:hover,\n[bog_builderui_select] [mol_check]:focus,\n[bog_builderui_select] [mol_check]:focus-visible,\n[bog_builderui_select] [mol_button_typed],\n[bog_builderui_select] [mol_button_typed]:hover,\n[bog_builderui_select] [mol_button_typed]:focus,\n[bog_builderui_select] [mol_button_typed]:focus-visible {\n\tbackground-color: transparent !important;\n\tbox-shadow: none !important;\n\toutline: none !important;\n\tfilter: none !important;\n\tcolor: inherit !important;\n}\n");
-})($ || ($ = {}));
-
-;
-"use strict";
 
 
 ;
@@ -10118,6 +10111,80 @@ var $;
         padding: {
             left: '0.75rem',
             right: '0.75rem',
+        },
+        cursor: 'pointer',
+        transition: 'background-color 120ms, border-color 120ms',
+        ':hover': {
+            background: {
+                color: $bog_builderui_tokens.hover,
+            },
+            border: {
+                color: $bog_builderui_tokens.focus,
+            },
+        },
+        $mol_check: {
+            background: { color: 'transparent' },
+            boxShadow: 'none',
+            outline: 'none',
+            color: 'inherit',
+            ':hover': {
+                background: { color: 'transparent' },
+                boxShadow: 'none',
+            },
+            ':focus': {
+                background: { color: 'transparent' },
+                boxShadow: 'none',
+                outline: 'none',
+            },
+            ':focus-visible': {
+                background: { color: 'transparent' },
+                boxShadow: 'none',
+                outline: 'none',
+            },
+        },
+        $mol_pop_bubble: {
+            background: {
+                color: $bog_builderui_tokens.card,
+            },
+            color: $bog_builderui_tokens.text,
+            border: {
+                width: '1px',
+                style: 'solid',
+                color: $bog_builderui_tokens.line,
+                radius: $bog_builderui_tokens.radius,
+            },
+            padding: {
+                top: '0.25rem',
+                right: '0.25rem',
+                bottom: '0.25rem',
+                left: '0.25rem',
+            },
+            box: {
+                shadow: [{ x: 0, y: '4px', blur: '12px', spread: 0, color: '#00000026' }],
+            },
+            overflow: 'hidden',
+            $mol_scroll: {
+                background: { color: 'transparent' },
+                border: { radius: $bog_builderui_tokens.radius },
+            },
+            $mol_button_minor: {
+                border: { radius: $bog_builderui_tokens.radius },
+                color: $bog_builderui_tokens.text,
+                background: { color: 'transparent' },
+                boxShadow: 'none',
+                ':hover': {
+                    background: { color: $bog_builderui_tokens.hover },
+                    boxShadow: 'none',
+                },
+                ':focus': {
+                    background: { color: 'transparent' },
+                    boxShadow: 'none',
+                },
+                ':focus-visible': {
+                    background: { color: 'transparent' },
+                    boxShadow: 'none',
+                },
+            },
         },
     });
 })($ || ($ = {}));
@@ -30089,6 +30156,13 @@ var $;
         ], $bog_mediagram_app.prototype, "entry_link", null);
         $$.$bog_mediagram_app = $bog_mediagram_app;
     })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("bog/mediagram/app/app.view.css", "[bog_mediagram_app][bog_builderui_lights=\"dark\"] {\n\t--bog_builderui_text: #d4d4d8;\n}\n\n[bog_mediagram_app] [mol_view][mol_view_error]:not([mol_view_error=\"Promise\"], [mol_view_error=\"$mol_promise_blocker\"]) {\n\tbackground-color: var(--bog_builderui_card);\n\tbackground-image: repeating-linear-gradient(\n\t\t90deg,\n\t\ttransparent,\n\t\ttransparent 10px,\n\t\trgba(239, 68, 68, 0.18) 10px,\n\t\trgba(239, 68, 68, 0.18) 20px\n\t);\n\tcolor: var(--bog_builderui_text);\n\tborder: 1px solid #ef4444;\n\tborder-radius: var(--bog_builderui_radius);\n\tpadding: 0.75rem 1rem 0.75rem 2.75rem;\n\tfont-family: var(--bog_builderui_font_body);\n\tfont-weight: 500;\n\talign-items: center;\n\tjustify-content: flex-start;\n\tposition: relative;\n\tmin-height: 2.5rem;\n\toverflow: hidden;\n\tanimation: bog_mediagram_error_slide 1s linear infinite;\n}\n\n[bog_mediagram_app] [mol_view][mol_view_error]:not([mol_view_error=\"Promise\"], [mol_view_error=\"$mol_promise_blocker\"])::before {\n\tcontent: \"⚠\";\n\tdisplay: inline-block;\n\tposition: absolute;\n\tleft: 1rem;\n\ttop: 50%;\n\tfont-size: 1.25rem;\n\tline-height: 1;\n\tcolor: #ef4444;\n\ttransform: translateY(-50%);\n\tanimation: bog_mediagram_error_pulse 0.9s ease-in-out infinite;\n}\n\n@keyframes bog_mediagram_error_slide {\n\tfrom { background-position: 0 0; }\n\tto { background-position: 20px 0; }\n}\n\n@keyframes bog_mediagram_error_pulse {\n\t0%, 100% { transform: translateY(-50%) scale(1); opacity: 0.8; }\n\t50% { transform: translateY(-50%) scale(1.35); opacity: 1; }\n}\n\n@media (prefers-reduced-motion: reduce) {\n\t[bog_mediagram_app] [mol_view][mol_view_error]:not([mol_view_error=\"Promise\"], [mol_view_error=\"$mol_promise_blocker\"]),\n\t[bog_mediagram_app] [mol_view][mol_view_error]:not([mol_view_error=\"Promise\"], [mol_view_error=\"$mol_promise_blocker\"])::before {\n\t\tanimation: none;\n\t}\n}\n");
 })($ || ($ = {}));
 
 ;

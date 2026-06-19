@@ -4318,9 +4318,6 @@ declare namespace $ {
 }
 
 declare namespace $ {
-}
-
-declare namespace $ {
 
 	export class $bog_builderui_select extends $mol_select {
 	}
@@ -41201,6 +41198,9 @@ declare namespace $.$$ {
         library_rows(): $.$bog_mediagram_app_tile[];
         entry_link(i: number): string;
     }
+}
+
+declare namespace $ {
 }
 
 declare namespace $ {
