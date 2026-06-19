@@ -11149,32 +11149,50 @@ var $;
             circles_active() { return this.tab() === 'circles' ? 'on' : 'off'; }
             me_active() { return this.tab() === 'me' ? 'on' : 'off'; }
             library_click(e) {
+                console.log('[mediagram] NAV CLICK library');
                 if (e)
                     e.preventDefault();
                 this.tab('library');
+                console.log('[mediagram] NAV CLICK library ✓');
                 return null;
             }
             feed_click(e) {
+                console.log('[mediagram] NAV CLICK feed');
                 if (e)
                     e.preventDefault();
                 this.tab('feed');
+                console.log('[mediagram] NAV CLICK feed ✓');
                 return null;
             }
             circles_click(e) {
+                console.log('[mediagram] NAV CLICK circles');
                 if (e)
                     e.preventDefault();
-                console.log('[mediagram] nav.circles_click — calling this.tab("circles")');
                 this.tab('circles');
-                console.log('[mediagram] nav.circles_click — done');
+                console.log('[mediagram] NAV CLICK circles ✓');
                 return null;
             }
             me_click(e) {
+                console.log('[mediagram] NAV CLICK me');
                 if (e)
                     e.preventDefault();
                 this.tab('me');
+                console.log('[mediagram] NAV CLICK me ✓');
                 return null;
             }
         }
+        __decorate([
+            $mol_action
+        ], $bog_mediagram_app_nav.prototype, "library_click", null);
+        __decorate([
+            $mol_action
+        ], $bog_mediagram_app_nav.prototype, "feed_click", null);
+        __decorate([
+            $mol_action
+        ], $bog_mediagram_app_nav.prototype, "circles_click", null);
+        __decorate([
+            $mol_action
+        ], $bog_mediagram_app_nav.prototype, "me_click", null);
         $$.$bog_mediagram_app_nav = $bog_mediagram_app_nav;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
@@ -21410,26 +21428,6 @@ var $;
 "use strict";
 var $;
 (function ($) {
-    function $mol_offline() { }
-    $.$mol_offline = $mol_offline;
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
-    try {
-        $mol_offline();
-    }
-    catch (error) {
-        console.error(error);
-    }
-})($ || ($ = {}));
-
-;
-"use strict";
-var $;
-(function ($) {
     class $mol_rest_message extends $mol_object {
         port;
         method() {
@@ -22399,45 +22397,46 @@ var $;
             }
             /** Home land библиотеки текущего юзера. Не мемоизируем — возвращает Pawn. */
             library_node() {
-                console.log('[mediagram] library_node()');
-                const r = this.$.$giper_baza_glob.home().land().Data(this.$.$bog_mediagram_library);
-                console.log('[mediagram] library_node() ✓');
-                return r;
+                return this.$.$giper_baza_glob.home().land().Data(this.$.$bog_mediagram_library);
             }
             /** Сырые entry-Pawn'ы из библиотеки. Не мемоизируем — возвращает Pawn[]. */
             entries_baza() {
-                console.log('[mediagram] entries_baza()');
                 const list = this.library_node().Entries();
-                if (!list) {
-                    console.log('[mediagram] entries_baza() → empty (no Entries)');
+                if (!list)
                     return [];
-                }
-                const r = list.remote_list();
-                console.log('[mediagram] entries_baza() ✓ count=', r.length);
-                return r;
+                return list.remote_list();
             }
-            entries_all() {
-                console.log('[mediagram] entries_all() — start');
-                return this.entries_baza().map(e => {
-                    const media = e.Media()?.remote();
-                    const year_bint = media?.Year()?.val();
-                    const rating_bint = e.Rating()?.val();
-                    return {
-                        id: e.link().str,
-                        title: media?.Title()?.val() ?? '(без названия)',
-                        year: year_bint != null ? String(year_bint) : '',
-                        kind: (media?.Kind()?.val() ?? 'movie'),
-                        status: (e.Status()?.val() ?? 'want_to'),
-                        rating: rating_bint != null ? Number(rating_bint) : null,
-                        favorite: e.Favorite()?.val() ?? false,
-                    };
-                });
+            /** Идентификаторы entries — лёгкий @$mol_mem (subscribe только на длину/состав, не на media). */
+            entry_ids() {
+                const ids = this.entries_baza().map(e => e.link().str);
+                console.log('[mediagram] entry_ids() count=', ids.length);
+                return ids;
             }
-            entries_filtered() {
+            /** Один Entry — per-id @$mol_mem_key. Изолированная фибра на каждый ряд:
+             * Promise от Media().remote() ретраит ТОЛЬКО эту строку, а не всю library_grid. */
+            entry(id) {
+                const e = this.entries_baza().find(e => e.link().str === id);
+                if (!e)
+                    throw new Error(`entry ${id} not found`);
+                const media = e.Media()?.remote();
+                const year_bint = media?.Year()?.val();
+                const rating_bint = e.Rating()?.val();
+                return {
+                    id,
+                    title: media?.Title()?.val() ?? '(без названия)',
+                    year: year_bint != null ? String(year_bint) : '',
+                    kind: (media?.Kind()?.val() ?? 'movie'),
+                    status: (e.Status()?.val() ?? 'want_to'),
+                    rating: rating_bint != null ? Number(rating_bint) : null,
+                    favorite: e.Favorite()?.val() ?? false,
+                };
+            }
+            entries_filtered_ids() {
                 const q = this.query().trim().toLowerCase();
                 const s = this.status();
                 const k = this.kind_filter();
-                return this.entries_all().filter(e => {
+                return this.entry_ids().filter(id => {
+                    const e = this.entry(id);
                     if (q && !e.title.toLowerCase().includes(q))
                         return false;
                     if (s !== 'all' && e.status !== s)
@@ -22448,7 +22447,7 @@ var $;
                 });
             }
             count_label() {
-                return `${this.entries_filtered().length} записей`;
+                return `${this.entries_filtered_ids().length} записей`;
             }
             banner_title() {
                 return 'сегодня зафиксировано: 2';
@@ -22457,7 +22456,7 @@ var $;
                 return 'авто из плеера — undo в истории';
             }
             circle_dialog_showed(next) {
-                return $mol_state_local.value('mediagram_circle_dialog_showed', next) ?? false;
+                return next ?? false;
             }
             circle_name(next) {
                 return $mol_state_local.value('mediagram_circle_name', next) ?? '';
@@ -22472,18 +22471,23 @@ var $;
                 return $mol_state_local.value('mediagram_circles', next) ?? [];
             }
             circle_create_open(e) {
+                console.log('[mediagram] CLICK circle_create_open');
                 if (e)
                     e.preventDefault();
                 this.circle_dialog_showed(true);
+                console.log('[mediagram] CLICK circle_create_open ✓');
                 return null;
             }
             circle_create_close(e) {
+                console.log('[mediagram] CLICK circle_create_close');
                 if (e)
                     e.preventDefault();
                 this.circle_dialog_showed(false);
+                console.log('[mediagram] CLICK circle_create_close ✓');
                 return null;
             }
             circle_create_confirm(e) {
+                console.log('[mediagram] CLICK circle_create_confirm');
                 if (e)
                     e.preventDefault();
                 const type = this.circle_type();
@@ -22500,6 +22504,7 @@ var $;
                 this.circle_name('');
                 this.circle_description('');
                 this.circle_dialog_showed(false);
+                console.log('[mediagram] CLICK circle_create_confirm ✓');
                 return null;
             }
             circle_rows() {
@@ -22514,21 +22519,22 @@ var $;
                 return circle;
             }
             circle_open(id, e) {
+                console.log('[mediagram] CLICK circle_open id=', id);
                 if (e)
                     e.preventDefault();
                 this.circle_current(id);
                 this.tab('circle');
+                console.log('[mediagram] CLICK circle_open ✓');
                 return null;
             }
             circle_back(e) {
+                console.log('[mediagram] CLICK circle_back');
                 if (e)
                     e.preventDefault();
                 this.circle_current('');
                 this.tab('circles');
+                console.log('[mediagram] CLICK circle_back ✓');
                 return null;
-            }
-            circle_current(next) {
-                return $mol_state_arg.value('circle', next) ?? '';
             }
             circle(id) {
                 const found = this.circles().find(circle => circle.id === id);
@@ -22631,7 +22637,7 @@ var $;
                 return new this.$.$bog_mediagram_app_chip();
             }
             entries() {
-                return this.entries_filtered().map(e => this.Card(e.id));
+                return this.entries_filtered_ids().map(id => this.Card(id));
             }
             Card(id) {
                 const card = new this.$.$bog_mediagram_app_card();
@@ -22653,21 +22659,21 @@ var $;
                 };
                 return card;
             }
-            entry(id) {
-                const found = this.entries_all().find(e => e.id === id);
-                if (!found)
-                    throw new Error(`entry ${id} not found`);
-                return found;
-            }
             tab(next) {
                 if (next !== undefined)
-                    console.log('[mediagram] tab() ←', next);
+                    console.log('[mediagram] tab() SET ←', next);
                 const v = $mol_state_arg.value('tab', next) ?? 'library';
+                if (next !== undefined)
+                    console.log('[mediagram] tab() SET ✓ →', v);
                 return v;
+            }
+            circle_current(next) {
+                if (next !== undefined)
+                    console.log('[mediagram] circle_current() SET ←', next);
+                return $mol_state_arg.value('circle', next) ?? '';
             }
             body_content() {
                 const tab = this.tab();
-                console.log('[mediagram] body_content() tab=', tab);
                 switch (tab) {
                     case 'feed': return [this.Feed_pane()];
                     case 'circles': return [this.Circles_pane()];
@@ -22791,10 +22797,10 @@ var $;
         ], $bog_mediagram_app.prototype, "kind_filter", null);
         __decorate([
             $mol_mem
-        ], $bog_mediagram_app.prototype, "entries_all", null);
+        ], $bog_mediagram_app.prototype, "entry_ids", null);
         __decorate([
-            $mol_mem
-        ], $bog_mediagram_app.prototype, "entries_filtered", null);
+            $mol_mem_key
+        ], $bog_mediagram_app.prototype, "entry", null);
         __decorate([
             $mol_mem
         ], $bog_mediagram_app.prototype, "circle_dialog_showed", null);
@@ -22812,13 +22818,22 @@ var $;
         ], $bog_mediagram_app.prototype, "circles", null);
         __decorate([
             $mol_action
+        ], $bog_mediagram_app.prototype, "circle_create_open", null);
+        __decorate([
+            $mol_action
+        ], $bog_mediagram_app.prototype, "circle_create_close", null);
+        __decorate([
+            $mol_action
         ], $bog_mediagram_app.prototype, "circle_create_confirm", null);
         __decorate([
             $mol_mem_key
         ], $bog_mediagram_app.prototype, "Circle", null);
         __decorate([
-            $mol_mem
-        ], $bog_mediagram_app.prototype, "circle_current", null);
+            $mol_action
+        ], $bog_mediagram_app.prototype, "circle_open", null);
+        __decorate([
+            $mol_action
+        ], $bog_mediagram_app.prototype, "circle_back", null);
         __decorate([
             $mol_mem_key
         ], $bog_mediagram_app.prototype, "Circle_member", null);
@@ -22837,6 +22852,9 @@ var $;
         __decorate([
             $mol_mem
         ], $bog_mediagram_app.prototype, "tab", null);
+        __decorate([
+            $mol_mem
+        ], $bog_mediagram_app.prototype, "circle_current", null);
         __decorate([
             $mol_mem
         ], $bog_mediagram_app.prototype, "snapshot_tick", null);

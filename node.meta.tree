@@ -87,5 +87,4 @@
 	deploy \/giper/baza/docker/deploy.sh
 	deploy \/giper/baza/docker/autopull_and_restart.sh
 \/bog/mediagram/app
-	include \/mol/offline/install
 	deploy \/bog/mediagram/ext

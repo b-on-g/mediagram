@@ -363,9 +363,7 @@
     "$bog_mediagram_app_circle_feed_item",
     "$bog_mediagram_app_circle_feed",
     "$bog_mediagram_app_chip",
-    "$bog_mediagram_app_card",
-    "$mol_offline_install",
-    "$mol_offline"
+    "$bog_mediagram_app_card"
   ],
   "dependencies": {
     "autoinstall": "*",

@@ -39687,18 +39687,6 @@ declare namespace $ {
 }
 
 declare namespace $ {
-    function $mol_offline(): void;
-}
-
-declare namespace $ {
-    /** Installs service worker proxy, which caches all requests and respond from cache on http errors. */
-    function $mol_offline_web(): void;
-}
-
-declare namespace $ {
-}
-
-declare namespace $ {
 
 	type $mol_book2_sub__1 = $mol_type_enforce<
 		ReturnType< $mol_book2['pages'] >[number]
@@ -45113,8 +45101,12 @@ declare namespace $.$$ {
         library_node(): $bog_mediagram_library;
         /** Сырые entry-Pawn'ы из библиотеки. Не мемоизируем — возвращает Pawn[]. */
         entries_baza(): $bog_mediagram_entry[];
-        entries_all(): Entry[];
-        entries_filtered(): Entry[];
+        /** Идентификаторы entries — лёгкий @$mol_mem (subscribe только на длину/состав, не на media). */
+        entry_ids(): string[];
+        /** Один Entry — per-id @$mol_mem_key. Изолированная фибра на каждый ряд:
+         * Promise от Media().remote() ретраит ТОЛЬКО эту строку, а не всю library_grid. */
+        entry(id: string): Entry;
+        entries_filtered_ids(): string[];
         count_label(): string;
         banner_title(): string;
         banner_text(): string;
@@ -45130,7 +45122,6 @@ declare namespace $.$$ {
         Circle(id: string): $bog_mediagram_app_circle;
         circle_open(id: string, e?: Event): null;
         circle_back(e?: Event): null;
-        circle_current(next?: string): string;
         circle(id: string): Circle;
         circle_detail(): Circle | null;
         circle_detail_title(): string;
@@ -45152,8 +45143,8 @@ declare namespace $.$$ {
         Chip(id: string): $bog_mediagram_app_chip;
         entries(): $bog_mediagram_app_card[];
         Card(id: string): $bog_mediagram_app_card;
-        entry(id: string): Entry;
         tab(next?: string): string;
+        circle_current(next?: string): string;
         body_content(): any[];
         top_content(): any[];
         add_click(e?: Event): null;
