@@ -812,11 +812,6 @@ $bog_theme_toggle $mol_pop
 			theme_auto <= theme_auto
 			close? <=> picker_close? null
 
-- mediagram — webapp + Chrome side panel
-- Одна сборка $mol-аппа адаптируется по ширине через container queries
-- Пресет builderui: zinc / sky / yellow / eb-garamond / large
-- Тема светает/тёмная переключается через $bog_theme_toggle
-
 $bog_mediagram_app $bog_builderui_div
 	plugins /
 		<= Theme $bog_theme_auto

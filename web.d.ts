@@ -39429,6 +39429,143 @@ declare namespace $.$$ {
 
 declare namespace $ {
 
+	type $bog_builderui_badge__title_bog_mediagram_app_circle_1 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app_circle['type_label'] >
+		,
+		ReturnType< $bog_builderui_badge['title'] >
+	>
+	type $mol_view__sub_bog_mediagram_app_circle_2 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_bog_mediagram_app_circle_3 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	export class $bog_mediagram_app_circle extends $bog_builderui_card {
+		open( next?: any ): any
+		Circle_row_type( ): $bog_builderui_badge
+		Circle_row_title( ): $mol_view
+		Circle_row_description( ): $mol_view
+		title( ): string
+		type_label( ): string
+		description( ): string
+		event( ): ({ 
+			click( next?: ReturnType< $bog_mediagram_app_circle['open'] > ): ReturnType< $bog_mediagram_app_circle['open'] >,
+		})  & ReturnType< $bog_builderui_card['event'] >
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=circle.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $bog_mediagram_app_circle extends $.$bog_mediagram_app_circle {
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	type $mol_view__sub_bog_mediagram_app_circle_member_1 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $bog_builderui_badge__title_bog_mediagram_app_circle_member_2 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app_circle_member['role'] >
+		,
+		ReturnType< $bog_builderui_badge['title'] >
+	>
+	type $mol_view__sub_bog_mediagram_app_circle_member_3 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_bog_mediagram_app_circle_member_4 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	export class $bog_mediagram_app_circle_member extends $bog_builderui_card {
+		Member_name( ): $mol_view
+		Member_role( ): $bog_builderui_badge
+		Member_head( ): $mol_view
+		Member_watching( ): $mol_view
+		name( ): string
+		role( ): string
+		watching( ): string
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=member.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $bog_mediagram_app_circle_member extends $.$bog_mediagram_app_circle_member {
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
+	type $mol_view__sub_bog_mediagram_app_circle_feed_item_1 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $bog_builderui_badge__title_bog_mediagram_app_circle_feed_item_2 = $mol_type_enforce<
+		ReturnType< $bog_mediagram_app_circle_feed_item['meta'] >
+		,
+		ReturnType< $bog_builderui_badge['title'] >
+	>
+	type $mol_view__sub_bog_mediagram_app_circle_feed_item_3 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_bog_mediagram_app_circle_feed_item_4 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	type $mol_view__sub_bog_mediagram_app_circle_feed_item_5 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_view['sub'] >
+	>
+	export class $bog_mediagram_app_circle_feed_item extends $bog_builderui_card {
+		Feed_item_title( ): $mol_view
+		Feed_item_meta( ): $bog_builderui_badge
+		Feed_item_head( ): $mol_view
+		Feed_item_by( ): $mol_view
+		Feed_item_note( ): $mol_view
+		title( ): string
+		by( ): string
+		meta( ): string
+		note( ): string
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=item.view.tree.d.ts.map
+declare namespace $.$$ {
+    class $bog_mediagram_app_circle_feed_item extends $.$bog_mediagram_app_circle_feed_item {
+    }
+}
+
+declare namespace $ {
+}
+
+declare namespace $ {
+
 	type $mol_view__sub_bog_mediagram_app_chip_1 = $mol_type_enforce<
 		readonly(any)[]
 		,
@@ -44924,104 +45061,6 @@ declare namespace $ {
 		sub( ): readonly(any)[]
 	}
 	
-	type $bog_builderui_badge__title_bog_mediagram_app_circle_1 = $mol_type_enforce<
-		ReturnType< $bog_mediagram_app_circle['type_label'] >
-		,
-		ReturnType< $bog_builderui_badge['title'] >
-	>
-	type $mol_view__sub_bog_mediagram_app_circle_2 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_view__sub_bog_mediagram_app_circle_3 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	export class $bog_mediagram_app_circle extends $bog_builderui_card {
-		open( next?: any ): any
-		Circle_row_type( ): $bog_builderui_badge
-		Circle_row_title( ): $mol_view
-		Circle_row_description( ): $mol_view
-		title( ): string
-		type_label( ): string
-		description( ): string
-		event( ): ({ 
-			click( next?: ReturnType< $bog_mediagram_app_circle['open'] > ): ReturnType< $bog_mediagram_app_circle['open'] >,
-		})  & ReturnType< $bog_builderui_card['event'] >
-		sub( ): readonly(any)[]
-	}
-	
-	type $mol_view__sub_bog_mediagram_app_circle_member_1 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $bog_builderui_badge__title_bog_mediagram_app_circle_member_2 = $mol_type_enforce<
-		ReturnType< $bog_mediagram_app_circle_member['role'] >
-		,
-		ReturnType< $bog_builderui_badge['title'] >
-	>
-	type $mol_view__sub_bog_mediagram_app_circle_member_3 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_view__sub_bog_mediagram_app_circle_member_4 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	export class $bog_mediagram_app_circle_member extends $bog_builderui_card {
-		Member_name( ): $mol_view
-		Member_role( ): $bog_builderui_badge
-		Member_head( ): $mol_view
-		Member_watching( ): $mol_view
-		name( ): string
-		role( ): string
-		watching( ): string
-		sub( ): readonly(any)[]
-	}
-	
-	type $mol_view__sub_bog_mediagram_app_circle_feed_item_1 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $bog_builderui_badge__title_bog_mediagram_app_circle_feed_item_2 = $mol_type_enforce<
-		ReturnType< $bog_mediagram_app_circle_feed_item['meta'] >
-		,
-		ReturnType< $bog_builderui_badge['title'] >
-	>
-	type $mol_view__sub_bog_mediagram_app_circle_feed_item_3 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_view__sub_bog_mediagram_app_circle_feed_item_4 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	type $mol_view__sub_bog_mediagram_app_circle_feed_item_5 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_view['sub'] >
-	>
-	export class $bog_mediagram_app_circle_feed_item extends $bog_builderui_card {
-		Feed_item_title( ): $mol_view
-		Feed_item_meta( ): $bog_builderui_badge
-		Feed_item_head( ): $mol_view
-		Feed_item_by( ): $mol_view
-		Feed_item_note( ): $mol_view
-		title( ): string
-		by( ): string
-		meta( ): string
-		note( ): string
-		sub( ): readonly(any)[]
-	}
-	
 }
 
 //# sourceMappingURL=app.view.tree.d.ts.map
@@ -45131,13 +45170,12 @@ declare namespace $.$$ {
         };
         recognized_status(next?: string): string;
         recognized_add(e?: Event): null;
-        add_from_snapshot(): null;
-    }
-    export class $bog_mediagram_app_circle extends $.$bog_mediagram_app_circle {
-    }
-    export class $bog_mediagram_app_circle_member extends $.$bog_mediagram_app_circle_member {
-    }
-    export class $bog_mediagram_app_circle_feed_item extends $.$bog_mediagram_app_circle_feed_item {
+        /**
+         * Запись в баззу. Вызывать только через $mol_wire_async — иначе
+         * make() на каждой ретрае фибры будет создавать новые pawn'ы.
+         * НЕ @$mol_action: wire_async создаёт свой фибер, двойная обёртка лишняя.
+         */
+        save_from_snapshot(snap: any, status: string, now: number): null;
     }
     export {};
 }

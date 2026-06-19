@@ -12617,139 +12617,6 @@ var $;
 	($mol_mem(($.$bog_mediagram_app.prototype), "Search"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Theme_toggle"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Add_btn"));
-	($.$bog_mediagram_app_circle) = class $bog_mediagram_app_circle extends ($.$bog_builderui_card) {
-		open(next){
-			if(next !== undefined) return next;
-			return null;
-		}
-		Circle_row_type(){
-			const obj = new this.$.$bog_builderui_badge();
-			(obj.title) = () => ((this.type_label()));
-			return obj;
-		}
-		Circle_row_title(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.title())]);
-			return obj;
-		}
-		Circle_row_description(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.description())]);
-			return obj;
-		}
-		title(){
-			return "";
-		}
-		type_label(){
-			return "";
-		}
-		description(){
-			return "";
-		}
-		event(){
-			return {...(super.event()), "click": (next) => (this.open(next))};
-		}
-		sub(){
-			return [
-				(this.Circle_row_type()), 
-				(this.Circle_row_title()), 
-				(this.Circle_row_description())
-			];
-		}
-	};
-	($mol_mem(($.$bog_mediagram_app_circle.prototype), "open"));
-	($mol_mem(($.$bog_mediagram_app_circle.prototype), "Circle_row_type"));
-	($mol_mem(($.$bog_mediagram_app_circle.prototype), "Circle_row_title"));
-	($mol_mem(($.$bog_mediagram_app_circle.prototype), "Circle_row_description"));
-	($.$bog_mediagram_app_circle_member) = class $bog_mediagram_app_circle_member extends ($.$bog_builderui_card) {
-		Member_name(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.name())]);
-			return obj;
-		}
-		Member_role(){
-			const obj = new this.$.$bog_builderui_badge();
-			(obj.title) = () => ((this.role()));
-			return obj;
-		}
-		Member_head(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Member_name()), (this.Member_role())]);
-			return obj;
-		}
-		Member_watching(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.watching())]);
-			return obj;
-		}
-		name(){
-			return "";
-		}
-		role(){
-			return "";
-		}
-		watching(){
-			return "";
-		}
-		sub(){
-			return [(this.Member_head()), (this.Member_watching())];
-		}
-	};
-	($mol_mem(($.$bog_mediagram_app_circle_member.prototype), "Member_name"));
-	($mol_mem(($.$bog_mediagram_app_circle_member.prototype), "Member_role"));
-	($mol_mem(($.$bog_mediagram_app_circle_member.prototype), "Member_head"));
-	($mol_mem(($.$bog_mediagram_app_circle_member.prototype), "Member_watching"));
-	($.$bog_mediagram_app_circle_feed_item) = class $bog_mediagram_app_circle_feed_item extends ($.$bog_builderui_card) {
-		Feed_item_title(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.title())]);
-			return obj;
-		}
-		Feed_item_meta(){
-			const obj = new this.$.$bog_builderui_badge();
-			(obj.title) = () => ((this.meta()));
-			return obj;
-		}
-		Feed_item_head(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Feed_item_title()), (this.Feed_item_meta())]);
-			return obj;
-		}
-		Feed_item_by(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.by())]);
-			return obj;
-		}
-		Feed_item_note(){
-			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.note())]);
-			return obj;
-		}
-		title(){
-			return "";
-		}
-		by(){
-			return "";
-		}
-		meta(){
-			return "";
-		}
-		note(){
-			return "";
-		}
-		sub(){
-			return [
-				(this.Feed_item_head()), 
-				(this.Feed_item_by()), 
-				(this.Feed_item_note())
-			];
-		}
-	};
-	($mol_mem(($.$bog_mediagram_app_circle_feed_item.prototype), "Feed_item_title"));
-	($mol_mem(($.$bog_mediagram_app_circle_feed_item.prototype), "Feed_item_meta"));
-	($mol_mem(($.$bog_mediagram_app_circle_feed_item.prototype), "Feed_item_head"));
-	($mol_mem(($.$bog_mediagram_app_circle_feed_item.prototype), "Feed_item_by"));
-	($mol_mem(($.$bog_mediagram_app_circle_feed_item.prototype), "Feed_item_note"));
 
 
 ;
@@ -20976,6 +20843,277 @@ var $;
 })($ || ($ = {}));
 
 ;
+	($.$bog_mediagram_app_circle) = class $bog_mediagram_app_circle extends ($.$bog_builderui_card) {
+		open(next){
+			if(next !== undefined) return next;
+			return null;
+		}
+		Circle_row_type(){
+			const obj = new this.$.$bog_builderui_badge();
+			(obj.title) = () => ((this.type_label()));
+			return obj;
+		}
+		Circle_row_title(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.title())]);
+			return obj;
+		}
+		Circle_row_description(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.description())]);
+			return obj;
+		}
+		title(){
+			return "";
+		}
+		type_label(){
+			return "";
+		}
+		description(){
+			return "";
+		}
+		event(){
+			return {...(super.event()), "click": (next) => (this.open(next))};
+		}
+		sub(){
+			return [
+				(this.Circle_row_type()), 
+				(this.Circle_row_title()), 
+				(this.Circle_row_description())
+			];
+		}
+	};
+	($mol_mem(($.$bog_mediagram_app_circle.prototype), "open"));
+	($mol_mem(($.$bog_mediagram_app_circle.prototype), "Circle_row_type"));
+	($mol_mem(($.$bog_mediagram_app_circle.prototype), "Circle_row_title"));
+	($mol_mem(($.$bog_mediagram_app_circle.prototype), "Circle_row_description"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $bog_mediagram_app_circle extends $.$bog_mediagram_app_circle {
+        }
+        $$.$bog_mediagram_app_circle = $bog_mediagram_app_circle;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_define($bog_mediagram_app_circle, {
+        flex: { direction: 'column' },
+        gap: $mol_gap.text,
+        cursor: 'pointer',
+        Circle_row_type: {
+            align: { self: 'flex-start' },
+        },
+        Circle_row_title: {
+            font: {
+                family: $bog_builderui_tokens.font_head,
+                size: '16px',
+                weight: 700,
+            },
+        },
+        Circle_row_description: {
+            color: $bog_builderui_tokens.shade,
+            font: { size: '13px' },
+        },
+    });
+})($ || ($ = {}));
+
+;
+	($.$bog_mediagram_app_circle_member) = class $bog_mediagram_app_circle_member extends ($.$bog_builderui_card) {
+		Member_name(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.name())]);
+			return obj;
+		}
+		Member_role(){
+			const obj = new this.$.$bog_builderui_badge();
+			(obj.title) = () => ((this.role()));
+			return obj;
+		}
+		Member_head(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Member_name()), (this.Member_role())]);
+			return obj;
+		}
+		Member_watching(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.watching())]);
+			return obj;
+		}
+		name(){
+			return "";
+		}
+		role(){
+			return "";
+		}
+		watching(){
+			return "";
+		}
+		sub(){
+			return [(this.Member_head()), (this.Member_watching())];
+		}
+	};
+	($mol_mem(($.$bog_mediagram_app_circle_member.prototype), "Member_name"));
+	($mol_mem(($.$bog_mediagram_app_circle_member.prototype), "Member_role"));
+	($mol_mem(($.$bog_mediagram_app_circle_member.prototype), "Member_head"));
+	($mol_mem(($.$bog_mediagram_app_circle_member.prototype), "Member_watching"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $bog_mediagram_app_circle_member extends $.$bog_mediagram_app_circle_member {
+        }
+        $$.$bog_mediagram_app_circle_member = $bog_mediagram_app_circle_member;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_define($bog_mediagram_app_circle_member, {
+        flex: { direction: 'column' },
+        gap: $mol_gap.text,
+        Member_head: {
+            flex: { direction: 'row', wrap: 'wrap' },
+            align: { items: 'center' },
+            gap: $mol_gap.text,
+        },
+        Member_name: {
+            font: {
+                family: $bog_builderui_tokens.font_head,
+                size: '16px',
+                weight: 700,
+            },
+        },
+        Member_watching: {
+            color: $bog_builderui_tokens.shade,
+            font: { size: '13px' },
+        },
+    });
+})($ || ($ = {}));
+
+;
+	($.$bog_mediagram_app_circle_feed_item) = class $bog_mediagram_app_circle_feed_item extends ($.$bog_builderui_card) {
+		Feed_item_title(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.title())]);
+			return obj;
+		}
+		Feed_item_meta(){
+			const obj = new this.$.$bog_builderui_badge();
+			(obj.title) = () => ((this.meta()));
+			return obj;
+		}
+		Feed_item_head(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.Feed_item_title()), (this.Feed_item_meta())]);
+			return obj;
+		}
+		Feed_item_by(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.by())]);
+			return obj;
+		}
+		Feed_item_note(){
+			const obj = new this.$.$mol_view();
+			(obj.sub) = () => ([(this.note())]);
+			return obj;
+		}
+		title(){
+			return "";
+		}
+		by(){
+			return "";
+		}
+		meta(){
+			return "";
+		}
+		note(){
+			return "";
+		}
+		sub(){
+			return [
+				(this.Feed_item_head()), 
+				(this.Feed_item_by()), 
+				(this.Feed_item_note())
+			];
+		}
+	};
+	($mol_mem(($.$bog_mediagram_app_circle_feed_item.prototype), "Feed_item_title"));
+	($mol_mem(($.$bog_mediagram_app_circle_feed_item.prototype), "Feed_item_meta"));
+	($mol_mem(($.$bog_mediagram_app_circle_feed_item.prototype), "Feed_item_head"));
+	($mol_mem(($.$bog_mediagram_app_circle_feed_item.prototype), "Feed_item_by"));
+	($mol_mem(($.$bog_mediagram_app_circle_feed_item.prototype), "Feed_item_note"));
+
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $bog_mediagram_app_circle_feed_item extends $.$bog_mediagram_app_circle_feed_item {
+        }
+        $$.$bog_mediagram_app_circle_feed_item = $bog_mediagram_app_circle_feed_item;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_define($bog_mediagram_app_circle_feed_item, {
+        flex: { direction: 'column' },
+        gap: $mol_gap.text,
+        Feed_item_head: {
+            flex: { direction: 'row', wrap: 'wrap' },
+            align: { items: 'center' },
+            gap: $mol_gap.text,
+        },
+        Feed_item_title: {
+            font: {
+                family: $bog_builderui_tokens.font_head,
+                size: '16px',
+                weight: 700,
+            },
+        },
+        Feed_item_by: {
+            color: $bog_builderui_tokens.control,
+            font: { size: '13px', weight: 600 },
+        },
+        Feed_item_note: {
+            color: $bog_builderui_tokens.shade,
+            font: { size: '13px' },
+        },
+    });
+})($ || ($ = {}));
+
+;
 	($.$bog_mediagram_app_chip) = class $bog_mediagram_app_chip extends ($.$bog_builderui_button) {
 		Chip_dot(){
 			const obj = new this.$.$mol_view();
@@ -22219,21 +22357,6 @@ var $;
                 .toUpperCase();
         }
         class $bog_mediagram_app extends $.$bog_mediagram_app {
-            static {
-                const c = globalThis.chrome;
-                if (c?.runtime?.onMessage) {
-                    c.runtime.onMessage.addListener((msg) => {
-                        if (msg?.type === 'mediagram_snapshot_changed') {
-                            try {
-                                const root = $bog_mediagram_app.Root(0);
-                                root.snapshot_tick(root.snapshot_tick() + 1);
-                            }
-                            catch (e) { /* root not mounted yet */ }
-                        }
-                        return false;
-                    });
-                }
-            }
             query(next) {
                 return $mol_state_arg.value('q', next) ?? '';
             }
@@ -22363,7 +22486,7 @@ var $;
                 return this.circles().map(circle => this.Circle(circle.id));
             }
             Circle(id) {
-                const circle = new $bog_mediagram_app_circle();
+                const circle = new this.$.$bog_mediagram_app_circle();
                 circle.title = () => this.circle(id).title;
                 circle.type_label = () => CIRCLE_TYPE_LABEL[this.circle(id).type];
                 circle.description = () => this.circle(id).description || 'без описания';
@@ -22415,7 +22538,7 @@ var $;
                 return this.circle_members().map(member => this.Circle_member(member.id));
             }
             Circle_member(id) {
-                const member = new $bog_mediagram_app_circle_member();
+                const member = new this.$.$bog_mediagram_app_circle_member();
                 member.name = () => this.circle_member(id).name;
                 member.role = () => this.circle_member(id).role;
                 member.watching = () => this.circle_member(id).watching;
@@ -22442,7 +22565,7 @@ var $;
                 return this.circle_suggest_items().map(item => this.Circle_suggest_item(item.id));
             }
             Circle_now_item(id) {
-                const item = new $bog_mediagram_app_circle_feed_item();
+                const item = new this.$.$bog_mediagram_app_circle_feed_item();
                 item.title = () => this.circle_now_item(id).title;
                 item.by = () => this.circle_now_item(id).by;
                 item.meta = () => this.circle_now_item(id).meta;
@@ -22450,7 +22573,7 @@ var $;
                 return item;
             }
             Circle_suggest_item(id) {
-                const item = new $bog_mediagram_app_circle_feed_item();
+                const item = new this.$.$bog_mediagram_app_circle_feed_item();
                 item.title = () => this.circle_suggest_item(id).title;
                 item.by = () => this.circle_suggest_item(id).by;
                 item.meta = () => this.circle_suggest_item(id).meta;
@@ -22543,7 +22666,11 @@ var $;
             add_click(e) {
                 if (e)
                     e.preventDefault();
-                this.add_from_snapshot();
+                const snap = this.snapshot();
+                if (!snap?.entity?.title)
+                    return null;
+                const status = this.recognized_status();
+                $mol_wire_async(this).save_from_snapshot(snap, status, Date.now());
                 return null;
             }
             in_extension() {
@@ -22592,13 +22719,20 @@ var $;
             recognized_add(e) {
                 if (e)
                     e.preventDefault();
-                this.add_from_snapshot();
-                return null;
-            }
-            add_from_snapshot() {
                 const snap = this.snapshot();
                 if (!snap?.entity?.title)
                     return null;
+                const status = this.recognized_status();
+                $mol_wire_async(this).save_from_snapshot(snap, status, Date.now());
+                return null;
+            }
+            /**
+             * Запись в баззу. Вызывать только через $mol_wire_async — иначе
+             * make() на каждой ретрае фибры будет создавать новые pawn'ы.
+             * НЕ @$mol_action: wire_async создаёт свой фибер, двойная обёртка лишняя.
+             */
+            save_from_snapshot(snap, status, now) {
+                const moment = new $mol_time_moment(now);
                 const lib = this.library_node();
                 const media = lib.Medias('auto').make(null);
                 media.Title('auto').val(snap.entity.title);
@@ -22610,14 +22744,14 @@ var $;
                     }
                     catch (_) { /* год не цифра — пропускаем */ }
                 }
-                media.AddedAt('auto').val(new $mol_time_moment());
+                media.AddedAt('auto').val(moment);
                 const sources = media.SourceIds('auto');
                 sources.key(source_key(snap.host), 'auto').val(snap.source_url);
                 const entry = lib.Entries('auto').make(null);
                 entry.Media('auto').remote(media);
-                entry.Status('auto').val(this.recognized_status());
+                entry.Status('auto').val(status);
                 entry.Source('auto').val('manual');
-                entry.StartedAt('auto').val(new $mol_time_moment());
+                entry.StartedAt('auto').val(moment);
                 return null;
             }
         }
@@ -22687,19 +22821,7 @@ var $;
         __decorate([
             $mol_mem
         ], $bog_mediagram_app.prototype, "recognized_status", null);
-        __decorate([
-            $mol_action
-        ], $bog_mediagram_app.prototype, "add_from_snapshot", null);
         $$.$bog_mediagram_app = $bog_mediagram_app;
-        class $bog_mediagram_app_circle extends $.$bog_mediagram_app_circle {
-        }
-        $$.$bog_mediagram_app_circle = $bog_mediagram_app_circle;
-        class $bog_mediagram_app_circle_member extends $.$bog_mediagram_app_circle_member {
-        }
-        $$.$bog_mediagram_app_circle_member = $bog_mediagram_app_circle_member;
-        class $bog_mediagram_app_circle_feed_item extends $.$bog_mediagram_app_circle_feed_item {
-        }
-        $$.$bog_mediagram_app_circle_feed_item = $bog_mediagram_app_circle_feed_item;
     })($$ = $.$$ || ($.$$ = {}));
 })($ || ($ = {}));
 
@@ -22943,69 +23065,6 @@ var $;
             flex: { direction: 'row', wrap: 'wrap' },
             gap: $mol_gap.text,
             align: { items: 'center' },
-        },
-    });
-    $mol_style_define($bog_mediagram_app_circle, {
-        flex: { direction: 'column' },
-        gap: $mol_gap.text,
-        cursor: 'pointer',
-        Circle_row_type: {
-            align: { self: 'flex-start' },
-        },
-        Circle_row_title: {
-            font: {
-                family: $bog_builderui_tokens.font_head,
-                size: '16px',
-                weight: 700,
-            },
-        },
-        Circle_row_description: {
-            color: $bog_builderui_tokens.shade,
-            font: { size: '13px' },
-        },
-    });
-    $mol_style_define($bog_mediagram_app_circle_member, {
-        flex: { direction: 'column' },
-        gap: $mol_gap.text,
-        Member_head: {
-            flex: { direction: 'row', wrap: 'wrap' },
-            align: { items: 'center' },
-            gap: $mol_gap.text,
-        },
-        Member_name: {
-            font: {
-                family: $bog_builderui_tokens.font_head,
-                size: '16px',
-                weight: 700,
-            },
-        },
-        Member_watching: {
-            color: $bog_builderui_tokens.shade,
-            font: { size: '13px' },
-        },
-    });
-    $mol_style_define($bog_mediagram_app_circle_feed_item, {
-        flex: { direction: 'column' },
-        gap: $mol_gap.text,
-        Feed_item_head: {
-            flex: { direction: 'row', wrap: 'wrap' },
-            align: { items: 'center' },
-            gap: $mol_gap.text,
-        },
-        Feed_item_title: {
-            font: {
-                family: $bog_builderui_tokens.font_head,
-                size: '16px',
-                weight: 700,
-            },
-        },
-        Feed_item_by: {
-            color: $bog_builderui_tokens.control,
-            font: { size: '13px', weight: 600 },
-        },
-        Feed_item_note: {
-            color: $bog_builderui_tokens.shade,
-            font: { size: '13px' },
         },
     });
 })($ || ($ = {}));
