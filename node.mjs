@@ -11163,7 +11163,9 @@ var $;
             circles_click(e) {
                 if (e)
                     e.preventDefault();
+                console.log('[mediagram] nav.circles_click — calling this.tab("circles")');
                 this.tab('circles');
+                console.log('[mediagram] nav.circles_click — done');
                 return null;
             }
             me_click(e) {
@@ -22397,16 +22399,25 @@ var $;
             }
             /** Home land библиотеки текущего юзера. Не мемоизируем — возвращает Pawn. */
             library_node() {
-                return this.$.$giper_baza_glob.home().land().Data(this.$.$bog_mediagram_library);
+                console.log('[mediagram] library_node()');
+                const r = this.$.$giper_baza_glob.home().land().Data(this.$.$bog_mediagram_library);
+                console.log('[mediagram] library_node() ✓');
+                return r;
             }
             /** Сырые entry-Pawn'ы из библиотеки. Не мемоизируем — возвращает Pawn[]. */
             entries_baza() {
+                console.log('[mediagram] entries_baza()');
                 const list = this.library_node().Entries();
-                if (!list)
+                if (!list) {
+                    console.log('[mediagram] entries_baza() → empty (no Entries)');
                     return [];
-                return list.remote_list();
+                }
+                const r = list.remote_list();
+                console.log('[mediagram] entries_baza() ✓ count=', r.length);
+                return r;
             }
             entries_all() {
+                console.log('[mediagram] entries_all() — start');
                 return this.entries_baza().map(e => {
                     const media = e.Media()?.remote();
                     const year_bint = media?.Year()?.val();
@@ -22649,10 +22660,15 @@ var $;
                 return found;
             }
             tab(next) {
-                return $mol_state_arg.value('tab', next) ?? 'library';
+                if (next !== undefined)
+                    console.log('[mediagram] tab() ←', next);
+                const v = $mol_state_arg.value('tab', next) ?? 'library';
+                return v;
             }
             body_content() {
-                switch (this.tab()) {
+                const tab = this.tab();
+                console.log('[mediagram] body_content() tab=', tab);
+                switch (tab) {
                     case 'feed': return [this.Feed_pane()];
                     case 'circles': return [this.Circles_pane()];
                     case 'circle': return this.circle_detail() ? [this.Circle_detail_pane()] : [this.Circles_pane()];
