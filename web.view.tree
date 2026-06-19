@@ -9,6 +9,7 @@ $bog_theme_auto $mol_plugin
 	theme_next? null
 	theme_prev? null
 	theme_set? null
+	is_light_now false
 	attr * mol_theme <= theme \
 
 $mol_svg $mol_view
@@ -2017,6 +2018,7 @@ $giper_baza_app $mol_book2_catalog
 $bog_mediagram_app_head $mol_view
 	query?val \
 	search?event null
+	tab? \library
 	theme_auto $bog_theme_auto
 	sub /
 		<= Logo $mol_icon_library
@@ -2191,8 +2193,6 @@ $bog_mediagram_app $bog_builderui_div
 					sub /
 						<= Head $bog_mediagram_app_head
 							theme_auto <= Theme
-							query?val <=> query?val \
-							search?event <=> search_click?event null
 						<= Filters $bog_mediagram_app_filters
 							kind?val <=> filter_kind?val \all
 							status?val <=> filter_status?val \all

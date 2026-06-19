@@ -4308,6 +4308,9 @@ var $;
 			if(next !== undefined) return next;
 			return null;
 		}
+		is_light_now(){
+			return false;
+		}
 		attr(){
 			return {"mol_theme": (this.theme())};
 		}
@@ -11174,7 +11177,10 @@ var $;
                     this.is_long_press = false;
                     return null;
                 }
+                const root = document.documentElement;
+                root.classList.add('bog_theme_switching');
                 this.theme_auto().mode_next();
+                setTimeout(() => root.classList.remove('bog_theme_switching'), 350);
                 return null;
             }
             press_start(event) {
@@ -11248,6 +11254,13 @@ var $;
         }
         $$.$bog_theme_toggle = $bog_theme_toggle;
     })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    $mol_style_attach("bog/theme/toggle/toggle.view.css", ".bog_theme_switching,\n.bog_theme_switching * {\n\ttransition: background-color 300ms ease, color 300ms ease, border-color 300ms ease, fill 300ms ease !important;\n}\n\n@media (prefers-reduced-motion: reduce) {\n\t.bog_theme_switching,\n\t.bog_theme_switching * {\n\t\ttransition: none !important;\n\t}\n}\n");
 })($ || ($ = {}));
 
 ;
@@ -20663,6 +20676,10 @@ var $;
 			if(next !== undefined) return next;
 			return null;
 		}
+		tab(next){
+			if(next !== undefined) return next;
+			return "library";
+		}
 		theme_auto(){
 			const obj = new this.$.$bog_theme_auto();
 			return obj;
@@ -20685,12 +20702,40 @@ var $;
 	($mol_mem(($.$bog_mediagram_app_head.prototype), "Sync"));
 	($mol_mem(($.$bog_mediagram_app_head.prototype), "query"));
 	($mol_mem(($.$bog_mediagram_app_head.prototype), "search"));
+	($mol_mem(($.$bog_mediagram_app_head.prototype), "tab"));
 	($mol_mem(($.$bog_mediagram_app_head.prototype), "theme_auto"));
 
 
 ;
 "use strict";
 
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $bog_mediagram_app_head extends $.$bog_mediagram_app_head {
+            query(next) {
+                return this.$.$mol_state_arg.value('q', next) ?? '';
+            }
+            tab(next) {
+                return this.$.$mol_state_arg.value('tab', next) ?? 'library';
+            }
+            search() {
+                return null;
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $bog_mediagram_app_head.prototype, "query", null);
+        __decorate([
+            $mol_mem
+        ], $bog_mediagram_app_head.prototype, "tab", null);
+        $$.$bog_mediagram_app_head = $bog_mediagram_app_head;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
 
 ;
 "use strict";
@@ -21720,19 +21765,9 @@ var $;
 		entry_link(id){
 			return "";
 		}
-		query(next){
-			if(next !== undefined) return next;
-			return "";
-		}
-		search_click(next){
-			if(next !== undefined) return next;
-			return null;
-		}
 		Head(){
 			const obj = new this.$.$bog_mediagram_app_head();
 			(obj.theme_auto) = () => ((this.Theme()));
-			(obj.query) = (next) => ((this.query(next)));
-			(obj.search) = (next) => ((this.search_click(next)));
 			return obj;
 		}
 		filter_kind(next){
@@ -21805,8 +21840,6 @@ var $;
 	($mol_mem(($.$bog_mediagram_app.prototype), "favicon_icon"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Favicon"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "tab"));
-	($mol_mem(($.$bog_mediagram_app.prototype), "query"));
-	($mol_mem(($.$bog_mediagram_app.prototype), "search_click"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "Head"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "filter_kind"));
 	($mol_mem(($.$bog_mediagram_app.prototype), "filter_status"));
@@ -21820,7 +21853,208 @@ var $;
 
 ;
 "use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /** Личные правила: что реплицировать в конкретный круг */
+        class $bog_mediagram_share_rule extends $giper_baza_dict.with({
+            // land id круга
+            Circle: $giper_baza_atom_text,
+            // какие kind'ы шарить
+            Kinds: $giper_baza_list_str,
+            // какие статусы шарить
+            Statuses: $giper_baza_list_str,
+            ShareRating: $giper_baza_atom_bool,
+            ShareReview: $giper_baza_atom_bool,
+        }) {
+            valid_kinds() {
+                const allowed = $bog_mediagram_media.kinds;
+                for (const v of this.Kinds()?.items_vary() ?? []) {
+                    if (typeof v !== 'string' || !allowed.includes(v))
+                        return false;
+                }
+                return true;
+            }
+            valid_statuses() {
+                const allowed = $bog_mediagram_entry.statuses;
+                for (const v of this.Statuses()?.items_vary() ?? []) {
+                    if (typeof v !== 'string' || !allowed.includes(v))
+                        return false;
+                }
+                return true;
+            }
+            /** Совпадает ли (kind, status) entry с правилом — true → реплицировать в snapshot/activity */
+            matches(kind, status) {
+                const kinds = (this.Kinds()?.items_vary() ?? []);
+                const statuses = (this.Statuses()?.items_vary() ?? []);
+                return kinds.includes(kind) && statuses.includes(status);
+            }
+        }
+        $$.$bog_mediagram_share_rule = $bog_mediagram_share_rule;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
 
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /** Личный home land юзера — корневая entity библиотеки */
+        class $bog_mediagram_library extends $giper_baza_dict.with({
+            Name: $giper_baza_atom_text,
+            Medias: $giper_baza_list_link.to(() => $bog_mediagram_media),
+            Entries: $giper_baza_list_link.to(() => $bog_mediagram_entry),
+            ShareRules: $giper_baza_list_link.to(() => $bog_mediagram_share_rule),
+            Circles: $giper_baza_list_str,
+        }) {
+        }
+        $$.$bog_mediagram_library = $bog_mediagram_library;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /**
+         * Корневая entity юзера в home-land (lord-land auth-ключа).
+         * Содержит только ссылку на отдельную encrypted library-land.
+         * Home-land публично-читаемая по дефолту (auth.lord = публичная справка), поэтому
+         * чувствительные данные (Medias/Entries) сюда не кладём.
+         */
+        class $bog_mediagram_home extends $giper_baza_dict.with({
+            Library: $giper_baza_atom_link.to(() => $bog_mediagram_library),
+        }) {
+        }
+        $$.$bog_mediagram_home = $bog_mediagram_home;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        class $bog_mediagram_app extends $.$bog_mediagram_app {
+            lights() {
+                return this.Theme().is_light_now() ? 'light' : 'dark';
+            }
+            tab(next) {
+                return this.Head().tab(next);
+            }
+            query() {
+                return this.Head().query();
+            }
+            filter_kind(next) {
+                return this.$.$mol_state_arg.value('kind', next) ?? 'all';
+            }
+            filter_status(next) {
+                return this.$.$mol_state_arg.value('status', next) ?? 'all';
+            }
+            /**
+             * Личная library в отдельной encrypted-land.
+             * Home-land (lord-auth) хранит только ссылку. Library-land grab'ится при первом запуске
+             * с preset `[[ null, rank_deny ]]` → encrypted=true, owner=rank_rule, мир=deny.
+             * Do NOT @$mol_mem (returns baza obj — потенциальный Circular subscription).
+             */
+            library_data() {
+                const home = this.$.$giper_baza_glob.home();
+                if (!home)
+                    return null;
+                const home_data = home.land().Data($bog_mediagram_home);
+                const link_field = home_data.Library('auto');
+                if (!link_field)
+                    return null;
+                return link_field.ensure([[null, this.$.$giper_baza_rank_deny]]);
+            }
+            /** Entry pawn by link. Do NOT @$mol_mem. */
+            entry_at(link) {
+                return this.$.$giper_baza_glob.Pawn(new $giper_baza_link(link), $bog_mediagram_entry);
+            }
+            /** Media pawn for a given entry link. Do NOT @$mol_mem. */
+            media_for_entry(link) {
+                const entry = this.entry_at(link);
+                const media_link = entry.Media()?.val();
+                if (!media_link)
+                    return null;
+                return this.$.$giper_baza_glob.Pawn(media_link, $bog_mediagram_media);
+            }
+            entry_links() {
+                const lib = this.library_data();
+                if (!lib)
+                    return [];
+                const list = lib.Entries();
+                if (!list)
+                    return [];
+                const items = list.items_vary() ?? [];
+                const result = [];
+                for (const v of items) {
+                    if (v instanceof $giper_baza_link)
+                        result.push(v.str);
+                }
+                return result;
+            }
+            filtered_links() {
+                const q = this.query().toLowerCase().trim();
+                const k = this.filter_kind();
+                const s = this.filter_status();
+                return this.entry_links().filter(link => {
+                    if (s !== 'all') {
+                        const status = this.entry_at(link).Status()?.val();
+                        if (status !== s)
+                            return false;
+                    }
+                    const media = this.media_for_entry(link);
+                    if (k !== 'all') {
+                        const kind = media?.Kind()?.val();
+                        if (kind !== k)
+                            return false;
+                    }
+                    if (q) {
+                        const title = (media?.Title()?.val() ?? '').toLowerCase();
+                        if (!title.includes(q))
+                            return false;
+                    }
+                    return true;
+                });
+            }
+            library_rows() {
+                return this.filtered_links().map((_, i) => this.Tile(i));
+            }
+            entry_link(i) {
+                return this.filtered_links()[i] ?? '';
+            }
+        }
+        __decorate([
+            $mol_mem
+        ], $bog_mediagram_app.prototype, "filter_kind", null);
+        __decorate([
+            $mol_mem
+        ], $bog_mediagram_app.prototype, "filter_status", null);
+        __decorate([
+            $mol_mem
+        ], $bog_mediagram_app.prototype, "entry_links", null);
+        __decorate([
+            $mol_mem
+        ], $bog_mediagram_app.prototype, "filtered_links", null);
+        __decorate([
+            $mol_mem
+        ], $bog_mediagram_app.prototype, "library_rows", null);
+        __decorate([
+            $mol_mem_key
+        ], $bog_mediagram_app.prototype, "entry_link", null);
+        $$.$bog_mediagram_app = $bog_mediagram_app;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
 
 ;
 "use strict";

@@ -359,7 +359,11 @@
     "$bog_mediagram_app_card",
     "$bog_builderui_badge",
     "$bog_mediagram_entry",
-    "$bog_mediagram_media"
+    "$bog_mediagram_media",
+    "$bog_mediagram_home",
+    "$bog_mediagram_library",
+    "$bog_mediagram_share_rule",
+    "$bog_mediagram_share"
   ],
   "dependencies": {
     "autoinstall": "*",
