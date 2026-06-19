@@ -41,13 +41,15 @@ namespace $.$$ {
 
 		@ $mol_mem
 		tile_kind_label(): string {
-			return ( this.kind_dict() as Record< string, string > )[ this.tile_kind() ] ?? ''
+			const dict: { [ k: string ]: string } = this.kind_dict()
+			return dict[ this.tile_kind() ] ?? ''
 		}
 
 		@ $mol_mem
 		tile_status_label(): string {
+			const dict: { [ k: string ]: string } = this.status_dict()
 			const s = this.entry()?.Status()?.val() ?? ''
-			return ( this.status_dict() as Record< string, string > )[ s ] ?? ''
+			return dict[ s ] ?? ''
 		}
 
 		@ $mol_mem

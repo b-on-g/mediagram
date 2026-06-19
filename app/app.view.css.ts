@@ -8,7 +8,8 @@ namespace $ {
 		},
 
 		Library: {
-			flex: { direction: 'column' },
+			display: 'grid',
+			gridTemplateColumns: 'repeat(auto-fill, minmax(140px, 1fr))',
 			gap: $mol_gap.block,
 			padding: { top: 0, right: $mol_gap.block, bottom: $mol_gap.block, left: $mol_gap.block },
 		},

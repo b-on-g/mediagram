@@ -22,11 +22,19 @@ namespace $.$$ {
 			return this.$.$mol_state_arg.value( 'status', next ) ?? 'all'
 		}
 
-		/** Home land library data. Do NOT @$mol_mem (returns baza obj). */
+		/**
+		 * Личная library в отдельной encrypted-land.
+		 * Home-land (lord-auth) хранит только ссылку. Library-land grab'ится при первом запуске
+		 * с preset `[[ null, rank_deny ]]` → encrypted=true, owner=rank_rule, мир=deny.
+		 * Do NOT @$mol_mem (returns baza obj — потенциальный Circular subscription).
+		 */
 		library_data() {
 			const home = this.$.$giper_baza_glob.home()
 			if( !home ) return null
-			return home.land().Data( $bog_mediagram_library )
+			const home_data = home.land().Data( $bog_mediagram_home )
+			const link_field = home_data.Library( 'auto' )
+			if( !link_field ) return null
+			return link_field.ensure( [[ null, this.$.$giper_baza_rank_deny ]] )
 		}
 
 		/** Entry pawn by link. Do NOT @$mol_mem. */

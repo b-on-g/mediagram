@@ -1,12 +1,19 @@
 namespace $ {
 
 	$mol_style_define( $bog_mediagram_app_card, {
+
 		flex: { direction: 'column' },
 		gap: $mol_gap.text,
 		cursor: 'pointer',
 		padding: { top: 0, right: 0, bottom: 0, left: 0 },
 		background: { color: 'transparent' },
 		border: { width: 0 },
+		boxShadow: 'none',
+		transition: 'transform .15s ease',
+
+		':hover': {
+			transform: 'translateY(-2px)',
+		},
 
 		Poster: {
 			position: 'relative',
@@ -18,20 +25,21 @@ namespace $ {
 				color: $bog_builderui_tokens.line,
 				radius: $bog_builderui_tokens.radius,
 			},
+			background: { color: $bog_builderui_tokens.card },
 			display: 'grid',
 			align: { items: 'center' },
 			justify: { content: 'center' },
+			transition: 'border-color .15s ease',
 		},
 
 		Init: {
 			font: {
-				family: 'ui-monospace, "SF Mono", Menlo, monospace',
-				size: '30px',
-				weight: 600,
+				family: $bog_builderui_tokens.font_head,
+				size: '32px',
+				weight: 700,
 			},
-			color: '#ffffffd1',
+			color: $bog_builderui_tokens.shade,
 			letterSpacing: '0.5px',
-			textShadow: '0 1px 8px #00000059',
 		},
 
 		Kind_flag: {
@@ -39,20 +47,25 @@ namespace $ {
 			top: '8px',
 			left: '8px',
 			font: { size: '10px', weight: 600 },
-			letterSpacing: '0.3px',
+			letterSpacing: '0.4px',
 			textTransform: 'uppercase',
-			padding: { top: '3px', right: '7px', bottom: '3px', left: '7px' },
-			borderRadius: '6px',
-			background: { color: '#08090c8c' },
-			color: '#ffffff',
+			padding: { top: '3px', right: '8px', bottom: '3px', left: '8px' },
+			borderRadius: $bog_builderui_tokens.radius,
+			background: { color: $bog_builderui_tokens.back },
+			color: $bog_builderui_tokens.text,
+			border: {
+				width: '1px',
+				style: 'solid',
+				color: $bog_builderui_tokens.line,
+			},
 		},
 
 		Fav_view: {
 			position: 'absolute',
 			top: '8px',
 			right: '8px',
-			font: { size: '13px' },
-			color: '#ef5b6b',
+			font: { size: '14px' },
+			color: $bog_builderui_tokens.current,
 		},
 
 		Pill: {
@@ -66,14 +79,19 @@ namespace $ {
 			right: '8px',
 			bottom: '8px',
 			font: {
-				family: 'ui-monospace, "SF Mono", Menlo, monospace',
+				family: $bog_builderui_tokens.font_head,
 				size: '12px',
-				weight: 600,
+				weight: 700,
 			},
-			color: '#ffffff',
-			background: { color: '#08090c99' },
-			padding: { top: '2px', right: '7px', bottom: '2px', left: '7px' },
-			borderRadius: '7px',
+			color: $bog_builderui_tokens.text,
+			background: { color: $bog_builderui_tokens.back },
+			padding: { top: '2px', right: '8px', bottom: '2px', left: '8px' },
+			borderRadius: $bog_builderui_tokens.radius,
+			border: {
+				width: '1px',
+				style: 'solid',
+				color: $bog_builderui_tokens.line,
+			},
 		},
 
 		Meta: {
@@ -82,7 +100,11 @@ namespace $ {
 		},
 
 		Title_view: {
-			font: { size: '13px', weight: 600 },
+			font: {
+				family: $bog_builderui_tokens.font_head,
+				size: '14px',
+				weight: 600,
+			},
 			color: $bog_builderui_tokens.text,
 			overflow: { x: 'hidden' },
 			textOverflow: 'ellipsis',
@@ -91,11 +113,12 @@ namespace $ {
 
 		Sub_year: {
 			font: {
-				family: 'ui-monospace, "SF Mono", Menlo, monospace',
-				size: '11px',
+				family: $bog_builderui_tokens.font_body,
+				size: '12px',
 			},
 			color: $bog_builderui_tokens.shade,
 		},
+
 	} )
 
 }

@@ -3,6 +3,7 @@ $bog_mediagram_app_filters $mol_view
 	status?val \all
 	sub /
 		<= Filter_kind $bog_builderui_select
+			Filter null
 			value?val <=> kind?val
 			dictionary *
 				all @ \Все типы
@@ -11,6 +12,7 @@ $bog_mediagram_app_filters $mol_view
 				book @ \Книги
 				anime @ \Аниме
 		<= Filter_status $bog_builderui_select
+			Filter null
 			value?val <=> status?val
 			dictionary *
 				all @ \Все статусы
