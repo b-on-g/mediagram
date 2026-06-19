@@ -1,6 +1,10 @@
 namespace $ {
 
 	$mol_style_define( $bog_mediagram_app, {
+		background: {
+			color: $bog_builderui_tokens.card,
+		},
+		color: $bog_builderui_tokens.text,
 
 		Body_inner: {
 			flex: { direction: 'column', grow: 1 },

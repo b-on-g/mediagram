@@ -25,7 +25,7 @@ namespace $ {
 				color: $bog_builderui_tokens.line,
 				radius: $bog_builderui_tokens.radius,
 			},
-			background: { color: $bog_builderui_tokens.card },
+			background: { color: $bog_builderui_tokens.back },
 			display: 'grid',
 			align: { items: 'center' },
 			justify: { content: 'center' },
@@ -50,13 +50,13 @@ namespace $ {
 			letterSpacing: '0.4px',
 			textTransform: 'uppercase',
 			padding: { top: '3px', right: '8px', bottom: '3px', left: '8px' },
-			borderRadius: $bog_builderui_tokens.radius,
 			background: { color: $bog_builderui_tokens.back },
 			color: $bog_builderui_tokens.text,
 			border: {
 				width: '1px',
 				style: 'solid',
 				color: $bog_builderui_tokens.line,
+				radius: $bog_builderui_tokens.radius,
 			},
 		},
 
@@ -86,11 +86,11 @@ namespace $ {
 			color: $bog_builderui_tokens.text,
 			background: { color: $bog_builderui_tokens.back },
 			padding: { top: '2px', right: '8px', bottom: '2px', left: '8px' },
-			borderRadius: $bog_builderui_tokens.radius,
 			border: {
 				width: '1px',
 				style: 'solid',
 				color: $bog_builderui_tokens.line,
+				radius: $bog_builderui_tokens.radius,
 			},
 		},
 

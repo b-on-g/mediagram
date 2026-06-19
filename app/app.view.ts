@@ -3,6 +3,18 @@ namespace $.$$ {
 	export class $bog_mediagram_app extends $.$bog_mediagram_app {
 
 		@ $mol_mem
+		override lights( next?: string ): string {
+			const stored = this.$.$mol_state_local.value( this + '.lights()', next )
+			return stored ?? ( this.$.$mol_lights() ? 'light' : 'dark' )
+		}
+
+		@ $mol_action
+		override lights_toggle() {
+			this.lights( this.lights() === 'dark' ? 'light' : 'dark' )
+			return null
+		}
+
+		@ $mol_mem
 		override tab( next?: string ): string {
 			return this.$.$mol_state_arg.value( 'tab', next ) ?? 'library'
 		}
