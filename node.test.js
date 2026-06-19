@@ -20851,19 +20851,124 @@ var $;
             }
         }
         $$.$bog_mediagram_media = $bog_mediagram_media;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /** Состояние пользователя по конкретному медиа (статус, оценка, ревью) */
         class $bog_mediagram_entry extends $giper_baza_dict.with({
-            Media: $giper_baza_atom_link.to(() => $bog_mediagram_media),
+            Media: $giper_baza_atom_link_to(() => $bog_mediagram_media),
+            // 'want_to' | 'doing' | 'done' | 'dropped'
             Status: $giper_baza_atom_text,
-            Rating: $giper_baza_atom_bint,
             Favorite: $giper_baza_atom_bool,
+            // 1-10
+            Rating: $giper_baza_atom_bint,
+            Review: $giper_baza_atom_text,
+            // 'auto' | 'manual' — manual всегда сильнее auto
             Source: $giper_baza_atom_text,
             StartedAt: $giper_baza_atom_time,
+            FinishedAt: $giper_baza_atom_time,
         }) {
+            static statuses = ['want_to', 'doing', 'done', 'dropped'];
+            static sources = ['auto', 'manual'];
+            static rating_min = 1n;
+            static rating_max = 10n;
+            valid_status() {
+                const v = this.Status()?.val();
+                return v != null && $bog_mediagram_entry.statuses.includes(v);
+            }
+            valid_source() {
+                const v = this.Source()?.val();
+                return v != null && $bog_mediagram_entry.sources.includes(v);
+            }
+            /** 1..10 включительно; null допустим (нет оценки) */
+            valid_rating() {
+                const v = this.Rating()?.val();
+                if (v == null)
+                    return true;
+                return v >= $bog_mediagram_entry.rating_min && v <= $bog_mediagram_entry.rating_max;
+            }
+            /**
+             * PRD §F1: авто никогда не понижает статус и не трогает done/dropped.
+             * Manual всегда сильнее. Возвращает true если auto-апдейт на next разрешён.
+             */
+            can_auto_apply(next) {
+                const current = this.Status()?.val() ?? null;
+                if (this.Source()?.val() === 'manual')
+                    return false;
+                if (current === 'done' || current === 'dropped')
+                    return false;
+                if (current === 'doing' && next === 'want_to')
+                    return false;
+                return true;
+            }
         }
         $$.$bog_mediagram_entry = $bog_mediagram_entry;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /** Личные правила: что реплицировать в конкретный круг */
+        class $bog_mediagram_share_rule extends $giper_baza_dict.with({
+            // land id круга
+            Circle: $giper_baza_atom_text,
+            // какие kind'ы шарить
+            Kinds: $giper_baza_list_str,
+            // какие статусы шарить
+            Statuses: $giper_baza_list_str,
+            ShareRating: $giper_baza_atom_bool,
+            ShareReview: $giper_baza_atom_bool,
+        }) {
+            valid_kinds() {
+                const allowed = $bog_mediagram_media.kinds;
+                for (const v of this.Kinds()?.items_vary() ?? []) {
+                    if (typeof v !== 'string' || !allowed.includes(v))
+                        return false;
+                }
+                return true;
+            }
+            valid_statuses() {
+                const allowed = $bog_mediagram_entry.statuses;
+                for (const v of this.Statuses()?.items_vary() ?? []) {
+                    if (typeof v !== 'string' || !allowed.includes(v))
+                        return false;
+                }
+                return true;
+            }
+            /** Совпадает ли (kind, status) entry с правилом — true → реплицировать в snapshot/activity */
+            matches(kind, status) {
+                const kinds = (this.Kinds()?.items_vary() ?? []);
+                const statuses = (this.Statuses()?.items_vary() ?? []);
+                return kinds.includes(kind) && statuses.includes(status);
+            }
+        }
+        $$.$bog_mediagram_share_rule = $bog_mediagram_share_rule;
+    })($$ = $.$$ || ($.$$ = {}));
+})($ || ($ = {}));
+
+;
+"use strict";
+var $;
+(function ($) {
+    var $$;
+    (function ($$) {
+        /** Личный home land юзера — корневая entity библиотеки */
         class $bog_mediagram_library extends $giper_baza_dict.with({
-            Medias: $giper_baza_list_link.to(() => $bog_mediagram_media),
-            Entries: $giper_baza_list_link.to(() => $bog_mediagram_entry),
+            Name: $giper_baza_atom_text,
+            Medias: $giper_baza_list_link_to(() => $bog_mediagram_media),
+            Entries: $giper_baza_list_link_to(() => $bog_mediagram_entry),
+            ShareRules: $giper_baza_list_link_to(() => $bog_mediagram_share_rule),
+            Circles: $giper_baza_list_str,
         }) {
         }
         $$.$bog_mediagram_library = $bog_mediagram_library;
@@ -20872,7 +20977,7 @@ var $;
 
 ;
 	($.$bog_mediagram_app_chip) = class $bog_mediagram_app_chip extends ($.$bog_builderui_button) {
-		Swatch(){
+		Chip_dot(){
 			const obj = new this.$.$mol_view();
 			return obj;
 		}
@@ -20901,10 +21006,10 @@ var $;
 			};
 		}
 		sub(){
-			return [(this.Swatch()), (this.Label())];
+			return [(this.Chip_dot()), (this.Label())];
 		}
 	};
-	($mol_mem(($.$bog_mediagram_app_chip.prototype), "Swatch"));
+	($mol_mem(($.$bog_mediagram_app_chip.prototype), "Chip_dot"));
 	($mol_mem(($.$bog_mediagram_app_chip.prototype), "Label"));
 
 
@@ -20921,7 +21026,7 @@ var $;
         align: { items: 'center' },
         gap: $mol_gap.text,
         cursor: 'pointer',
-        Swatch: {
+        Chip_dot: {
             width: '8px',
             height: '8px',
             borderRadius: '50%',
@@ -20983,14 +21088,14 @@ var $;
 			(obj.sub) = () => ([(this.title())]);
 			return obj;
 		}
-		Sub(){
+		Sub_year(){
 			const obj = new this.$.$mol_view();
 			(obj.sub) = () => ([(this.year())]);
 			return obj;
 		}
 		Meta(){
 			const obj = new this.$.$mol_view();
-			(obj.sub) = () => ([(this.Title_view()), (this.Sub())]);
+			(obj.sub) = () => ([(this.Title_view()), (this.Sub_year())]);
 			return obj;
 		}
 		title(){
@@ -21050,7 +21155,7 @@ var $;
 	($mol_mem(($.$bog_mediagram_app_card.prototype), "Rate_view"));
 	($mol_mem(($.$bog_mediagram_app_card.prototype), "Poster"));
 	($mol_mem(($.$bog_mediagram_app_card.prototype), "Title_view"));
-	($mol_mem(($.$bog_mediagram_app_card.prototype), "Sub"));
+	($mol_mem(($.$bog_mediagram_app_card.prototype), "Sub_year"));
 	($mol_mem(($.$bog_mediagram_app_card.prototype), "Meta"));
 
 
@@ -21142,7 +21247,7 @@ var $;
             textOverflow: 'ellipsis',
             whiteSpace: 'nowrap',
         },
-        Sub: {
+        Sub_year: {
             font: {
                 family: 'ui-monospace, "SF Mono", Menlo, monospace',
                 size: '11px',
@@ -22380,13 +22485,13 @@ var $;
                 });
             }
             Chip(id) {
-                return new $bog_mediagram_app_chip();
+                return new this.$.$bog_mediagram_app_chip();
             }
             entries() {
                 return this.entries_filtered().map(e => this.Card(e.id));
             }
             Card(id) {
-                const card = new $bog_mediagram_app_card();
+                const card = new this.$.$bog_mediagram_app_card();
                 card.title = () => this.entry(id).title;
                 card.year = () => this.entry(id).year;
                 card.kind = () => this.entry(id).kind;
