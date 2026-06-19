@@ -1,0 +1,56 @@
+[bog_mediagram_app][bog_builderui_lights="dark"] {
+	--bog_builderui_text: #d4d4d8;
+}
+
+[bog_mediagram_app] [mol_view][mol_view_error]:not([mol_view_error="Promise"], [mol_view_error="$mol_promise_blocker"]) {
+	background-color: var(--bog_builderui_card);
+	background-image: repeating-linear-gradient(
+		90deg,
+		transparent,
+		transparent 10px,
+		rgba(239, 68, 68, 0.18) 10px,
+		rgba(239, 68, 68, 0.18) 20px
+	);
+	color: var(--bog_builderui_text);
+	border: 1px solid #ef4444;
+	border-radius: var(--bog_builderui_radius);
+	padding: 0.75rem 1rem 0.75rem 2.75rem;
+	font-family: var(--bog_builderui_font_body);
+	font-weight: 500;
+	align-items: center;
+	justify-content: flex-start;
+	position: relative;
+	min-height: 2.5rem;
+	overflow: hidden;
+	animation: bog_mediagram_error_slide 1s linear infinite;
+}
+
+[bog_mediagram_app] [mol_view][mol_view_error]:not([mol_view_error="Promise"], [mol_view_error="$mol_promise_blocker"])::before {
+	content: "⚠";
+	display: inline-block;
+	position: absolute;
+	left: 1rem;
+	top: 50%;
+	font-size: 1.25rem;
+	line-height: 1;
+	color: #ef4444;
+	transform: translateY(-50%);
+	animation: bog_mediagram_error_pulse 0.9s ease-in-out infinite;
+}
+
+@keyframes bog_mediagram_error_slide {
+	from { background-position: 0 0; }
+	to { background-position: 20px 0; }
+}
+
+@keyframes bog_mediagram_error_pulse {
+	0%, 100% { transform: translateY(-50%) scale(1); opacity: 0.8; }
+	50% { transform: translateY(-50%) scale(1.35); opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	[bog_mediagram_app] [mol_view][mol_view_error]:not([mol_view_error="Promise"], [mol_view_error="$mol_promise_blocker"]),
+	[bog_mediagram_app] [mol_view][mol_view_error]:not([mol_view_error="Promise"], [mol_view_error="$mol_promise_blocker"])::before {
+		animation: none;
+	}
+}

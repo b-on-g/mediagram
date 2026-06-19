@@ -1,7 +1,6 @@
 namespace $.$$ {
 
 	export class $bog_mediagram_app extends $.$bog_mediagram_app {
-
 		override lights(): string {
 			return this.Theme().is_light_now() ? 'light' : 'dark'
 		}
@@ -99,6 +98,7 @@ namespace $.$$ {
 		override library_rows() {
 			return this.filtered_links().map( ( _, i ) => this.Tile( i ) )
 		}
+
 
 		@ $mol_mem_key
 		override entry_link( i: number ): string {
