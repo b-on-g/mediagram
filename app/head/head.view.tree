@@ -1,6 +1,7 @@
 $bog_mediagram_app_head $mol_view
 	query?val \
 	search?event null
+	tab? \library
 	theme_auto $bog_theme_auto
 	sub /
 		<= Logo $mol_icon_library

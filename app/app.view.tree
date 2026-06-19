@@ -22,8 +22,6 @@ $bog_mediagram_app $bog_builderui_div
 					sub /
 						<= Head $bog_mediagram_app_head
 							theme_auto <= Theme
-							query?val <=> query?val \
-							search?event <=> search_click?event null
 						<= Filters $bog_mediagram_app_filters
 							kind?val <=> filter_kind?val \all
 							status?val <=> filter_status?val \all
