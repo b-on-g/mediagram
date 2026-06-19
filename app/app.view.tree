@@ -6,91 +6,159 @@
 $bog_mediagram_app $bog_builderui_div
 	plugins /
 		<= Theme $bog_theme_auto
+		<= Favicon $bog_favicon
+			Icon <= favicon_icon $mol_icon_library
 	attr *
 		^
 		bog_builderui_lights <= lights \dark
 		bog_builderui_base \zinc
-		bog_builderui_theme \red
+		bog_builderui_theme \sky
 		bog_builderui_chart \yellow
-		bog_builderui_radius \medium
-		bog_builderui_font_body \inter
-		bog_builderui_font_head \inter
+		bog_builderui_radius \large
+		bog_builderui_font_body \eb-garamond
+		bog_builderui_font_head \eb-garamond
+		bog_mediagram_tab <= tab \library
+	Library_filters $mol_view
+		sub /
+			<= Types $mol_view sub <= type_chips /
+			<= Status_row $mol_view
+				sub /
+					<= Status_tabs $bog_builderui_tabs
+						value? <=> status? \all
+						options <= status_options *
+					<= Count $mol_view sub / <= count_label \
+	Library_banner $bog_builderui_alert
+		title <= banner_title \
+		text <= banner_text \
+	Library_grid $mol_view sub <= entries /
+	Feed_pane $bog_builderui_card
+		sub /
+			<= Feed_title $mol_view sub / \Лента активности
+			<= Feed_text $mol_view sub / \тут появятся события из ваших кругов
+	Circles_pane $bog_builderui_card
+		sub /
+			<= Circles_head $mol_view
+				sub /
+					<= Circles_title $mol_view sub / \Круги
+					<= Circle_create_btn $bog_builderui_button
+						title \создать круг
+						click? <=> circle_create_open? null
+			<= Circles_text $mol_view sub / \приватные группы — семья, друзья и пары
+			<= Circles_list $mol_view sub <= circle_rows /
+	Circle_detail_pane $bog_builderui_card
+		sub /
+			<= Circle_detail_head $mol_view
+				sub /
+					<= Circle_back_btn $bog_builderui_button
+						title \назад
+						click? <=> circle_back? null
+					<= Circle_detail_title $mol_view sub / <= circle_detail_title \
+					<= Circle_detail_type $bog_builderui_badge
+						title <= circle_detail_type_label \
+			<= Circle_detail_description $mol_view sub / <= circle_detail_description \
+			<= Circle_members_title $mol_view sub / \Участники
+			<= Circle_members_list $mol_view sub <= circle_member_rows /
+			<= Circle_now_title $mol_view sub / \Сейчас смотрят
+			<= Circle_now_feed $mol_view sub <= circle_now_rows /
+			<= Circle_suggest_title $mol_view sub / \Предлагают посмотреть вместе
+			<= Circle_suggest_feed $mol_view sub <= circle_suggest_rows /
+	Me_pane $bog_builderui_card
+		sub /
+			<= Me_title $mol_view sub / \Я
+			<= Me_text $mol_view sub / \профиль, перенос аккаунта, share-правила
+	Recognized $bog_builderui_card
+		attr *
+			^
+			bog_mediagram_page_kind <= recognized_page_kind \info
+		sub /
+			<= Recognized_head $mol_view
+				sub /
+					<= Recognized_badge $mol_view sub / \распознано на странице
+					<= Recognized_host $mol_view sub / <= recognized_host \
+			<= Recognized_title $mol_view sub / <= recognized_title \
+			<= Recognized_meta $mol_view sub / <= recognized_meta \
+			<= Recognized_actions $mol_view
+				sub /
+					<= Recognized_status $bog_builderui_select
+						value? <=> recognized_status? \want_to
+						dictionary <= recognized_status_options *
+					<= Recognized_add $bog_builderui_button
+						title \добавить
+						click? <=> recognized_add? null
+	Brand $mol_view
+		sub /
+			<= Brand_mark $mol_icon_library
+			<= Brand_name $mol_view sub / \mediagram
+	Search $bog_builderui_field
+		hint \поиск в библиотеке
+		value? <=> query? \
+	Theme_toggle $bog_theme_toggle
+		theme_auto <= Theme
+	Add_btn $bog_builderui_button
+		title \+
+		hint \добавить вручную
+		click? <=> add_click? null
 	sub /
-		<= Top $mol_view
+		<= Top $mol_view sub <= top_content /
+		<= Body $mol_scroll
 			sub /
-				<= Brand $mol_view
-					sub /
-						<= Brand_mark $mol_view
-						<= Brand_name $mol_view sub / \mediagram
-				<= Search $bog_builderui_field
-					hint \поиск по библиотеке
-					value? <=> query? \
-				<= Theme_toggle $bog_theme_toggle
-					theme_auto <= Theme
-				<= Add_btn $bog_builderui_button
-					title \добавить
-					click? <=> add_click? null
-		<= Filters $mol_view
-			sub /
-				<= Types $mol_view
-					sub <= type_chips /
-				<= Status_row $mol_view
-					sub /
-						<= Status_tabs $bog_builderui_tabs
-							value? <=> status? \all
-							options <= status_options *
-						<= Count $mol_view sub / <= count_label \
-		<= Banner $bog_builderui_alert
-			title <= banner_title \
-			text <= banner_text \
-		<= Library $mol_scroll
-			sub /
-				<= Grid $mol_view
-					sub <= entries /
+				<= Page $mol_view sub <= body_content /
+		<= Nav $bog_mediagram_app_nav
+			tab? <=> tab? \library
+		<= Circle_create_dialog $bog_builderui_dialog
+			showed? <=> circle_dialog_showed? false
+			title \Создать круг
+			text \Заполните поля, чтобы добавить приватный круг.
+			confirm_title \создать круг
+			close? <=> circle_create_close? null
+			confirm? <=> circle_create_confirm? null
+			content /
+				<= Circle_name_field $bog_builderui_field
+					hint \Название
+					value? <=> circle_name? \
+				<= Circle_type_field $bog_builderui_select
+					value? <=> circle_type? \family
+					dictionary <= circle_type_options *
+				<= Circle_description_field $bog_builderui_field
+					hint \Описание
+					value? <=> circle_description? \
 
-$bog_mediagram_app_chip $bog_builderui_button
-	kind \
-	label \
-	active \off
-	variant \ghost
-	attr *
-		^
-		bog_mediagram_chip_kind <= kind
-		bog_mediagram_chip_active <= active
-	sub /
-		<= Swatch $mol_view
-		<= Label $mol_view sub / <= label
-
-$bog_mediagram_app_card $bog_builderui_card
+$bog_mediagram_app_circle $bog_builderui_card
 	title \
-	year \
-	kind \
-	kind_label \
-	status_label \
-	status_class \
-	favorite false
-	fav_label \
-	rating null
-	rate_text \
-	initials \
-	color \
-	poster_bg \
-	attr *
+	type_label \
+	description \
+	open? null
+	event *
 		^
-		bog_mediagram_status <= status_class
-		bog_mediagram_kind <= kind
+		click? <=> open? null
 	sub /
-		<= Poster $mol_view
-			style *
-				background <= poster_bg
+		<= Circle_row_type $bog_builderui_badge
+			title <= type_label
+		<= Circle_row_title $mol_view sub / <= title
+		<= Circle_row_description $mol_view sub / <= description
+
+$bog_mediagram_app_circle_member $bog_builderui_card
+	name \
+	role \
+	watching \
+	sub /
+		<= Member_head $mol_view
 			sub /
-				<= Kind_flag $mol_view sub / <= kind_label
-				<= Fav_view $mol_view sub / <= fav_label
-				<= Pill $bog_builderui_badge
-					title <= status_label
-					variant \secondary
-				<= Rate_view $mol_view sub / <= rate_text
-		<= Meta $mol_view
+				<= Member_name $mol_view sub / <= name
+				<= Member_role $bog_builderui_badge
+					title <= role
+		<= Member_watching $mol_view sub / <= watching
+
+$bog_mediagram_app_circle_feed_item $bog_builderui_card
+	title \
+	by \
+	meta \
+	note \
+	sub /
+		<= Feed_item_head $mol_view
 			sub /
-				<= Title_view $mol_view sub / <= title
-				<= Sub $mol_view sub / <= year
+				<= Feed_item_title $mol_view sub / <= title
+				<= Feed_item_meta $bog_builderui_badge
+					title <= meta
+		<= Feed_item_by $mol_view sub / <= by
+		<= Feed_item_note $mol_view sub / <= note

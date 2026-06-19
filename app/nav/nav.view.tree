@@ -1,0 +1,23 @@
+$bog_mediagram_app_nav $mol_view
+	tab? \library
+	sub /
+		<= Tab_library $bog_mediagram_app_nav_item
+			label \Библиотека
+			active <= library_active \off
+			Icon <= Icon_library $mol_icon_library
+			click? <=> library_click? null
+		<= Tab_feed $bog_mediagram_app_nav_item
+			label \Лента
+			active <= feed_active \off
+			Icon <= Icon_feed $mol_icon_history
+			click? <=> feed_click? null
+		<= Tab_circles $bog_mediagram_app_nav_item
+			label \Круги
+			active <= circles_active \off
+			Icon <= Icon_circles $mol_icon_group
+			click? <=> circles_click? null
+		<= Tab_me $bog_mediagram_app_nav_item
+			label \Я
+			active <= me_active \off
+			Icon <= Icon_me $mol_icon_account
+			click? <=> me_click? null

@@ -4,20 +4,25 @@ namespace $ {
 
 		flex: { direction: 'column' },
 		minHeight: '100%',
-		background: { color: '#050505' },
+		background: { color: $bog_builderui_tokens.back },
 		color: $bog_builderui_tokens.text,
 		font: { family: $bog_builderui_tokens.font_body },
 
 		Top: {
 			flex: { direction: 'row', wrap: 'wrap', shrink: 0 },
-			gap: $mol_gap.block,
+			gap: $mol_gap.text,
 			align: { items: 'center' },
-			padding: { top: '18px', right: '32px', bottom: '18px', left: '32px' },
-			border: { bottom: { width: '1px', style: 'solid', color: '#ffffff14' } },
-			background: { image: 'linear-gradient(180deg, #050505f5 0%, #050505d9 72%, #05050500 100%)' },
+			padding: {
+				top: $mol_gap.block,
+				right: $mol_gap.block,
+				bottom: $mol_gap.block,
+				left: $mol_gap.block,
+			},
+			border: { bottom: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line } },
+			background: { color: $bog_builderui_tokens.card },
 			position: 'sticky',
 			top: 0,
-			zIndex: 10,
+			zIndex: 5,
 		},
 
 		Brand: {
@@ -26,34 +31,42 @@ namespace $ {
 			gap: $mol_gap.text,
 			font: {
 				family: $bog_builderui_tokens.font_head,
-				weight: 800,
-				size: '24px',
+				weight: 600,
+				size: '16px',
 			},
-			color: '#e50914',
-			textTransform: 'uppercase',
-			letterSpacing: '0',
 		},
 
 		Brand_mark: {
-			width: '10px',
-			height: '30px',
-			borderRadius: '2px',
-			background: { color: '#e50914' },
-			boxShadow: '10px 0 0 #b20710',
+			width: '24px',
+			height: '24px',
+			color: $bog_builderui_tokens.control,
 		},
 
 		Search: {
 			flex: { grow: 1, basis: '200px' },
 			minWidth: '160px',
-			maxWidth: '420px',
 		},
 
-		Filters: {
+		Body: {
+			flex: { grow: 1 },
+		},
+
+		Page: {
+			flex: { direction: 'column', grow: 1 },
+			padding: { bottom: '72px' },
+			width: '100%',
+		},
+
+		Library_filters: {
 			flex: { direction: 'column', shrink: 0 },
-			gap: $mol_gap.block,
-			padding: { top: '12px', right: '32px', bottom: '12px', left: '32px' },
-			border: { bottom: { width: '1px', style: 'solid', color: '#ffffff10' } },
-			background: { color: '#050505' },
+			gap: $mol_gap.text,
+			padding: {
+				top: $mol_gap.text,
+				right: $mol_gap.block,
+				bottom: $mol_gap.text,
+				left: $mol_gap.block,
+			},
+			border: { bottom: { width: '1px', style: 'solid', color: $bog_builderui_tokens.line } },
 		},
 
 		Types: {
@@ -69,148 +82,279 @@ namespace $ {
 
 		Count: {
 			marginLeft: 'auto',
-			color: '#ffffff99',
+			color: $bog_builderui_tokens.shade,
 			font: { size: '12px' },
 		},
 
-		Banner: {
-			margin: { top: '18px', right: '32px', left: '32px' },
+		Library_banner: {
+			margin: { top: $mol_gap.text, right: $mol_gap.block, left: $mol_gap.block },
 			flex: { shrink: 0 },
-			background: { image: 'linear-gradient(120deg, #180203 0%, #5c050a 42%, #050505 100%)' },
-			border: { width: '1px', style: 'solid', color: '#ffffff12' },
-			borderRadius: '8px',
-			boxShadow: '0 18px 50px #0000008c',
 		},
 
-		Library: {
-			flex: { grow: 1 },
-		},
-
-		Grid: {
+		Library_grid: {
 			display: 'grid',
-			padding: { top: '26px', right: '32px', bottom: '42px', left: '32px' },
-			gap: '22px',
-			gridTemplateColumns: 'repeat(auto-fill, minmax(170px, 1fr))',
-		},
-
-	} )
-
-	$mol_style_define( $bog_mediagram_app_chip, {
-		flex: { direction: 'row', shrink: 0 },
-		align: { items: 'center' },
-		gap: $mol_gap.text,
-		cursor: 'pointer',
-
-		Swatch: {
-			width: '8px',
-			height: '8px',
-			borderRadius: '50%',
-			background: { color: 'currentcolor' },
-		},
-
-		'@': {
-			bog_mediagram_chip_active: {
-				on: {
-					background: { color: '#e50914' },
-					color: '#ffffff',
-				},
+			padding: {
+				top: $mol_gap.block,
+				right: $mol_gap.block,
+				bottom: $mol_gap.block,
+				left: $mol_gap.block,
 			},
-		},
-	} )
-
-	$mol_style_define( $bog_mediagram_app_card, {
-		flex: { direction: 'column' },
-		gap: '10px',
-		cursor: 'pointer',
-		padding: { top: 0, right: 0, bottom: 0, left: 0 },
-		background: { color: 'transparent' },
-		border: { width: 0 },
-		transform: 'translateZ(0)',
-
-		Poster: {
-			position: 'relative',
-			aspectRatio: '2 / 3',
-			overflow: { x: 'hidden', y: 'hidden' },
-			border: { width: '1px', style: 'solid', color: '#ffffff1a' },
-			borderRadius: '6px',
-			display: 'grid',
-			align: { items: 'center' },
-			justify: { content: 'center' },
-			backgroundSize: 'cover',
-			backgroundPosition: 'center',
-			boxShadow: '0 18px 42px #000000a6',
-			transition: 'transform .18s ease, box-shadow .18s ease, border-color .18s ease',
-			':hover': {
-				transform: 'scale(1.045)',
-				border: { color: '#ffffff70' },
-				boxShadow: '0 24px 60px #000000d9',
-			},
+			gap: $mol_gap.block,
+			gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))',
 		},
 
-		Kind_flag: {
-			position: 'absolute',
-			top: '8px',
-			left: '8px',
-			font: { size: '10px', weight: 600 },
-			letterSpacing: '0',
-			textTransform: 'uppercase',
-			padding: { top: '3px', right: '7px', bottom: '3px', left: '7px' },
-			borderRadius: '4px',
-			background: { color: '#050505b8' },
-			color: '#ffffff',
-		},
-
-		Fav_view: {
-			position: 'absolute',
-			top: '8px',
-			right: '8px',
-			font: { size: '13px' },
-			color: '#ef5b6b',
-		},
-
-		Pill: {
-			position: 'absolute',
-			left: '8px',
-			bottom: '8px',
-			background: { color: '#e50914' },
-			color: '#ffffff',
-		},
-
-		Rate_view: {
-			position: 'absolute',
-			right: '8px',
-			bottom: '8px',
-			font: {
-				family: 'ui-monospace, "SF Mono", Menlo, monospace',
-				size: '12px',
-				weight: 600,
-			},
-			color: '#ffffff',
-			background: { color: '#050505c9' },
-			padding: { top: '2px', right: '7px', bottom: '2px', left: '7px' },
-			borderRadius: '4px',
-		},
-
-		Meta: {
+		Feed_pane: {
+			margin: { top: $mol_gap.block, right: $mol_gap.block, left: $mol_gap.block },
 			flex: { direction: 'column' },
-			gap: '2px',
+			gap: $mol_gap.text,
 		},
 
-		Title_view: {
-			font: { size: '14px', weight: 700 },
-			color: '#ffffff',
-			overflow: { x: 'hidden' },
-			textOverflow: 'ellipsis',
-			whiteSpace: 'nowrap',
+		Circles_pane: {
+			margin: { top: $mol_gap.block, right: $mol_gap.block, left: $mol_gap.block },
+			flex: { direction: 'column' },
+			gap: $mol_gap.text,
 		},
 
-		Sub: {
+		Circles_head: {
+			flex: { direction: 'row', wrap: 'wrap' },
+			align: { items: 'center' },
+			gap: $mol_gap.text,
+		},
+
+		Circles_title: {
+			font: {
+				family: $bog_builderui_tokens.font_head,
+				size: '18px',
+				weight: 700,
+			},
+		},
+
+		Circle_create_btn: {
+			marginLeft: 'auto',
+		},
+
+		Circles_text: {
+			color: $bog_builderui_tokens.shade,
+		},
+
+		Circles_list: {
+			display: 'grid',
+			gridTemplateColumns: 'repeat(auto-fill, minmax(190px, 1fr))',
+			gap: $mol_gap.text,
+		},
+
+		Circle_detail_pane: {
+			margin: { top: $mol_gap.block, right: $mol_gap.block, left: $mol_gap.block },
+			flex: { direction: 'column' },
+			gap: $mol_gap.text,
+		},
+
+		Circle_detail_head: {
+			flex: { direction: 'row', wrap: 'wrap' },
+			align: { items: 'center' },
+			gap: $mol_gap.text,
+		},
+
+		Circle_detail_title: {
+			font: {
+				family: $bog_builderui_tokens.font_head,
+				size: '18px',
+				weight: 700,
+			},
+		},
+
+		Circle_detail_description: {
+			color: $bog_builderui_tokens.shade,
+		},
+
+		Circle_members_title: {
+			font: {
+				family: $bog_builderui_tokens.font_head,
+				size: '16px',
+				weight: 700,
+			},
+		},
+
+		Circle_members_list: {
+			display: 'grid',
+			gridTemplateColumns: 'repeat(auto-fill, minmax(210px, 1fr))',
+			gap: $mol_gap.text,
+		},
+
+		Circle_now_title: {
+			font: {
+				family: $bog_builderui_tokens.font_head,
+				size: '16px',
+				weight: 700,
+			},
+		},
+
+		Circle_suggest_title: {
+			font: {
+				family: $bog_builderui_tokens.font_head,
+				size: '16px',
+				weight: 700,
+			},
+		},
+
+		Circle_now_feed: {
+			display: 'grid',
+			gridTemplateColumns: 'repeat(auto-fill, minmax(210px, 1fr))',
+			gap: $mol_gap.text,
+		},
+
+		Circle_suggest_feed: {
+			display: 'grid',
+			gridTemplateColumns: 'repeat(auto-fill, minmax(210px, 1fr))',
+			gap: $mol_gap.text,
+		},
+
+		Circle_name_field: {
+			width: '100%',
+		},
+
+		Circle_type_field: {
+			width: '100%',
+		},
+
+		Circle_description_field: {
+			width: '100%',
+		},
+
+		Me_pane: {
+			margin: { top: $mol_gap.block, right: $mol_gap.block, left: $mol_gap.block },
+			flex: { direction: 'column' },
+			gap: $mol_gap.text,
+		},
+
+		Nav: {
+			position: 'sticky',
+			bottom: 0,
+			zIndex: 6,
+			flex: { shrink: 0 },
+		},
+
+		Recognized: {
+			margin: { top: $mol_gap.block, right: $mol_gap.block, left: $mol_gap.block },
+			flex: { direction: 'column', shrink: 0 },
+			gap: $mol_gap.text,
+		},
+
+		Recognized_head: {
+			flex: { direction: 'row', wrap: 'wrap' },
+			align: { items: 'center' },
+			gap: $mol_gap.text,
+		},
+
+		Recognized_badge: {
+			font: { size: '11px', weight: 600 },
+			textTransform: 'uppercase',
+			letterSpacing: '0.4px',
+			color: $bog_builderui_tokens.control,
+		},
+
+		Recognized_host: {
 			font: {
 				family: 'ui-monospace, "SF Mono", Menlo, monospace',
 				size: '11px',
 			},
-			color: '#ffffff8f',
+			color: $bog_builderui_tokens.shade,
+		},
+
+		Recognized_title: {
+			font: {
+				family: $bog_builderui_tokens.font_head,
+				size: '18px',
+				weight: 700,
+			},
+		},
+
+		Recognized_meta: {
+			font: { size: '13px' },
+			color: $bog_builderui_tokens.shade,
+		},
+
+		Recognized_actions: {
+			flex: { direction: 'row', wrap: 'wrap' },
+			gap: $mol_gap.text,
+			align: { items: 'center' },
+		},
+
+	} )
+
+	$mol_style_define( $bog_mediagram_app_circle, {
+		flex: { direction: 'column' },
+		gap: $mol_gap.text,
+		cursor: 'pointer',
+
+		Circle_row_type: {
+			align: { self: 'flex-start' },
+		},
+
+		Circle_row_title: {
+			font: {
+				family: $bog_builderui_tokens.font_head,
+				size: '16px',
+				weight: 700,
+			},
+		},
+
+		Circle_row_description: {
+			color: $bog_builderui_tokens.shade,
+			font: { size: '13px' },
 		},
 	} )
 
+	$mol_style_define( $bog_mediagram_app_circle_member, {
+		flex: { direction: 'column' },
+		gap: $mol_gap.text,
+
+		Member_head: {
+			flex: { direction: 'row', wrap: 'wrap' },
+			align: { items: 'center' },
+			gap: $mol_gap.text,
+		},
+
+		Member_name: {
+			font: {
+				family: $bog_builderui_tokens.font_head,
+				size: '16px',
+				weight: 700,
+			},
+		},
+
+		Member_watching: {
+			color: $bog_builderui_tokens.shade,
+			font: { size: '13px' },
+		},
+	} )
+
+	$mol_style_define( $bog_mediagram_app_circle_feed_item, {
+		flex: { direction: 'column' },
+		gap: $mol_gap.text,
+
+		Feed_item_head: {
+			flex: { direction: 'row', wrap: 'wrap' },
+			align: { items: 'center' },
+			gap: $mol_gap.text,
+		},
+
+		Feed_item_title: {
+			font: {
+				family: $bog_builderui_tokens.font_head,
+				size: '16px',
+				weight: 700,
+			},
+		},
+
+		Feed_item_by: {
+			color: $bog_builderui_tokens.control,
+			font: { size: '13px', weight: 600 },
+		},
+
+		Feed_item_note: {
+			color: $bog_builderui_tokens.shade,
+			font: { size: '13px' },
+		},
+	} )
 }
