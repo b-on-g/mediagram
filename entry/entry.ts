@@ -2,7 +2,7 @@ namespace $.$$ {
 
 	/** Состояние пользователя по конкретному медиа (статус, оценка, ревью) */
 	export class $bog_mediagram_entry extends $giper_baza_dict.with({
-		Media: $giper_baza_atom_link_to(() => $bog_mediagram_media),
+		Media: $giper_baza_atom_link.to(() => $bog_mediagram_media),
 		// 'want_to' | 'doing' | 'done' | 'dropped'
 		Status: $giper_baza_atom_text,
 		Favorite: $giper_baza_atom_bool,
