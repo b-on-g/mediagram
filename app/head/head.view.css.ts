@@ -11,6 +11,7 @@ namespace $ {
 			flex: { shrink: 0 },
 			minWidth: '32px',
 			minHeight: '32px',
+			color: $bog_builderui_tokens.current
 		},
 
 		Search_field: {

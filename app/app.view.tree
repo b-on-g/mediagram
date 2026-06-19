@@ -17,19 +17,21 @@ $bog_mediagram_app $bog_builderui_div
 		bog_builderui_font_body \eb-garamond
 		bog_builderui_font_head \eb-garamond
 		bog_mediagram_tab <= tab \library
+	Tile* $bog_mediagram_app_tile
+		entry_link <= entry_link* \
 	sub /
 		<= Body $mol_scroll
 			sub /
-				<= Head $bog_mediagram_app_head
-					theme_auto <= Theme
-					query?val <=> query?val \
-					search?event <=> search_click?event null
-				<= Filters $bog_mediagram_app_filters
-					kind?val <=> filter_kind?val \all
-					status?val <=> filter_status?val \all
-				<= Library $mol_list
-					rows <= library_rows /
+				<= Body_inner $mol_view
+					sub /
+						<= Head $bog_mediagram_app_head
+							theme_auto <= Theme
+							query?val <=> query?val \
+							search?event <=> search_click?event null
+						<= Filters $bog_mediagram_app_filters
+							kind?val <=> filter_kind?val \all
+							status?val <=> filter_status?val \all
+						<= Library $mol_list
+							rows <= library_rows /
 		<= Nav $bog_mediagram_app_nav
 			tab? <=> tab? \library
-	Tile* $bog_mediagram_app_tile
-		entry_link <= entry_link* \

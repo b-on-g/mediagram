@@ -1,19 +1,5 @@
 namespace $.$$ {
 
-	const KIND_LABEL: Record<string, string> = {
-		movie: 'Фильм',
-		series: 'Сериал',
-		book: 'Книга',
-		anime: 'Аниме',
-	}
-
-	const STATUS_LABEL: Record<string, string> = {
-		want_to: 'Хочу',
-		doing: 'Смотрю',
-		done: 'Готово',
-		dropped: 'Брошено',
-	}
-
 	export class $bog_mediagram_app_tile extends $.$bog_mediagram_app_tile {
 
 		/** Entry pawn for this tile. Do NOT @$mol_mem. */
@@ -55,13 +41,13 @@ namespace $.$$ {
 
 		@ $mol_mem
 		tile_kind_label(): string {
-			return KIND_LABEL[ this.tile_kind() ] ?? ''
+			return ( this.kind_dict() as Record< string, string > )[ this.tile_kind() ] ?? ''
 		}
 
 		@ $mol_mem
 		tile_status_label(): string {
 			const s = this.entry()?.Status()?.val() ?? ''
-			return STATUS_LABEL[ s ] ?? ''
+			return ( this.status_dict() as Record< string, string > )[ s ] ?? ''
 		}
 
 		@ $mol_mem

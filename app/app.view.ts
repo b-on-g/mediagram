@@ -55,10 +55,11 @@ namespace $.$$ {
 			const list = lib.Entries()
 			if( !list ) return []
 			const items = list.items_vary() ?? []
-			return items
-				.map( v => $giper_baza_vary_cast_link( v ) )
-				.filter( $mol_guard_defined )
-				.map( link => link.str )
+			const result: string[] = []
+			for( const v of items ) {
+				if( v instanceof $giper_baza_link ) result.push( v.str )
+			}
+			return result
 		}
 
 		@ $mol_mem

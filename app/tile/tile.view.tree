@@ -1,5 +1,15 @@
 $bog_mediagram_app_tile $bog_mediagram_app_card
 	entry_link \
+	kind_dict *
+		movie @ \Фильм
+		series @ \Сериал
+		book @ \Книга
+		anime @ \Аниме
+	status_dict *
+		want_to @ \Хочу
+		doing @ \Смотрю
+		done @ \Готово
+		dropped @ \Брошено
 	title <= tile_title \
 	year <= tile_year \
 	kind <= tile_kind \

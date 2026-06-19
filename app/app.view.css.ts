@@ -2,8 +2,9 @@ namespace $ {
 
 	$mol_style_define( $bog_mediagram_app, {
 
-		Body: {
-			flex: { direction: 'column' },
+		Body_inner: {
+			flex: { direction: 'column', grow: 1 },
+			width: '100%',
 		},
 
 		Library: {
