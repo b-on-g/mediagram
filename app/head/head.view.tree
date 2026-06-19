@@ -1,8 +1,7 @@
 $bog_mediagram_app_head $mol_view
 	query?val \
 	search?event null
-	lights?val \dark
-	lights_toggle?event null
+	theme_auto $bog_theme_auto
 	sub /
 		<= Logo $mol_icon_library
 		<= Search_field $bog_builderui_field
@@ -12,8 +11,6 @@ $bog_mediagram_app_head $mol_view
 			sub /
 				<= Search_icon $mol_icon_magnify
 			click?event <=> search?event
-		<= Lights $bog_builderui_button
-			variant \ghost
-			sub / <= Lights_icon $mol_icon_brightness_4
-			click?event <=> lights_toggle?event
+		<= Lights $bog_theme_toggle
+			theme_auto <= theme_auto
 		<= Sync $giper_baza_status

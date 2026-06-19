@@ -1,5 +1,6 @@
 $bog_mediagram_app $bog_builderui_div
 	plugins /
+		<= Theme $bog_theme_auto
 		<= Favicon $bog_favicon
 			Icon <= favicon_icon $mol_icon_library
 	attr *
@@ -8,7 +9,7 @@ $bog_mediagram_app $bog_builderui_div
 		bog_builderui_theme \sky
 		bog_builderui_chart \yellow
 		bog_builderui_radius \large
-		bog_builderui_lights <= lights? \dark
+		bog_builderui_lights <= lights \dark
 		bog_builderui_font_body \eb-garamond
 		bog_builderui_font_head \eb-garamond
 		bog_mediagram_tab <= tab \library
@@ -20,8 +21,7 @@ $bog_mediagram_app $bog_builderui_div
 				<= Body_inner $mol_view
 					sub /
 						<= Head $bog_mediagram_app_head
-							lights?val <=> lights?val \dark
-							lights_toggle?event <=> lights_toggle?event null
+							theme_auto <= Theme
 							query?val <=> query?val \
 							search?event <=> search_click?event null
 						<= Filters $bog_mediagram_app_filters
