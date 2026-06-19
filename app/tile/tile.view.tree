@@ -1,0 +1,15 @@
+$bog_mediagram_app_tile $bog_mediagram_app_card
+	entry_link \
+	title <= tile_title \
+	year <= tile_year \
+	kind <= tile_kind \
+	kind_label <= tile_kind_label \
+	status_label <= tile_status_label \
+	status_class <= tile_status_class \
+	favorite <= tile_favorite false
+	fav_label <= tile_fav_label \
+	rating <= tile_rating null
+	rate_text <= tile_rate_text \
+	initials <= tile_initials \
+	color <= tile_color \
+	poster_bg <= tile_poster_bg \

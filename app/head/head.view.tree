@@ -1,0 +1,16 @@
+$bog_mediagram_app_head $mol_view
+	query?val \
+	search?event null
+	theme_auto $bog_theme_auto
+	sub /
+		<= Logo $mol_icon_library
+		<= Search_field $bog_builderui_field
+			hint @ \Поиск
+			value?val <=> query?val
+		<= Search_btn $bog_builderui_button
+			sub /
+				<= Search_icon $mol_icon_magnify
+			click?event <=> search?event
+		<= Lights $bog_theme_toggle
+			theme_auto <= theme_auto
+		<= Sync $giper_baza_status

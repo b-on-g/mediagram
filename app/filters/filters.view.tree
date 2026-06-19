@@ -1,0 +1,20 @@
+$bog_mediagram_app_filters $mol_view
+	kind?val \all
+	status?val \all
+	sub /
+		<= Filter_kind $bog_builderui_select
+			value?val <=> kind?val
+			dictionary *
+				all @ \Все типы
+				movie @ \Фильмы
+				series @ \Сериалы
+				book @ \Книги
+				anime @ \Аниме
+		<= Filter_status $bog_builderui_select
+			value?val <=> status?val
+			dictionary *
+				all @ \Все статусы
+				want_to @ \Хочу
+				doing @ \Смотрю
+				done @ \Готово
+				dropped @ \Брошено
