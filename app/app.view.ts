@@ -133,21 +133,6 @@ namespace $.$$ {
 
 	export class $bog_mediagram_app extends $.$bog_mediagram_app {
 
-		static {
-			const c = ( globalThis as any ).chrome
-			if( c?.runtime?.onMessage ) {
-				c.runtime.onMessage.addListener( ( msg: any ) => {
-					if( msg?.type === 'mediagram_snapshot_changed' ) {
-						try {
-							const root = $bog_mediagram_app.Root( 0 )
-							root.snapshot_tick( root.snapshot_tick() + 1 )
-						} catch( e ) { /* root not mounted yet */ }
-					}
-					return false
-				} )
-			}
-		}
-
 		@ $mol_mem
 		query( next?: string ) {
 			return $mol_state_arg.value( 'q', next ) ?? ''
@@ -302,7 +287,7 @@ namespace $.$$ {
 
 		@ $mol_mem_key
 		Circle( id: string ) {
-			const circle = new $bog_mediagram_app_circle()
+			const circle = new this.$.$bog_mediagram_app_circle()
 			circle.title = () => this.circle( id ).title
 			circle.type_label = () => CIRCLE_TYPE_LABEL[ this.circle( id ).type ]
 			circle.description = () => this.circle( id ).description || 'без описания'
@@ -364,7 +349,7 @@ namespace $.$$ {
 
 		@ $mol_mem_key
 		Circle_member( id: string ) {
-			const member = new $bog_mediagram_app_circle_member()
+			const member = new this.$.$bog_mediagram_app_circle_member()
 			member.name = () => this.circle_member( id ).name
 			member.role = () => this.circle_member( id ).role
 			member.watching = () => this.circle_member( id ).watching
@@ -397,7 +382,7 @@ namespace $.$$ {
 
 		@ $mol_mem_key
 		Circle_now_item( id: string ) {
-			const item = new $bog_mediagram_app_circle_feed_item()
+			const item = new this.$.$bog_mediagram_app_circle_feed_item()
 			item.title = () => this.circle_now_item( id ).title
 			item.by = () => this.circle_now_item( id ).by
 			item.meta = () => this.circle_now_item( id ).meta
@@ -407,7 +392,7 @@ namespace $.$$ {
 
 		@ $mol_mem_key
 		Circle_suggest_item( id: string ) {
-			const item = new $bog_mediagram_app_circle_feed_item()
+			const item = new this.$.$bog_mediagram_app_circle_feed_item()
 			item.title = () => this.circle_suggest_item( id ).title
 			item.by = () => this.circle_suggest_item( id ).by
 			item.meta = () => this.circle_suggest_item( id ).meta
@@ -507,7 +492,10 @@ namespace $.$$ {
 
 		add_click( e?: Event ) {
 			if( e ) e.preventDefault()
-			this.add_from_snapshot()
+			const snap = this.snapshot()
+			if( !snap?.entity?.title ) return null
+			const status = this.recognized_status()
+			$mol_wire_async( this ).save_from_snapshot( snap, status, Date.now() )
 			return null
 		}
 
@@ -564,15 +552,20 @@ namespace $.$$ {
 
 		recognized_add( e?: Event ) {
 			if( e ) e.preventDefault()
-			this.add_from_snapshot()
+			const snap = this.snapshot()
+			if( !snap?.entity?.title ) return null
+			const status = this.recognized_status()
+			$mol_wire_async( this ).save_from_snapshot( snap, status, Date.now() )
 			return null
 		}
 
-		@ $mol_action
-		add_from_snapshot() {
-			const snap = this.snapshot()
-			if( !snap?.entity?.title ) return null
-
+		/**
+		 * Запись в баззу. Вызывать только через $mol_wire_async — иначе
+		 * make() на каждой ретрае фибры будет создавать новые pawn'ы.
+		 * НЕ @$mol_action: wire_async создаёт свой фибер, двойная обёртка лишняя.
+		 */
+		save_from_snapshot( snap: any, status: string, now: number ) {
+			const moment = new $mol_time_moment( now )
 			const lib = this.library_node()
 
 			const media = lib.Medias( 'auto' )!.make( null )
@@ -582,24 +575,20 @@ namespace $.$$ {
 				try { media.Year( 'auto' )!.val( BigInt( snap.entity.year ) ) }
 				catch( _ ) { /* год не цифра — пропускаем */ }
 			}
-			media.AddedAt( 'auto' )!.val( new $mol_time_moment() )
+			media.AddedAt( 'auto' )!.val( moment )
 
 			const sources = media.SourceIds( 'auto' )!
 			sources.key( source_key( snap.host ), 'auto' )!.val( snap.source_url )
 
 			const entry = lib.Entries( 'auto' )!.make( null )
 			entry.Media( 'auto' )!.remote( media )
-			entry.Status( 'auto' )!.val( this.recognized_status() )
+			entry.Status( 'auto' )!.val( status )
 			entry.Source( 'auto' )!.val( 'manual' )
-			entry.StartedAt( 'auto' )!.val( new $mol_time_moment() )
+			entry.StartedAt( 'auto' )!.val( moment )
 
 			return null
 		}
 
 	}
-
-	export class $bog_mediagram_app_circle extends $.$bog_mediagram_app_circle {}
-	export class $bog_mediagram_app_circle_member extends $.$bog_mediagram_app_circle_member {}
-	export class $bog_mediagram_app_circle_feed_item extends $.$bog_mediagram_app_circle_feed_item {}
 
 }

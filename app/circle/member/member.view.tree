@@ -1,0 +1,11 @@
+$bog_mediagram_app_circle_member $bog_builderui_card
+	name \
+	role \
+	watching \
+	sub /
+		<= Member_head $mol_view
+			sub /
+				<= Member_name $mol_view sub / <= name
+				<= Member_role $bog_builderui_badge
+					title <= role
+		<= Member_watching $mol_view sub / <= watching

@@ -1,8 +1,3 @@
-- mediagram — webapp + Chrome side panel
-- Одна сборка $mol-аппа адаптируется по ширине через container queries
-- Пресет builderui: zinc / sky / yellow / eb-garamond / large
-- Тема светает/тёмная переключается через $bog_theme_toggle
-
 $bog_mediagram_app $bog_builderui_div
 	plugins /
 		<= Theme $bog_theme_auto
@@ -122,43 +117,3 @@ $bog_mediagram_app $bog_builderui_div
 				<= Circle_description_field $bog_builderui_field
 					hint \Описание
 					value? <=> circle_description? \
-
-$bog_mediagram_app_circle $bog_builderui_card
-	title \
-	type_label \
-	description \
-	open? null
-	event *
-		^
-		click? <=> open? null
-	sub /
-		<= Circle_row_type $bog_builderui_badge
-			title <= type_label
-		<= Circle_row_title $mol_view sub / <= title
-		<= Circle_row_description $mol_view sub / <= description
-
-$bog_mediagram_app_circle_member $bog_builderui_card
-	name \
-	role \
-	watching \
-	sub /
-		<= Member_head $mol_view
-			sub /
-				<= Member_name $mol_view sub / <= name
-				<= Member_role $bog_builderui_badge
-					title <= role
-		<= Member_watching $mol_view sub / <= watching
-
-$bog_mediagram_app_circle_feed_item $bog_builderui_card
-	title \
-	by \
-	meta \
-	note \
-	sub /
-		<= Feed_item_head $mol_view
-			sub /
-				<= Feed_item_title $mol_view sub / <= title
-				<= Feed_item_meta $bog_builderui_badge
-					title <= meta
-		<= Feed_item_by $mol_view sub / <= by
-		<= Feed_item_note $mol_view sub / <= note

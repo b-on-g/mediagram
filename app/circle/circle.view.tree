@@ -1,0 +1,13 @@
+$bog_mediagram_app_circle $bog_builderui_card
+	title \
+	type_label \
+	description \
+	open? null
+	event *
+		^
+		click? <=> open? null
+	sub /
+		<= Circle_row_type $bog_builderui_badge
+			title <= type_label
+		<= Circle_row_title $mol_view sub / <= title
+		<= Circle_row_description $mol_view sub / <= description
