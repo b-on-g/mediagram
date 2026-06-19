@@ -19,7 +19,9 @@ namespace $.$$ {
 		}
 		circles_click( e?: Event ) {
 			if( e ) e.preventDefault()
+			console.log( '[mediagram] nav.circles_click — calling this.tab("circles")' )
 			this.tab( 'circles' )
+			console.log( '[mediagram] nav.circles_click — done' )
 			return null
 		}
 		me_click( e?: Event ) {

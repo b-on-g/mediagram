@@ -171,18 +171,28 @@ namespace $.$$ {
 
 		/** Home land библиотеки текущего юзера. Не мемоизируем — возвращает Pawn. */
 		library_node() {
-			return this.$.$giper_baza_glob.home().land().Data( this.$.$bog_mediagram_library )
+			console.log( '[mediagram] library_node()' )
+			const r = this.$.$giper_baza_glob.home().land().Data( this.$.$bog_mediagram_library )
+			console.log( '[mediagram] library_node() ✓' )
+			return r
 		}
 
 		/** Сырые entry-Pawn'ы из библиотеки. Не мемоизируем — возвращает Pawn[]. */
 		entries_baza() {
+			console.log( '[mediagram] entries_baza()' )
 			const list = this.library_node().Entries()
-			if( !list ) return []
-			return list.remote_list() as $bog_mediagram_entry[]
+			if( !list ) {
+				console.log( '[mediagram] entries_baza() → empty (no Entries)' )
+				return []
+			}
+			const r = list.remote_list() as $bog_mediagram_entry[]
+			console.log( '[mediagram] entries_baza() ✓ count=', r.length )
+			return r
 		}
 
 		@ $mol_mem
 		entries_all(): Entry[] {
+			console.log( '[mediagram] entries_all() — start' )
 			return this.entries_baza().map( e => {
 				const media = e.Media()?.remote() as $bog_mediagram_media | null
 				const year_bint = media?.Year()?.val()
@@ -466,11 +476,15 @@ namespace $.$$ {
 
 		@ $mol_mem
 		tab( next?: string ) {
-			return $mol_state_arg.value( 'tab', next ) ?? 'library'
+			if( next !== undefined ) console.log( '[mediagram] tab() ←', next )
+			const v = $mol_state_arg.value( 'tab', next ) ?? 'library'
+			return v
 		}
 
 		body_content() {
-			switch( this.tab() ) {
+			const tab = this.tab()
+			console.log( '[mediagram] body_content() tab=', tab )
+			switch( tab ) {
 				case 'feed': return [ this.Feed_pane() ]
 				case 'circles': return [ this.Circles_pane() ]
 				case 'circle': return this.circle_detail() ? [ this.Circle_detail_pane() ] : [ this.Circles_pane() ]
