@@ -89,7 +89,7 @@ namespace $ {
 			whiteSpace: 'nowrap',
 		},
 
-		Sub: {
+		Sub_year: {
 			font: {
 				family: 'ui-monospace, "SF Mono", Menlo, monospace',
 				size: '11px',

@@ -31,4 +31,4 @@ $bog_mediagram_app_card $bog_builderui_card
 		<= Meta $mol_view
 			sub /
 				<= Title_view $mol_view sub / <= title
-				<= Sub $mol_view sub / <= year
+				<= Sub_year $mol_view sub / <= year

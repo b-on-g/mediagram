@@ -444,7 +444,7 @@ namespace $.$$ {
 
 		@ $mol_mem_key
 		Chip( id: string ) {
-			return new $bog_mediagram_app_chip()
+			return new this.$.$bog_mediagram_app_chip()
 		}
 
 		entries() {
@@ -453,7 +453,7 @@ namespace $.$$ {
 
 		@ $mol_mem_key
 		Card( id: string ) {
-			const card = new $bog_mediagram_app_card()
+			const card = new this.$.$bog_mediagram_app_card()
 			card.title = () => this.entry( id ).title
 			card.year = () => this.entry( id ).year
 			card.kind = () => this.entry( id ).kind

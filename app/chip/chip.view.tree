@@ -8,5 +8,5 @@ $bog_mediagram_app_chip $bog_builderui_button
 		bog_mediagram_chip_kind <= kind
 		bog_mediagram_chip_active <= active
 	sub /
-		<= Swatch $mol_view
+		<= Chip_dot $mol_view
 		<= Label $mol_view sub / <= label

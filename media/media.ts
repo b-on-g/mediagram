@@ -41,18 +41,4 @@ namespace $.$$ {
 
 	}
 
-	export class $bog_mediagram_entry extends $giper_baza_dict.with({
-		Media: $giper_baza_atom_link.to( ()=> $bog_mediagram_media ),
-		Status: $giper_baza_atom_text,
-		Rating: $giper_baza_atom_bint,
-		Favorite: $giper_baza_atom_bool,
-		Source: $giper_baza_atom_text,
-		StartedAt: $giper_baza_atom_time,
-	}) {}
-
-	export class $bog_mediagram_library extends $giper_baza_dict.with({
-		Medias: $giper_baza_list_link.to( ()=> $bog_mediagram_media ),
-		Entries: $giper_baza_list_link.to( ()=> $bog_mediagram_entry ),
-	}) {}
-
 }

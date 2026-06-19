@@ -6,7 +6,7 @@ namespace $ {
 		gap: $mol_gap.text,
 		cursor: 'pointer',
 
-		Swatch: {
+		Chip_dot: {
 			width: '8px',
 			height: '8px',
 			borderRadius: '50%',
