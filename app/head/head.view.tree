@@ -12,6 +12,6 @@ $bog_mediagram_app_head $mol_view
 			sub /
 				<= Search_icon $mol_icon_magnify
 			click?event <=> search?event
-		<= Lights $bog_theme_toggle
+		<= Lights $bog_theme_switch
 			theme_auto <= theme_auto
 		<= Sync $giper_baza_status
