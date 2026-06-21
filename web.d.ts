@@ -1819,7 +1819,10 @@ declare namespace $.$$ {
     type $bog_theme_mode = 'light' | 'dark' | 'system' | 'custom';
     class $bog_theme_auto extends $.$bog_theme_auto {
         themes_default(): readonly $.$bog_theme_name[];
-        /** Stores current mode in localStorage. Defaults to 'system'. */
+        /** Stores current mode in localStorage. Defaults to 'system'.
+         *  При записи дёргает класс `.bog_theme_switching` на `<html>` —
+         *  это активирует CSS-transition'ы на цветах темы.
+         */
         mode(next?: $bog_theme_mode): $bog_theme_mode;
         click_step(next?: number): number;
         /** 3-click cycle: opposite → back → system. */
@@ -1833,6 +1836,9 @@ declare namespace $.$$ {
         /** Called by picker. Sets mode to light/dark or custom for themed palettes. */
         theme_set(index: number): void;
     }
+}
+
+declare namespace $ {
 }
 
 declare namespace $ {
@@ -4302,119 +4308,6 @@ declare namespace $ {
 
 declare namespace $ {
 
-	export class $bog_theme_picker_row extends $mol_button_minor {
-		focused_str( ): string
-		hover( next?: any ): any
-		theme_name( ): string
-		title( ): ReturnType< $bog_theme_picker_row['theme_name'] >
-		attr( ): ({ 
-			'bog_theme_picker_row_focused': ReturnType< $bog_theme_picker_row['focused_str'] >,
-		})  & ReturnType< $mol_button_minor['attr'] >
-		event( ): ({ 
-			pointerenter( next?: ReturnType< $bog_theme_picker_row['hover'] > ): ReturnType< $bog_theme_picker_row['hover'] >,
-		})  & ReturnType< $mol_button_minor['event'] >
-	}
-	
-}
-
-//# sourceMappingURL=row.view.tree.d.ts.map
-declare namespace $.$$ {
-    class $bog_theme_picker_row extends $.$bog_theme_picker_row {
-        focused_str(): "" | "true";
-    }
-}
-
-declare namespace $.$$ {
-}
-
-declare namespace $ {
-
-	type $mol_string__value_bog_theme_picker_1 = $mol_type_enforce<
-		ReturnType< $bog_theme_picker['query'] >
-		,
-		ReturnType< $mol_string['value'] >
-	>
-	type $mol_string__hint_bog_theme_picker_2 = $mol_type_enforce<
-		string
-		,
-		ReturnType< $mol_string['hint'] >
-	>
-	type $mol_list__rows_bog_theme_picker_3 = $mol_type_enforce<
-		ReturnType< $bog_theme_picker['theme_rows'] >
-		,
-		ReturnType< $mol_list['rows'] >
-	>
-	type $mol_list__rows_bog_theme_picker_4 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_list['rows'] >
-	>
-	type $bog_theme_picker_row__theme_name_bog_theme_picker_5 = $mol_type_enforce<
-		ReturnType< $bog_theme_picker['theme_name'] >
-		,
-		ReturnType< $bog_theme_picker_row['theme_name'] >
-	>
-	type $bog_theme_picker_row__focused_bog_theme_picker_6 = $mol_type_enforce<
-		ReturnType< $bog_theme_picker['theme_focused'] >
-		,
-		ReturnType< $bog_theme_picker_row['focused'] >
-	>
-	type $bog_theme_picker_row__click_bog_theme_picker_7 = $mol_type_enforce<
-		ReturnType< $bog_theme_picker['theme_select'] >
-		,
-		ReturnType< $bog_theme_picker_row['click'] >
-	>
-	type $bog_theme_picker_row__hover_bog_theme_picker_8 = $mol_type_enforce<
-		ReturnType< $bog_theme_picker['theme_hover'] >
-		,
-		ReturnType< $bog_theme_picker_row['hover'] >
-	>
-	export class $bog_theme_picker extends $mol_scroll {
-		theme_name( id: any): string
-		theme_focused( id: any): boolean
-		theme_select( id: any, next?: any ): any
-		theme_hover( id: any, next?: any ): any
-		Search( ): $mol_string
-		theme_rows( ): readonly(any)[]
-		Theme_list( ): $mol_list
-		Content( ): $mol_list
-		key_down( next?: any ): any
-		theme_auto( ): $bog_theme_auto
-		close( next?: any ): any
-		query( next?: string ): string
-		focused_index( next?: number ): number
-		Theme_row( id: any): $bog_theme_picker_row
-		sub( ): readonly(any)[]
-		event( ): ({ 
-			keydown( next?: ReturnType< $bog_theme_picker['key_down'] > ): ReturnType< $bog_theme_picker['key_down'] >,
-		})  & ReturnType< $mol_scroll['event'] >
-	}
-	
-}
-
-//# sourceMappingURL=picker.view.tree.d.ts.map
-declare namespace $.$$ {
-    /**
-     * Theme picker popup with search and list
-     */
-    class $bog_theme_picker extends $.$bog_theme_picker {
-        theme_rows(): $.$bog_theme_picker_row[];
-        filtered_themes(): ("$mol_theme_giper_smash_dark" | "$mol_theme_giper_smash_light" | "$mol_theme_light" | "$mol_theme_dark" | "$mol_theme_monefro_light" | "$mol_theme_monefro_dark" | "$mol_theme_homerent_light" | "$mol_theme_homerent_dark" | "$mol_theme_upwork" | "$mol_theme_ainews_light" | "$mol_theme_ainews_dark" | "$mol_theme_calm_dark" | "$mol_theme_calm_light")[];
-        theme_name(index: number): "$mol_theme_giper_smash_dark" | "$mol_theme_giper_smash_light" | "$mol_theme_light" | "$mol_theme_dark" | "$mol_theme_monefro_light" | "$mol_theme_monefro_dark" | "$mol_theme_homerent_light" | "$mol_theme_homerent_dark" | "$mol_theme_upwork" | "$mol_theme_ainews_light" | "$mol_theme_ainews_dark" | "$mol_theme_calm_dark" | "$mol_theme_calm_light";
-        theme_focused(index: number): boolean;
-        theme_select(index: number, event?: MouseEvent): null;
-        theme_hover(index: number, event?: PointerEvent): null;
-        key_down(event?: KeyboardEvent): null;
-        private select_theme;
-        private preview_theme;
-    }
-}
-
-declare namespace $.$$ {
-}
-
-declare namespace $ {
-
 	export class $mol_icon_white_balance_sunny extends $mol_icon {
 		path( ): string
 	}
@@ -4422,15 +4315,6 @@ declare namespace $ {
 }
 
 //# sourceMappingURL=sunny.view.tree.d.ts.map
-declare namespace $ {
-
-	export class $mol_icon_weather_night extends $mol_icon {
-		path( ): string
-	}
-	
-}
-
-//# sourceMappingURL=night.view.tree.d.ts.map
 declare namespace $ {
 
 	export class $mol_icon_monitor extends $mol_icon {
@@ -4442,102 +4326,116 @@ declare namespace $ {
 //# sourceMappingURL=monitor.view.tree.d.ts.map
 declare namespace $ {
 
-	type $mol_view__event_bog_theme_toggle_1 = $mol_type_enforce<
-		({ 
-			click( next?: ReturnType< $bog_theme_toggle['backdrop_click'] > ): ReturnType< $bog_theme_toggle['backdrop_click'] >,
-		}) 
-		,
-		ReturnType< $mol_view['event'] >
-	>
-	type $bog_theme_picker__theme_auto_bog_theme_toggle_2 = $mol_type_enforce<
-		ReturnType< $bog_theme_toggle['theme_auto'] >
-		,
-		ReturnType< $bog_theme_picker['theme_auto'] >
-	>
-	type $bog_theme_picker__close_bog_theme_toggle_3 = $mol_type_enforce<
-		ReturnType< $bog_theme_toggle['picker_close'] >
-		,
-		ReturnType< $bog_theme_picker['close'] >
-	>
-	type $mol_button_minor__sub_bog_theme_toggle_4 = $mol_type_enforce<
-		readonly(any)[]
-		,
-		ReturnType< $mol_button_minor['sub'] >
-	>
-	type $mol_button_minor__hint_bog_theme_toggle_5 = $mol_type_enforce<
-		ReturnType< $bog_theme_toggle['anchor_hint'] >
-		,
-		ReturnType< $mol_button_minor['hint'] >
-	>
-	type $mol_button_minor__click_bog_theme_toggle_6 = $mol_type_enforce<
-		ReturnType< $bog_theme_toggle['clicked'] >
-		,
-		ReturnType< $mol_button_minor['click'] >
-	>
-	type $mol_button_minor__event_bog_theme_toggle_7 = $mol_type_enforce<
-		({ 
-			pointerdown( next?: ReturnType< $bog_theme_toggle['press_start'] > ): ReturnType< $bog_theme_toggle['press_start'] >,
-			pointermove( next?: ReturnType< $bog_theme_toggle['press_move'] > ): ReturnType< $bog_theme_toggle['press_move'] >,
-			pointerup( next?: ReturnType< $bog_theme_toggle['press_end'] > ): ReturnType< $bog_theme_toggle['press_end'] >,
-			pointercancel( next?: ReturnType< $bog_theme_toggle['press_cancel'] > ): ReturnType< $bog_theme_toggle['press_cancel'] >,
-			lostpointercapture( next?: ReturnType< $bog_theme_toggle['press_lost'] > ): ReturnType< $bog_theme_toggle['press_lost'] >,
-		})  & ReturnType< $mol_button_minor['event'] >
-		,
-		ReturnType< $mol_button_minor['event'] >
-	>
-	export class $bog_theme_toggle extends $mol_pop {
-		Icon( ): $mol_view
-		anchor_hint( ): string
-		clicked( next?: any ): any
-		press_start( next?: any ): any
-		press_move( next?: any ): any
-		press_end( next?: any ): any
-		press_cancel( next?: any ): any
-		press_lost( next?: any ): any
-		backdrop_click( next?: any ): any
-		Backdrop( ): $mol_view
-		picker_close( next?: any ): any
-		Picker( ): $bog_theme_picker
-		theme_auto( ): $bog_theme_auto
-		showed( next?: boolean ): boolean
-		align( ): string
-		Anchor( ): $mol_button_minor
-		Icon_light( ): $mol_icon_white_balance_sunny
-		Icon_dark( ): $mol_icon_weather_night
-		Icon_system( ): $mol_icon_monitor
-		bubble_content( ): readonly(any)[]
+	export class $mol_icon_weather_night extends $mol_icon {
+		path( ): string
 	}
 	
 }
 
-//# sourceMappingURL=toggle.view.tree.d.ts.map
+//# sourceMappingURL=night.view.tree.d.ts.map
+declare namespace $ {
+
+	type $mol_button_minor__attr_bog_theme_switch_1 = $mol_type_enforce<
+		({ 
+			'bog_theme_switch_active': ReturnType< $bog_theme_switch['light_active'] >,
+		})  & ReturnType< $mol_button_minor['attr'] >
+		,
+		ReturnType< $mol_button_minor['attr'] >
+	>
+	type $mol_button_minor__hint_bog_theme_switch_2 = $mol_type_enforce<
+		ReturnType< $bog_theme_switch['light_hint'] >
+		,
+		ReturnType< $mol_button_minor['hint'] >
+	>
+	type $mol_button_minor__click_bog_theme_switch_3 = $mol_type_enforce<
+		ReturnType< $bog_theme_switch['set_light'] >
+		,
+		ReturnType< $mol_button_minor['click'] >
+	>
+	type $mol_button_minor__sub_bog_theme_switch_4 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_button_minor['sub'] >
+	>
+	type $mol_button_minor__attr_bog_theme_switch_5 = $mol_type_enforce<
+		({ 
+			'bog_theme_switch_active': ReturnType< $bog_theme_switch['system_active'] >,
+		})  & ReturnType< $mol_button_minor['attr'] >
+		,
+		ReturnType< $mol_button_minor['attr'] >
+	>
+	type $mol_button_minor__hint_bog_theme_switch_6 = $mol_type_enforce<
+		ReturnType< $bog_theme_switch['system_hint'] >
+		,
+		ReturnType< $mol_button_minor['hint'] >
+	>
+	type $mol_button_minor__click_bog_theme_switch_7 = $mol_type_enforce<
+		ReturnType< $bog_theme_switch['set_system'] >
+		,
+		ReturnType< $mol_button_minor['click'] >
+	>
+	type $mol_button_minor__sub_bog_theme_switch_8 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_button_minor['sub'] >
+	>
+	type $mol_button_minor__attr_bog_theme_switch_9 = $mol_type_enforce<
+		({ 
+			'bog_theme_switch_active': ReturnType< $bog_theme_switch['dark_active'] >,
+		})  & ReturnType< $mol_button_minor['attr'] >
+		,
+		ReturnType< $mol_button_minor['attr'] >
+	>
+	type $mol_button_minor__hint_bog_theme_switch_10 = $mol_type_enforce<
+		ReturnType< $bog_theme_switch['dark_hint'] >
+		,
+		ReturnType< $mol_button_minor['hint'] >
+	>
+	type $mol_button_minor__click_bog_theme_switch_11 = $mol_type_enforce<
+		ReturnType< $bog_theme_switch['set_dark'] >
+		,
+		ReturnType< $mol_button_minor['click'] >
+	>
+	type $mol_button_minor__sub_bog_theme_switch_12 = $mol_type_enforce<
+		readonly(any)[]
+		,
+		ReturnType< $mol_button_minor['sub'] >
+	>
+	export class $bog_theme_switch extends $mol_view {
+		light_active( ): boolean
+		light_hint( ): string
+		set_light( next?: any ): any
+		Light_icon( ): $mol_icon_white_balance_sunny
+		Light( ): $mol_button_minor
+		system_active( ): boolean
+		system_hint( ): string
+		set_system( next?: any ): any
+		System_icon( ): $mol_icon_monitor
+		System( ): $mol_button_minor
+		dark_active( ): boolean
+		dark_hint( ): string
+		set_dark( next?: any ): any
+		Dark_icon( ): $mol_icon_weather_night
+		Dark( ): $mol_button_minor
+		theme_auto( ): $bog_theme_auto
+		sub( ): readonly(any)[]
+	}
+	
+}
+
+//# sourceMappingURL=switch.view.tree.d.ts.map
 declare namespace $.$$ {
-    class $bog_theme_toggle extends $.$bog_theme_toggle {
-        long_press_delay: number;
-        move_threshold: number;
-        private press_timer;
-        private press_start_x;
-        private press_start_y;
-        private is_long_press;
-        Icon(): $mol_icon_white_balance_sunny | $mol_icon_weather_night | $mol_icon_monitor;
-        anchor_hint(): "Светлая тема" | "Тёмная тема" | "Пользовательская тема" | "Как в системе";
-        clicked(event?: MouseEvent): null;
-        press_start(event?: PointerEvent): null;
-        press_move(event?: PointerEvent): null;
-        press_end(event?: PointerEvent): null;
-        press_cancel(event?: PointerEvent): null;
-        press_lost(event?: Event): null;
-        private clear_press_timer;
-        private on_long_press;
-        picker_close(): void;
-        backdrop_click(event?: MouseEvent): null;
+    class $bog_theme_switch extends $.$bog_theme_switch {
+        light_active(): boolean;
+        system_active(): boolean;
+        dark_active(): boolean;
+        set_light(): null;
+        set_system(): null;
+        set_dark(): null;
     }
 }
 
 declare namespace $ {
-}
-
-declare namespace $.$$ {
 }
 
 declare namespace $ {
@@ -39904,17 +39802,17 @@ declare namespace $ {
 		,
 		ReturnType< $bog_builderui_button['click'] >
 	>
-	type $bog_theme_toggle__theme_auto_bog_mediagram_app_head_5 = $mol_type_enforce<
+	type $bog_theme_switch__theme_auto_bog_mediagram_app_head_5 = $mol_type_enforce<
 		ReturnType< $bog_mediagram_app_head['theme_auto'] >
 		,
-		ReturnType< $bog_theme_toggle['theme_auto'] >
+		ReturnType< $bog_theme_switch['theme_auto'] >
 	>
 	export class $bog_mediagram_app_head extends $mol_view {
 		Logo( ): $mol_icon_library
 		Search_field( ): $bog_builderui_field
 		Search_icon( ): $mol_icon_magnify
 		Search_btn( ): $bog_builderui_button
-		Lights( ): $bog_theme_toggle
+		Lights( ): $bog_theme_switch
 		Sync( ): $giper_baza_status
 		query( next?: string ): string
 		search( next?: any ): any
